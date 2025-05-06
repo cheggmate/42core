@@ -3,32 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:56:00 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 17:12:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:12:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalpha(char *str)
+#include <stdio.h>
+int	ft_isalpha(int c)
 {
-	if (*str == '\0')
+	if (c == NULL)
 		return (1);
-	while (*str)
-	{
-		if (!((*str >= 'a' && *str <= 'z') || (*str >= 'A' && *str <= 'Z')))
-			return (0);
-		str++;
-	}
+	if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90)))
+		return (0);
 	return (1);
 }
 /*
 int     main(void)
 {
-    char    *str = "hellAo";
+    int		c = 97;
     int     result;
     
-    result = ft_isalpha(str);
-    printf("%i\n", result);
+    result = ft_isalpha(c);
+    printf("%d\n", result);
     return(0);
 }*/

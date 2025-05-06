@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:21:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 16:21:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:18:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isdigit(char *str)
+int ft_isdigit(int c)
 {
-	int	is_true;
-
-	is_true = 1;
-	if (*str == '\0')
-		is_true = 1;
-	while (*str)
-	{
-		if (!(*str >= '0' && *str <= '9'))
-			is_true = 0;
-		str++;
-	}
-	return (is_true);
+	if (c >= 0 && c <= 9)
+		return (1);
+	return (0);
 }
+/* #include <stdio.h>
+int main(void)
+{
+	int out;
+    int val = 3;
+
+    out = ft_isdigit(val);
+    printf("result is %d\n", out);
+} */

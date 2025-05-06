@@ -3,22 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:10:26 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 16:10:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/06 23:09:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isalnum(char *str)
+#include <stdio.h>
+int	ft_isalnum(int c)
 {
-    if (*str == '\0')
+    if (c == NULL)
 		return (0);
-	while (*str)
-	{
-		if (!((*str >= 'a' && *str <= 'z') || (*str >= 'A' && *str <= 'Z') || (*str >= '0' && *str <= '9')))
-			return (0);
-		str++;
-	}
+	if (!((c >= 48 && c <= 57) || (c >=65 && c <= 90 ) || (c >= 97 && c <= 122)))
+		return (0);
 	return (1);
 }
+/* #include <stdio.h>
+int	main(void)
+{
+	char	input[10] = "test";
+	int		out;
+
+	out = ft_isalnum(&input);
+	printf("result is %d\n", out);
+} */
