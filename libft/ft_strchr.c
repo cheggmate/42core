@@ -6,12 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:37:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 23:24:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/07 20:21:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-char    convert_to_char(int c)
+static char    convert_to_char(int c)
 {
     if (!(c >= 0 && c <= 127))
         return (NULL);

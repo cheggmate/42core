@@ -6,73 +6,95 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:03:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 22:29:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/08 23:14:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* void	ft_fill_up_string(char *ptr, char *dest, \
-    unsigned int len, unsigned int s)
+#include <stdio.h>
+
+static void	flush_everything(char *dest, char *src, unsigned int *count)
 {
-while (*ptr && len + 1 < s)
-{
-    *dest = *ptr;
-    dest++;
-    ptr++;
-}
-*dest = '\0';
+	unsigned int	temp_count;
+
+	temp_count = *count;
+
+	while (*dest)
+	{
+		temp_count++;
+		dest++;
+	}
+	while (*src)
+	{
+		temp_count++;
+		src++;
+	}
+	*count = temp_count;
 }
 
-int	ft_calc_remainder(unsigned int len, unsigned int size, unsigned int rm)
+static char	*copy_over(char *dest, char *src_ptr, unsigned int *count, unsigned int *rem)
 {
-if (len >= size)
-    rm += size;
-else
-    rm += len;
-return (rm);
-} */
+	int	temp_count;
+	int	temp_rem;
 
-unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
+	temp_rem = *rem;
+	temp_count = *count;
+	while (*src_ptr && temp_rem > 1)
+	{
+		printf("copying %c\n",  *src_ptr);
+		printf("rem is %d\n", temp_rem);
+		*dest = *src_ptr;
+		src_ptr++;
+		dest++;
+		temp_rem--;
+		temp_count++;
+	}
+	while	(*src_ptr)
+	{
+		temp_count++;
+		src_ptr++;
+	}
+	*rem = temp_rem;
+	*count = temp_count;
+	return (dest);
+}
+
+#include <string.h>
+unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
 {
-	unsigned int	length;
 	unsigned int	remainder;
+	unsigned int	count;
 	char			*src_ptr;
 
-	length = 0;
+	count = 0;
 	remainder = size;
-	src_ptr = src;
+	src_ptr = (char*)src;
     if (size == 0)
-        return (0);
+    {
+		flush_everything(dest, src_ptr, &count);
+		return (count);
+	}
 	while (*dest)
 	{
 		dest++;
-		length++;
+		count++;
         remainder--;
 	}
-	while (*src && remainder > 0)
-	{
-		src++;
-		remainder--;
-	}
+	dest = copy_over(dest, src_ptr, &count, &remainder);
     *dest = '\0';
-	// remainder = ft_calc_remainder(length, size, remainder);
-	// ft_fill_up_string(src_ptr, dest, length, size);
-	return (size - remainder);
+	count++;
+	return (count);
 }
-/* 
 #include <stdio.h>
 int     main(void)
 {
-    char    str1[] = "year of interesting things";
-    char    str2[80] = "this is the year 2023";
+    char    str1[] = "World";
+    char    str2[6] = "Hello"; // destination
 
     unsigned int    size;
     unsigned int	length;
-	char			*dest_ptr;
 
-	dest_ptr = str2;
-    size = 25;
+    size = sizeof(str2);
     length = ft_strlcat(str2, str1, size);
-	printf("length is %i\n", length);
-	printf("dest is %s\n", dest_ptr);
-    return(0);
-} */
+	printf("length is: %i\n", length);
+	printf("dest is: %s\n",str2);
+}

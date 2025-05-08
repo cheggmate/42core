@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:44:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 17:44:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/07 19:45:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int main(void)
     char source[] = "Hello";
     char destination[10];
 
-    memcpy(destination, source, 6);  // Includes the null terminator
+    memcpy(&destination, &source, 6);  // Includes the null terminator
     printf("Copied string: %s\n", destination);  // Output: Hello
 
     return 0;

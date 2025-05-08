@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:43:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/06 23:22:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/08 21:41:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strlen(const char *str)
 	while (*ptr)
 	{
 		count++;
-		ptr++;
+		str++;
 	}
 	return (count);
 }
