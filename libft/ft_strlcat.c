@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:03:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/08 23:14:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/09 11:54:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static char	*copy_over(char *dest, char *src_ptr, unsigned int *count, unsigned 
 	while (*src_ptr && temp_rem > 1)
 	{
 		printf("copying %c\n",  *src_ptr);
-		printf("rem is %d\n", temp_rem);
 		*dest = *src_ptr;
 		src_ptr++;
 		dest++;
@@ -81,14 +80,13 @@ unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size)
 	}
 	dest = copy_over(dest, src_ptr, &count, &remainder);
     *dest = '\0';
-	count++;
 	return (count);
 }
 #include <stdio.h>
 int     main(void)
 {
     char    str1[] = "World";
-    char    str2[6] = "Hello"; // destination
+    char    str2[20] = ""; // destination
 
     unsigned int    size;
     unsigned int	length;

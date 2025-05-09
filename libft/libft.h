@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:08:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:10:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/09 12:08:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,7 @@
 //     }
 //     _num;
 // })
+
+//declare functions here
+unsigned int	ft_strlcat(char *dest, const char *src, unsigned int size);
 #endif libft.h
