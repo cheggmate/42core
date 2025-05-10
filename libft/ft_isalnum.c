@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:10:26 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/08 21:41:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 00:01:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+
 int	ft_isalnum(int c)
 {
-    if (c == NULL)
+	if (c == 0)
 		return (0);
-	if (!((c >= 48 && c <= 57) || (c >=65 && c <= 90 ) || (c >= 97 && c <= 122)))
+	if (!((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || \
+	(c >= 97 && c <= 122)))
 		return (0);
 	return (1);
 }

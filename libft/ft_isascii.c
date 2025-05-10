@@ -6,16 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:15:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:04:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 23:59:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isascii(int c)
+int	ft_isascii(int c)
 {
-    if (!(c >= 0 && c <= 127))
-        return (0);
-    else
-        return (1);
+	if (!(c >= 0 && c <= 127))
+		return (0);
+	else
+		return (1);
 }
 /* #include <stdio.h>
 int main(void)

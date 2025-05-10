@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:21:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:04:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 23:59:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
-	if (c >= 0 && c <= 9)
+	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }

@@ -6,34 +6,80 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:40:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 22:31:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 22:46:08 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
-{
-	unsigned int	i;
-	unsigned int	len;
+#include <stddef.h>
 
-	i = 0;
-	len = 0;
-	if (size == 0)
-		return (i);
-	/* while (*dest)
+static void	flush_everything(const char *restrict src, unsigned int *count)
+{
+	unsigned int	temp_count;
+
+	temp_count = *count;
+	while (*src)
 	{
-		dest++;
-		len++;
-	} */
-	while (*src && len + i < size)
-	{
-		*dest = *src;
-		dest++;
-		src++;
-		len++;
-		i++;
+		printf("trying while loop again\n");
+		if (src != NULL)
+		{
+			temp_count++;
+			src++;
+			printf("incremented pointer\n\n");
+		}
+		else
+			break ;
 	}
-	*dest = '\0';
-	return (i);
+	printf("completed while loop");
+	*count = temp_count;
+}
+
+static char	*copy_over(char *restrict dest, const char *restrict src_ptr, \
+	unsigned int *count, unsigned int *rem)
+{
+	int	temp_count;
+	int	temp_rem;
+
+	temp_rem = *rem;
+	temp_count = *count;
+	while (*src_ptr && temp_rem > 1)
+	{
+		*dest = *src_ptr;
+		src_ptr++;
+		dest++;
+		temp_count++;
+		temp_rem--;
+	}
+	while (*src_ptr)
+	{
+		temp_count++;
+		src_ptr++;
+	}
+	*rem = temp_rem;
+	*count = temp_count;
+	return (dest);
+}
+
+unsigned int	ft_strlcpy(char *restrict dest, \
+	const char *restrict src, size_t size)
+{
+	unsigned int	count;
+	unsigned int	remainder;
+
+	count = 0;
+	remainder = size;
+	if (size == 0)
+	{
+		flush_everything(src, &count);
+		return (count);
+	}
+	else if (!src)
+		return (0);
+	else
+	{
+		dest = copy_over(dest, src, &count, &remainder);
+		*dest = '\0';
+		return (count);
+	}
 }
 /*
 int	main(void)

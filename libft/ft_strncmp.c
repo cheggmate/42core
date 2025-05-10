@@ -6,11 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:12:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:04:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 21:55:05 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strncmp(char *s1, char *s2, unsigned int n)
+#include <stddef.h>
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned int	i;
 
@@ -19,6 +21,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	{
 		s1++;
 		s2++;
+		i++;
 	}
 	if (n == 0)
 		return (0);

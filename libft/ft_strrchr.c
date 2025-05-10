@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 23:27:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 23:27:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 23:25:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 char    convert_to_char(int c)
 {
     if (!(c >= 0 && c <= 127))
-        return (NULL);
+        return ('\0');
     else
         return (c + '0');
 }
@@ -25,26 +25,30 @@ char    *ft_strrchr(const char *str, int c)
     char    char_c;
     char    *latest;
 
-    ptr = str;
+    ptr = (char *)str;
+	latest = NULL;
     char_c = convert_to_char(c);
     while (*ptr)
     {
+		printf("checking ptr (%c) against c\n", *ptr);
         if (*ptr == char_c)
-        {
             latest = ptr;
-        }
         ptr++;
     }
+	printf("latest is now pointing to %c\n", *latest);
+	printf("the while loop is completed\n");
     if (c == '\0')
+	{
+		printf("first if cause hit\n");
+		return (ptr);
+	}
+        
+    else if (latest == NULL || *latest != char_c)
     {
-        ptr++;
-        return (ptr);
+		printf("trying to check if the charc is a match\n");
+        return ((void *)0);
     }
-    if (*latest != char_c)
-    {
-        ptr = NULL;
-        return (ptr);
-    }
+	printf("else clause\n");
     return (latest);
 }
 /* int main(void)

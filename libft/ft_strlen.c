@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:43:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/08 21:41:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 00:01:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strlen(const char *str)
 {
-	int     count;
-	char    *ptr;
+	int		count;
+	char	*ptr;
 
 	count = 0;
+	ptr = (char *)str;
 	while (*ptr)
 	{
 		count++;
-		str++;
+		ptr++;
 	}
 	return (count);
 }

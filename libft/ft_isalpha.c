@@ -6,14 +6,15 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:56:00 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:04:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/10 23:59:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+
 int	ft_isalpha(int c)
 {
-	if (c == NULL)
+	if (c == 0)
 		return (1);
 	if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90)))
 		return (0);

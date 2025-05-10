@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 13:51:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:03:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 00:01:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_atoi(const char *str)
 	int		sign;
 	char	*ptr;
 
-	ptr = str;
+	ptr = (char *)str;
 	final_int = 0;
 	sign = 1;
 	while (*ptr == '\t' || *ptr == '\n' || *ptr == '\v' || \
@@ -41,7 +41,7 @@ int	main(void)
 {
 	int	out;
 
-	out = ft_atoi("-----21474836sdv");
+	out = ft_atoi("2147483648");
 	printf("out: %i\n", out);
 	return (0);
 } */
