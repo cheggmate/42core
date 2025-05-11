@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:40:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/10 22:46:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 22:25:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ static void	flush_everything(const char *restrict src, unsigned int *count)
 	temp_count = *count;
 	while (*src)
 	{
-		printf("trying while loop again\n");
 		if (src != NULL)
 		{
 			temp_count++;
 			src++;
-			printf("incremented pointer\n\n");
 		}
 		else
 			break ;
 	}
-	printf("completed while loop");
 	*count = temp_count;
 }
 

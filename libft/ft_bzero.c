@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 22:31:21 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/09 17:17:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 20:47:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*ptr;
-	int		count;
+	char			*ptr;
+	unsigned int	count;
+	unsigned int	search_len;
 
 	ptr = s;
 	count = 1;
-	while (*ptr && (count <= n))
+	search_len = 0;
+	search_len = (unsigned int) n;
+	while (*ptr && (count <= search_len))
 	{
 		*ptr = 0;
 		ptr++;

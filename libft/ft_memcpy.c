@@ -3,31 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:44:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/07 19:45:42 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 17:25:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-void    *ft_memcpy(void *dest, const void *src, int n)
-{
-    int     *ptr;
-    int     *from;
-    int     len;
+#include <stddef.h>
 
-    len = 0;
-    ptr = (int *)dest;      // check if this works
-    from = (int *)src;      // check if this works
-    while (*ptr && len <= n)
-    {
-        *ptr = *from;
-        ptr++;
-        src++;
-        len++;
-    }
-    return (dest);
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	unsigned char	*to;
+	unsigned char	*from;
+	size_t			len;
+
+	len = 0;
+	to = (unsigned char *)dest;
+	from = (unsigned char *)src;
+	if (!to || !from)
+		return (dest);
+	else
+	{
+		while (len < n)
+		{
+			to[len] = from[len];
+			len++;
+		}
+	}
+	return (dest);
 }
 /* #include <stdio.h>
 int main(void)

@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:36:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/05 17:41:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/11 15:54:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-void    *ft_memset(void *ptr, int value, int num)
-{
-    int     counter;
-    int     *dest;
+#include <stddef.h>
 
-    counter = 0;
-    dest = (int*)ptr;                   // check if this works
-    while (*dest && counter <= num)
-    {
-        *dest = value;
-        dest++;
-        counter++;
-    }
-    return (ptr);
+void	*ft_memset(void *ptr, int value, size_t num)
+{
+	size_t			count;
+	unsigned char	*dest;
+
+	count = 0;
+	dest = (unsigned char *)ptr;
+	while (count < num)
+	{
+		dest[count] = value;
+		count++;
+	}
+	return (ptr);
 }
 /* #include <stdio.h>
 int main(void)
