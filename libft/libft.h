@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:08:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/11 21:05:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/12 00:12:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 // declare functions here
 int             ft_atoi(const char *str);
 void            ft_bzero(void *s, size_t n);
+void			*ft_calloc(size_t num, size_t size);
 int 			ft_isascii(int c);
 int				ft_isalpha(int c);
 int				ft_isalnum(int c);
@@ -37,6 +38,7 @@ void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memset(void *ptr, int value, size_t num);
 char			*ft_strchr(const char *str, int c);
+char 			*ft_strdup(const char *s1);
 unsigned int	ft_strlcat(char *restrict dest, const char *restrict src, size_t size);
 unsigned int	ft_strlcpy(char *restrict dest, const char *restrict src, size_t size);
 int				ft_strlen(const char *str);
