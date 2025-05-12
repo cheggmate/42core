@@ -4,8 +4,8 @@ FLAG = -Wall -Wextra -Werror
 NAME = libft.a
 
 all: atoi bzero isalnum isalpha isascii isdigit isprint memchr memcpy \
-	memmove memset strchr strlcat strlcpy strlen strncmp strnstr strrchr \
-	tolower toupper
+	memmove memset substr strchr strlcat strlcpy strlen strncmp strnstr \
+	strrchr strtrim tolower toupper
 
 atoi: ft_atoi.c
 	cc -c ft_atoi.c -o ft_atoi.o
@@ -40,6 +40,9 @@ memmove: ft_memmove.c
 memset: ft_memset.c
 	cc -c ft_memset.c -o ft_memset.o
 
+substr: ft_substr.c
+	cc -c ft_substr.c -o ft_substr.o
+
 strchr: ft_strchr.c
 	cc -c ft_strchr.c -o ft_strchr.o
 
@@ -60,6 +63,9 @@ strnstr: ft_strnstr.c
 
 strrchr: ft_strrchr.c
 	cc -c ft_strrchr.c -o ft_strrchr.o
+
+strtrim: ft_strtrim.c
+	cc -c ft_strtrim.c -o ft_strtrim.o
 
 tolower: ft_tolower.c
 	cc -c ft_tolower.c -o ft_tolower.o
@@ -84,6 +90,7 @@ SRC = ft_atoi.c \
 	  ft_memcpy.c \
 	  ft_memmove.c \
 	  ft_memset.c \
+	  ft_substr.c \
 	  ft_strchr.c \
 	  ft_strlcat.c \
 	  ft_strlcpy.c \
@@ -91,6 +98,7 @@ SRC = ft_atoi.c \
 	  ft_strncmp.c \
 	  ft_strnstr.c \
 	  ft_strrchr.c \
+	  ft_strtrim.c \
 	  ft_tolower.c \
 	  ft_toupper.c \
 	  ft_calloc.c \

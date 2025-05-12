@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:40:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/11 22:25:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/12 11:51:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static char	*copy_over(char *restrict dest, const char *restrict src_ptr, \
 	return (dest);
 }
 
-unsigned int	ft_strlcpy(char *restrict dest, \
+size_t	ft_strlcpy(char *restrict dest, \
 	const char *restrict src, size_t size)
 {
 	unsigned int	count;

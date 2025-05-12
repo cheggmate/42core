@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:40:08 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/11 20:34:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/12 10:12:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 				count++;
 		}
 	}
+	
 	return ((void *)0);
 }
 /* 

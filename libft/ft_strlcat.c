@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:03:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/11 20:48:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/12 14:15:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h> // remove later
 
 static void	flush_everything(char *dest, char *src, unsigned int *count)
 {
@@ -32,15 +32,16 @@ static void	flush_everything(char *dest, char *src, unsigned int *count)
 	*count = temp_count;
 }
 
-static char	*copy_over(char *dest, char *src_ptr, \
+static char	*copy_over(char *dest, char *src_ptr,	\
 	unsigned int *count, unsigned int *rem)
 {
 	int	temp_count;
 	int	temp_rem;
 
 	temp_rem = *rem;
+	printf("temp_rem is %d.\n", temp_rem);
 	temp_count = *count;
-	while (*src_ptr && temp_rem > 0)
+	while (*src_ptr && temp_rem > 1)
 	{
 		*dest = *src_ptr;
 		src_ptr++;
@@ -58,7 +59,7 @@ static char	*copy_over(char *dest, char *src_ptr, \
 	return (dest);
 }
 
-unsigned int	ft_strlcat(char *restrict dest, \
+size_t	ft_strlcat(char *restrict dest,	\
 	const char *restrict src, size_t size)
 {
 	unsigned int	remainder;
