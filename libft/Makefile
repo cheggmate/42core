@@ -17,6 +17,8 @@ SRC = ft_atoi.c \
 	  ft_memmove.c \
 	  ft_memset.c \
 	  ft_purchar_fd.c \
+	  ft_putendl_fd.c \
+	  ft_putnbr_fd.c \
 	  ft_putstr_fd.c \
 	  ft_strchr.c \
 	  ft_striteri.c \
@@ -58,6 +60,8 @@ TEST_SRC = tests/tests_atoi.c \
 	  tests/tests_memmove.c \
 	  tests/tests_memset.c \
 	  tests/tests_putchar_fd.c \
+	  tests/tests_putendl_fd.c \
+	  tests/tests_putnbr_fd.c \
 	  tests/tests_putstr_fd.c \
 	  tests/tests_strchr.c \
 	  tests/tests_striteri.c \
