@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:08:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/13 00:45:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/13 23:37:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ void			*ft_memchr(const void *s, int c, size_t n);
 void			*ft_memcpy(void *dest, const void *src, size_t n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
 void			*ft_memset(void *ptr, int value, size_t num);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_striteri(char *s, void (*f)(unsigned int, char *));
+char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strchr(const char *str, int c);
 char 			*ft_strdup(const char *s1);
 unsigned int	ft_strlcat(char *restrict dest, const char *restrict src, size_t size);
