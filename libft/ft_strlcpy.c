@@ -6,35 +6,30 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 16:40:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/12 11:51:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:58:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-static void	flush_everything(const char *restrict src, unsigned int *count)
+static void	flush_everything(const char *src, unsigned int *count)
 {
 	unsigned int	temp_count;
 
 	temp_count = *count;
 	while (*src)
 	{
-		if (src != NULL)
-		{
-			temp_count++;
-			src++;
-		}
-		else
-			break ;
+		temp_count++;
+		src++;
 	}
 	*count = temp_count;
 }
 
-static char	*copy_over(char *restrict dest, const char *restrict src_ptr, \
+static char	*copy_over(char *dest, const char *src_ptr, \
 	unsigned int *count, unsigned int *rem)
 {
-	int	temp_count;
-	int	temp_rem;
+	unsigned int	temp_count;
+	unsigned int	temp_rem;
 
 	temp_rem = *rem;
 	temp_count = *count;
@@ -56,8 +51,7 @@ static char	*copy_over(char *restrict dest, const char *restrict src_ptr, \
 	return (dest);
 }
 
-size_t	ft_strlcpy(char *restrict dest, \
-	const char *restrict src, size_t size)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	unsigned int	count;
 	unsigned int	remainder;
@@ -78,15 +72,3 @@ size_t	ft_strlcpy(char *restrict dest, \
 		return (count);
 	}
 }
-/*
-int	main(void)
-{
-	char 			src[] = "HELLO THERE";
-	char 			dest[100] = "HEY,";
-	unsigned int	size = 100;
-	unsigned int	out = 0;
-
-	out = ft_strlcpy(dest, src, size);
-	printf("out = %i", out);
-	return(0);
-}*/

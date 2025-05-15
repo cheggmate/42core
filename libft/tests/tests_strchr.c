@@ -33,7 +33,7 @@ int main(void)
 	int		input5 = '\0';
 	char	search5[] = "hello";
 	char	*result5 = ft_strchr(search5, input5);
-	assert(memcmp(result5, &search5[6], 5) == 0);
+	assert(memcmp(result5, &search5[5], 5) == 0);
 
 	// Test 6: repeated character
 	int		input6 = 'a';
@@ -64,6 +64,14 @@ int main(void)
 	char	search10[] = "C is fun!";
 	char	*result10 = ft_strchr(search10, input10);
 	assert(memcmp(result10, &search10[8], 9) == 0);
+	printf("test passed\n");
+
+	// Test 11: casting (libft test)
+	int		input11 = 't' + 256;
+	char	search11[] = "tripouille";
+	char	*result11 = ft_strchr(search11, input11);
+	assert(memcmp(result11, &search11[0], 9) == 0);
+
     
     printf("All tests passed!\n");
     return 0;

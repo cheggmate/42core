@@ -13,13 +13,15 @@ SRC = ft_atoi.c \
 	  ft_isprint.c \
 	  ft_itoa.c \
 	  ft_memchr.c \
+	  ft_memcmp.c \
 	  ft_memcpy.c \
 	  ft_memmove.c \
 	  ft_memset.c \
-	  ft_purchar_fd.c \
+	  ft_putchar_fd.c \
 	  ft_putendl_fd.c \
 	  ft_putnbr_fd.c \
 	  ft_putstr_fd.c \
+	  ft_split.c \
 	  ft_strchr.c \
 	  ft_striteri.c \
 	  ft_strlcat.c \
@@ -29,6 +31,7 @@ SRC = ft_atoi.c \
 	  ft_strncmp.c \
 	  ft_strnstr.c \
 	  ft_strrchr.c \
+	  ft_strjoin.c \
 	  ft_strtrim.c \
 	  ft_substr.c \
 	  ft_tolower.c \
@@ -56,6 +59,7 @@ TEST_SRC = tests/tests_atoi.c \
 	  tests/tests_isprint.c \
 	  tests/tests_itoa.c \
 	  tests/tests_memchr.c \
+	  tests/tests_memcmp.c \
 	  tests/tests_memcpy.c \
 	  tests/tests_memmove.c \
 	  tests/tests_memset.c \
@@ -63,8 +67,10 @@ TEST_SRC = tests/tests_atoi.c \
 	  tests/tests_putendl_fd.c \
 	  tests/tests_putnbr_fd.c \
 	  tests/tests_putstr_fd.c \
+	  tests/tests_split.c \
 	  tests/tests_strchr.c \
 	  tests/tests_striteri.c \
+	  tests/tests_strjoin.c \
 	  tests/tests_strlcat.c \
 	  tests/tests_strlcpy.c \
 	  tests/tests_strlen.c \

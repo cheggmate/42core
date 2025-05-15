@@ -6,33 +6,29 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:37:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/12 10:12:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/15 21:30:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
+#include <limits.h>
+
 char	*ft_strchr(const char *str, int c)
 {
-	char	*ptr;
+	unsigned char	*ptr;
+	unsigned char	to_search;
 
-	ptr = (char *)str;
+	to_search = (unsigned char)c;
+	ptr = (unsigned char *)str;
+	if (!((to_search >= 32 && to_search <= 126) || to_search == 0))
+		return (NULL);
 	while (*ptr)
 	{
-		if (*ptr == c)
-			return (ptr);
+		if (*ptr == (char)to_search)
+			return ((char *)ptr);
 		ptr++;
 	}
-	if (c == '\0')
-	{
-		ptr++;
-		return (ptr);
-	}
-	return ((void *)0);
+	if ((char)to_search == '\0')
+		return ((char *)ptr);
+	return (NULL);
 }
-/* #include <stdio.h>
-int main(void)
-{
-    int		input2 = 'l';
-	char	search2[] = "hello";
-	char	*result2 = ft_strchr(search2, input2);
-    printf("string is %c\n", *result2);
-} */

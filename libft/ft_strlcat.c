@@ -6,95 +6,38 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:03:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/12 14:15:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/15 23:49:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <string.h>
-#include <stdio.h> // remove later
 
-static void	flush_everything(char *dest, char *src, unsigned int *count)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	unsigned int	temp_count;
+	size_t	dest_size;
+	size_t	src_size;
+	size_t	i;
 
-	temp_count = *count;
-	while (*dest)
+	i = 0;
+	dest_size = 0;
+	src_size = 0;
+	while (dest[dest_size] && dest_size < size)
+		dest_size++;
+	while (src[src_size])
+		src_size++;
+	if (dest_size >= size)
 	{
-		temp_count++;
-		dest++;
+		if (dest_size > size)
+			dest[dest_size] = '\0';
+		return (size + src_size);
 	}
-	while (*src)
+	while (src[i] && (dest_size + i + 1) < size)
 	{
-		temp_count++;
-		src++;
+		dest[dest_size + i] = src[i];
+		i++;
 	}
-	*count = temp_count;
+	if (dest_size + i < size)
+		dest[dest_size + i] = '\0';
+	return (dest_size + src_size);
 }
-
-static char	*copy_over(char *dest, char *src_ptr,	\
-	unsigned int *count, unsigned int *rem)
-{
-	int	temp_count;
-	int	temp_rem;
-
-	temp_rem = *rem;
-	printf("temp_rem is %d.\n", temp_rem);
-	temp_count = *count;
-	while (*src_ptr && temp_rem > 1)
-	{
-		*dest = *src_ptr;
-		src_ptr++;
-		dest++;
-		temp_rem--;
-		temp_count++;
-	}
-	while (*src_ptr)
-	{
-		temp_count++;
-		src_ptr++;
-	}
-	*rem = temp_rem;
-	*count = temp_count;
-	return (dest);
-}
-
-size_t	ft_strlcat(char *restrict dest,	\
-	const char *restrict src, size_t size)
-{
-	unsigned int	remainder;
-	unsigned int	count;
-	char			*src_ptr;
-
-	count = 0;
-	remainder = size;
-	src_ptr = (char *) src;
-	if (size == 0)
-	{
-		flush_everything(dest, src_ptr, &count);
-		return (count);
-	}
-	while (*dest)
-	{
-		dest++;
-		count++;
-		remainder--;
-	}
-	dest = copy_over(dest, src_ptr, &count, &remainder);
-	*dest = '\0';
-	return (count);
-}
-/* include <stdio.h>
-int     main(void)
-{
-    char    str1[] = "World!";
-    char    str2[20] = "Hello"; // destination
-
-    unsigned int    size;
-    unsigned int	length;
-
-    size = sizeof(str2);
-    length = ft_strlcat(str2, str1, size);
-	printf("length is: %i\n", length);
-	printf("dest is: %s\n",str2);
-} */

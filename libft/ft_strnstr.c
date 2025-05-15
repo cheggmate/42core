@@ -6,34 +6,61 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:10:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/11 20:46:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/16 01:02:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strnstr(char *str, char *to_find, int len)
-{
-	char	*s_space;
-	char	*s_term;
-    int     pos;
+#include <stddef.h>
 
-    pos = 0;
-	if (*str == '\0' || *to_find == '\0')
-		return (str);
+/* static char	*search_str(const char *s_space, const char *s_term, size_t len, size_t *pos)
+{
+	size_t	str_len = 0;
+
+	while (*s_space && *s_term && \
+		(*s_space == *s_term) && (*pos + str_len) < len)
+	{
+		s_space++;
+		s_term++;
+		str_len++;
+	}
+	if (*s_term == '\0')
+		return ((char *)s_space);
+	return (NULL);
+} */
+
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+{
+	char		*s_space;
+	char		*s_term;
+	size_t		pos;
+	size_t		str_len;
+
+	pos = 0;
+	if (*str == '\0')
+	{
+		if (*to_find == '\0')
+			return ((char *)str);
+		else
+			return (NULL);
+	}
 	while (*str && pos <= len)
 	{
-		s_space = str;
-		s_term = to_find;
-		while (*s_space && *s_term && (*s_space == *s_term))
+		str_len = 0;
+		s_space = (char *)str;
+		s_term = (char *)to_find;
+		while (*s_space && *s_term && \
+			(*s_space == *s_term) && (pos + str_len) < len)
 		{
 			s_space++;
 			s_term++;
+			str_len++;
 		}
 		if (*s_term == '\0')
-			return (str);
+			return ((char *)str);
 		str++;
         pos++;
 	}
-	return (0);
+	return (NULL);
 }
 /* 
 #include <stdio.h>

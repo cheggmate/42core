@@ -39,7 +39,7 @@ int main(void)
 	int		size4 = 0;
 	int		result4 = ft_strlcpy(dest4, src4, size4);
 	assert(result4 == 2);
-	assert(strcmp(dest4, NULL) == 0); // need to check whether this is a valid test
+	assert(strcmp(dest4, "") == 0); // need to check whether this is a valid test
 	printf("Test 4 passed.\n");
 
 	// Test 5: Empty source  // This test is failing
@@ -48,7 +48,7 @@ int main(void)
 	int		size5 = 5;
 	int		result5 = ft_strlcpy(dest5, src5, size5);
 	assert(result5 == 0);
-	assert(strcmp(dest5, NULL)== 0);
+	assert(strcmp(dest5, "")== 0);
 	printf("Test 5 passed.\n");
 
 	// Test 6: One-byte buffer
@@ -76,6 +76,16 @@ int main(void)
 	int		result8 = ft_strlcpy(dest8, src8, size8);
 	assert(result8 == 4);
 	assert(strcmp(dest8, "copy") == 0);
+	printf("Test 8 passed.\n");
+
+	// Test9: edge case of dstsize = -1
+	char		src9[] = "helloworld!";
+	char		dest9[20];
+	size_t		size9 = -1;
+	int			result9 = ft_strlcpy(dest9, src9, size9);
+	assert(result9 == 11);
+	assert(strcmp(dest9, src9) == 0);
+	assert(strncmp(dest9, src9, 11) == 0);
     
     printf("All tests passed!\n");
     return 0;
