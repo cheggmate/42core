@@ -6,125 +6,110 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:03:51 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/14 00:32:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/15 14:18:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static void	free_array(char **arr, int str_count)
+static int	chk_or_free_arr(char **arr, int str_count, char oper_type)
 {
 	int	strings_left;
 
 	strings_left = str_count;
-	while (strings_left > 0)
+	if (oper_type == 'c')
 	{
-		free(arr[strings_left]);
-		strings_left--;
+		if (!arr)
+			chk_or_free_arr(arr, str_count, 'f');
+		else
+			return (1);
 	}
-	free(arr);
+	else if (oper_type == 'f')
+	{
+		while (strings_left > 0)
+		{
+			free(arr[strings_left]);
+			strings_left--;
+		}
+		free(arr);
+		return (0);
+	}
+	return (1);
 }
 
 static int	count_words(char const *s, char c)
 {
 	int		str_count;
+	int		within_str;
 
 	str_count = 0;
+	within_str = 0;
 	if (ft_strncmp(&c, "", 1) == 0)
 		return (str_count);
 	while (*s)
 	{
-		if (!(ft_strchr(s, (int)c)))
+		if (*s != c)
+			within_str = 1;
+		else if (*s == c && within_str == 1)
+		{
+			within_str = 0;
 			str_count++;
-		s++;	
+		}
+		s++;
 	}
-	str_count += 1;
+	s--;
+	if (*s != c)
+		str_count += 1;
 	return (str_count);
 }
 
-/* static char	*dup_word(const char *split_str, const char *s, int curr_str_count, int str_count)
+char	*get_insert_word(char **split_str, const char *start, int index, char c)
 {
-	char	*new_word;
+	char		*new_word;
+	const char	*start_temp;
+	int			str_len;
 
-	new_word = malloc((str_len) + 1);
-	if (!(split_str[curr_str_count]))
+	str_len = 0;
+	start_temp = start;
+	while (*start_temp != c && *start_temp)
 	{
-		free_array(split_str, str_count);
-		return (NULL);
+		str_len++;
+		start_temp++;
 	}
-	else
+	new_word = malloc(str_len + 1);
+	if (new_word)
 	{
-		ft_strlcpy(split_str[curr_str_count], s, str_len);
-		curr_str_count++;
-		s = nxt_delimit + 1;
-		nxt_delimit = ft_strchr(s, c);
+		ft_strlcpy(new_word, start, str_len + 1);
+		split_str[index] = new_word;
 	}
-} */
+	return ((char *)start_temp);
+}
 
 char	**ft_split(const char *s, char c)
 {
-	char	**split_str;
-	char	*nxt_delimit;
-	int		str_count;
-	int		curr_str_count;
+	char		**split_str;
+	int			curr_str_n;
+	const char	*start;
 
-	printf("starting split\n");
-	if (!s)
+	curr_str_n = 0;
+	if (!s || ft_strncmp(&c, "", 1) == 0 || count_words(s, c) == 0)
 		return (NULL);
-	str_count = count_words(s, c);
-	if (str_count == 0 || ft_strncmp(&c, "", 1) == 0)
+	split_str = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (chk_or_free_arr(split_str, curr_str_n, 'c') == 0)
+		return (NULL);
+	while (*s)
 	{
-		split_str = malloc(sizeof(char *) + 1);
-		split_str[0] = ft_strdup(s);
-		return (split_str); // potentially move this out?
-	}
-	else 
-	{
-		split_str = malloc((str_count + 1) * sizeof(char *));
-		nxt_delimit = ft_strchr(s, c);
-		while (curr_str_count < str_count)
+		if (*s != c)
 		{
-			split_str[curr_str_count] = malloc((nxt_delimit - s) + 1);
-			if (!(split_str[curr_str_count]))
-			{
-				free_array(split_str, str_count);
+			start = s;
+			s = get_insert_word(split_str, start, curr_str_n, c);
+			if (chk_or_free_arr(&split_str[curr_str_n], curr_str_n, 'c') == 0)
 				return (NULL);
-			}
-			else
-			{
-				ft_strlcpy(split_str[curr_str_count], s, nxt_delimit - s);
-				curr_str_count++;
-				s = nxt_delimit + 1;
-				nxt_delimit = ft_strchr(s, c);
-			}
+			curr_str_n++;
 		}
-		split_str[str_count] = (char *)0;
-		return (split_str);
+		else
+			s++;
 	}
+	return (split_str);
 }
-
-/* #include <string.h>
-#include <stdio.h>
-#include <assert.h>
-
-int	main(void)
-{
-	char	str1[] = "a,b,c";
-	char	delimit1 = ',';
-	char	*expected1[] = {"a", "b", "c", NULL};
-	char	**results1 = ft_split(str1, delimit1);
-	if (!results1)
-		printf("results1 is null\n");
-	else
-	{
-		assert(strcmp(results1[0], expected1[0]) == 0);
-		assert(strcmp(results1[1], expected1[0]) == 0);
-		assert(strcmp(results1[2], expected1[0]) == 0);
-		assert(!(results1[3]));
-	}
-    
-    printf("All tests passed!\n");
-    return 0;
-}
- */
