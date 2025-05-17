@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:37:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/16 18:47:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 14:56:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strchr(const char *str, int c)
 
 	to_search = (unsigned char)c;
 	ptr = (unsigned char *)str;
-	if (!( to_search == 9 || to_search == 10 \
+	if (!(to_search == 9 || to_search == 10 \
 		|| (to_search >= 32 && to_search <= 126) || to_search == 0))
 		return (NULL);
 	while (*ptr)

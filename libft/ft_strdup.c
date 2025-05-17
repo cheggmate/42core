@@ -6,14 +6,14 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 23:23:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/12 00:11:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 14:55:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char *ft_strdup(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	int			len;
 	char		*dup;

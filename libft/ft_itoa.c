@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 22:32:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/17 14:46:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 15:23:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 #include <limits.h>
 #include "libft.h"
 
-static char	*create_string(int n, int is_negative)
+static char	*create_string(int n, int is_negative, char *str_n)
 {
 	int		pos;
 	int		m;
-	char	*str_n;
 	int		num_digits;
-	int		total_len;
-
 
 	pos = 0;
 	m = n;
@@ -31,13 +28,12 @@ static char	*create_string(int n, int is_negative)
 		m /= 10;
 		num_digits++;
 	}
-	total_len = num_digits + is_negative;
-	str_n = malloc(total_len + 1);
+	str_n = malloc(num_digits + is_negative + 1);
 	if (str_n)
 	{
 		while (n > 0)
 		{
-			str_n[total_len - pos - 1] = (n % 10) + '0';
+			str_n[num_digits + is_negative - pos - 1] = (n % 10) + '0';
 			n = n / 10;
 			pos++;
 		}
@@ -47,10 +43,8 @@ static char	*create_string(int n, int is_negative)
 	return (str_n);
 }
 
-static char	*handle_limits_and_zero(int n)
+static char	*handle_limits_and_zero(int n, char *str_n)
 {
-	char	*str_n;
-
 	if (n == INT_MIN)
 	{
 		str_n = malloc(11 + 1);
@@ -77,10 +71,11 @@ char	*ft_itoa(int n)
 	int		is_negative;
 	char	*str_n;
 
+	str_n = NULL;
 	is_negative = 0;
 	if (n == INT_MAX || n == INT_MIN || n == 0)
 	{
-		str_n = handle_limits_and_zero(n);
+		str_n = handle_limits_and_zero(n, str_n);
 		return (str_n);
 	}
 	if (n < 0)
@@ -88,6 +83,6 @@ char	*ft_itoa(int n)
 		is_negative = 1;
 		n = -n;
 	}
-	str_n = create_string(n, is_negative);
+	str_n = create_string(n, is_negative, str_n);
 	return (str_n);
 }

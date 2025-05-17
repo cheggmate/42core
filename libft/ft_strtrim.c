@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:11:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/16 18:08:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 14:56:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	check_len(char const *s1, char const *set)
 {
 	unsigned char const	*str;
-	int			count;
+	int					count;
 
 	count = 0;
 	str = (unsigned char const *)s1;

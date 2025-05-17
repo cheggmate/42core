@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 14:44:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/15 15:45:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 14:55:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 
 	t1 = s1;
 	t2 = s2;
-
 	if (n <= 0)
 		return (0);
 	while (n--)
