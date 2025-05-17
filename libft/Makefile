@@ -1,103 +1,53 @@
-FLAG = -Wall -Wextra -Werror
+FLAG 		= -Wall -Wextra -Werror
 
-NAME = libft.a
+NAME 		= libft.a
 
-all: $(NAME) # dont know if this is correct
+REQ_SRC 	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
+	  		ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
+	  		ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
+	  		ft_split.c ft_strchr.c ft_striteri.c ft_strlcat.c ft_strlcpy.c ft_strlen.c \
+	  		ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strjoin.c ft_strtrim.c \
+	  		ft_substr.c ft_tolower.c ft_toupper.c ft_calloc.c ft_strdup.c 
+OBJ 		= $(REQ_SRC:.c=.o)
 
-SRC = ft_atoi.c \
-	  ft_bzero.c \
-	  ft_isalnum.c \
-	  ft_isalpha.c \
-	  ft_isascii.c \
-	  ft_isdigit.c \
-	  ft_isprint.c \
-	  ft_itoa.c \
-	  ft_memchr.c \
-	  ft_memcmp.c \
-	  ft_memcpy.c \
-	  ft_memmove.c \
-	  ft_memset.c \
-	  ft_putchar_fd.c \
-	  ft_putendl_fd.c \
-	  ft_putnbr_fd.c \
-	  ft_putstr_fd.c \
-	  ft_split.c \
-	  ft_strchr.c \
-	  ft_striteri.c \
-	  ft_strlcat.c \
-	  ft_strlcpy.c \
-	  ft_strlen.c \
-	  ft_strmapi.c \
-	  ft_strncmp.c \
-	  ft_strnstr.c \
-	  ft_strrchr.c \
-	  ft_strjoin.c \
-	  ft_strtrim.c \
-	  ft_substr.c \
-	  ft_tolower.c \
-	  ft_toupper.c \
-	  ft_calloc.c \
-	  ft_strdup.c \
+# Bonus files
+BONUS_SRC	= ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstclear_bonus.c \
+			ft_lstdelone_bonus.c ft_lstlast_bonus.c ft_lstiter_bonus.c ft_lstlast_bonus.c \
+			ft_lstmap_bonus.c ft_lstnew_bonus.c ft_lstsize_bonus.c 
+BONUS_OBJ	= $(BONUS_SRC:.c=.o)
 
-	  OBJ = $(SRC:.c=.o)
+# Default target
+all: $(NAME)
 
+# Compile and archive .o files into libft.a
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@echo "$(NAME) created"
 	@ranlib $(NAME)
 	@echo "$(NAME) indexed"
 
+# Compile .c to .o
 %.o: %.c
 	@cc $(FLAG) -c $< -o $@
 
-TEST_SRC = tests/tests_atoi.c \
-	  tests/tests_bzero.c \
-	  tests/tests_isalnum.c \
-	  tests/tests_isalpha.c \
-	  tests/tests_isascii.c \
-	  tests/tests_isdigit.c \
-	  tests/tests_isprint.c \
-	  tests/tests_itoa.c \
-	  tests/tests_memchr.c \
-	  tests/tests_memcmp.c \
-	  tests/tests_memcpy.c \
-	  tests/tests_memmove.c \
-	  tests/tests_memset.c \
-	  tests/tests_putchar_fd.c \
-	  tests/tests_putendl_fd.c \
-	  tests/tests_putnbr_fd.c \
-	  tests/tests_putstr_fd.c \
-	  tests/tests_split.c \
-	  tests/tests_strchr.c \
-	  tests/tests_striteri.c \
-	  tests/tests_strjoin.c \
-	  tests/tests_strlcat.c \
-	  tests/tests_strlcpy.c \
-	  tests/tests_strlen.c \
-	  tests/tests_strmapi.c \
-	  tests/tests_strncmp.c \
-	  tests/tests_strnstr.c \
-	  tests/tests_strrchr.c \
-	  tests/tests_strtrim.c \
-	  tests/tests_substr.c \
-	  tests/tests_tolower.c \
-	  tests/tests_toupper.c \
-	  tests/tests_calloc.c \
-	  tests/tests_strdup.c \
+# Bonus target - compile + add bonus .o files to libft.a
+bonus: $(OBJ) $(BONUS_OBJ)
+	@echo "BONUS_OBJ = $(BONUS_OBJ)"
+	@ar rc $(NAME) $(OBJ) $(BONUS_OBJ)
+	@ranlib $(NAME)
 
-	  TEST_OBJ = $(TEST_SRC:.c=tests/.o)
-
-#split_test: ft_strdup.c ft_strncmp.c ft_strchr.c ft_strlen.c ft_strlcpy.c ft_memcpy.c
-#	cc -c tests/tests_split.c ft_strdup.c ft_strncmp.c ft_strchr.c ft_strlen.c ft_strlcpy.c ft_memcpy.c
-
+# Clean OBJ files
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(BONUS_OBJ)
 	@echo "OBJ deleted"
 
+# Clean all
 fclean: clean
-	@rm -f $(NAME)
-	@echo "$(NAME) deleted"
+	@rm -f $(NAME) $(BONUS_OBJ)
+	@echo "$(NAME) $(BONUS_OBJ) deleted"
 
+# Rebuild everything
 re: fclean all
 
-.PHONY: all, clean, fclean, re
+# Used to declare targets that are not actual fieles but command names
+.PHONY: all bonus clean fclean re
