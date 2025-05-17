@@ -6,12 +6,28 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 15:11:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/12 16:01:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/16 18:08:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+
+static int	check_len(char const *s1, char const *set)
+{
+	unsigned char const	*str;
+	int			count;
+
+	count = 0;
+	str = (unsigned char const *)s1;
+	while (*str)
+	{
+		if (!ft_strchr(set, (int)(*str)))
+			count++;
+		str++;
+	}
+	return (count);
+}
 
 static void	fill_string(char const *s1, char const *set, char *new_str)
 {
@@ -38,12 +54,12 @@ char	*ft_strtrim(char const *s1, char const *set)
 
 	if (!s1)
 		return (NULL);
-	len = ft_strlen(s1);
 	if (!set)
 	{
 		new_str = ft_strdup(s1);
 		return (new_str);
 	}
+	len = check_len(s1, set);
 	new_str = (char *)malloc(len + 1);
 	if (!new_str)
 		return (NULL);

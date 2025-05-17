@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 23:54:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/14 00:30:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/16 20:35:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	ft_putnbr_fd(int n, int fd)
 	if (n == INT_MAX)
 		write(fd, "2147483647", 11);
 	else if (n == INT_MIN)
-		write(fd, "-2147483648", 11);
-	else if (n < 0)
+		write(fd, "-2147483648", 12);
+	if (n < 0)
 	{
 		ft_putchar_fd('-', fd);
 		n = -n;
 	}
-	else if (n >= 10)
+	if (n >= 10)
 		ft_putnbr_fd(n / 10, fd);
 	ft_putchar_fd((n % 10) + '0', fd);
 }

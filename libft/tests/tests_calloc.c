@@ -26,7 +26,7 @@ int main(void)
 	if (!arr2)
 		printf("arr2 is null\n");
 	else
-		assert(memcmp(arr2, result2, num2) == 0);
+		assert(memcmp(arr2, result2, size2) == 0);
 	free(arr2);
 	printf("test 2 passed\n");
 
@@ -37,7 +37,7 @@ int main(void)
 	if (!arr3)
 		printf("arr3 is null\n");
 	else
-		assert(!arr3);
+		assert(arr3 != NULL);
 	free(arr3);	
 	printf("test 3 passed\n");
 
@@ -65,8 +65,42 @@ int main(void)
 		printf("arr5 is null\n");
 	else
 		assert((*arr5 == 0) || !arr5);
+	printf("test 5 passed\n");
 	free(arr5);
+
+	// Test6:  size of 0
+	size_t	num6 = 5;
+	size_t	size6 = 0;
+	int		*arr6 = ft_calloc(num6, size6);
+	if (!arr6)
+		printf("arr6 is null\n");
+	else
+		assert(arr6 != NULL);
+	printf("test 6 passed\n");
+	free(arr6);
+	
+	// Test7: negative num, zero size
+	size_t	num7 = -5;
+	size_t	size7 = 0;
+	int		*arr7 = ft_calloc(num7, size7);
+	if (!arr7)
+		printf("arr7 is null\n");
+	else
+		assert(arr7 != NULL);
+	printf("test 7 passed\n");
+	free(arr7);
+
+	// Test8: negative size, zero num
+	size_t	num8 = 0;
+	size_t	size8 = -5;
+	int		*arr8 = ft_calloc(num8, size8);
+	if (!arr8)
+		printf("arr8 is null\n");
+	else
+		assert(arr8 != NULL);
+	printf("test 8 passed\n");
+	free(arr8);
     
-    printf("All tests passed!\n");
+    // printf("All tests passed!\n");
     return 0;
 }

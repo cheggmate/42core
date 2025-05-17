@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <assert.h>
 #include <limits.h>
 #include "../ft_atoi.c"
@@ -8,7 +9,7 @@ int	main(void)
 	// Test 1: Basic positive number
     int out1;
     out1 = ft_atoi("1234");
-    assert(out1 = 1234);
+    assert(out1 == 1234);
 
     // Test 2: Basic negative number
     int out2;
@@ -74,6 +75,24 @@ int	main(void)
     int out14;
     out14 = ft_atoi("1 2 3");
     assert(out14 == 1);
+
+    // Test 15: --1
+    int out15;
+    out15 = ft_atoi("--1");
+    assert(out15 == 0);
+
+    // Test 16: ++1
+    int out16;
+    out16 = ft_atoi("++1");
+    assert(out16 == 0);
+
+    // Test 17: -+42
+    int out17 = ft_atoi("-+42");
+    assert(out17 == 0);
+
+    // Test 18: +-42
+    int out18 = ft_atoi("+-42");
+    assert(out18 == 0);
 
     printf("All tests passed!\n");
     return 0;

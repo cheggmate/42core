@@ -44,10 +44,18 @@ int main(void)
 	printf("expected in file: '12345' \n");
 	printf("--------\n");
 
-	// Test 7: Wwrite negative number to stderr
+	// Test 7: Write negative number to stderr
 	ft_putnbr_fd(-1234, 2);
 	printf("\n");
 	printf("expected: '-1234' \n");
+	printf("--------\n");
+
+	// Test 8: -42
+	int	fd8 = open("test8_putnbr_fd.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	ft_putnbr_fd(-42 , fd8);
+	close(fd8);
+	printf("\n");
+	printf("expected in file: '-42' \n");
 	printf("--------\n");
 
 

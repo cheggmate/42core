@@ -25,6 +25,7 @@ int main(void)
 	size_t			len2 = 5;
 	char			expected2[] = "world";
 	char			*sub2 = ft_substr(str2, start2, len2);
+	printf("substr is %s\n", sub2);
 	if (!sub2)
 		printf("sub2 is null\n");
 	else
@@ -51,7 +52,6 @@ int main(void)
 	size_t			len4 = 10;
 	char			expected4[] = "bc";
 	char			*sub4 = ft_substr(str4, start4, len4);
-	printf("sub4 is %s.\n", sub4);
 	if (!sub4)
 		printf("sub4 is null\n");
 	else
@@ -123,6 +123,18 @@ int main(void)
 	else
 		assert(strcmp(sub9, expected9) == 0);
 	free(sub9);
+
+	// Test 10: libft test
+	char			str10[] = "tripouille";
+	unsigned int	start10 = 0;
+	size_t			len10 = 42000;
+	char			expected10[] = "tripouille";
+	char			*sub10 = ft_substr(str10, start10, len10);
+	if (!sub10)
+		printf("sub10 is null\n");
+	else
+		assert(!strcmp(sub10, expected10));
+	free(sub10);
 
     printf("All tests passed!\n");
     return 0;

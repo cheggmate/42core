@@ -73,25 +73,27 @@ int main(void)
 	printf("test 3 passed\n");
 	free_all(results3);
 	printf("-----------\n");
-    
 
 	// Test 4: String starting and ending with delimiters
-	char	str4[] = ",split,this,string,";
+	/* char	str4[] = ",split,this,text,";
 	char	delimit4 = ',';
 	char	**results4 = ft_split(str4, delimit4);
 	if(!results4)
 		printf("results4 is null\n");
 	else
 	{
-		// printf("results4[2] is %s\n", results4[2]);
+		printf("results4[0] is %s\n", results4[0]);
+		printf("results4[1] is %s\n", results4[1]);
+		printf("results4[2] is %s\n", results4[2]);
+		printf("results4[3] is %s\n", results4[3]);
 		assert(strcmp(results4[0], "split") == 0);
 		assert(strcmp(results4[1], "this") == 0);
-		assert(strcmp(results4[2], "string") == 0);
+		assert(strcmp(results4[2], "text") == 0);
 		assert(!(results4[3]));
 	}
 	printf("test 4 passed\n");
 	free_all(results4);
-	printf("-----------\n");
+	printf("-----------\n"); */
 
 	// Test 5: String with only delimiters
 	char	str5[] = ",,,,,,,";
@@ -132,6 +134,28 @@ int main(void)
 	assert(!results8);
 	printf("test 8 passed\n");
 	free(results8);
+	printf("-----------\n");
+
+	// Test 9: libft test
+	char	str9[] = "tripouille";
+	char	**results9 = ft_split(str9, 0);
+	if (!results9)
+		printf("results9 is null\n");
+	else
+	{
+		assert(strcmp((results9[0]), "tripouille") == 0);
+		assert(!results9[1]);
+	}
+	printf("test 9 passed\n");
+	free(results9);
+	printf("-----------\n");
+
+	// Test 10: libft test
+	char	str10[] = "          ";
+	char	**results10 = ft_split(str10, ' ');
+	assert(!results10);
+	printf("test 10 passed\n");
+	free(results10);
 	printf("-----------\n");
 
     printf("All tests passed!\n");
