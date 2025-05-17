@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:10:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/17 15:34:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/17 16:03:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+static char	*find_substr(const char *str, const char *to_find, size_t len)
 {
 	char		*hay;
 	char		*needle;
@@ -20,10 +20,6 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	size_t		str_len;
 
 	pos = 0;
-	if (*str == '\0' && *to_find == '\0')
-		return ((char *)str);
-	else if (*str == '\0')
-		return (NULL);
 	while (*str && pos <= len)
 	{
 		str_len = 0;
@@ -41,6 +37,19 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 		pos++;
 	}
 	return (NULL);
+}
+
+char	*ft_strnstr(const char *str, const char *to_find, size_t len)
+{
+	char	*result;
+
+	result = NULL;
+	if (*str == '\0' && *to_find == '\0')
+		return ((char *)str);
+	else if (*str == '\0')
+		return (NULL);
+	result = find_substr(str, to_find, len);
+	return (result);
 }
 /* 
 #include <stdio.h>
