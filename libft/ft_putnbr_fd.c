@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 23:54:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/16 20:35:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/18 20:23:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <limits.h>
-#include "libft.h"
+#include "../libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

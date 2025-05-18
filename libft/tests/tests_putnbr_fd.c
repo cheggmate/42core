@@ -58,7 +58,6 @@ int main(void)
 	printf("expected in file: '-42' \n");
 	printf("--------\n");
 
-
-    // printf("All tests passed!\n");
+    // printf("All tests passed!\n")
     return 0;
 }
