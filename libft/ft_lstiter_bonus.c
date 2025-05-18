@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:25:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/18 00:02:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/18 16:40:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 	{
 		f(curr -> content);
 		if (!(curr->next))
-			break;
+			break ;
 		curr = curr -> next;
 	}
 }
