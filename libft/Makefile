@@ -2,6 +2,8 @@ FLAG 		= -Wall -Wextra -Werror
 
 NAME 		= libft.a
 
+NAME_BONUS	= libft_bonus.a
+
 REQ_SRC 	= ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c \
 	  		ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memmove.c \
 	  		ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
@@ -33,8 +35,8 @@ $(NAME): $(OBJ)
 # Bonus target - compile + add bonus .o files to libft.a
 bonus: $(OBJ) $(BONUS_OBJ)
 	@echo "BONUS_OBJ = $(BONUS_OBJ)"
-	@ar rc $(NAME) $(OBJ) $(BONUS_OBJ)
-	@ranlib $(NAME)
+	@ar rc $(NAME_BONUS) $(OBJ) $(BONUS_OBJ)
+	@ranlib $(NAME_BONUS)
 
 # Clean OBJ files
 clean:
