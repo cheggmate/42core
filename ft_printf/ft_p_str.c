@@ -6,42 +6,13 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:33:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 09:56:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 10:07:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h> // remove when removing all printf
 #include <unistd.h>
 #include "ft_printf.h"
-
-/* static int	write_str(char *s)
-{
-	ssize_t	result;
-
-	result = 0;
-	if (*s)
-	{
-		while (*s)
-		{
-			result = write (1, s, 1);
-			s++;
-		}
-	}
-	return (result);
-}
-
-static int	write_char(char *s)
-{
-	ssize_t	result;
-
-	result = 0;
-	if (*s)
-	{
-		result = write (1, s, 1);
-		s++;
-	}
-	return (result);
-} */
 
 ssize_t	ft_p_str(char *s, char type)
 {
