@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:57:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 22:07:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 22:29:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_p_nbr_base(unsigned int nbr, char type, char *base)
 {
 	int		i;
 	char	buffer[32];
-	int	count;
+	int		count;
 
 	count = 0;
 	i = 0;

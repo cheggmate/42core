@@ -6,15 +6,15 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:55:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 21:46:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 22:32:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_h
-
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdarg.h>
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
 
 // definition of function
 int			ft_printf(const char *content, ...);

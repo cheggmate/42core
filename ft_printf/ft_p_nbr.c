@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:47:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/21 23:49:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 22:25:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ size_t	ft_p_nbr(int n, char type)
 {
 	int		count;
 	char	string;
+
 	count = 0;
 	if (n == -2147483648)
 	{

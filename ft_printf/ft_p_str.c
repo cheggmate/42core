@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:33:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 10:07:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 22:28:05 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@
 ssize_t	ft_p_str(char *s, char type)
 {
 	if (type == 'c')
-	{
 		return (write(1, &s, 1));
-	}
-		
 	else
-		return  (write(1, s, ft_strlen(s)));
+		return (write(1, s, ft_strlen(s)));
 }
