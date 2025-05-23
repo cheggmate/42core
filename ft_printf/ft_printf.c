@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:55:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 22:30:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/22 23:04:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 static size_t	eval_form(va_list *args, const char *form, int x)
 {
-	void	*ptr;
-
 	if (!form[x])
 		return (0);
 	if (form[x] == 'c' || form[x] == 's')
