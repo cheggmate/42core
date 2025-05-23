@@ -6,12 +6,10 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:47:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 22:25:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/23 16:00:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stddef.h>
 #include "ft_printf.h"
 
 #include <stdio.h>

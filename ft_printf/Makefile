@@ -2,6 +2,7 @@ FLAG		= -Wall -Wextra -Werror
 NAME		= libftprintf.a
 REQ_SRC		= ft_printf.c ft_p_nbr_base.c ft_p_nbr.c ft_p_str.c ft_p_ptr.c ft_p_unbr.c ft_strlen.c
 OBJ 		= $(REQ_SRC:.c=.o)
+HEADER		= ft_printf.h
 
 # Compile and archive .o files into libft.a
 $(NAME): $(OBJ)
@@ -14,6 +15,9 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 # Compile .c to .o
+%.o : %.c ${HEADER}
+			@cc $(FLAG) -c $< -o $@
+
 
 # Clean OBJ files
 clean:

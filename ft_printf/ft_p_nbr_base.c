@@ -6,15 +6,13 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:57:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/22 22:29:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/23 16:05:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h> // remove when removing all printf statements
-#include <unistd.h>
-#include <stddef.h>
+#include "ft_printf.h"
 
-size_t	ft_p_nbr_base(unsigned int nbr, char type, char *base)
+size_t	ft_p_nbr_base(unsigned int nbr, char *base)
 {
 	int		i;
 	char	buffer[32];
