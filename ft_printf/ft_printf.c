@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/18 16:55:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/23 17:16:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/24 14:52:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,12 @@ int	ft_printf(const char *form, ...)
 			x++;
 		}
 		else
-			write (1, &form[x], 1);
+		{
+			if (form[x] == '\n')
+				total += write(1, &form[x], 1);
+			else
+				total += write (1, &form[x], 1);
+		}
 	}
 	va_end (args);
 	return (total);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <limits.h>
+#include <assert.h>
 #include <stddef.h>
 #include <stdarg.h>
 #include "../ft_printf.c"
@@ -94,17 +95,23 @@ static void	test_integer_basic(void)
 {
 	print_test_subheader("INTEGER TESTS");
 	
-	ft_printf("(FT) Test 1: Zero: [%d]\n", 0);
-	printf("(IO) Test 1: Zero: [%d]\n", 0);
-	ft_printf("(FT) Test 2: Positive integer: [%d]\n", 42);
-	printf("(IO) Test 2: Positive integer: [%d]\n", 42);
-	ft_printf("(FT) Test 3: Negative integer: [%d]\n", -42);
-	printf("(IO) Test 3: Negative integer: [%d]\n", -42);
-	ft_printf("(FT) Test 4: MAX_INT: [%d]\n", INT_MAX);
-	printf("(IO) Test 4: MAX_INT: [%d]\n", INT_MAX);
-	ft_printf("(FT) Test 5: MIN_INT: [%d]\n", INT_MIN);
-	printf("(IO) Test 5: MIN_INT: [%d]\n", INT_MIN);
-	
+	int val1a = ft_printf("(FT) Test 1: Zero: [%d]\n", 0);
+	int val1b= printf("(IO) Test 1: Zero: [%d]\n", 0);
+	assert(val1a == val1b);
+	int val2a = ft_printf("(FT) Test 2: Positive integer: [%d]\n", 42);
+	int val2b = printf("(IO) Test 2: Positive integer: [%d]\n", 42);
+	assert(val2a == val2b);
+	int val3a = ft_printf("(FT) Test 3: Negative integer: [%d]\n", -42);
+	int val3b = printf("(IO) Test 3: Negative integer: [%d]\n", -42);
+	assert(val3a == val3b);
+	int val4a = ft_printf("(FT) Test 4: MAX_INT: [%d]\n", INT_MAX);
+	int val4b = printf("(IO) Test 4: MAX_INT: [%d]\n", INT_MAX);
+	assert(val4a == val4b);
+	int val5a = ft_printf("(FT) Test 5: MIN_INT: [%d]\n", INT_MIN);
+	int val5b = printf("(IO) Test 5: MIN_INT: [%d]\n", INT_MIN);
+	printf("val5a = %d,  val5b = %d\n", val5a, val5b);
+	assert(val5a == val5b);
+
 	// Test %i as well
 	ft_printf("(FT) Test 6: Zero with %%i: [%i]\n", 0);
 	printf("(IO) Test 6: Zero with %%i: [%i]\n", 0);
@@ -558,6 +565,14 @@ int	main(void)
 	printf("hello world! '%u'", val44);
 	write(1, "\n", 1);
 	printf("\n-----------\n");
+
+	// Test 45: % and ' '
+	int	result1f = ft_printf("hello world! '%%'");
+	printf("\n");
+	int	result2f = printf("hello world! '%%'");
+	printf("\n");
+
+	printf("my function returned %d and IO returned %d\n", result1f, result2f);
 
 	ft_printf("\n===== MANDATORY ft_printf TESTS =====\n\n");
 	

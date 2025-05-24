@@ -6,13 +6,11 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 13:47:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/23 16:00:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/24 14:49:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 size_t	ft_p_nbr(int n, char type)
 {
@@ -22,7 +20,7 @@ size_t	ft_p_nbr(int n, char type)
 	count = 0;
 	if (n == -2147483648)
 	{
-		count += write(1, "-2147483648", 12);
+		count += write(1, "-2147483648", 11);
 		return (count);
 	}
 	if (n < 0)
@@ -36,7 +34,7 @@ size_t	ft_p_nbr(int n, char type)
 		count += write(1, &string, 1);
 		return (count);
 	}
-	ft_p_nbr(n / 10, type);
+	count += ft_p_nbr(n / 10, type);
 	string = (n % 10) + '0';
 	count += write(1, &string, 1);
 	return (count);
