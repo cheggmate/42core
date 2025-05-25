@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/24 15:37:26 by jotong            #+#    #+#              #
-#    Updated: 2025/05/24 15:39:52 by jotong           ###   ########.fr        #
+#    Updated: 2025/05/24 23:08:17 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,15 @@ $(NAME): $(OBJ)
 	@ranlib $(NAME)
 	@echo "$(NAME) indexed"
 
+# Default buffer size
+BUFFER_SIZE ?= 100
+
 # Default target
 all: $(NAME)
 
 # Compile .c to .o
 %.o : %.c ${HEADER}
-			@cc $(FLAG) -c $< -o $@
+			@cc $(FLAG) -D BUFFER_SIZE=$(BUFFER_SIZE) -c $< -o $@
 
 
 # Clean OBJ files
