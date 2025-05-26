@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/26 23:35:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/27 00:19:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*get_line(char *buf)
 		extra_byte += 1;
 	out = (char *)malloc((i + extra_byte) * sizeof(char *));
 	ft_strlcpy(out, buf, i + 1);
+	return (out);
 }
 
 char	*get_next_line(int fd)
@@ -56,12 +57,12 @@ char	*get_next_line(int fd)
 
 	
 	b = 0;
-	if (!(fd > 0 && fd < 1023) || BUFFER_SIZE == 0) //legally supported file descriptors. adjust this later to meet any strict requirements for this fn.
+	if (!(fd > 0 || fd > 1023) || BUFFER_SIZE == 0) //legally supported file descriptors. adjust this later to meet any strict requirements for this fn.
 		return (NULL);
-	while (!ft_strchr(buf, '\n') && (b = read(fd, buf, BUFFER_SIZE)) > 0)
+	while (!ft_strchr(buf, '\n') && (b = read(fd, tmp, BUFFER_SIZE)) > 0)
 	{
 		tmp[b] = '\0';
-		buf = ft_strljoin(buf, tmp);
+		buf = ft_strjoin(buf, tmp);
 	}
 	if (b == -1 || b == 0 || !buf || buf[0] == '\0')
 	{
@@ -71,5 +72,5 @@ char	*get_next_line(int fd)
 	}
 	out = get_line(buf);
 	buf = rem_printed(buf);
-	return (buf);
+	return (out);
 }
