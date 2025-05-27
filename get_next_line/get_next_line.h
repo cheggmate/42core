@@ -6,12 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 09:02:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/27 23:00:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 100
+# define BUFFER_SIZE 10
 #endif
 
 #ifndef GET_NEXT_LINE_H

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 22:43:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/27 23:13:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*rem_printed(char *buf)
 	while (buf[i] && buf[i] != '\n')
 		i++;
 	new_buf = (char *)malloc((i + 1) * sizeof(char));
-	ft_strlcpy(new_buf, &buf[i], ft_strlen(buf) + 1);
+	ft_strlcpy(new_buf, &buf[i + 1], ft_strlen(buf) + 1);
 	free(buf);
 	return (new_buf);
 }
@@ -35,23 +35,17 @@ char	*get_line(char *buf)
 	int		extra_byte;
 
 	i = 0;
-	printf("start get_line\n");
 	extra_byte = 1;
 	if (!buf)
 		return (NULL);
-	printf("start while loop\n");
 	while (buf[i] != '\0' && buf[i] != '\n')
 		i++;
-	printf("i is %zu\n", i);
-	printf("buf[%zu] = '%c'\n", i, buf[i]);
 	if (i == 0)
 		return (NULL);
 	if (buf[i] == '\n')
 		extra_byte += 1;
 	out = (char *)malloc((i + extra_byte) * sizeof(char));
-	printf("extra byte = %d\n", extra_byte);
 	ft_strlcpy(out, buf, i + extra_byte);
-	printf("out is '%s'\n",out);
 	return (out);
 }
 
@@ -61,11 +55,9 @@ char	*get_next_line(int fd)
 	char		*out;
 	static char	*buf[1024];
 	char		tmp[BUFFER_SIZE + 1];
-	// ssize_t		b_total;
 
-	// b_total = 0;
 	b = 0;
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0) //legally supported file descriptors. adjust this later to meet any strict requirements for this fn.
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
 	while (!ft_strchr(buf[fd], '\n') && (b = read(fd, tmp, BUFFER_SIZE)) > 0)
 	{
