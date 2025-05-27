@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 00:21:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/27 09:02:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <stdio.h> // Remove before submitting
 
 char	*get_line(char *buf);
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 22:37:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/25 21:42:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/27 09:03:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strchr(const char *str, int c)
 	unsigned char	*ptr;
 	unsigned char	to_search;
 
+	if (!str)
+		return (NULL);
 	to_search = (unsigned char)c;
 	ptr = (unsigned char *)str;
 	if (!(to_search == 9 || to_search == 10

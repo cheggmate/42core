@@ -32,6 +32,8 @@ char	*ft_strchr(const char *str, int c)
 	unsigned char	*ptr;
 	unsigned char	to_search;
 
+	if (!str)
+		return (NULL);
 	to_search = (unsigned char)c;
 	ptr = (unsigned char *)str;
 	if (!(to_search == 9 || to_search == 10
@@ -72,24 +74,21 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char			*new_str;
 	unsigned int	total_len;
-	unsigned int	len1;
-	unsigned int	len2;
 
 	total_len = 0;
-	len1 = 0;
-	len2 = 0;
-	if (!(s1 && s2))
+	if (!s1 && !s2)
 		return (NULL);
 	if (s1 != NULL)
-		len1 = ft_strlen(s1);
+		total_len += ft_strlen(s1);
 	if (s2 != NULL)
-		len2 = ft_strlen(s2);
-	total_len = len1 + len2;
+		total_len += ft_strlen(s2);
 	new_str = (char *)malloc(total_len + 1);
 	if (!new_str)
 		return (NULL);
-	ft_strlcpy(new_str, s1, total_len + 1);
-	ft_strlcat(new_str, s2, total_len + 1);
+	if (s1)
+		ft_strlcat(new_str, s1, total_len + 1);
+	if (s2)
+		ft_strlcat(new_str, s2, total_len + 1);
 	return (new_str);
 }
 
