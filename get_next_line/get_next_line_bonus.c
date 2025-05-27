@@ -6,11 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 23:13:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/28 00:11:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*rem_printed(char *buf)
 {
@@ -22,8 +22,8 @@ char	*rem_printed(char *buf)
 		return (NULL);
 	while (buf[i] && buf[i] != '\n')
 		i++;
-	new_buf = (char *)malloc((i + 1) * sizeof(char));
-	ft_strlcpy(new_buf, &buf[i + 1], ft_strlen(buf) + 1);
+	new_buf = (char *)malloc((ft_strlen(i + buf)) * sizeof(char));
+	ft_strlcpy(new_buf, &buf[i + 1], ft_strlen(buf) + i);
 	free(buf);
 	return (new_buf);
 }
@@ -40,7 +40,7 @@ char	*get_line(char *buf)
 		return (NULL);
 	while (buf[i] != '\0' && buf[i] != '\n')
 		i++;
-	if (i == 0)
+	if (i == 0 && buf[i] != '\n')
 		return (NULL);
 	if (buf[i] == '\n')
 		extra_byte += 1;
