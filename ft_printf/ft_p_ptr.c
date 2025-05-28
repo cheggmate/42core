@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_p_ptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 21:36:59 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/23 19:13:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/28 23:17:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,6 @@ size_t	ft_p_ptr(void *s, const char *hex)
 	addr = (unsigned long)s;
 	if (s == 0)
 		return (write(1, "(nil)", 5));
-	if (addr == 0)
-	{
-		count += write(1, "0x0\n", 4);
-		return (count);
-	}
 	while (addr && i >= 2)
 	{
 		buffer[i--] = hex[addr % 16];
