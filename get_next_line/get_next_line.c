@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 00:20:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 00:21:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ char	*get_next_line(int fd)
 	char		*tmp_ptr;
 
 	b = 0;
-	out[0] = '\0';
-	tmp[0] = '\0';
+	out = NULL;
+	tmp = NULL;
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buf[fd])
@@ -81,7 +81,7 @@ char	*get_next_line(int fd)
 		tmp[b] = '\0';
 		tmp_ptr = ft_strjoin(buf[fd], tmp);
 		free(buf[fd]);
-		// free(tmp);
+		free(tmp);
 		buf[fd] = tmp_ptr;
 	}
 	if (b == -1 || !buf[fd] || buf[fd][0] == '\0' || b == 0)
