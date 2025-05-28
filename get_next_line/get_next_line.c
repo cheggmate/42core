@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 00:21:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 00:23:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,12 @@ char	*get_next_line(int fd)
 	if (!buf[fd])
 	{
 		buf[fd] = malloc(BUFFER_SIZE + 1);
-		buf[fd][0] = '\0';
+		// buf[fd][0] = '\0';
 	}
 	if (!tmp)
 	{
 		tmp = malloc(BUFFER_SIZE + 1);
-		tmp[0] = '\0';
+		// tmp[0] = '\0';
 	}
 	while (!ft_strchr(buf[fd], '\n'))
 	{
