@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 00:10:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 00:17:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	*get_line(char *buf)
 		return (NULL);
 	if (buf[i] == '\n')
 		extra_byte += 1;
+	buf[i + 1] = '\0';
 	out = (char *)malloc((i + extra_byte) * sizeof(char));
 	ft_strlcpy(out, buf, i + extra_byte);
 	return (out);
