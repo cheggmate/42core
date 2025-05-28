@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/28 23:45:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/28 23:57:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,15 @@ char	*get_next_line(int fd)
 		buf[fd] = malloc(BUFFER_SIZE + 1);
 	if (!tmp)
 		tmp = malloc(BUFFER_SIZE + 1);
-	while (!ft_strchr(buf[fd], '\n') && (b = read(fd, tmp, BUFFER_SIZE)) > 0)
+	while (!ft_strchr(buf[fd], '\n'))
 	{
+		b = read(fd, tmp, BUFFER_SIZE);
+		if (b <= 0)
+			break;
 		tmp[b] = '\0';
 		buf[fd] = ft_strjoin(buf[fd], tmp);
 	}
-	if (b == -1 || !buf[fd] || buf[fd][0] == '\0')
-	{
-		free(buf[fd]);
-		buf[fd] = NULL;
-		return (NULL);
-	}
-	if (b == 0)
+	if (b == -1 || !buf[fd] || buf[fd][0] == '\0' || b == 0)
 	{
 		if (buf[fd])
 			free(buf[fd]);
@@ -84,6 +81,8 @@ char	*get_next_line(int fd)
 			free(tmp);
 		if (out)
 			free(out);
+		buf[fd] = NULL;
+		return (NULL);
 	}
 	out = get_line(buf[fd]);
 	buf[fd] = rem_printed(buf[fd]);
