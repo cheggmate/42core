@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 00:19:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 00:20:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ char	*get_next_line(int fd)
 	char		*tmp_ptr;
 
 	b = 0;
-	// out = NULL;
-	// tmp = NULL;
+	out[0] = '\0';
+	tmp[0] = '\0';
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buf[fd])
