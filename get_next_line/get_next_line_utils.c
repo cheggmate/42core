@@ -83,6 +83,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s2 != NULL)
 		total_len += ft_strlen(s2);
 	new_str = (char *)malloc(total_len + 1);
+	new_str[0] = '\0';
 	if (!new_str)
 		return (NULL);
 	if (s1)
