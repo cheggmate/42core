@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/28 23:42:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/28 23:45:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ char	*get_next_line(int fd)
 	char		*tmp;
 
 	b = 0;
+	out = NULL;
+	tmp = NULL;
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!buf[fd])
 		buf[fd] = malloc(BUFFER_SIZE + 1);
+	if (!tmp)
+		tmp = malloc(BUFFER_SIZE + 1);
 	while (!ft_strchr(buf[fd], '\n') && (b = read(fd, tmp, BUFFER_SIZE)) > 0)
 	{
 		tmp[b] = '\0';
