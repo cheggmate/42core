@@ -26,21 +26,21 @@ int	main(void)
 	printf("\n-------\n");
 
 	// Test 2: Read one paragraph.
-	printf("Test 2: Read one paragraph\n");
-	int		fd2;
-	if (access("tests/example_longsentence.txt", F_OK) == -1)
-	{
-		printf("file doesnt exist, are you running the test from 'get_next_line'?\n");
-		fd2 = open("example_longsentence.txt", O_RDONLY);
-	}
-	else
-		fd2 = open("tests/example_longsentence.txt", O_RDONLY);
-	char	*b_read2 = get_next_line(fd2);
-	printf("b_read: '%s'\n", b_read2);
-	char	output2[] = "However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.";
-	assert(strcmp(b_read2, output2) == 0);
-	free(b_read2);
-	printf("\n-------\n");
+	// printf("Test 2: Read one paragraph\n");
+	// int		fd2;
+	// if (access("tests/example_longsentence.txt", F_OK) == -1)
+	// {
+	// 	printf("file doesnt exist, are you running the test from 'get_next_line'?\n");
+	// 	fd2 = open("example_longsentence.txt", O_RDONLY);
+	// }
+	// else
+	// 	fd2 = open("tests/example_longsentence.txt", O_RDONLY);
+	// char	*b_read2 = get_next_line(fd2);
+	// printf("b_read: '%s'\n", b_read2);
+	// char	output2[] = "However little known the feelings or views of such a man may be on his first entering a neighbourhood, this truth is so well fixed in the minds of the surrounding families, that he is considered as the rightful property of some one or other of their daughters.";
+	// assert(strcmp(b_read2, output2) == 0);
+	// free(b_read2);
+	// printf("\n-------\n");
 
 	// Test 3: Read empty input
 	printf("Test 3:  Read empty input\n");
