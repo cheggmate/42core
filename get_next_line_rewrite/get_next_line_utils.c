@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 17:37:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 00:35:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (s2 != NULL)
 		total_len += ft_strlen(s2);
 	new_str = (char *)malloc(total_len + 1);
-	new_str[0] = '\0';
 	if (!new_str)
 		return (NULL);
+	new_str[0] = '\0';
 	if (s1)
 		ft_strlcat(new_str, s1, total_len + 1);
 	if (s2)
