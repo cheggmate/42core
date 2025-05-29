@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 23:31:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 23:59:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char	*get_next_line(int fd)
 			break;
 		tmp_buf[b] = '\0';
 		out = ft_strjoin(buf[fd], tmp_buf);
-		// printf("out is %s\n", out);
+		printf("out is %s\n", out);
 		free(buf[fd]);
 		buf[fd] = out;
 	}
