@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/30 00:01:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 00:11:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	*rem_print(char *buf)
 	len = ft_strlen(&buf[i]);
 	cleaned_str = malloc(len + 1);
 	if (cleaned_str)
+	{
+		cleaned_str[0] = '\0';
 		ft_strlcpy(cleaned_str, &buf[i], len + 1);
+	}
 	free (buf);
 	return (cleaned_str);
 }
@@ -45,6 +48,7 @@ char	*get_line(char *buf)
 	to_print = malloc(i + 1);
 	if (!to_print)
 		return (NULL);
+	to_print[0] = '\0';
 	ft_strlcpy(to_print, buf, i + 1);
 	return (to_print);
 }
@@ -70,12 +74,10 @@ char	*get_next_line(int fd)
 	while (!ft_strchr(buf[fd], '\n'))
 	{
 		b = read(fd, tmp_buf, BUFFER_SIZE);
-		printf("tmp_buf is '%s'\n", tmp_buf);
 		if (b <= 0)
 			break;
 		tmp_buf[b] = '\0';
 		out = ft_strjoin(buf[fd], tmp_buf);
-		printf("out is %s\n", out);
 		free(buf[fd]);
 		buf[fd] = out;
 	}
