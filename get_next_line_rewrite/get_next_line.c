@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 22:12:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/29 23:26:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,12 @@ char	*get_next_line(int fd)
 	while (!ft_strchr(buf[fd], '\n'))
 	{
 		b = read(fd, tmp_buf, BUFFER_SIZE);
+		printf("tmp_buf is '%s'\n", tmp_buf);
 		if (b <= 0)
 			break;
 		tmp_buf[b] = '\0';
 		out = ft_strjoin(buf[fd], tmp_buf);
-		printf("out is %s\n", out);
+		// printf("out is %s\n", out);
 		free(buf[fd]);
 		buf[fd] = out;
 	}
