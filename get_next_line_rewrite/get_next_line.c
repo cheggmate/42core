@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:42:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:45:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b)
 	return (out);
 }
 
+void	free_buf(char **buf, int fd)
+{
+	free(buf[fd]);
+	buf[fd] = NULL;
+}
+
 char	*get_next_line(int fd)
 {
 	ssize_t		b;
@@ -97,13 +103,11 @@ char	*get_next_line(int fd)
 	if (!tmp_buf)
 		return (NULL);
 	tmp_buf[0] = '\0';
+	out = rd_parse_line(buf, fd, tmp_buf, b);
 	cleaned_tmp_str = rem_print(buf[fd]);
 	buf[fd] = cleaned_tmp_str;
 	if (b <= 0 && buf[fd][0] == '\0')
-	{
-		free(buf[fd]);
-		buf[fd] = NULL;
-	}
+		free_buf(buf, fd);
 	if (out[0] == '\0')
 	{
 		free(out);
