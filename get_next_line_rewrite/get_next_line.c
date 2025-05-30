@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:13:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:26:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*rem_print(char *buf)
 	while (buf[i] && buf[i] != '\n')
 		i++;
 	if (buf[i] == '\n')
-		i++; 
+		i++;
 	len = ft_strlen(&buf[i]);
 	cleaned_str = malloc(len + 1);
 	if (cleaned_str)
@@ -39,7 +39,7 @@ char	*get_line(char *buf)
 {
 	size_t	i;
 	char	*to_print;
-	
+
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
 		i++;
@@ -53,7 +53,7 @@ char	*get_line(char *buf)
 	return (to_print);
 }
 
-char	*read_and_cut(char *tmp_buf, char *buf, size_t b, int fd)
+char	*read_and_cut_cleanup(char *tmp_buf, char *buf, size_t b, int fd)
 {
 	char	*cleaned_tmp_str;
 	char	*out;
@@ -62,7 +62,7 @@ char	*read_and_cut(char *tmp_buf, char *buf, size_t b, int fd)
 	{
 		b = read(fd, tmp_buf, BUFFER_SIZE);
 		if (b <= 0)
-			break;
+			break ;
 		tmp_buf[b] = '\0';
 		out = ft_strjoin(buf, tmp_buf);
 		free(buf);
@@ -72,7 +72,12 @@ char	*read_and_cut(char *tmp_buf, char *buf, size_t b, int fd)
 	out = get_line(buf);
 	cleaned_tmp_str = rem_print(buf);
 	buf = cleaned_tmp_str;
-	return (buf);
+	if (b <= 0 && buf[0] == '\0')
+	{
+		free(buf);
+		buf = NULL;
+	}
+	return (out);
 }
 
 char	*get_next_line(int fd)
@@ -100,26 +105,7 @@ char	*get_next_line(int fd)
 		}
 		buf[fd][0] = '\0';
 	}
-	// while (!ft_strchr(buf[fd], '\n'))
-	// {
-	// 	b = read(fd, tmp_buf, BUFFER_SIZE);
-	// 	if (b <= 0)
-	// 		break;
-	// 	tmp_buf[b] = '\0';
-	// 	out = ft_strjoin(buf[fd], tmp_buf);
-	// 	free(buf[fd]);
-	// 	buf[fd] = out;
-	// }
-	// free(tmp_buf);
-	// out = get_line(buf[fd]);
-	// cleaned_tmp_str = rem_print(buf[fd]);
-	// buf[fd] = cleaned_tmp_str;
-	buf[fd] = read_and_cut(tmp_buf, buf[fd], b, fd);
-	if (b <= 0 && buf[fd][0] == '\0')
-	{
-		free(buf[fd]);
-		buf[fd] = NULL;
-	}
+	out = read_and_cut_cleanup(tmp_buf, buf[fd], b, fd);
 	if (out[0] == '\0')
 	{
 		free(out);
