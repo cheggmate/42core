@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:47:42 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:54:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_line(char *buf)
 	return (to_print);
 }
 
-char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b)
+char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t *b)
 {
 	char	*out;
 
@@ -69,10 +69,10 @@ char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b)
 	}
 	while (!ft_strchr(buf[fd], '\n'))
 	{
-		b = read(fd, tmp_buf, BUFFER_SIZE);
-		if (b <= 0)
+		*b = read(fd, tmp_buf, BUFFER_SIZE);
+		if (*b <= 0)
 			break ;
-		tmp_buf[b] = '\0';
+		tmp_buf[*b] = '\0';
 		out = ft_strjoin(buf[fd], tmp_buf);
 		free(buf[fd]);
 		buf[fd] = out;
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	if (!tmp_buf)
 		return (NULL);
 	tmp_buf[0] = '\0';
-	out = rd_parse_line(buf, fd, tmp_buf, b);
+	out = rd_parse_line(buf, fd, tmp_buf, *b);
 	cleaned_tmp_str = rem_print(buf[fd]);
 	buf[fd] = cleaned_tmp_str;
 	if (b <= 0 && buf[fd][0] == '\0')
