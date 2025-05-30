@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/30 23:03:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 23:20:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,13 @@ char	*get_next_line(int fd)
 		if (b <= 0)
 			break;
 		tmp_buf[b] = '\0';
-		// printf("\n------\n");
-		// printf("buf[fd] is '%s'\n", buf[fd]);
-		// printf("tmp_buf is '%s'\n", tmp_buf);
 		out = ft_strjoin(buf[fd], tmp_buf);
-		// printf("\n------\n");
-		// printf("out(aft strjoin) is '%s'\n", out);
 		free(buf[fd]);
 		buf[fd] = out;
 	}
 	free(tmp_buf);
 	out = get_line(buf[fd]);
-	printf("out is '%s'\n", out);
 	cleaned_tmp_str = rem_print(buf[fd]);
-	printf("\n------\n");
-	printf("cleaned tmp str is '%s', b = %zu\n", cleaned_tmp_str, b);
 	buf[fd] = cleaned_tmp_str;
 	if (b <= 0 && buf[fd][0] == '\0')
 	{
@@ -106,10 +98,6 @@ char	*get_next_line(int fd)
 		buf[fd] = NULL;
 	}
 	if (out[0] == '\0')
-	{
-		// free(out);
-		// return(NULL);
 		out = NULL;
-	}
 	return (out);
 }
