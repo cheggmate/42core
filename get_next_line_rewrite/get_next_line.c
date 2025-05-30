@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/30 00:39:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 22:11:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*get_next_line(int fd)
 	}
 	free(tmp_buf);
 	out = get_line(buf[fd]);
+	// printf("buf[fd] is '%s'\n", buf[fd]);
 	cleaned_tmp_str = rem_print(buf[fd]);
 	buf[fd] = cleaned_tmp_str;
 	if (b <= 0)
@@ -99,8 +100,9 @@ char	*get_next_line(int fd)
 	}
 	if (out[0] == '\0')
 	{
-		free(out);
-		return(NULL);
+		// free(out);
+		// return(NULL);
+		out = NULL;
 	}
 	return (out);
 }

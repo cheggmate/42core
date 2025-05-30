@@ -167,12 +167,96 @@ int	main(void)
 	}
 	else
 		fd9 = open("tests/example_multiplenl.txt", O_RDONLY);
-	char	*b_read9 = get_next_line(fd9);
-	printf("b_read: '%s'\n", b_read9);
-	char	output9[] = "\n\n\n\n\n";
-	assert(strcmp(b_read9, output9) == 0);
-	free(b_read9);
+	char	*b_read9a = get_next_line(fd9);
+	printf("b_read: '%s'\n", b_read9a);
+	char	output9a[] = "\n";
+	assert(strcmp(b_read9a, output9a) == 0);
+	char	output9b[] = "\n";
+	char	output9c[] = "\n";
+	char	output9d[] = "\n";
+	char	output9e[] = "\n";
+	assert(strcmp(b_read9a, output9b) == 0);
+	assert(strcmp(b_read9a, output9c) == 0);
+	assert(strcmp(b_read9a, output9d) == 0);
+	assert(strcmp(b_read9a, output9e) == 0);
+	free(b_read9a);
 	printf("\n-------\n");
+
+	// Test 10: multiple lines with nl
+	printf("Test 10: multiple lines with newlines\n");
+	int		fd10;
+	if(access("tests/example_multiplelinewithnl.txt", F_OK) == -1)
+	{
+		printf("file doesnt exist, are you running the test from 'get_next_line'?\n");
+		fd10 = open("example_multiplelinewithnl.txt", O_RDONLY);
+	}
+	else
+		fd10 = open("tests/example_multiplelinewithnl.txt", O_RDONLY);
+	char	*b_read10a = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10a);
+	char	output10a[] = "This is a test to see\n";
+	char	output10b[] = "\n";
+	char	output10c[] = "If the program\n";
+	char	output10d[] = "\n";
+	char	output10e[] = "is able\n";
+	char	output10f[] = "\n";
+	char	output10g[] = "\n";
+	char	output10h[] = "to\n";
+	char	output10i[] = "\n";
+	char	output10j[] = "Defy\n";
+	char	output10k[] = "\n";
+	char	output10l[] = "the\n";
+	char	output10m[] = "\n";
+	char	output10n[] = "odds\n";
+	char	output10o[] = "\n";
+	char	output10p[] = ";";
+	assert(strcmp(b_read10a, output10a) == 0);
+	char	*b_read10b = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10b);
+	assert(strcmp(b_read10b, output10b) == 0);
+	char	*b_read10c = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10c);
+	assert(strcmp(b_read10c, output10c) == 0);
+	char	*b_read10d = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10d);
+	assert(strcmp(b_read10d, output10d) == 0);
+	char	*b_read10e = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10e);
+	assert(strcmp(b_read10e, output10e) == 0);
+	char	*b_read10f = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10f);
+	assert(strcmp(b_read10f, output10f) == 0);
+	char	*b_read10g = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10g);
+	assert(strcmp(b_read10g, output10g) == 0);
+	char	*b_read10h = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10h);
+	assert(strcmp(b_read10h, output10h) == 0);
+	char	*b_read10i = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10i);
+	assert(strcmp(b_read10i, output10i) == 0);
+	char	*b_read10j = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10j);
+	assert(strcmp(b_read10j, output10j) == 0);
+	char	*b_read10k = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10k);
+	assert(strcmp(b_read10k, output10k) == 0);
+	char	*b_read10l = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10l);
+	assert(strcmp(b_read10l, output10l) == 0);
+	char	*b_read10m = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10m);
+	assert(strcmp(b_read10m, output10m) == 0);
+	char	*b_read10n = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10n);
+	assert(strcmp(b_read10n, output10n) == 0);
+	char	*b_read10o = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10o);
+	assert(strcmp(b_read10o, output10o) == 0);
+	char	*b_read10p = get_next_line(fd10);
+	printf("b_read: '%s'\n", b_read10p);
+	assert(strcmp(b_read10p, output10p) == 0);
+
 
 	//---------- Tests, read from standard input
 	// Test 1: Read one sentence.
