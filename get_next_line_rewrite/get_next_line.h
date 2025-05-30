@@ -6,22 +6,21 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/29 21:43:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 23:53:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 10
-#endif
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdio.h> // Remove before submitting
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
+# include <stddef.h>
 
 char	*get_line(char *buf);
 char	*get_next_line(int fd);

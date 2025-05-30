@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/30 00:35:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 23:51:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t ft_strlen(const char	*str)
+size_t	ft_strlen(const char *str)
 {
 	size_t			count;
 	unsigned char	*ptr;
@@ -50,7 +50,6 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	count;
@@ -58,7 +57,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	count = 0;
 	if (!src || !dest)
 		return (0);
-
 	if (size > 0)
 	{
 		while (src[count] && count < (size - 1))
@@ -68,7 +66,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		}
 		dest[count] = '\0'; 
 	}
-
 	return ft_strlen(src);
 }
 
