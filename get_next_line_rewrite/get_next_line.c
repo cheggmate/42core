@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:26:42 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:32:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ char	*get_line(char *buf)
 	return (to_print);
 }
 
+char	*init_buf(char *buf, char *tmp_buf)
+{
+	if (!buf)
+	{
+		buf = malloc(BUFFER_SIZE + 1);
+		if (!buf)
+		{
+			free(tmp_buf);
+			return (NULL);
+		}
+	}
+	return (buf);
+}
+
 char	*read_and_cut_cleanup(char *tmp_buf, char *buf, size_t b, int fd)
 {
 	char	*cleaned_tmp_str;
@@ -86,7 +100,6 @@ char	*get_next_line(int fd)
 	char		*tmp_buf;
 	static char	*buf[1024];
 	char		*out;
-	char		*cleaned_tmp_str;
 
 	b = 0;
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
@@ -95,16 +108,10 @@ char	*get_next_line(int fd)
 	if (!tmp_buf)
 		return (NULL);
 	tmp_buf[0] = '\0';
+	buf[fd] = init_buf(buf[fd], tmp_buf);
 	if (!buf[fd])
-	{
-		buf[fd] = malloc(BUFFER_SIZE + 1);
-		if (!buf[fd])
-		{
-			free(tmp_buf);
-			return (NULL);
-		}
-		buf[fd][0] = '\0';
-	}
+		return (NULL);
+	buf[fd][0] = '\0';
 	out = read_and_cut_cleanup(tmp_buf, buf[fd], b, fd);
 	if (out[0] == '\0')
 	{
