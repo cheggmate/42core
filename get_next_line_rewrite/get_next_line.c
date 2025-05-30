@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:45:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:47:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*rem_print(char *buf)
 	while (buf[i] && buf[i] != '\n')
 		i++;
 	if (buf[i] == '\n')
-		i++; 
+		i++;
 	len = ft_strlen(&buf[i]);
 	cleaned_str = malloc(len + 1);
 	if (cleaned_str)
@@ -39,7 +39,7 @@ char	*get_line(char *buf)
 {
 	size_t	i;
 	char	*to_print;
-	
+
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
 		i++;
@@ -71,7 +71,7 @@ char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b)
 	{
 		b = read(fd, tmp_buf, BUFFER_SIZE);
 		if (b <= 0)
-			break;
+			break ;
 		tmp_buf[b] = '\0';
 		out = ft_strjoin(buf[fd], tmp_buf);
 		free(buf[fd]);
