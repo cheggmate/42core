@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/30 23:20:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/30 23:38:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ char	*get_next_line(int fd)
 		buf[fd] = NULL;
 	}
 	if (out[0] == '\0')
+	{
+		free(out);
 		out = NULL;
+		return (NULL);
+	}
 	return (out);
 }
