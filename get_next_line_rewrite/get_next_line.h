@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:31:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:46:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <stddef.h>
 
-char	*init_buf(char *buf, char *tmp_buf);
-char	*read_and_cut_cleanup(char *tmp_buf, char *buf, size_t b, int fd);
+void	free_buf(char **buf, int fd);
+char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b);
 char	*get_line(char *buf);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *str, int c);
