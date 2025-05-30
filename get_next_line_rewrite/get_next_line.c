@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:32:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:42:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*rem_print(char *buf)
 	while (buf[i] && buf[i] != '\n')
 		i++;
 	if (buf[i] == '\n')
-		i++;
+		i++; 
 	len = ft_strlen(&buf[i]);
 	cleaned_str = malloc(len + 1);
 	if (cleaned_str)
@@ -39,7 +39,7 @@ char	*get_line(char *buf)
 {
 	size_t	i;
 	char	*to_print;
-
+	
 	i = 0;
 	while (buf[i] && buf[i] != '\n')
 		i++;
@@ -53,44 +53,32 @@ char	*get_line(char *buf)
 	return (to_print);
 }
 
-char	*init_buf(char *buf, char *tmp_buf)
+char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t b)
 {
-	if (!buf)
+	char	*out;
+
+	if (!buf[fd])
 	{
-		buf = malloc(BUFFER_SIZE + 1);
-		if (!buf)
+		buf[fd] = malloc(BUFFER_SIZE + 1);
+		if (!buf[fd])
 		{
 			free(tmp_buf);
 			return (NULL);
 		}
+		buf[fd][0] = '\0';
 	}
-	return (buf);
-}
-
-char	*read_and_cut_cleanup(char *tmp_buf, char *buf, size_t b, int fd)
-{
-	char	*cleaned_tmp_str;
-	char	*out;
-
-	while (!ft_strchr(buf, '\n'))
+	while (!ft_strchr(buf[fd], '\n'))
 	{
 		b = read(fd, tmp_buf, BUFFER_SIZE);
 		if (b <= 0)
-			break ;
+			break;
 		tmp_buf[b] = '\0';
-		out = ft_strjoin(buf, tmp_buf);
-		free(buf);
-		buf = out;
+		out = ft_strjoin(buf[fd], tmp_buf);
+		free(buf[fd]);
+		buf[fd] = out;
 	}
 	free(tmp_buf);
-	out = get_line(buf);
-	cleaned_tmp_str = rem_print(buf);
-	buf = cleaned_tmp_str;
-	if (b <= 0 && buf[0] == '\0')
-	{
-		free(buf);
-		buf = NULL;
-	}
+	out = get_line(buf[fd]);
 	return (out);
 }
 
@@ -100,6 +88,7 @@ char	*get_next_line(int fd)
 	char		*tmp_buf;
 	static char	*buf[1024];
 	char		*out;
+	char		*cleaned_tmp_str;
 
 	b = 0;
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
@@ -108,11 +97,13 @@ char	*get_next_line(int fd)
 	if (!tmp_buf)
 		return (NULL);
 	tmp_buf[0] = '\0';
-	buf[fd] = init_buf(buf[fd], tmp_buf);
-	if (!buf[fd])
-		return (NULL);
-	buf[fd][0] = '\0';
-	out = read_and_cut_cleanup(tmp_buf, buf[fd], b, fd);
+	cleaned_tmp_str = rem_print(buf[fd]);
+	buf[fd] = cleaned_tmp_str;
+	if (b <= 0 && buf[fd][0] == '\0')
+	{
+		free(buf[fd]);
+		buf[fd] = NULL;
+	}
 	if (out[0] == '\0')
 	{
 		free(out);
