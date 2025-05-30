@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:05:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:56:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:57:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_line(char *buf)
 	return (to_print);
 }
 
-char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t *b)
+char	*rd_parse_line(char **buf, int fd, char *tmp_buf, ssize_t *b)
 {
 	char	*out;
 

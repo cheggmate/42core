@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 15:40:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/31 00:54:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/05/31 00:58:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stddef.h>
 
 void	free_buf(char **buf, int fd);
-char	*rd_parse_line(char **buf, int fd, char *tmp_buf, size_t *b);
+char	*rd_parse_line(char **buf, int fd, char *tmp_buf, ssize_t *b);
 char	*get_line(char *buf);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *str, int c);
