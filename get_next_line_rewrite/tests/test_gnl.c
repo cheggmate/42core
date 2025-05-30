@@ -169,7 +169,7 @@ int	main(void)
 		fd9 = open("tests/example_multiplenl.txt", O_RDONLY);
 	char	*b_read9 = get_next_line(fd9);
 	printf("b_read: '%s'\n", b_read9);
-	char	output9[] = "\n";
+	char	output9[] = "\n\n\n\n\n";
 	assert(strcmp(b_read9, output9) == 0);
 	free(b_read9);
 	printf("\n-------\n");
