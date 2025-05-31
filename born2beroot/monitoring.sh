@@ -11,7 +11,7 @@ echo "#CPU Physical: $(nproc --all)"
 echo "#vCPU : "
 
 # Display current available RAM on your server and its utilization rate as a percentage
-echo "#Memory Usage: "; free -h | greg Mem |awk 'printf("%d/%dMB (%0.2f%%)",$3, $4, $3/$4 * 100)'
+echo "#Memory Usage: "; free -h | grep Mem | awk '{printf("%d/%dMB (%0.2f%%)\n",$3, $4, $3/$4 * 100)}'
 
 # Display current available storage on your server and its utilization rate as a percentage
 echo "#Disk Usage: "
