@@ -11,7 +11,7 @@ echo "#CPU Physical: $(nproc --all)"
 echo "#vCPU : "
 
 # Display current available RAM on your server and its utilization rate as a percentage
-echo "#Memory Usage: ${grep Memtotal /proc/meminfo}"
+echo "#Memory Usage: "; free -h | greg Mem |awk 'printf("%d/%dMB (%0.2f%%)",$3, $4, $3/$4 * 100)'
 
 # Display current available storage on your server and its utilization rate as a percentage
 echo "#Disk Usage: "
@@ -26,7 +26,7 @@ echo "#Last boot: "
 echo "#LVM use: "
 
 # Display the number of active connections
-echo "#Cpmmectopms TCP : ##### ESTABLISHED"
+echo "#Connections TCP : ##### ESTABLISHED"
 
 # Display the number of users using the server
 echo "#User log: "
