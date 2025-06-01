@@ -8,7 +8,7 @@ echo "#Architecture: $(uname -a)"
 echo "#CPU Physical: $(grep "physical id" /proc/cpuinfo | sort -u | wc -l)"
 
 # Display number of virtual processors
-echo "#vCPU : ${nrpoc --all}"
+echo "#vCPU : $(nrpoc --all)"
 
 # Display current available RAM on your server and its utilization rate as a percentage
 echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%d MB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
