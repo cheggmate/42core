@@ -9,6 +9,7 @@ echo "#Architecture: $(uname -a)"
 phys_cores=$(grep "core id" /proc/cpuinfo | sort -u | wc -l)
 if $phys_cores==0 ; then 
 	phys_cores=0
+fi
 echo "#CPU Physical: $phys_cores"
 
 # Display number of virtual processors
