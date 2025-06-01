@@ -6,7 +6,7 @@ echo "#Architecture: $(uname -a)"
 
 # Display number of physical processors
 # Get number of physical cores (optional: per core count)
-phys_cores=$(grep "core id" /proc/cpuinfo | sort -u | wc -l)
+phys_cores=$(grep "physical id" /proc/cpuinfo | sort -u | wc -l)
 if ["$phys_cores" -eq 0] ; then 
 	phys_cores=0
 fi
