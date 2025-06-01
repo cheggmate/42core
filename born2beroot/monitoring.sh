@@ -27,7 +27,7 @@ df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%.2f
 echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')% used"
 
 # Display the date and time of the last reboot
-echo "#Last boot: $(who -b | head -1)"
+echo "#Last boot: $(who -b | awk 'NR==1 {print $3, $4}')"
 
 # Display whether LVM is active or not
 if lsblk | grep -q "lvm"; then
@@ -43,7 +43,7 @@ echo "#Connections TCP : $(ss -tan | grep ESTABLISHED | wc -l) ESTABLISHED"
 echo "#User log: $(users | wc -w)"
 
 # Display the IPv4 address of your server and its MAC address
-echo "#Network: $(ipconfig getifaddr en0)"
+echo "#Network: $(ip addr | wc -l)"
 
 # Display the number of commands executed with the sudo program
 echo "#Sudo : $(journalctl _COMM=sudo | grep -c COMMAND)"
