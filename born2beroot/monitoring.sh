@@ -16,7 +16,7 @@ vcpus=$(grep -c ^processor /proc/cpuinfo)
 echo "#vCPU : $vcpus"
 
 # Display current available RAM on your server and its utilization rate as a percentage
-echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%d MB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
+echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%dMB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
 
 # Display current available storage on your server and its utilization rate as a percentage
 # echo "#Disk Usage: $(df -h)"
@@ -30,7 +30,6 @@ echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')% used"
 echo "#Last boot: $(who -b | head -1)"
 
 # Display whether LVM is active or not
-# echo "#LVM use: $(lvs -a)"														#need to refine to show only required info
 if lsblk | grep -q "lvm"; then
     echo "#LVM use: yes"
 else
@@ -38,7 +37,7 @@ else
 fi
 
 # Display the number of active connections
-echo "#Connections TCP : $(wc -l) ESTABLISHED"
+echo "#Connections TCP : $(ss -tan | grep ESTABLISHED | wc -l) ESTABLISHED"
 
 # Display the number of users using the server
 echo "#User log: $(users | wc -w)"
