@@ -8,8 +8,8 @@ echo "#Architecture: $(uname -a)"
 # Get number of physical cores (optional: per core count)
 # phys_cores=$(grep "physical id" /proc/cpuinfo | sort -u | wc -l)
 phys_cores=$(lscpu | awk -F: '/^Socket\(s\)/ {sockets=$2} /^Core\(s\) per socket/ {cores=$2} END {print sockets * cores}')
-if "$phys_cores" -eq 0 ; then 
-	phys_cores=0
+if "$phys_cores" 0 ; then 
+	phys_cores=1
 fi
 echo "#CPU Physical: $phys_cores"
 
