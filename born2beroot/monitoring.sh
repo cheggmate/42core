@@ -21,7 +21,7 @@ echo "#vCPU : $vcpus"
 echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%dMB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
 
 # Display current available storage on your server and its utilization rate as a percentage
-df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%f%%) \n", used/1024/1000, total/1024/1000, used/total*100)}'
+df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%d%%) \n", used/1024/1000, total/1024/1000, used/total*100)}'
 
 # Display current utilization rate of your processors as a percentage
 echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')%"
