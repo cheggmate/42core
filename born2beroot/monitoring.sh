@@ -43,7 +43,7 @@ echo "#Connections TCP : $(ss -tan | grep ESTABLISHED | wc -l) ESTABLISHED"
 echo "#User log: $(users | wc -w)"
 
 # Display the IPv4 address of your server and its MAC address
-echo "#Network: $(ip addr | wc -l)"
+echo "#Network: $(ip addr)"
 
 # Display the number of commands executed with the sudo program
 echo "#Sudo : $(journalctl _COMM=sudo | grep -c COMMAND)"
