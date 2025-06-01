@@ -5,16 +5,22 @@
 echo "#Architecture: $(uname -a)"
 
 # Display number of physical processors
-echo "#CPU Physical: $(grep "physical id" /proc/cpuinfo | sort -u | wc -l)"
+# Get number of physical cores (optional: per core count)
+phys_cores=$(grep "core id" /proc/cpuinfo | sort -u | wc -l)
+# echo "#CPU Physical: $(grep "physical id" /proc/cpuinfo | sort -u | wc -l)"
+# echo "$CPU Physical: $(nproc --all)"
+echo "#CPU Physical: $phys_cores"
 
 # Display number of virtual processors
-echo "#vCPU : $(nproc --all)"
+vcpus=$(grep -c ^processor /proc/cpuinfo)
+echo "#vCPU : $vcpus"
 
 # Display current available RAM on your server and its utilization rate as a percentage
 echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%d MB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
 
 # Display current available storage on your server and its utilization rate as a percentage
-echo "#Disk Usage: $(df -h / | awk '{printf("%d/%d GB (.2f%%)", $3/$2, $3/$2 * 100)}')"
+# echo "#Disk Usage: $(df -h)"
+echo "#Disk Usage: $(df -h / | awk '{printf("%d/%d GB (.2f%%)", $4/$3, $4/$3 * 100)}')"
 
 # Display current utilization rate of your processors as a percentage
 echo "#CPU load: $(top)"
