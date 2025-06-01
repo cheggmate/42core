@@ -8,7 +8,7 @@ echo "#Architecture: $(uname -a)"
 # Get number of physical cores (optional: per core count)
 phys_cores=$(grep "physical id" /proc/cpuinfo | sort -u | wc -l)
 # phys_cores=$(lscpu | awk -F: '/^Socket\(s\)/ {sockets=$2} /^Core\(s\) per socket/ {cores=$2} END {print sockets * cores}')
-if "$phys_cores" 0 ; then 
+if [ "$phys_cores" -eq 0 ] ; then 
 	phys_cores=1
 fi
 echo "#CPU Physical: $phys_cores"
@@ -30,7 +30,7 @@ echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')%"
 echo "#Last boot: $(who -b | awk 'NR==1 {print $3, $4}')"
 
 # Display whether LVM is active or not
-if lsblk | grep -q "lvm" ; then
+if [ lsblk | grep -q "lvm" ] ; then
     echo "#LVM use: yes"
 else
     echo "#LVM use: no"
