@@ -30,11 +30,15 @@ echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')% used"
 echo "#Last boot: $(who -b | head -1)"
 
 # Display whether LVM is active or not
-echo "#LVM use: $(lvs -a)"														#need to refine to show only required info
-echo "#LVM use: $(lvs -a | awk if [$1]; echo "yes" else echo "no")"
+# echo "#LVM use: $(lvs -a)"														#need to refine to show only required info
+if lsblk | grep -q "lvm"; then
+    echo "#LVM use: yes"
+else
+    echo "#LVM use: no"
+fi
 
 # Display the number of active connections
-echo "#Connections TCP : $(wc -l  /proc/net/tcp) ##### ESTABLISHED"
+echo "#Connections TCP : $(wc -l) ESTABLISHED"
 
 # Display the number of users using the server
 echo "#User log: $(users | wc -w)"
