@@ -14,29 +14,29 @@ echo "#vCPU : $(nrpoc --all)"
 echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%d MB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
 
 # Display current available storage on your server and its utilization rate as a percentage
-echo "#Disk Usage: ${df -h / | awk '{printf("%d/%d GB (.2f%%)", $3/$2, $3/$2 * 100)}')"
+echo "#Disk Usage: $(df -h / | awk '{printf("%d/%d GB (.2f%%)", $3/$2, $3/$2 * 100)}')"
 
 # Display current utilization rate of your processors as a percentage
-echo "#CPU load: ${top}"
+echo "#CPU load: $(top)"
 
 # Display the date and time of the last reboot
-echo "#Last boot: ${who -b | head -1}"
+echo "#Last boot: $(who -b | head -1)"
 
 # Display whether LVM is active or not
-echo "#LVM use: ${lvs -a}"														#need to refine to show only required info
-echo "#LVM use: ${lvs -a | awk if [$1]; then echo "yes" else echo "no"}"
+echo "#LVM use: $(lvs -a)"														#need to refine to show only required info
+echo "#LVM use: $(lvs -a | awk if [$1]; then echo "yes" else echo "no")"
 
 # Display the number of active connections
-echo "#Connections TCP : ${wc -l  /proc/net/tcp} ##### ESTABLISHED"
+echo "#Connections TCP : $(wc -l  /proc/net/tcp) ##### ESTABLISHED"
 
 # Display the number of users using the server
-echo "#User log: ${users | wc -w}"
+echo "#User log: $(users | wc -w)"
 
 # Display the IPv4 address of your server and its MAC address
-echo "#Network: ${ipconfig getifaddr en0}"
+echo "#Network: $(ipconfig getifaddr en0)"
 
 # Display the number of commands executed with the sudo program
-echo "#Sudo : ${journalctl _COMM=sudo | grep -c COMMAND}"
+echo "#Sudo : $(journalctl _COMM=sudo | grep -c COMMAND)"
 
 # --------------
 # example
