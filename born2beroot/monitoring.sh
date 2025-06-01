@@ -43,6 +43,8 @@ echo "#Connections TCP : $(ss -tan | grep ESTABLISHED | wc -l) ESTABLISHED"
 echo "#User log: $(users | wc -w)"
 
 # Display the IPv4 address of your server and its MAC address
+ipadd = $(ip -4 addr show | awk '/inet/ && $2 !~ /^127/ {print $2}' | cut -d/ -f1)
+macadd = $(ip link show| awk '/ether/ {print $2}')
 echo "#Network: $(ip addr)"
 
 # Display the number of commands executed with the sudo program
