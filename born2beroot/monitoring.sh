@@ -19,12 +19,10 @@ echo "#vCPU : $vcpus"
 echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%dMB (%.2f%%)", $3/1024, $2/1024, $3/$2 * 100)}')"
 
 # Display current available storage on your server and its utilization rate as a percentage
-# echo "#Disk Usage: $(df -h)"
-# echo "#Disk Usage: $(df -k / | awk 'NR==2 {printf("%d/%d GB (.2f%%)", $4/$3, $4/$3 * 100)}')"
-df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%.2f%%) \n", used/1024/1000, total/1024/1000, used/total*100)}'
+df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%f%%) \n", used/1024/1000, total/1024/1000, used/total*100)}'
 
 # Display current utilization rate of your processors as a percentage
-echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')% used"
+echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')%"
 
 # Display the date and time of the last reboot
 echo "#Last boot: $(who -b | awk 'NR==1 {print $3, $4}')"
@@ -48,7 +46,7 @@ macadd=$(ip link show| awk '/ether/ {print $2}')
 echo "#Network: $ipadd ($macadd)"
 
 # Display the number of commands executed with the sudo program
-echo "#Sudo : $(journalctl _COMM=sudo | grep -c COMMAND)"
+echo "#Sudo : $(journalctl _COMM=sudo | grep -c COMMAND) cmd"
 
 # --------------
 # example
