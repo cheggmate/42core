@@ -20,10 +20,11 @@ echo "#Memory Usage: $(free | awk '/Mem:/ {printf("%d/%d MB (%.2f%%)", $3/1024, 
 
 # Display current available storage on your server and its utilization rate as a percentage
 # echo "#Disk Usage: $(df -h)"
-echo "#Disk Usage: $(df -h / | awk '{printf("%d/%d GB (.2f%%)", $4/$3, $4/$3 * 100)}')"
+# echo "#Disk Usage: $(df -k / | awk 'NR==2 {printf("%d/%d GB (.2f%%)", $4/$3, $4/$3 * 100)}')"
+df -k / | awk 'NR==2 {used=$3; total=used+$4; printf("#Disk Usage: %d/%dGb (%.2f%%) \n", used/1024/1000, total/1024/1000, used/total*100)}'
 
 # Display current utilization rate of your processors as a percentage
-echo "#CPU load: $(top)"
+echo "#CPU load: $(top -bn1 | grep '%Cpu'| awk '{print $2 + $4}')% used"
 
 # Display the date and time of the last reboot
 echo "#Last boot: $(who -b | head -1)"
