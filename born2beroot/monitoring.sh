@@ -31,7 +31,7 @@ echo "#Last boot: $(who -b | head -1)"
 
 # Display whether LVM is active or not
 echo "#LVM use: $(lvs -a)"														#need to refine to show only required info
-echo "#LVM use: $(lvs -a | awk if [$1]; then echo "yes" else echo "no")"
+echo "#LVM use: $(lvs -a | awk if [$1]; echo "yes" else echo "no")"
 
 # Display the number of active connections
 echo "#Connections TCP : $(wc -l  /proc/net/tcp) ##### ESTABLISHED"
