@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 00:04:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/06 09:41:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,32 @@
 
 #include "ft_push_swap.h"
 
-void	push_a(int	*stack_a, int *stack_b, int *len_a, int *len_b)
+void	push(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	if (stack_a[0] != 0)
-		ft_memmove(&stack_a[1], &stack_a[0], (*len_a - 1) * sizeof(int));
-	stack_a[0] = stack_b[0];
-	if (stack_b[0] != 0)
-		ft_memmove(&stack_b[0], &stack_b[1], (*len_b - 1) * sizeof(int));
-	stack_b[*len_b - 1] = 0;
+	if (stack_dest[0] != 0)
+	{
+		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
+		stack_dest[0] = stack_src[0];
+		ft_memmove(&stack_src[0], &stack_src[1], (*len_src - 1) * sizeof(int));
+		stack_src[*len_src - 1] = 0;
+	}
 }
 
-void	push_b(int *stack_a, int *stack_b ,int *len_a, int *len_b)
+int	main(void)
 {
-	int	*tmp_b;
+	int	a[6] = {1, 2, 3, 4, 5};
+	int	b[5] = {5, 4, 3, 2, 1};
+	int	len_a = 6;
+	int	len_b = 5;
 
-	if (stack_b[0] != 0)
-		ft_memmove(&stack_b[1], &stack_b[0], *len_b * sizeof(int));
-	stack_b[0] = stack_a[0];
-	if (stack_a[0] != 0)
-		ft_memmove(&stack_a[0], &stack_a[1], (*len_a - 1) * sizeof(int));
-	stack_a[*len_a - 1] = 0;
+	push(a, b, &len_a, &len_b);
+	printf("a = ");
+	print_stack(a, &len_a);
+	printf("b = ");
+	print_stack(b, &len_b);
+	push(b, a, &len_b, &len_a); 
+	printf("a = ");
+	print_stack(a, &len_a);
+	printf("b = ");
+	print_stack(b, &len_b);
 }
-// 
-// int	main(void)
-// {
-// 	int		a[6]= {5, 1, 2, 3, 4, 0};
-// 	int		b[4] = {6, 0, 0, 0};
-// 	int		len_a = 6;
-// 	int		len_b = 4;
-
-// 	push_a(a, b, &len_a, &len_b);
-// 	print_stack(a, &len_a);
-// 	print_stack(b, &len_b);
-// }
