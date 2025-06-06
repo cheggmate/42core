@@ -1,6 +1,6 @@
 FLAG		= -Wall -Wextra -Werror
 NAME		= ft_push_swap.a
-REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c
+REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c ft_libft_utils.c
 OBJ 		= $(REQ_SRC:.c=.o)
 HEADER		= ft_push_swap.h
 

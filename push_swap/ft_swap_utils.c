@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 09:29:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/06 21:50:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include "ft_push_swap.h"
 
-void	swap(int *stack, int *len)
+void	swap(int *stack, int *len, int ab)
 {
 	int	tmp;
 
@@ -28,13 +28,18 @@ void	swap(int *stack, int *len)
 		tmp = stack[0];
 		stack[0] = stack[1];
 		stack[1] = tmp;
+		if (ab == 'a')
+			write (1, "sa", 2);
+		else
+			write (1, "sb", 2);
+		write (1, "\n", 1);
 	}
 }
 
 void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b)
 {
-	swap(stack_a, len_a);
-	swap(stack_b, len_b);
+	swap(stack_a, len_a, 'a');
+	swap(stack_b, len_b, 'b');
 }
 
 // int	main(void)
@@ -44,9 +49,9 @@ void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b)
 // 	int	len_a = 5;
 // 	int	len_b = 5;
 
-// 	swap(a, &len_a);
+// 	swap(a, &len_a, 'a');
 // 	print_stack(a, &len_a);
-// 	swap(b, &len_b);
+// 	swap(b, &len_b, 'b');
 // 	print_stack(b, &len_b);
 // }
 

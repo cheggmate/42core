@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 09:41:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/06 21:48:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "ft_push_swap.h"
 
-void	push(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
+void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
 	if (stack_dest[0] != 0)
 	{
@@ -25,24 +25,39 @@ void	push(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		stack_dest[0] = stack_src[0];
 		ft_memmove(&stack_src[0], &stack_src[1], (*len_src - 1) * sizeof(int));
 		stack_src[*len_src - 1] = 0;
+		write (1, "pa", 2);
+		write (1, "\n", 1);
 	}
 }
 
-int	main(void)
+void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	int	a[6] = {1, 2, 3, 4, 5};
-	int	b[5] = {5, 4, 3, 2, 1};
-	int	len_a = 6;
-	int	len_b = 5;
-
-	push(a, b, &len_a, &len_b);
-	printf("a = ");
-	print_stack(a, &len_a);
-	printf("b = ");
-	print_stack(b, &len_b);
-	push(b, a, &len_b, &len_a); 
-	printf("a = ");
-	print_stack(a, &len_a);
-	printf("b = ");
-	print_stack(b, &len_b);
+	if (stack_dest[0] != 0)
+	{
+		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
+		stack_dest[0] = stack_src[0];
+		ft_memmove(&stack_src[0], &stack_src[1], (*len_src - 1) * sizeof(int));
+		stack_src[*len_src - 1] = 0;
+		write (1, "pb", 2);
+		write (1, "\n", 1);
+	}
 }
+
+// int	main(void)
+// {
+// 	int	a[6] = {1, 2, 3, 4, 5};
+// 	int	b[5] = {5, 4, 3, 2, 1};
+// 	int	len_a = 6;
+// 	int	len_b = 5;
+
+// 	push(a, b, &len_a, &len_b);
+// 	printf("a = ");
+// 	print_stack(a, &len_a);
+// 	printf("b = ");
+// 	print_stack(b, &len_b);
+// 	push(b, a, &len_b, &len_a); 
+// 	printf("a = ");
+// 	print_stack(a, &len_a);
+// 	printf("b = ");
+// 	print_stack(b, &len_b);
+// }

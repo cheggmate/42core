@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/05 21:07:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/07 00:10:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,47 @@
 
 #include "ft_push_swap.h"
 
-void ft_push_swap(char **args)
+// void ft_push_swap(int *stack, int len)
+// {
+// 	// int			len;
+// 	// int			*stack;
+
+// 	// printf("arc = %d\n", argc);
+// 	// printf("argv[1][1] = %d\n", argv[1][1]);
+// 	// len = (argc - 1);
+// 	// if (len == 0)		// if inputs are not null
+// 	// 	write (1, "\n", 1);
+// 	// else
+// 	// {
+// 	// 	// Do something here.
+// 	// }
+// }
+
+int	main(int argc, char **argv)
 {
-	if (args[1][0]) // if not null
+	int			len;
+	int			*stack;
+	int			stack_len;
+	int			counter;
+
+	stack_len = argc - 1;
+	len = 1;
+	counter = 0;
+	if (argc == 1)
 	{
-		// Do something here.
+		write (1, "\n", 1);
+		return (0);
+	}
+	else
+	{
+		stack = (int *)malloc(stack_len * sizeof (int));
+		while (len < argc)
+		{
+			if (!ft_isalpha((int)argv[len][0]))
+				stack[counter] = argv[len][0] - '0';
+			len++;
+			counter++;
+		}
+		push_swap(stack, stack_len);
 	}
 }
