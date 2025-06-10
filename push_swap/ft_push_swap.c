@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/07 00:10:34 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/10 09:31:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,47 +45,79 @@
 
 #include "ft_push_swap.h"
 
-// void ft_push_swap(int *stack, int len)
-// {
-// 	// int			len;
-// 	// int			*stack;
+void push_swap(int *stack, int len, int argc, int median)
+{
+	int	*stack_b;
 
-// 	// printf("arc = %d\n", argc);
-// 	// printf("argv[1][1] = %d\n", argv[1][1]);
-// 	// len = (argc - 1);
-// 	// if (len == 0)		// if inputs are not null
-// 	// 	write (1, "\n", 1);
-// 	// else
-// 	// {
-// 	// 	// Do something here.
-// 	// }
-// }
+	stack_b = (int)malloc((len + 1) * sizeof(len));
+	if (stack_b)
+	{
+		stack_b[0] = 0;
+		split_stack (stack, stack_b, len, median);
+		sort_stack (stack, stack_b, len, median);
+		free (stack_b);
+	}
+}
+
+int	get_med(int	*arr, int arr_len)
+{
+	int	median;
+	int	i;
+
+	median = 0;
+	i = 0;
+	while (i < arr_len)
+	{
+		if (i == 0)
+			median = arr[i];
+		else
+			median = ((median * i - 1) + arr[i]) / i;
+		i++;
+	}
+	return (median);
+}
+
+int	check_inputs(int *len, int argc, int *stack, char **argv)
+{
+	int	counter;
+
+
+	counter = 0;
+	while (len < argc - 1)
+	{
+		if (!ft_isalpha((int)argv[*len][0]))
+			stack[counter] = argv[*len][0] - '0';
+		else
+			return (0);
+		*len++;
+		counter++;
+	}
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
 	int			len;
 	int			*stack;
-	int			stack_len;
-	int			counter;
+	int			median;
 
-	stack_len = argc - 1;
 	len = 1;
-	counter = 0;
-	if (argc == 1)
+	if (argc > 1)
 	{
-		write (1, "\n", 1);
-		return (0);
-	}
-	else
-	{
-		stack = (int *)malloc(stack_len * sizeof (int));
-		while (len < argc)
+		stack = (int *)malloc((argc) * sizeof (int));
+		if (stack)
 		{
-			if (!ft_isalpha((int)argv[len][0]))
-				stack[counter] = argv[len][0] - '0';
-			len++;
-			counter++;
+			if (!(check_inputs(&len, argc, stack, argv)))
+				write(1, "Error\n", 6);
+			else if (len > 1)
+			{
+				median = get_med(stack, argc);
+				push_swap(stack, len, argc, median); // TODO: Add a extra median to use as the pivot
+			}
+			free (stack);  // check if this is correct before submission.
 		}
-		push_swap(stack, stack_len);
+		else
+			write(1, "Error\n", 6);
 	}
+	return (0);
 }

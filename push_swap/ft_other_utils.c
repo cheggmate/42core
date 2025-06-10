@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:37:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 22:42:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/10 09:28:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	print_stack(int	*s, int *len)			// remove this function before submission.
+void	print_stack(int	*s, int *len)			// remove this function before subm112ission.
 {
 	int		i;
 
@@ -34,7 +34,7 @@ int	ft_arr_len(int	*str)
 	if (str)
 	{
 		while (str[i] >= INT_MIN && str[i] <= INT_MAX && str[i] != 0)
-			i++;		
+			i++;
 	}
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 21:48:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/09 20:21:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	if (stack_dest[0] != 0)
+	if (stack_src[0] != 0)
 	{
 		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
 		stack_dest[0] = stack_src[0];
@@ -32,7 +32,7 @@ void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 
 void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	if (stack_dest[0] != 0)
+	if (stack_src[0] != 0)
 	{
 		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
 		stack_dest[0] = stack_src[0];
