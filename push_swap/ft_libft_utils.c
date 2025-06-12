@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:49:59 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/11 17:59:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 22:00:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,38 +67,38 @@ int	ft_atoi(const char *str)
 	return (final_int * sign);
 }
 
-// int	ft_strncmp(const char *s1, const char *s2, size_t n)
-// {
-// 	size_t			i;
-// 	unsigned char	*c1;
-// 	unsigned char	*c2;
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t			i;
+	unsigned char	*c1;
+	unsigned char	*c2;
 
-// 	c1 = (unsigned char *) s1;
-// 	c2 = (unsigned char *) s2;
-// 	i = 0;
-// 	while ((*c1 == *c2 && *c1 != '\0' && *c2 != '\0') && i < n -1)
-// 	{
-// 		c1++;
-// 		c2++;
-// 		i++;
-// 	}
-// 	if (n == 0)
-// 		return (0);
-// 	else
-// 		return (*c1 - *c2);
-// }
+	c1 = (unsigned char *) s1;
+	c2 = (unsigned char *) s2;
+	i = 0;
+	while ((*c1 == *c2 && *c1 != '\0' && *c2 != '\0') && i < n -1)
+	{
+		c1++;
+		c2++;
+		i++;
+	}
+	if (n == 0)
+		return (0);
+	else
+		return (*c1 - *c2);
+}
 
-// size_t	ft_strlen(const char *str)
-// {
-// 	size_t			count;
-// 	unsigned char	*ptr;
+size_t	ft_strlen(const char *str)
+{
+	size_t			count;
+	unsigned char	*ptr;
 
-// 	count = 0;
-// 	ptr = (unsigned char *)str;
-// 	while (*ptr)
-// 	{
-// 		count++;
-// 		ptr++;
-// 	}
-// 	return (count);
-// }
+	count = 0;
+	ptr = (unsigned char *)str;
+	while (*ptr)
+	{
+		count++;
+		ptr++;
+	}
+	return (count);
+}

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 18:48:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 22:48:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,19 @@ int	num_ops = 0; // remove this before submission!!!
 void push_swap(int *stack, int len, int median)
 {
 	int	*stack_b;
+	int	b_len;
 
 	stack_b = malloc((len + 1) * sizeof(len));
 	if (stack_b)
 	{
 		stack_b[0] = 0;
-		split_stack (stack, stack_b, len, median);
-		// sort_stack (stack, stack_b, len, median);
+		split_stack (stack, stack_b, &len, median);
+		b_len = ft_arr_len(stack_b);
+		sort_stack (stack, len);
+		while (b_len > 0)
+			pusha(stack, stack_b, &len, &b_len);
+		// print_stack(stack, &len, 'a');			// remove this before submission.
+		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 		free (stack_b);
 	}
 }
@@ -83,12 +89,23 @@ int	get_med(int	*arr, int arr_len)
 int	check_copy_inputs(int len, int *stack, char **argv)
 {
 	int	counter;
+	int	i;
 
 	counter = 1;
 	while (counter <= len)
 	{
-		if (!ft_isalpha_str(argv[counter]))
+		if (is_num(argv[counter]))
+		{
+			i = 0;
+			while (i < len)
+			{
+				if (stack[i] && ft_atoi(argv[counter]) == stack[i])
+					return (0);
+				else
+					i++;
+			}
 			stack[counter-1] = ft_atoi(argv[counter]);
+		}
 		else
 			return (0);
 		counter++;
@@ -124,12 +141,14 @@ int	main(int argc, char **argv)
 		if (stack)
 		{
 			median = 0;
-			if (!(check_copy_inputs(len, stack, argv)))
-				write(1, "Error\n", 6);                  
+			if ((check_copy_inputs(len, stack, argv)) == 0)
+			{
+				write(1, "Error\n", 6);
+				return (0);
+			}                
 			else if (len > 1 && !check_order(len, stack))
-			{                                        
+			{                                      
 				median = get_med(stack, argc);
-				printf("median: %d\n", median);
 				push_swap(stack, len, median);
 			}
 			free (stack);  // check if this is correct before submission.
@@ -137,6 +156,6 @@ int	main(int argc, char **argv)
 		else
 			write(1, "Error\n", 6);
 	}
-	printf("num ops: %d\n", num_ops);
+	// printf("num ops: %d\n", num_ops);
 	return (0);
 }

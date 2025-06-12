@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 19:00:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 21:36:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len)
 
 }
 
-void	split_stack(int *stack, int  *stack_b, int len, int median)
+void	split_stack(int *stack, int  *stack_b, int *len, int median)
 {
 	int	i;
 	int	b_len;
 	int	char_to_check;
 
-	char_to_check = len;
+	char_to_check = *len;
 	i = 0;
 	b_len = 0;
 	while (i < char_to_check)
@@ -42,24 +42,33 @@ void	split_stack(int *stack, int  *stack_b, int len, int median)
 		if (stack[0] < median)
 		{
 			if (b_len > 0 && (stack[0] < stack_b[0]))
-				rotate_and_push(stack_b, stack, &b_len, &len);
+				rotate_and_push(stack_b, stack, &b_len, len);
 			else
-				pushb(stack_b, stack, &b_len, &len);
+				pushb(stack_b, stack, &b_len, len);
 		}
 		else
-			rotate(stack, &len, 'a');
-		printf("len = %d, b_len = %d\n", len, b_len);
-		print_stack(stack, &len, 'a');			// remove this before submission.
-		print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			rotate(stack, len, 'a');
+		// printf("len = %d, b_len = %d\n", *len, b_len);
+		// print_stack(stack, len, 'a');			// remove this before submission.
+		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 		i++;
 	}
 }
 
-void	sort_stack(int *stack, int  *stack_b, int len, int median)
+void	sort_stack(int *stack, int len)
 {
-	int	i;
+	int	largest;
+	int	iter;
 
-	i = 0;
-	// todo: sort stack a. check if largest, do rotate
-	// if not, then do a mix of swap and rotate
+	iter = 0;
+	largest = find_largest(stack, len);
+	while (is_sorted(stack, len) == 0 || iter++ < len)
+	{
+		if (stack[0] == largest)
+			rev_rot(stack, &len, 'a');
+		else if (stack[0] > stack[1])
+			swap(stack, &len, 'a');
+		else
+			rev_rot(stack, &len, 'a');
+	}
 }
