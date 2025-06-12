@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/09 20:21:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 15:46:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,39 @@
 //     Do nothing if a is empty.
 
 #include "ft_push_swap.h"
+#include "globals.h"
 
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	if (stack_src[0] != 0)
+	if (*len_src > 0)
 	{
-		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
+		if (*len_dest > 0)
+			ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest) * sizeof(int));
 		stack_dest[0] = stack_src[0];
+		*len_dest += 1;
 		ft_memmove(&stack_src[0], &stack_src[1], (*len_src - 1) * sizeof(int));
 		stack_src[*len_src - 1] = 0;
+		*len_src -= 1;
 		write (1, "pa", 2);
 		write (1, "\n", 1);
+		num_ops += 1;				// remove before submission
 	}
 }
 
 void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
-	if (stack_src[0] != 0)
+	if (*len_src > 0)
 	{
-		ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest - 1) * sizeof(int));
+		if (*len_dest > 0)
+			ft_memmove(&stack_dest[1], &stack_dest[0], (*len_dest) * sizeof(int));
 		stack_dest[0] = stack_src[0];
+		*len_dest += 1;
 		ft_memmove(&stack_src[0], &stack_src[1], (*len_src - 1) * sizeof(int));
 		stack_src[*len_src - 1] = 0;
+		*len_src -= 1;
 		write (1, "pb", 2);
 		write (1, "\n", 1);
+		num_ops += 1;				// remove before submission
 	}
 }
 

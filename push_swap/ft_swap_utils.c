@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/09 20:30:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/11 13:20:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // - ss : sa and sb at the same time.
 
 #include "ft_push_swap.h"
+#include "globals.h"
 
 void	swap(int *stack, int *len, int ab)
 {
@@ -33,6 +34,7 @@ void	swap(int *stack, int *len, int ab)
 		else
 			write (1, "sb", 2);
 		write (1, "\n", 1);
+		num_ops += 1;					// remove before submission
 	}
 }
 
@@ -40,6 +42,7 @@ void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b)
 {
 	swap(stack_a, len_a, 'a');
 	swap(stack_b, len_b, 'b');
+	num_ops -= 1;						// remove before submission
 }
 
 // int	main(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:49:59 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/06 23:58:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/11 17:59:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,30 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-int	ft_isalpha(int c)
+int	ft_atoi(const char *str)
 {
-	if (c == 0)
-		return (0);
-	if (!((c >= 97 && c <= 122) || (c >= 65 && c <= 90)))
-		return (0);
-	return (1);
+	unsigned int	final_int;
+	int				sign;
+	unsigned char	*ptr;
+
+	ptr = (unsigned char *)str;
+	final_int = 0;
+	sign = 1;
+	while (*ptr == '\t' || *ptr == '\n' || *ptr == '\v'
+		|| *ptr == '\f' || *ptr == '\r' || *ptr == ' ')
+		ptr++;
+	if ((*ptr == '-' || *ptr == '+'))
+	{
+		if (*ptr == '-')
+			sign *= -1 ;
+		ptr++;
+	}
+	while (*ptr >= '0' && *ptr <= '9')
+	{
+		final_int = final_int * 10 + *ptr - '0';
+		ptr++;
+	}
+	return (final_int * sign);
 }
 
 // int	ft_strncmp(const char *s1, const char *s2, size_t n)
