@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 18:28:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 18:48:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void push_swap(int *stack, int len, int median)
 	if (stack_b)
 	{
 		stack_b[0] = 0;
-		printf("starting to split stack\n");
 		split_stack (stack, stack_b, len, median);
 		// sort_stack (stack, stack_b, len, median);
 		free (stack_b);

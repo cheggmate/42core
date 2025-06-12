@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 18:28:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/12 18:53:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		find_pos(int *str, int val, int len);
 int		ft_isalpha_str(char	*str);
 int		ft_atoi(const char *str);
 int		check_copy_inputs(int len, int *stack, char **argv);
+void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
 int		get_med(int	*arr, int arr_len);
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
 void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
