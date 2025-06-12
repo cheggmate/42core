@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 22:21:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/13 01:23:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int		find_pos(int *str, int val, int len);
 // int		ft_isalpha_str(char	*str);
 int		is_num(char *str);
 int		check_copy_inputs(int len, int *stack, char **argv);
+int		check_copy_str(int *len, int *stack, char **argv);
+int		check_order(int len, int *stack);
 int		find_largest(int *stack, int len);
 int		is_sorted(int *stack, int len);
 void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
@@ -42,6 +44,7 @@ void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b);\
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
+char	**ft_split(const char *s, char c);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

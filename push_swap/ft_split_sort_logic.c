@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 21:36:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/13 00:10:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	split_stack(int *stack, int  *stack_b, int *len, int median)
 	b_len = 0;
 	while (i < char_to_check)
 	{
-		if (stack[0] < median)
+		if (b_len > 0 && stack[0] > stack[*len - 1] && stack_b[0] < stack_b[b_len - 1])
+			rr(stack, stack_b, len, &b_len);
+		else if (stack[0] < median)
 		{
 			if (b_len > 0 && (stack[0] < stack_b[0]))
 				rotate_and_push(stack_b, stack, &b_len, len);
@@ -58,11 +60,9 @@ void	split_stack(int *stack, int  *stack_b, int *len, int median)
 void	sort_stack(int *stack, int len)
 {
 	int	largest;
-	int	iter;
 
-	iter = 0;
 	largest = find_largest(stack, len);
-	while (is_sorted(stack, len) == 0 || iter++ < len)
+	while (is_sorted(stack, len) == 0)
 	{
 		if (stack[0] == largest)
 			rev_rot(stack, &len, 'a');

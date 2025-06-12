@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 22:48:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/13 01:31:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void push_swap(int *stack, int len, int median)
 		stack_b[0] = 0;
 		split_stack (stack, stack_b, &len, median);
 		b_len = ft_arr_len(stack_b);
+		// print_stack(stack, &len, 'a');			// remove this before submission.
+		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 		sort_stack (stack, len);
 		while (b_len > 0)
 			pusha(stack, stack_b, &len, &b_len);
@@ -80,52 +82,10 @@ int	get_med(int	*arr, int arr_len)
 		if (i == 0)
 			median = arr[i];
 		else
-			median = ((median * i - 1) + arr[i]) / i;
+			median = ((median * i) + arr[i]) / (i + 1);
 		i++;
 	}
 	return (median);
-}
-
-int	check_copy_inputs(int len, int *stack, char **argv)
-{
-	int	counter;
-	int	i;
-
-	counter = 1;
-	while (counter <= len)
-	{
-		if (is_num(argv[counter]))
-		{
-			i = 0;
-			while (i < len)
-			{
-				if (stack[i] && ft_atoi(argv[counter]) == stack[i])
-					return (0);
-				else
-					i++;
-			}
-			stack[counter-1] = ft_atoi(argv[counter]);
-		}
-		else
-			return (0);
-		counter++;
-	}
-	return (1);
-}
-
-int	check_order(int len, int *stack)
-{
-	int	i;
-
-	i = 0;
-	while (i < len - 1)
-	{
-		if (stack[i] < stack[i + 1])
-			i++;
-		else
-			return (0);
-	}
-	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -135,19 +95,19 @@ int	main(int argc, char **argv)
 	int			median;
 
 	len = argc - 1;
-	if (len > 1)
+	if (len >= 1)
 	{
 		stack = malloc((len + 1) * sizeof (int));
 		if (stack)
 		{
 			median = 0;
-			if ((check_copy_inputs(len, stack, argv)) == 0)
+			if (check_copy_str(&len, stack, argv) == 0 && (check_copy_inputs(len, stack, argv)) == 0)
 			{
 				write(1, "Error\n", 6);
-				return (0);
+				return (1);
 			}                
-			else if (len > 1 && !check_order(len, stack))
-			{                                      
+			else if (len >= 1 && !check_order(len, stack))
+			{                                  
 				median = get_med(stack, argc);
 				push_swap(stack, len, median);
 			}
