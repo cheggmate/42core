@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:21:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:49:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void push_swap(int *stack, int len, double median)
 	int	*stack_b;
 	int	b_len;
 
+	// print_stack(stack, &len, 'a');			// remove this before submission.
 	if (len > 1 && !check_order(len, stack))
 	{
 		median = find_median(stack, len);
@@ -67,8 +68,8 @@ void push_swap(int *stack, int len, double median)
 			sort_stack (stack, len);
 			while (b_len > 0)
 				pusha(stack, stack_b, &len, &b_len);
-			// print_stack(stack, &len, 'a');			// remove this before submission.
-			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			print_stack(stack, &len, 'a');			// remove this before submission.
+			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:39:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:25:28 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:42:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_order(int len, int *stack)
 		else
 			return (0);
 	}
-	printf("finished check order\n");
+	// printf("finished check order\n");
 	return (1);
 }
 
