@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/13 01:31:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:21:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,74 +48,105 @@
 
 int	num_ops = 0; // remove this before submission!!!
 
-void push_swap(int *stack, int len, int median)
+void push_swap(int *stack, int len, double median)
 {
 	int	*stack_b;
 	int	b_len;
 
-	stack_b = malloc((len + 1) * sizeof(len));
-	if (stack_b)
+	if (len > 1 && !check_order(len, stack))
 	{
-		stack_b[0] = 0;
-		split_stack (stack, stack_b, &len, median);
-		b_len = ft_arr_len(stack_b);
-		// print_stack(stack, &len, 'a');			// remove this before submission.
-		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
-		sort_stack (stack, len);
-		while (b_len > 0)
-			pusha(stack, stack_b, &len, &b_len);
-		// print_stack(stack, &len, 'a');			// remove this before submission.
-		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
-		free (stack_b);
+		median = find_median(stack, len);
+		stack_b = malloc((len + 1) * sizeof(len));
+		if (stack_b)
+		{
+			stack_b[0] = 0;
+			split_stack (stack, stack_b, &len, median);
+			b_len = ft_arr_len(stack_b);
+			// print_stack(stack, &len, 'a');			// remove this before submission.
+			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			sort_stack (stack, len);
+			while (b_len > 0)
+				pusha(stack, stack_b, &len, &b_len);
+			// print_stack(stack, &len, 'a');			// remove this before submission.
+			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			free (stack_b);
+		}
 	}
 }
 
-int	get_med(int	*arr, int arr_len)
+int	prep_values(int len, int *stack, char **argv)
 {
-	int	median;
-	int	i;
+	int i;
 
-	median = 0;
 	i = 0;
-	while (i < arr_len)
+	while (*stack && i++ < len)
 	{
-		if (i == 0)
-			median = arr[i];
-		else
-			median = ((median * i) + arr[i]) / (i + 1);
-		i++;
+		if (is_num(argv[i + 1]))
+		{
+			i = 0;
+			while (i < len)
+			{
+				if (stack[i] && ft_atoi(argv[i + 1]) == stack[i])
+					return (0);
+				else
+					i++;
+			}
+			stack[i] = ft_atoi(argv[i + 1]);
+		}
 	}
-	return (median);
+	return (1);
+}
+
+int	prep_string(int len, char **str, int *stack)
+{
+	char		*str_check;
+	int			i;
+
+	i = -1;
+	if (!stack)
+	{
+		free (stack);
+		return (0);
+	}
+	while (i++ < len - 1)
+	{
+		str_check = ft_itoa(ft_atoi(str[i]));
+		if (ft_strncmp(str_check, str[i], ft_strlen(str[i]))!= 0)
+			return (0);
+		else
+			stack[i] = ft_atoi(str[i]);
+		free (str_check);
+	}
+	free (str);
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	int			len;
 	int			*stack;
-	int			median;
+	double		median;
+	char		**str;
 
-	len = argc - 1;
-	if (len >= 1)
+	len = 0;
+	median = 0.0;
+	stack = NULL;
+	if (argc == 2)
 	{
-		stack = malloc((len + 1) * sizeof (int));
+		str = ft_split_count(argv[1], ' ', &len);
+		stack = malloc ((len + 1) * sizeof(int));
 		if (stack)
-		{
-			median = 0;
-			if (check_copy_str(&len, stack, argv) == 0 && (check_copy_inputs(len, stack, argv)) == 0)
-			{
-				write(1, "Error\n", 6);
-				return (1);
-			}                
-			else if (len >= 1 && !check_order(len, stack))
-			{                                  
-				median = get_med(stack, argc);
-				push_swap(stack, len, median);
-			}
-			free (stack);  // check if this is correct before submission.
-		}
-		else
-			write(1, "Error\n", 6);
+			prep_string(len, str, stack);
 	}
+	else if (argc != 1)
+	{
+		stack = malloc ((len + 1) * sizeof(int));
+		if (stack)
+			prep_values(argc, &len, argv);
+	}
+	push_swap(stack, len, median);
+	if (argc == 1 || !stack)
+		write(2, "Error\n", 6);
 	// printf("num ops: %d\n", num_ops);
 	return (0);
 }

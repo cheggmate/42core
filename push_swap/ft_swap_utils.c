@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/11 13:20:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/13 15:38:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	swap(int *stack, int *len, int ab)
 		stack[1] = tmp;
 		if (ab == 'a')
 			write (1, "sa", 2);
-		else
+		else if (ab == 'b')
 			write (1, "sb", 2);
 		write (1, "\n", 1);
 		num_ops += 1;					// remove before submission
@@ -40,8 +40,9 @@ void	swap(int *stack, int *len, int ab)
 
 void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b)
 {
-	swap(stack_a, len_a, 'a');
-	swap(stack_b, len_b, 'b');
+	swap(stack_a, len_a, 'x');
+	swap(stack_b, len_b, 'x');
+	write(1, "ss", 2);
 	num_ops -= 1;						// remove before submission
 }
 

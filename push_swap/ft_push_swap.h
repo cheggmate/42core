@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/13 01:23:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:11:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ int		ft_arr_len(int	*str);
 int		find_pos(int *str, int val, int len);
 // int		ft_isalpha_str(char	*str);
 int		is_num(char *str);
-int		check_copy_inputs(int len, int *stack, char **argv);
+int		*ft_arr_dup(int *stack, int len);
+// int		check_copy_inputs(int len, int *stack, char **argv);
 int		check_copy_str(int *len, int *stack, char **argv);
 int		check_order(int len, int *stack);
+// int		*create_check_stack(int	*stack, int len);
+int		prep_string(int len, char **str, int *stack);
 int		find_largest(int *stack, int len);
 int		is_sorted(int *stack, int len);
 void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
-int		get_med(int	*arr, int arr_len);
+double	find_median(int *stack, int len);
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
 void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
-void	push_swap(int *stack, int len, int median);
+void	push_swap(int *stack, int len, double median);
 void	rev_rot(int *stack, int *len, int ab);
 void	rr(int	*stack_a, int *stack_b, int *len_a, int *len_b);
 void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b);
@@ -44,7 +47,7 @@ void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b);\
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
-char	**ft_split(const char *s, char c);
+char	**ft_split_count(const char *s, char c, int *word_count);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

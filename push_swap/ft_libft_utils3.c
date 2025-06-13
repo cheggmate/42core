@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/13 00:48:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/13 09:46:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,16 @@ static char	*word_dup(const char *start, char c, char **result, int i)
 	return (word);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split_count(const char *s, char c, int *word_count)
 {
 	int		i;
-	int		word_count;
 	char	**result;
 
 	i = 0;
-	result = count_words_create_result(s, c, &word_count);
+	result = count_words_create_result(s, c, word_count);
 	if (!result)
 		return (NULL);
-	while (*s && i < word_count)
+	while (*s && i < *word_count)
 	{
 		while (*s == c)
 			s++;
