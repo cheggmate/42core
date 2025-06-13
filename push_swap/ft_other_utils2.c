@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:02:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:26:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@ int	is_sorted(int *stack, int len)
 	}
 	return (1);
 }
-
-// int	*create_check_stack(int	*stack, int len)
-// {
-// 	if (len > 0)
-// 	{
-// 		stack = malloc ((len + 1) * sizeof(int));
-// 		if (!stack)
-// 		{
-// 			free(stack);
-// 			stack = NULL;
-// 		}
-// 	}
-// 	return (stack);
-// }
 
 int	*ft_arr_dup(int *stack, int len)
 {

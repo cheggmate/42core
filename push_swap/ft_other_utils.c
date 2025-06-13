@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:37:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 22:21:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:26:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,6 @@ int	ft_arr_len(int	*str)
 	}
 	return (i);
 }
-
-// int	ft_isalpha_str(char	*str)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	if (!str || str[0] == '\0')
-// 		return (0);
-// 	else
-// 	{
-// 		while (str[i])
-// 		{
-// 			printf("checking %c\n", str[i]);
-// 			if (!((str[i] >= 97 && str[i] <= 122) || (str[i] >= 65 && str[i] <= 90)))
-// 				return (0);
-// 			i++;
-// 		}
-// 	}
-// 	return (1);
-// }
 
 int	is_num(char *str)
 {

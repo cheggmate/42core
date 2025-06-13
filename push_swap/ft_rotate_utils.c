@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:18:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/13 15:37:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:26:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,3 @@ void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b)
 	rev_rot(stack_b, len_b, 'r');
 	write (1, "rrr", 3);
 }
-
-// int	main(void)
-// {
-// 	int	a[6] = {1, 2, 3, 4, 5};
-// 	int	b[5] = {5, 4, 3, 2, 1};
-// 	int	len_a = 5;
-// 	int	len_b = 5;
-
-// 	rotate(a, &len_a, 'a');
-// 	print_stack(a, &len_a, 'a');
-// 	rotate(b, &len_b, 'b');
-// 	print_stack(b, &len_b, 'b');
-// }

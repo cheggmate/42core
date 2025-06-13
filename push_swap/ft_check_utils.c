@@ -6,41 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:39:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:22:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:25:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 #include "globals.h"			// remove before submission!
-
-// int	check_copy_inputs(int len, int *stack, char **argv)
-// {
-// 	int	counter;
-// 	int	i;
-
-// 	counter = 1;
-// 	printf("check copy inputs executed\n");
-// 	stack = create_check_stack(stack, len);
-// 	while (*stack && counter <= len)
-// 	{
-// 		if (is_num(argv[counter]))
-// 		{
-// 			i = 0;
-// 			while (i < len)
-// 			{
-// 				if (stack[i] && ft_atoi(argv[counter]) == stack[i])
-// 					return (0);
-// 				else
-// 					i++;
-// 			}
-// 			stack[counter-1] = ft_atoi(argv[counter]);
-// 		}
-// 		else
-// 			return (0);
-// 		counter++;
-// 	}
-// 	return (1);
-// }
 
 int	check_order(int len, int *stack)
 {

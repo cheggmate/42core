@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 15:46:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 00:25:51 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,3 @@ void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		num_ops += 1;				// remove before submission
 	}
 }
-
-// int	main(void)
-// {
-// 	int	a[6] = {1, 2, 3, 4, 5};
-// 	int	b[5] = {5, 4, 3, 2, 1};
-// 	int	len_a = 6;
-// 	int	len_b = 5;
-
-// 	push(a, b, &len_a, &len_b);
-// 	printf("a = ");
-// 	print_stack(a, &len_a);
-// 	printf("b = ");
-// 	print_stack(b, &len_b);
-// 	push(b, a, &len_b, &len_a); 
-// 	printf("a = ");
-// 	print_stack(a, &len_a);
-// 	printf("b = ");
-// 	print_stack(b, &len_b);
-// }
