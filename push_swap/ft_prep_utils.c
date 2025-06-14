@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 00:51:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:41:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@ int	prep_values(int len, int *stack, char **argv)
 {
 	int 	i;
 
-	i = -1;
-	while (*stack && i++ < len)
+	i = 0;
+	if (is_num(argv[1]))
 	{
-		if (is_num(argv[i + 1]))
+		while (i++ < len)
 		{
-			i = 0;
-			while (i < len)
-			{
-				if (stack[i] && stack[i] <= INT_MAX && stack[i] >= INT_MIN && \
-					ft_atoi(argv[i + 1]) == stack[i])
-					return (0);
-				else
-					i++;
-			}
-			stack[i] = ft_atoi(argv[i + 1]);
+			if (stack[i] && stack[i] > INT_MAX && stack[i] < INT_MIN && \
+				ft_atoi(argv[i]) == stack[i])
+				return (0);
+			else
+				stack[i - 1] = ft_atoi(argv[i]);
 		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 int	prep_string(int len, char **str, int *stack)

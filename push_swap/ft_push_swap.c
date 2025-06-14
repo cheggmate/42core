@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:20:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:42:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,12 @@ int	pswap_for_int(int len, char **argv)
 	if (stack)
 	{
 		result = prep_values(len, stack, argv);
+		// print_stack(stack, &len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len);
 		else
 			return (0);
+		// print_stack(stack, &len, 'a');
 		result = push_swap(stack, len, median);
 		if (!stack || result == 0)
 			return (0);
@@ -115,17 +117,12 @@ int	pswap_for_string(int len, char **argv)
 	result = 0;
 	stack = NULL;
 	str = ft_split_count(argv[1], ' ', &len);
-	printf("str[0] is %s\n", str[0]);
 	stack = malloc ((len + 1) * sizeof(int));
 	if (stack)
 	{
 		result = prep_string(len, str, stack);
-		printf("after prep string\n");
-		print_stack(stack, &len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len);
-		printf("after dup check\n");
-		print_stack(stack, &len, 'a');
 		if (result == 0)
 			return (0);
 		result = push_swap(stack, len, median);
@@ -143,16 +140,14 @@ int	main(int argc, char **argv)
 
 	result = 0;
 	len = argc - 1;
-	printf("argc is %d\n", len + 1);
-	printf("argv[0][0] is %c\n", argv[0][0]);
-	// if (argc == 2)
-	// {
-	// 	result = pswap_for_string(len, argv);
-	// }
-	// else if (argc != 1)
-	// {
-	// 	result = pswap_for_int(len, argv);
-	// }
+	if (argc == 2)
+	{
+		result = pswap_for_string(len, argv);
+	}
+	else if (argc != 1)
+	{
+		result = pswap_for_int(len, argv);
+	}
 	if (argc == 1 || result == 0)
 		write(2, "Error\n", 6);
 	// printf("num ops: %d\n", num_ops);
