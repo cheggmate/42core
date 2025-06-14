@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 23:15:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 00:51:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,3 +64,4 @@ int	prep_string(int len, char **str, int *stack)
 	free (str);
 	return (1);
 }
+

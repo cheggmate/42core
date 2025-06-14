@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 23:56:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 00:06:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		find_pos(int *str, int val, int len);
 int		is_num(char *str);
 int		*ft_arr_dup(int *stack, int len);
 int		check_order(int len, int *stack);
+int		check_dups(int	*stack, int len);
 int		prep_string(int len, char **str, int *stack);
 int		prep_values(int len, int *stack, char **argv);
 int		find_largest(int *stack, int len);

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 23:43:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 00:49:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,20 @@ int push_swap(int *stack, int len, double median)
 	if (len > 1 && !check_order(len, stack))
 	{
 		median = find_median(stack, len);
-		printf("median = %.2f\n", median);
+		// printf("median = %.2f\n", median);
 		stack_b = malloc((len + 1) * sizeof(len));
 		if (stack_b)
 		{
 			stack_b[0] = 0;
 			split_stack (stack, stack_b, &len, median);
 			b_len = ft_arr_len(stack_b);
-			printf("done splitting\n");
-			print_stack(stack, &len, 'a');			// remove this before submission.
-			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			// print_stack(stack, &len, 'a');			// remove this before submission.
+			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			sort_stack (stack, len);
 			while (b_len > 0)
 				pusha(stack, stack_b, &len, &b_len);
-			print_stack(stack, &len, 'a');			// remove this before submission.
-			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			// print_stack(stack, &len, 'a');			// remove this before submission.
+			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
 		if (!stack_b)
@@ -92,7 +91,11 @@ int	pswap_for_int(int len, char **argv)
 	stack = malloc ((len + 1) * sizeof(int));
 	if (stack)
 	{
-		result = prep_values(len, &len, argv);
+		result = prep_values(len, stack, argv);
+		if (result == 1)
+			result = check_dups(stack, len);
+		else
+			return (0);
 		result = push_swap(stack, len, median);
 		if (!stack || result == 0)
 			return (0);
@@ -112,19 +115,12 @@ int	pswap_for_string(int len, char **argv)
 	result = 0;
 	stack = NULL;
 	str = ft_split_count(argv[1], ' ', &len);
-	// start remove later before submission
-	int i;
-	i = 0;
-	while (i < len)
-	{
-		printf("str[%d] = %s\n", i, str[i]);
-		i++;
-	}
-	// end remove later before submission
 	stack = malloc ((len + 1) * sizeof(int));
 	if (stack)
 	{
 		result = prep_string(len, str, stack);
+		if (result == 1)
+			result = check_dups(stack, len);
 		if (result == 0)
 			return (0);
 		result = push_swap(stack, len, median);
