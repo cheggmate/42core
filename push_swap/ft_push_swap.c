@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:08:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:12:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,12 @@ int	pswap_for_string(int len, char **argv)
 	if (stack)
 	{
 		result = prep_string(len, str, stack);
+		printf("after prep string\n");
+		print_stack(stack, &len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len);
+		printf("after dup check\n");
+		print_stack(stack, &len, 'a');
 		if (result == 0)
 			return (0);
 		result = push_swap(stack, len, median);
