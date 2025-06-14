@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:26:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 23:56:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int		ft_arr_len(int	*str);
 int		find_pos(int *str, int val, int len);
 int		is_num(char *str);
 int		*ft_arr_dup(int *stack, int len);
-int		check_copy_str(int *len, int *stack, char **argv);
 int		check_order(int len, int *stack);
 int		prep_string(int len, char **str, int *stack);
+int		prep_values(int len, int *stack, char **argv);
 int		find_largest(int *stack, int len);
 int		is_sorted(int *stack, int len);
 void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
 double	find_median(int *stack, int len);
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
 void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
-void	push_swap(int *stack, int len, double median);
+int		push_swap(int *stack, int len, double median);
 void	rev_rot(int *stack, int *len, int ab);
 void	rr(int	*stack_a, int *stack_b, int *len_a, int *len_b);
 void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b);

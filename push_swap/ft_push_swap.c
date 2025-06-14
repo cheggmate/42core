@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:49:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 23:43:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@
 
 int	num_ops = 0; // remove this before submission!!!
 
-void push_swap(int *stack, int len, double median)
+int push_swap(int *stack, int len, double median)
 {
 	int	*stack_b;
 	int	b_len;
@@ -57,14 +57,16 @@ void push_swap(int *stack, int len, double median)
 	if (len > 1 && !check_order(len, stack))
 	{
 		median = find_median(stack, len);
+		printf("median = %.2f\n", median);
 		stack_b = malloc((len + 1) * sizeof(len));
 		if (stack_b)
 		{
 			stack_b[0] = 0;
 			split_stack (stack, stack_b, &len, median);
 			b_len = ft_arr_len(stack_b);
-			// print_stack(stack, &len, 'a');			// remove this before submission.
-			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			printf("done splitting\n");
+			print_stack(stack, &len, 'a');			// remove this before submission.
+			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			sort_stack (stack, len);
 			while (b_len > 0)
 				pusha(stack, stack_b, &len, &b_len);
@@ -72,81 +74,83 @@ void push_swap(int *stack, int len, double median)
 			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
-	}
-}
-
-int	prep_values(int len, int *stack, char **argv)
-{
-	int i;
-
-	i = 0;
-	while (*stack && i++ < len)
-	{
-		if (is_num(argv[i + 1]))
-		{
-			i = 0;
-			while (i < len)
-			{
-				if (stack[i] && ft_atoi(argv[i + 1]) == stack[i])
-					return (0);
-				else
-					i++;
-			}
-			stack[i] = ft_atoi(argv[i + 1]);
-		}
-	}
-	return (1);
-}
-
-int	prep_string(int len, char **str, int *stack)
-{
-	char		*str_check;
-	int			i;
-
-	i = -1;
-	if (!stack)
-	{
-		free (stack);
-		return (0);
-	}
-	while (i++ < len - 1)
-	{
-		str_check = ft_itoa(ft_atoi(str[i]));
-		if (ft_strncmp(str_check, str[i], ft_strlen(str[i]))!= 0)
+		if (!stack_b)
 			return (0);
-		else
-			stack[i] = ft_atoi(str[i]);
-		free (str_check);
 	}
-	free (str);
 	return (1);
+}
+
+int	pswap_for_int(int len, char **argv)
+{
+	int			*stack;
+	double		median;
+	int			result;
+
+	median = 0.0;
+	result = 0;
+	stack = NULL;
+	stack = malloc ((len + 1) * sizeof(int));
+	if (stack)
+	{
+		result = prep_values(len, &len, argv);
+		result = push_swap(stack, len, median);
+		if (!stack || result == 0)
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+int	pswap_for_string(int len, char **argv)
+{
+	int			*stack;
+	double		median;
+	char		**str;
+	int			result;
+
+	median = 0.0;
+	result = 0;
+	stack = NULL;
+	str = ft_split_count(argv[1], ' ', &len);
+	// start remove later before submission
+	int i;
+	i = 0;
+	while (i < len)
+	{
+		printf("str[%d] = %s\n", i, str[i]);
+		i++;
+	}
+	// end remove later before submission
+	stack = malloc ((len + 1) * sizeof(int));
+	if (stack)
+	{
+		result = prep_string(len, str, stack);
+		if (result == 0)
+			return (0);
+		result = push_swap(stack, len, median);
+		if (result == 0)
+			return (0);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
 	int			len;
-	int			*stack;
-	double		median;
-	char		**str;
+	int	result;
 
-	len = 0;
-	median = 0.0;
-	stack = NULL;
+	result = 0;
+	len = argc - 1;
 	if (argc == 2)
 	{
-		str = ft_split_count(argv[1], ' ', &len);
-		stack = malloc ((len + 1) * sizeof(int));
-		if (stack)
-			prep_string(len, str, stack);
+		result = pswap_for_string(len, argv);
 	}
 	else if (argc != 1)
 	{
-		stack = malloc ((len + 1) * sizeof(int));
-		if (stack)
-			prep_values(argc, &len, argv);
+		result = pswap_for_int(len, argv);
 	}
-	push_swap(stack, len, median);
-	if (argc == 1 || !stack)
+	if (argc == 1 || result == 0)
 		write(2, "Error\n", 6);
 	// printf("num ops: %d\n", num_ops);
 	return (0);

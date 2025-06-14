@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/13 09:46:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/14 23:13:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**count_words_create_result(const char *s, char c, int *word_count)
 		s++;
 	}
 	*word_count = count;
-	result = malloc((*word_count + 1) * sizeof(char));
+	result = malloc((*word_count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	result[*word_count] = NULL;
