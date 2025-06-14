@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:13:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:13:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ int	pswap_for_int(int len, char **argv)
 int	pswap_for_string(int len, char **argv)
 {
 	int			*stack;
-	double		median;
+	// double		median;
 	char		**str;
 	int			result;
 
-	median = 0.0;
+	// median = 0.0;
 	result = 0;
 	stack = NULL;
 	str = ft_split_count(argv[1], ' ', &len);
