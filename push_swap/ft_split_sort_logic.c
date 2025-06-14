@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 23:56:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:10:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ void	split_stack(int *stack, int  *stack_b, int *len, int median)
 		}
 		else
 			rotate(stack, len, 'a');
-		// printf("len = %d, b_len = %d\n", *len, b_len);
-		// print_stack(stack, len, 'a');			// remove this before submission.
-		// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+		printf("len = %d, b_len = %d\n", *len, b_len);
+		print_stack(stack, len, 'a');			// remove this before submission.
+		print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+		printf("to_push is %d\n", to_push);		// remove this before submission.
 		// i++;
 	}
 }
