@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:12:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:13:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	pswap_for_string(int len, char **argv)
 		print_stack(stack, &len, 'a');
 		if (result == 0)
 			return (0);
-		result = push_swap(stack, len, median);
+		// result = push_swap(stack, len, median);
 		if (result == 0)
 			return (0);
 		return (1);
