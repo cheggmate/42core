@@ -6,12 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 23:57:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:54:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-#include "globals.h"			// remove before submitting
 
 int	is_sorted(int *stack, int len)
 {

@@ -6,12 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:39:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 00:48:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:52:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-#include "globals.h"			// remove before submission!
 
 int	check_order(int len, int *stack)
 {

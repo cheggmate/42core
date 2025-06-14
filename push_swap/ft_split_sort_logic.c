@@ -6,12 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:11:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:52:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-#include "globals.h"				// Remove before submission
 
 void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len)
 {

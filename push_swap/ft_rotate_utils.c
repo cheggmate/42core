@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:18:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:26:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:53:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 // - rrr : rra and rrb at the same time.
 
 #include "ft_push_swap.h"
-#include "globals.h"
 
 void	rotate(int *stack, int *len, int ab)
 {
@@ -39,7 +38,6 @@ void	rotate(int *stack, int *len, int ab)
 		else if (ab == 'b')
 			write (1, "rb", 2);
 		write (1, "\n", 1);
-		num_ops += 1;				// remove before submission
 	}
 }
 
@@ -58,7 +56,6 @@ void	rev_rot(int *stack, int *len, int ab)
 		else if (ab == 'b')
 			write (1, "rrb", 3);
 		write (1, "\n", 1);
-		num_ops += 1;				// remove before submission
 	}
 }
 

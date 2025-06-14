@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/14 00:25:51 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:53:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //     Do nothing if a is empty.
 
 #include "ft_push_swap.h"
-#include "globals.h"
 
 void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
@@ -31,7 +30,6 @@ void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		*len_src -= 1;
 		write (1, "pa", 2);
 		write (1, "\n", 1);
-		num_ops += 1;				// remove before submission
 	}
 }
 
@@ -48,6 +46,5 @@ void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		*len_src -= 1;
 		write (1, "pb", 2);
 		write (1, "\n", 1);
-		num_ops += 1;				// remove before submission
 	}
 }
