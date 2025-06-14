@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 00:49:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 01:07:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ int push_swap(int *stack, int len, double median)
 			stack_b[0] = 0;
 			split_stack (stack, stack_b, &len, median);
 			b_len = ft_arr_len(stack_b);
-			// print_stack(stack, &len, 'a');			// remove this before submission.
-			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
-			sort_stack (stack, len);
+			print_stack(stack, &len, 'a');			// remove this before submission.
+			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			// sort_stack (stack, len);
 			while (b_len > 0)
 				pusha(stack, stack_b, &len, &b_len);
 			// print_stack(stack, &len, 'a');			// remove this before submission.
