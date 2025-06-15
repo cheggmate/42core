@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:34:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 23:25:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/16 00:42:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ static void	chunk_sort(int *stack, int *stack_b, int *len, int *b_len)
 	int	size;
 
 	size = *len;
-	chunk_size = *len / 5 + 1;
+	chunk_size = (*len <= 100) ? 15 : 30; // chunk_size = *len / 5 + 1;
 	low = 0;
 	while (low < size)
 	{
-		i = 0;
+		i = -1;
 		pushed = 0;
-		while (i < size && pushed < chunk_size)
+		while (i++ < size && pushed < chunk_size)
 		{
 			if (stack[0] >= low && stack[0] <= (low + chunk_size - 1))
 				pushed += pushb(stack_b, stack, b_len, len);
 			else
-				rotate(stack, len, 'a');
-			i++;
+				// rotate(stack, len, 'a');
+				chunk_optmzns(stack, stack_b, len, b_len);
 		}
 		low += chunk_size;
 	}

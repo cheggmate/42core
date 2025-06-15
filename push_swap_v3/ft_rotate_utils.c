@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:18:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 15:44:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/16 00:08:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	rotate(int *stack, int *len, int ab)
 			write (1, "ra", 2);
 		else if (ab == 'b')
 			write (1, "rb", 2);
+		if (ab == 'a' || ab == 'b')
 		write (1, "\n", 1);
 	}
 }
@@ -55,7 +56,8 @@ void	rev_rot(int *stack, int *len, int ab)
 			write (1, "rra", 3);
 		else if (ab == 'b')
 			write (1, "rrb", 3);
-		write (1, "\n", 1);
+		if (ab == 'a' || ab == 'b')
+			write (1, "\n", 1);
 	}
 }
 
@@ -64,6 +66,7 @@ void	rr(int	*stack_a, int *stack_b, int *len_a, int *len_b)
 	rotate(stack_a, len_a, 'r');
 	rotate(stack_b, len_b, 'r');
 	write (1, "rr", 2);
+	write (1, "\n", 1);
 }
 
 void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b)
@@ -71,4 +74,6 @@ void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b)
 	rev_rot(stack_a, len_a, 'r');
 	rev_rot(stack_b, len_b, 'r');
 	write (1, "rrr", 3);
+	write (1, "\n", 1);
+
 }

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 23:27:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/16 00:42:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int push_swap(int *stack, int len)
 			stack_b[0] = 0;
 			if (len <= 6)
 				sort_stack(stack, len);
-			else if (len > 6 && len <= 100)		// chunk sort
+			else if (len > 6 && len <= 500)		// chunk sort
 				start_chunking(stack, stack_b, &len, &b_len);
 			else											// Binary radix sort
 			{

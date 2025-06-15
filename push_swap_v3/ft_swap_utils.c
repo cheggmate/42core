@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:53:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 23:48:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	swap(int *stack, int *len, int ab)
 			write (1, "sa", 2);
 		else if (ab == 'b')
 			write (1, "sb", 2);
+		if (ab == 'a' || ab == 'b')
 		write (1, "\n", 1);
 	}
 }
@@ -41,4 +42,5 @@ void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b)
 	swap(stack_a, len_a, 'x');
 	swap(stack_b, len_b, 'x');
 	write(1, "ss", 2);
+	write (1, "\n", 1);
 }
