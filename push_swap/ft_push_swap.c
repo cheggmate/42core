@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 12:01:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 13:18:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,12 @@ int	pswap_for_int(int len, char **argv)
 	if (stack)
 	{
 		result = prep_values(len, stack, argv);
-		printf("done prepping int\n");
 		print_stack(stack, &len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len);
 		if (result == 0)
 			return (0);
-		// print_stack(stack, &len, 'a');
+		print_stack(stack, &len, 'a');
 		result = push_swap(stack, len, median);
 		if (!stack || result == 0)
 			return (0);
@@ -120,11 +119,15 @@ int	pswap_for_string(int len, char **argv)
 	stack = malloc ((len + 1) * sizeof(int));
 	if (stack)
 	{
+		printf("start check pswap for string\n");
 		result = prep_string(len, str, stack);
+		printf("check string done\n");
 		if (result == 1)
 			result = check_dups(stack, len);
+		print_stack(stack, &len, 'a');
 		if (result == 0)
 			return (0);
+		// print_stack(stack, &len, 'a');
 		result = push_swap(stack, len, median);
 		if (result == 0)
 			return (0);
@@ -142,6 +145,7 @@ int	main(int argc, char **argv)
 	len = argc - 1;
 	if (argc == 2)
 	{
+		printf("argc=2 route\n");
 		result = pswap_for_string(len, argv);
 	}
 	else if (argc != 1)
