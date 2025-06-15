@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:52:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 12:01:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,15 @@ int push_swap(int *stack, int len, double median)
 			stack_b[0] = 0;
 			split_stack (stack, stack_b, &len, median);
 			b_len = ft_arr_len(stack_b);
-			// print_stack(stack, &len, 'a');			// remove this before submission.
-			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			printf("stacks after splitting\n");
+			print_stack(stack, &len, 'a');			// remove this before submission.
+			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			sort_stack (stack, len);
 			while (b_len > 0)
 				pusha(stack, stack_b, &len, &b_len);
-			// print_stack(stack, &len, 'a');			// remove this before submission.
-			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			printf("stacks after sorting\n");
+			print_stack(stack, &len, 'a');			// remove this before submission.
+			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
 		if (!stack_b)
@@ -89,10 +91,11 @@ int	pswap_for_int(int len, char **argv)
 	if (stack)
 	{
 		result = prep_values(len, stack, argv);
-		// print_stack(stack, &len, 'a');
+		printf("done prepping int\n");
+		print_stack(stack, &len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len);
-		else
+		if (result == 0)
 			return (0);
 		// print_stack(stack, &len, 'a');
 		result = push_swap(stack, len, median);
@@ -147,6 +150,5 @@ int	main(int argc, char **argv)
 	}
 	if (argc == 1 || result == 0)
 		write(2, "Error\n", 6);
-	// printf("num ops: %d\n", num_ops);
 	return (0);
 }

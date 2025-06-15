@@ -6,27 +6,35 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:41:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 12:05:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-
 int	prep_values(int len, int *stack, char **argv)
 {
 	int 	i;
+	int		to_save;
+	char	*str_chk;
 
-	i = 0;
+	i = -1;
+	if (!stack)
+	{
+		free (stack);
+		return (0);
+	}
 	if (is_num(argv[1]))
 	{
-		while (i++ < len)
+		while (i++ < len - 1)
 		{
-			if (stack[i] && stack[i] > INT_MAX && stack[i] < INT_MIN && \
-				ft_atoi(argv[i]) == stack[i])
+			to_save = ft_atoi(argv[i + 1]);
+			str_chk = ft_itoa(to_save);
+			if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0 || \
+				ft_strncmp(str_chk, argv[i + 1], ft_strlen(argv[i + 1])) != 0)
 				return (0);
 			else
-				stack[i - 1] = ft_atoi(argv[i]);
+				stack[i] = to_save;
 		}
 		return (1);
 	}
@@ -50,11 +58,11 @@ int	prep_string(int len, char **str, int *stack)
 	{
 		str_check = ft_itoa(ft_atoi(str[i]));
 		to_save = ft_atoi(str[i]);
-		if (to_save > INT_MAX && to_save < INT_MIN && \
+		if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0 || \
 			ft_strncmp(str_check, str[i], ft_strlen(str[i]))!= 0)
 			return (0);
 		else
-			stack[i] = (int)to_save;  // stack[i] = ft_atoi(str[i]);
+			stack[i] = (int)to_save;
 		free (str_check);
 	}
 	free (str);

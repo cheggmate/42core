@@ -6,15 +6,15 @@ REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_o
 OBJ 		= $(REQ_SRC:.c=.o)
 HEADER		= ft_push_swap.h
 
+# Default target
+all: $(NAME)
+
 # Compile and archive .o files into ft_push_swap.a
 $(NAME): $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@echo "$(NAME) created"
 	@ranlib $(NAME)
 	@echo "$(NAME) indexed"
-
-# Default target
-all: $(NAME)
 
 # Compile .c to .o
 %.o : %.c ${HEADER}
