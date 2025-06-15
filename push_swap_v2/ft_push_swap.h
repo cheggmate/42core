@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 15:44:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 20:56:51 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int		prep_string(int len, char **str, int *stack);
 int		prep_values(int len, int *stack, char **argv);
 int		find_largest(int *stack, int len);
 int		is_sorted(int *stack, int len);
-void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
+// void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
 int		rotate_and_push_top(int *stack_b, int *stack, int *b_len, int *len);
-void	find_mids(int *stack, int len, int *mid_l, int *mid_u);
+int		push_and_rotate(int *dest, int *src, int *dest_len, int *src_len);
+int		adjust_rotate_and_push_bottom(int *stack_b, int *stack, int *b_len, int *len);
+void	find_mids(int *stack, int len, int *smlr, int *bgr);
 int		pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
 int		pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src);
 int		push_swap(int *stack, int len);
@@ -39,7 +41,7 @@ void	rev_rot(int *stack, int *len, int ab);
 void	rr(int	*stack_a, int *stack_b, int *len_a, int *len_b);
 void	rrr(int	*stack_a, int *stack_b, int *len_a, int *len_b);
 void	rotate(int *stack, int *len, int ab);
-void	split_stack(int *stack, int  *stack_b, int *len, int mid_l, int mid_u);
+void	split_stack(int *stack, int  *stack_b, int *len, int *b_len);
 void	sort_stack(int *stack, int len);
 void	swap(int	*stack, int *len, int ab);
 void	swap_both(int *stack_a, int *stack_b, int *len_a, int *len_b);

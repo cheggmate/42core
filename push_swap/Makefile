@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/15 20:28:47 by jotong            #+#    #+#              #
+#    Updated: 2025/06/15 20:28:48 by jotong           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 FLAG		= -Wall -Wextra -Werror
 NAME		= ft_push_swap.a
 REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c ft_libft_utils.c \

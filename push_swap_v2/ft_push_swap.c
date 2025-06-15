@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 15:05:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 21:01:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,12 @@ int push_swap(int *stack, int len)
 {
 	int	*stack_b;
 	int	b_len;
-	// int	mid_l;
-	// int	mid_u;
 
-	// mid_l = 0;
-	// mid_u = 0;
+	b_len = 0;
 	// print_stack(stack, &len, 'a');			// remove this before submission.
 	if (len > 1 && !check_order(len, stack))
 	{
 		// find_median(stack, len, &mid_l, &mid_u);
-		printf("mid_l = %.2f\n", mid_l);
-		printf("mid_u = %.2f\n", mid_u);
 		stack_b = malloc((len + 1) * sizeof(len));
 		if (stack_b)
 		{
@@ -69,18 +64,18 @@ int push_swap(int *stack, int len)
 			else
 			{
 				stack_b[0] = 0;
-				split_stack (stack, stack_b, &len);
+				split_stack (stack, stack_b, &len, &b_len);
 				b_len = ft_arr_len(stack_b);
-				printf("stacks after splitting\n");
-				print_stack(stack, &len, 'a');			// remove this before submission.
-				print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+				// printf("stacks after splitting\n");
+				// print_stack(stack, &len, 'a');			// remove this before submission.
+				// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 				sort_stack (stack, len);
 				while (b_len > 0)
 					pusha(stack, stack_b, &len, &b_len);
 			}
-			printf("stacks after sorting\n");
-			print_stack(stack, &len, 'a');			// remove this before submission.
-			print_stack(stack_b, &b_len, 'b');		// remove this before submission.
+			// printf("stacks after sorting\n");
+			// print_stack(stack, &len, 'a');			// remove this before submission.
+			// print_stack(stack_b, &b_len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
 		if (!stack_b)
@@ -117,27 +112,23 @@ int	pswap_for_int(int len, char **argv)
 int	pswap_for_string(int len, char **argv)
 {
 	int			*stack;
-	double		median;
 	char		**str;
 	int			result;
 
-	median = 0.0;
 	result = 0;
 	stack = NULL;
 	str = ft_split_count(argv[1], ' ', &len);
 	stack = malloc ((len + 1) * sizeof(int));
 	if (stack)
 	{
-		printf("start check pswap for string\n");
 		result = prep_string(len, str, stack);
-		printf("check string done\n");
 		if (result == 1)
 			result = check_dups(stack, len);
 		print_stack(stack, &len, 'a');
 		if (result == 0)
 			return (0);
 		// print_stack(stack, &len, 'a');
-		result = push_swap(stack, len, median);
+		result = push_swap(stack, len);
 		if (result == 0)
 			return (0);
 		return (1);
@@ -154,7 +145,6 @@ int	main(int argc, char **argv)
 	len = argc - 1;
 	if (argc == 2)
 	{
-		printf("argc=2 route\n");
 		result = pswap_for_string(len, argv);
 	}
 	else if (argc != 1)
