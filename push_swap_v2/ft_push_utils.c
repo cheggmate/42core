@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:53:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/15 15:41:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "ft_push_swap.h"
 
-void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
+int	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
 	if (*len_src > 0)
 	{
@@ -30,10 +30,12 @@ void	pusha(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		*len_src -= 1;
 		write (1, "pa", 2);
 		write (1, "\n", 1);
+		return (1);
 	}
+	return (0);
 }
 
-void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
+int	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 {
 	if (*len_src > 0)
 	{
@@ -46,5 +48,7 @@ void	pushb(int	*stack_dest, int *stack_src, int *len_dest, int *len_src)
 		*len_src -= 1;
 		write (1, "pb", 2);
 		write (1, "\n", 1);
+		return (1);
 	}
+	return (0);
 }
