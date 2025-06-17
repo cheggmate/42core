@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/17 13:37:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/17 23:57:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,17 @@ int push_swap(int *stack, int *len)
 		if (stack_b)
 		{
 			stack_b[0] = 0;
+			print_stack(stack, len, 'a');			// remove this before submission.
+			print_stack(stack_b, len, 'b');		// remove this before submission.
 			if (len[0] < 6)
 				sort_stack(stack, stack_b, &len[0]);
-			else if (len[0] >= 6 && len[0] <= 500)		// chunk sort
+			else if (len[0] >= 6 && len[0] < 100)		// chunk sort
 				start_chunking(stack, stack_b, len);
 			else
 				iter_quicksort(stack, stack_b, len);
 			// printf("stacks after sorting\n");
-			// print_stack(stack, len, 'a');			// remove this before submission.
-			// print_stack(stack_b, len, 'b');		// remove this before submission.
+			print_stack(stack, len, 'a');			// remove this before submission.
+			print_stack(stack_b, len, 'b');		// remove this before submission.
 			free (stack_b);
 		}
 		if (!stack_b)
@@ -134,7 +136,7 @@ int	main(int argc, char **argv)
 	len[0] = argc - 1;
 	if (argc == 2)
 	{
-		// printf("inputs; %s\n", argv[1]);
+		printf("inputs; %s\n", argv[1]);
 		result = pswap_for_string(len, argv);
 	}
 	else if (argc != 1)

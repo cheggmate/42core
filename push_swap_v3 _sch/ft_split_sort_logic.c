@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/17 13:36:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:57:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	move_back(int *stack, int *stack_b, int *len)
 		pusha(stack, stack_b, len);
 }
 
-static int	find_smallest(int *stack, int len)
+static int	find_smallest_index(int *stack, int len)
 {
 	int	smallest;
 	int	i;
@@ -46,7 +46,7 @@ static void move_two(int *stack, int *stack_b, int *len)
 	pushed = 0;
 	while (pushed < 2)
 	{
-		s_index = find_smallest(stack, len[0]);
+		s_index = find_smallest_index(stack, len[0]);
 		if (s_index > len[0] / 2)
 		{
 			while (len[0] - s_index++ > 0)

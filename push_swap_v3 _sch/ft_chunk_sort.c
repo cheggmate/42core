@@ -3,37 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_chunk_sort.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 21:34:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:55:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:43:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	replace_with_rank(int *stack, int len, int *copy, int *sorted)
+void	replace_with_rank(int *stack, int len, int *copy)
 {
-	int	i;
-	int j;
+	int	index[2];
+	int	*sorted;
 
-	i = -1;
+	index[0] = -1;
 	sorted = malloc (len * sizeof(int));
 	if (sorted)
 	{
-		while (i++ < len)
-			sorted[i] = stack[i];
+		while (index[0]++ < len)
+			sorted[index[0]] = stack[index[0]];
 		insertion_sort(sorted, len);
 	}
-	i = -1;
-	while (i++ < len)
+	index[0] = -1;
+	while (index[0]++ < len)
 	{
-		j = -1;
-		while (j++ < len)
+		index[1] = -1;
+		while (index[1]++ < len)
 		{
-			if (stack[i] == sorted[j])
+			if (stack[index[0]] == sorted[index[1]])
 			{
-				copy[i] = j;
+				copy[index[0]] = index[1];
 				break;
 			}
 		}
@@ -91,7 +91,10 @@ static void	chunk_sort(int *stack, int *stack_b, int *len)
 	int	size;
 
 	size = len[0];
-	chunk_size = (len[0] <= 100) ? 15 : 30; // chunk_size = len[0] / 5 + 1;
+	chunk_size = len[0] / 8 + 1;
+	printf("chunk size = %d\n", chunk_size);
+	if (len[0] > 100)
+		chunk_size = len[0] / 10 + 1;
 	low = 0;
 	while (low < size)
 	{
@@ -102,24 +105,24 @@ static void	chunk_sort(int *stack, int *stack_b, int *len)
 			if (stack[0] >= low && stack[0] <= (low + chunk_size - 1))
 				pushed += pushb(stack_b, stack, len);
 			else
-				// rotate(stack, len, 'a');
 				chunk_optmzns(stack, stack_b, len);
+			print_stack(stack, len, 'a');			// remove this before submission.
+			print_stack(stack_b, len, 'b');		// remove this before submission.
 		}
 		low += chunk_size;
 	}
 	sorted_return(stack, stack_b, len);
+	print_stack(stack, len, 'a');			// remove this before submission.
 }
 
 void	start_chunking(int *stack, int *stack_b, int *len)
 {
 	int	*copy;
-	int *sorted;
 
-	sorted = NULL;
 	copy = malloc(len[0] * sizeof(int));
 	if (copy)
 	{
-		replace_with_rank(stack, len[0], copy, sorted);
+		replace_with_rank(stack, len[0], copy);
 		chunk_sort(copy, stack_b, len);
 	}
 	free(copy);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:46:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 01:08:08 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,45 +19,71 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-int		ft_arr_len(int	*str);
-int		find_pos(int *str, int val, int len);
-int		is_num(char *str);
-int		*ft_arr_dup(int *stack, int len);
-int		check_order(int len, int *stack);
-int		check_dups(int	*stack, int len);
-int		prep_string(int len, char **str, int *stack);
-int		prep_values(int len, int *stack, char **argv);
-int		find_largest(int *stack, int len);
-int		is_sorted(int *stack, int len);
-// void	rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
-// int		rotate_and_push_top(int *stack_b, int *stack, int *b_len, int *len);
-// int		push_and_rotate(int *dest, int *src, int *dest_len, int *src_len);
-// int		adjust_rotate_and_push_bottom(int *stack_b, int *stack, int *b_len, int *len);
-// void	find_mids(int *stack, int len, int *smlr, int *bgr);
-void	insertion_sort(int	*stack_dup, int len);
-void	iter_quicksort(int *stack, int *stack_b, int *len);
-void	replace_with_rank(int *stack, int len, int *copy, int *sorted);
-int		pusha(int	*stack_dest, int *stack_src, int *len);
-int		pushb(int	*stack_dest, int *stack_src, int *len);
-int		push_swap(int *stack, int *len);
-void	rev_rot(int *stack, int *len, int ab);
-void	rr(int	*stack_a, int *stack_b, int *len);
-void	rrr(int	*stack_a, int *stack_b, int *len);
-void	rotate(int *stack, int *len, int ab);
-void	start_chunking(int *stack, int *stack_b, int *len);
-void	chunk_optmzns(int *stack, int *stack_b, int *len);
-void	split_stack(int *stack, int  *stack_b, int *len);
-void	sort_stack(int *stack, int *stack_b, int *len);
-void	sorted_return(int *stack, int *stack_b, int *len);
-void	swap(int	*stack, int *len, int ab);
-void	swap_both(int *stack_a, int *stack_b, int *len);
-int		ft_atoi(const char *str);
-char	*ft_itoa(int n);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-char	**ft_split_count(const char *s, char c, int *word_count);
-size_t	ft_strlen(const char *str);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-void	print_stack(int	*s, int *len, char ab);									// remove this before submission
+typedef struct s_list_ops
+{
+	int					*op_type;
+	struct s_list_ops	*next;
+}					t_list_ops;
+
+typedef struct s_list_split
+{
+	int					start;
+	int					end;
+	struct s_list_split	*next;
+}					t_list_split;
+
+int				ft_arr_len(int	*str);
+int				find_pos(int *str, int val, int len);
+int				is_num(char *str);
+int				*ft_arr_dup(int *stack, int len);
+int				check_order(int len, int *stack);
+int				check_dups(int	*stack, int len);
+int				prep_string(int len, char **str, int *stack);
+int				prep_values(int len, int *stack, char **argv);
+int				find_largest(int *stack, int len);
+int				find_smallest(int *stack, int len);
+int				is_sorted(int *stack, int len);
+// void			rotate_and_push(int *stack_b, int *stack, int *b_len, int *len);
+// int			rotate_and_push_top(int *stack_b, int *stack, int *b_len, int *len);
+// int			push_and_rotate(int *dest, int *src, int *dest_len, int *src_len);
+// int			adjust_rotate_and_push_bottom
+// (int *stack_b, int *stack, int *b_len, int *len);
+void			find_mids(int *stack, int len, int *sml_bgr);
+void			insertion_sort(int	*stack_dup, int len);
+void			iter_quicksort(int *stack, int *stack_b, int *len);
+void			replace_with_rank(int *stack, int len, int *copy);
+int				pusha(int	*stack_dest, int *stack_src, int *len);
+int				pushb(int	*stack_dest, int *stack_src, int *len);
+int				push_swap(int *stack, int *len);
+void			rev_rot(int *stack, int *len, int ab);
+void			rr(int	*stack_a, int *stack_b, int *len);
+void			rrr(int	*stack_a, int *stack_b, int *len);
+void			rotate(int *stack, int *len, int ab);
+void			start_chunking(int *stack, int *stack_b, int *len);
+void			chunk_optmzns(int *stack, int *stack_b, int *len);
+void			split_stack(int *stack, int  *stack_b, int *len);
+void			sort_stack(int *stack, int *stack_b, int *len);
+void			sorted_return(int *stack, int *stack_b, int *len);
+void			swap(int	*stack, int *len, int ab);
+void			swap_both(int *stack_a, int *stack_b, int *len);
+int				ft_atoi(const char *str);
+char			*ft_itoa(int n);
+void			*ft_memmove(void *dest, const void *src, size_t n);
+char			**ft_split_count(const char *s, char c, int *word_count);
+size_t			ft_strlen(const char *str);
+size_t			ft_strlcpy(char *dest, const char *src, size_t size);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+void			ft_lstadd_front_ops(t_list_ops **lst, t_list_ops *new);
+void			ft_lstadd_back_ops(t_list_ops **lst, t_list_ops *new);
+t_list_ops		*ft_lstnew_ops(int *op_type);
+int				ft_lstsize_ops(t_list_ops *list);
+void			ft_lstclear_ops(t_list_split **lst);
+void			ft_lstclear_splt(t_list_split **lst);
+int				ft_lstsize_splt(t_list_split *list);
+t_list_split	*ft_lstlast_splt(t_list_split *lst);
+t_list_split	*ft_lstnew_splt(int start, int end);
+void			ft_lstadd_front_splt(t_list_split **lst, t_list_split *new);
+void			ft_lstadd_back_splt(t_list_split **lst, t_list_split *new);
+void			print_stack(int	*s, int *len, char ab);									// remove this before submission
 
 # endif

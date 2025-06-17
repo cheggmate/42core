@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:54:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 00:58:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,20 @@ int	*ft_arr_dup(int *stack, int len)
 			dup[i] = stack[i];
 	}
 	return (dup);
+}
+
+int	find_smallest(int *stack, int len)
+{
+	int	smallest;
+	int	i;
+
+	smallest = INT_MAX;
+	i = 0;
+	while (i < len)
+	{
+		if (smallest > stack[i])
+			smallest = stack[i];
+		i++;
+	}
+	return (smallest);
 }
