@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/17 23:57:04 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 18:37:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int push_swap(int *stack, int *len)
 			print_stack(stack, len, 'a');			// remove this before submission.
 			print_stack(stack_b, len, 'b');		// remove this before submission.
 			if (len[0] < 6)
-				sort_stack(stack, stack_b, &len[0]);
+				sort_stack(stack, stack_b, &len[0], 1);
 			else if (len[0] >= 6 && len[0] < 100)		// chunk sort
 				start_chunking(stack, stack_b, len);
 			else

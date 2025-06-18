@@ -6,13 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:04:00 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/17 23:46:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/18 22:26:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-t_list_split	*ft_lstnew_splt(int start, int end)
+t_list_split	*ft_lstnew_splt(int *sml_bg)
 {
 	t_list_split	*new;
 
@@ -21,8 +21,10 @@ t_list_split	*ft_lstnew_splt(int start, int end)
 		return (NULL);
 	else
 	{
-		new->start = start;
-		new->end = end;
+		new->start = sml_bg[2];
+		new->end = sml_bg[3];
+		new->smlr = sml_bg[0];
+		new->bgr = sml_bg[1];
 		new->next = NULL;
 		return (new);
 	}

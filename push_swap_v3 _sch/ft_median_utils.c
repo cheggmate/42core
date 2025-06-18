@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 22:37:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/18 00:42:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/19 00:11:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,15 @@ void	find_mids(int *stack, int len, int *sml_bg)
 		{
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3];
-		}	
+		}
 	}
 	free (stack_dup);
+}
+
+void	calc_mids(t_list_split *curr, int *sml_bg)
+{
+	sml_bg[0] = (curr->smlr - curr->start) / 3;
+	sml_bg[1] = (curr->end - curr->bgr) / 3 * 2;
+	sml_bg[2] = curr->start;
+	sml_bg[3] = curr->end;
 }
