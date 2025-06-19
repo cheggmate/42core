@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/19 00:53:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/19 21:37:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int				is_sorted(int *stack, int len);
 // int			rotate_and_push_top(int *stack_b, int *stack, int *b_len, int *len);
 // int			push_and_rotate(int *dest, int *src, int *dest_len, int *src_len);
 // int			adjust_rotate_and_push_bottom
+void			move_btoa_base_case(int **stacks, int *len, int sub_len);
 void			find_mids(int *stack, int len, int *sml_bgr);
 void			calc_mids(t_list_split *curr, int *sml_bg);
 void			insertion_sort(int	*stack_dup, int len);
@@ -64,7 +65,7 @@ void			rotate(int *stack, int *len, int ab);
 void			start_chunking(int *stack, int *stack_b, int *len);
 void			chunk_optmzns(int *stack, int *stack_b, int *len);
 void			split_stack(int *stack, int  *stack_b, int *len);
-void			sort_stack(int *stack, int *stack_b, int *len, int flow);
+void			sort_stack(int *stack, int *stack_b, int *len);
 void			sorted_return(int *stack, int *stack_b, int *len);
 void			swap(int	*stack, int *len, int ab);
 void			swap_both(int *stack_a, int *stack_b, int *len);
@@ -88,7 +89,9 @@ void			ft_lstadd_front_splt(t_list_split **lst, t_list_split *new);
 void			ft_lstadd_back_splt(t_list_split **lst, t_list_split *new);
 int				ft_lstsize(t_list_split *list);
 void			create_list_split(int *sml_bg, t_list_split **lsts);
-int				is_in_range(int	*stack, int len, t_list_split *curr);
+// int				is_in_range(int	*stack, int len, t_list_split *curr);
+void			ft_sort_a(int **stacks, int *len, int *sml_bg, int n);
+void			ft_sort_b(int **stacks, int *len, int *sml_bg, int n);
 void			print_stack(int	*s, int *len, char ab);									// remove this before submission
 
 # endif

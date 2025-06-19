@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/18 00:58:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/20 00:41:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,48 @@ int	find_smallest(int *stack, int len)
 		i++;
 	}
 	return (smallest);
+}
+
+void	move_btoa_base_case(int **stacks, int *len, int sub_len)
+{
+	int	s_index;
+	int	pushed;
+
+	pushed = -1;
+	while (pushed++ < 2)
+	{
+		s_index = find_pos(stacks[1], find_largest(stacks[1], sub_len), sub_len);
+		while (s_index-- > 0)
+			rotate(stacks[1], len, 'a');
+		pusha(stacks[0], stacks[1], len);
+	}
+}
+
+void	replace_with_rank(int *stack, int len, int *copy)
+{
+	int	index[2];
+	int	*sorted;
+
+	index[0] = -1;
+	sorted = malloc (len * sizeof(int));
+	if (sorted)
+	{
+		while (index[0]++ < len)
+			sorted[index[0]] = stack[index[0]];
+		insertion_sort(sorted, len);
+		index[0] = -1;
+		while (index[0]++ < len)
+		{
+			index[1] = -1;
+			while (index[1]++ < len)
+			{
+				if (stack[index[0]] == sorted[index[1]])
+				{
+					copy[index[0]] = index[1];
+					break;
+				}
+			}
+		}
+		free(sorted);
+	}
 }
