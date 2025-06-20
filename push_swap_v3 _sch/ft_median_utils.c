@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 22:37:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/20 00:27:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:04:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	find_mids(int *stack, int len, int *sml_bg)
 	if (stack_dup)
 	{
 		insertion_sort(stack_dup, len);
-		if (len > 6 && len % 2 == 0)
+		if (len > 3 && len % 2 == 0)
 		{
 			sml_bg[1] = (stack_dup[len / 3 * 2]);
 			sml_bg[0] = stack_dup[len / 3 - 1];
 		}
-		else if (len > 6)
+		else if (len > 3)
 		{
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3];
