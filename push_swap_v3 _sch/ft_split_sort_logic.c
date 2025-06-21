@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/21 17:40:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/21 23:05:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,4 @@ void	sort_stack_b(int *stack_b, int *len, int n)
 		rev_rot(stack_b, len, 'b');
 	}
 	printf("exiting sorting stack b\n");
-	printf("stack_b : %d %d %d\n", stack_b[0], stack_b[1], stack_b[2]);
 }

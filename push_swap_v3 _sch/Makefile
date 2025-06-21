@@ -6,16 +6,16 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 20:28:40 by jotong            #+#    #+#              #
-#    Updated: 2025/06/19 21:11:12 by jotong           ###   ########.fr        #
+#    Updated: 2025/06/21 21:51:57 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAG		= -Wall -Wextra -Werror
-NAME		= ft_push_swap.a
+NAME		= push_swap
 REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c ft_libft_utils.c \
 				ft_libft_utils2.c ft_libft_utils3.c ft_split_sort_logic.c ft_other_utils2.c ft_check_utils.c \
 				ft_median_utils.c ft_prep_utils.c ft_iter_quicksort.c ft_list_split.c ft_list_ops.c \
-				 ft_list_split2.c ft_other_utils3.c ft_sort_flow.c # ft_chunk_sort.c ft_chunk_sort2.c 
+				 ft_list_split2.c ft_other_utils3.c ft_sort_flow.c
 OBJ 		= $(REQ_SRC:.c=.o)
 HEADER		= ft_push_swap.h
 
@@ -24,15 +24,16 @@ all: $(NAME)
 
 # Compile and archive .o files into ft_push_swap.a
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $(OBJ)
-	@echo "$(NAME) created"
-	@ranlib $(NAME)
-	@echo "$(NAME) indexed"
+	${CC} ${CFLAGS} ${REQ_SRC} -o ${NAME}
 
 # Compile .c to .o
 %.o : %.c ${HEADER}
 			@cc $(FLAG) -c $< -o $@
 
+
+# Compile rules
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
 # Clean OBJ files
 clean:

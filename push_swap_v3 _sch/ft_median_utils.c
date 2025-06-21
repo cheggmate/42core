@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 22:37:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/20 14:04:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 02:03:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	insertion_sort(int	*stack_dup, int len)
 	}
 }
 
-void	find_mids(int *stack, int len, int *sml_bg)
+void	find_mids_a(int *stack, int len, int *sml_bg)
 {
 	int			*stack_dup;
 
@@ -42,9 +42,44 @@ void	find_mids(int *stack, int len, int *sml_bg)
 	if (stack_dup)
 	{
 		insertion_sort(stack_dup, len);
+		if (len > 7 && len % 2 == 0)
+		{
+			sml_bg[1] = stack_dup[len / 3 * 2];
+			sml_bg[0] = stack_dup[len / 3 - 1];
+		}
+		else if (len > 7)
+		{
+			sml_bg[1] = stack_dup[len / 3 * 2];
+			sml_bg[0] = stack_dup[len / 3];
+		}
+		else
+		{
+			sml_bg[1] = stack_dup[len - 6];
+			sml_bg[0] = stack_dup[(len - 6) / 2];
+		}
+	}
+	free (stack_dup);
+}
+
+void	find_mids_b(int *stack, int len, int *sml_bg)
+{
+	int			*stack_dup;
+	// int			ctr;
+
+	// ctr = 0;
+	// if (len == 0)
+	// 	while (stack[ctr] >= sml_bg[0] &&  stack[ctr] <= sml_bg[1] && ctr < sml_bg[1])
+	// 	{
+	// 		len++;
+	// 		ctr++;
+	// 	}
+	stack_dup = ft_arr_dup(stack, len);
+	if (stack_dup)
+	{
+		insertion_sort(stack_dup, len);
 		if (len > 3 && len % 2 == 0)
 		{
-			sml_bg[1] = (stack_dup[len / 3 * 2]);
+			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3 - 1];
 		}
 		else if (len > 3)
@@ -55,6 +90,36 @@ void	find_mids(int *stack, int len, int *sml_bg)
 	}
 	free (stack_dup);
 }
+
+// void	find_mids_b_bottom(int *stack, int len, int *sml_bg)
+// {
+// 	int			*stack_dup;
+// 	int			ctr;
+
+// 	ctr = 0;
+// 	if (len == 0)
+// 		while (stack[ctr] >= sml_bg[0] &&  stack[ctr] <= sml_bg[1] && ctr < sml_bg[1])
+// 		{
+// 			len++;
+// 			ctr++;
+// 		}
+// 	stack_dup = ft_arr_dup(stack, len);
+// 	if (stack_dup)
+// 	{
+// 		insertion_sort(stack_dup, len);
+// 		if (len > 3 && len % 2 == 0)
+// 		{
+// 			sml_bg[1] = stack_dup[len / 3 * 2];
+// 			sml_bg[0] = stack_dup[len / 3 - 1];
+// 		}
+// 		else if (len > 3)
+// 		{
+// 			sml_bg[1] = stack_dup[len / 3 * 2];
+// 			sml_bg[0] = stack_dup[len / 3];
+// 		}
+// 	}
+// 	free (stack_dup);
+// }
 
 // void	calc_mids(t_list_split *curr, int *sml_bg)
 // {

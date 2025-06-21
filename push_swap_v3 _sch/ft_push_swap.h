@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/21 19:41:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 02:02:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int				find_smallest(int *stack, int len);
 int				is_sorted(int *stack, int len);
 int				find_ind_max(int *stack_b, int b_len);
 void			move_btoa_base_case(int **stacks, int *len, int sub_len);
-void			find_mids(int *stack, int len, int *sml_bgr);
+void			find_mids_a(int *stack, int len, int *sml_bg);
+void			find_mids_b(int *stack, int len, int *sml_bg);
+// void			find_mids_b_bottom(int *stack, int len, int *sml_bg);
 void			calc_mids(t_list_split *curr, int *sml_bg);
 void			insertion_sort(int	*stack_dup, int len);
 void			iter_quicksort(int *stack, int *stack_b, int *len);
@@ -89,8 +91,8 @@ void			ft_lstadd_back_splt(t_list_split **lst, t_list_split *new);
 int				ft_lstsize(t_list_split *list);
 void			create_list_split(int *sml_bg, t_list_split **lsts);
 // int				is_in_range(int	*stack, int len, t_list_split *curr);
-void			ft_sort_a(int **stacks, int *len, int *sml_bg, int n, int iter);		// remove iter
-void			ft_sort_b(int **stacks, int *len, int *sml_bg, int n, int iter);		// remove iter
+void			ft_sort_a(int **stacks, int *sml_bg, int *len, int n, int iter);		// remove iter
+void			ft_sort_b(int **stacks, int *sml_bg, int *len, int n, int iter);		// remove iter
 void			print_stack(int	*s, int *len, char ab);									// remove this before submission
 
 # endif
