@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/22 02:21:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 11:47:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ void	sort_small_a(int **stacks, int *len, int n)
 	print_stack(stacks[1], len, 'b');
 }
 
+void	sort_small_b(int **stacks, int *len, int n)
+{
+	int i;
+
+	i = 0;
+	printf("sorting b (n= %d)\n", n);
+	if (n > 3)
+		mv_largest_frm_b(stacks, len);
+	sort_stack_b(stacks[1], len, n);
+	// if (len[1] < n)
+	// 	move_back_b(stacks, len, n);
+	while (i++ < 3)
+		pusha(stacks[0], stacks[1], len);
+	printf("after small sort\n");
+	print_stack(stacks[0], len, 'a');
+	print_stack(stacks[1], len, 'b');
+}
+
 static void	sort_a_base(int **stacks, int *len, int *sml_bg, int *counts)
 {
 	// pushes the top n into the respective parts of the stacks
@@ -83,71 +101,57 @@ static void	sort_a_base(int **stacks, int *len, int *sml_bg, int *counts)
 	}
 }
 
-static void	sort_a_top(int **stacks, int *len, int *sml_bg, int *counts)
+static int	*sort_a_top(int **stacks, int *len, int *sml_bg_tmp, int n)
 {
-	// pushes the top n into the respective parts of the stacks
-	if (stacks[0][0] < sml_bg[0])
-	{
-		// printf("smallest stack\n");
-		pushb(stacks[1], stacks[0], len);
-		rotate(stacks[1], len, 'b');
-		counts[0]++;
-	}
-	else if (stacks[0][0] <= sml_bg[1])
-	{
-		// printf("middle stack\n");
-		pushb(stacks[1], stacks[0], len);
-		counts[1]++;
-	}
+	int i;
+	int	*count_tmp;
+
+	i = 0;
+	count_tmp = malloc(3 * sizeof(int));
+	if (!count_tmp || ! sml_bg_tmp)
+		return (NULL);
+	if (n <= 5)
+		sort_small_a(stacks, len, n);
 	else
 	{
-		// printf("largest stack\n");
-		rotate(stacks[0], len, 'a');
-		counts[2]++;
+		find_mids_a(stacks[0], n, sml_bg_tmp);
+		while (i++ < n)
+			sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
 	}
+	free(sml_bg_tmp);
+	return (count_tmp);
 }
 
-void	move_back_b(int **stacks, int *len, int n)
+static int *sort_a_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
 {
-	while (len[1] < n)
-		pushb(stacks[1], stacks[0], len);
+	int i;
+	int	*count_tmp;
+
+	i = 0;
+	count_tmp = malloc(3 * sizeof(int));
+	if (!count_tmp || !sml_bg_tmp)
+		return (NULL);
+	i = 0;
+	while (i++ < n)
+		rev_rot(stacks[0], len, 'a');
+	if (n <= 3)
+		sort_small_b(stacks, len, n);
+	else
+		{
+			find_mids_a(stacks[0], n, sml_bg_tmp);
+			while (i++ < n)
+				sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
+		}
+	return (count_tmp);
 }
 
-void	sort_small_b(int **stacks, int *len, int n)
-{
-	printf("sorting b (n= %d)\n", n);
-	if (n > 3)
-		mv_largest_frm_b(stacks, len);
-	sort_stack_b(stacks[1], len, n);
-	if (len[1] < n)
-		move_back_b(stacks, len, n);
-	printf("after small sort\n");
-	print_stack(stacks[0], len, 'a');
-	print_stack(stacks[1], len, 'b');
-}
-
-// static void sort_b_top(int **stacks, int *len, int *sml_bg, int substack_size, int iter)
+// void	move_back_b(int **stacks, int *len, int n)
 // {
-// 	int i;
-
-// 	if (substack_size > 3)
-// 	{
-// 		printf("before sort b\n");
-// 		print_stack(stacks[0], len, 'a');
-// 		print_stack(stacks[1], len, 'b');
-		
-// 		ft_sort_b(stacks, len, sml_bg, substack_size, iter);
-// 		i = 0;
-// 		if (len[1] <= 3)
-// 			while (i++ < len[1])
-// 			{
-// 				printf("i = %d, pushing %d\n", i, stacks[1][0]);
-// 				pusha(stacks[0], stacks[1], len);
-// 			}	
-// 	}
+// 	while (len[1] < n)
+// 		pushb(stacks[1], stacks[0], len);
 // }
 
-static void	sort_b_top(int **stacks, int *len, int *sml_bg, int *counts)
+static void	sort_b_base(int **stacks, int *len, int *sml_bg, int *counts)
 {
 	// This pushses the top of b into the respective parts of the stack.
 	printf("start sorting b top logic\n");
@@ -173,113 +177,142 @@ static void	sort_b_top(int **stacks, int *len, int *sml_bg, int *counts)
 	}
 }
 
-static void sort_b_btm(int **stacks, int *len, int *counts)
+static int	*sort_b_top(int **stacks, int *len, int *sml_bg_tmp, int n)
 {
 	int i;
-	int	sml_bg[3];
+	int *count_tmp;
 
 	i = 0;
-	sml_bg[0] = 0;
-	while (i++ < counts[0])
-		rev_rot(stacks[1], len, 'b');
-	if (counts[0] < 5)
-		sort_small_b(stacks, len, counts[0]);
+	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = NULL;
+	if (!count_tmp || sml_bg_tmp)
+		return (NULL);
+	if (n <= 5)
+		sort_small_b(stacks, len, n);
 	else
 	{
-		i = 0;
-		while (i++ < counts[0])
-		{
-			find_mids_b(stacks[1], counts[0], sml_bg);
-			sort_b_top(stacks, len, sml_bg, counts);
-		}
+		find_mids_b(stacks[1], len[1], sml_bg_tmp);
+		while (i++ < n)
+			sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
 	}
+	return(count_tmp);
 }
 
-void	ft_sort_a(int **stacks, int *len, int *sml_bg, int n, int iter)
+static int *sort_b_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
 {
 	int i;
-	int	counts[3];
+	int *count_tmp;
+
+	i = 0;
+	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = NULL;
+	if (!count_tmp || !sml_bg_tmp)
+		return (NULL);
+	sml_bg_tmp[0] = 0;
+	while (i++ <n)
+		rev_rot(stacks[1], len, 'b');
+	if (n < 5)
+		sort_small_b(stacks, len, n);
+	else
+	{
+		find_mids_b(stacks[1], n, sml_bg_tmp);
+		while (i++ < n)
+			sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
+	}
+	return(count_tmp);
+}
+
+void	ft_sort_a(int **stacks, int *len, int *sml_bg, int *counts, int iter)
+{
+	int	*count_next;
+	int	*sml_bg_tmp;
 
 	iter++;
-	printf("[ft_sort_a] iter = %d, n = %d, len[0] = %d, len[1] = %d\n", iter, n, len[0], len[1]);
-	if (n <= 5)
-		return(sort_small_a(stacks, len, n));
-	find_mids_a(stacks[0], n, sml_bg);
+	count_next = malloc(3 * sizeof(int));
+	sml_bg_tmp = malloc(2 * sizeof(int));
+	printf("[ft_sort_a] iter = %d, counts[0]= %d, counts[1]= %d, counts[2]= %d, len[0] = %d, len[1] = %d\n", iter, counts[0], counts[1], counts[2], len[0], len[1]);
+	if (counts[2] <= 5)
+		return(sort_small_a(stacks, len, counts[2]));
+	find_mids_a(stacks[0], counts[2], sml_bg);
 	printf("sort a: sml_bg[0] = %d, sml_bg[1] = %d\n", sml_bg[0], sml_bg[1]);
-	counts[0] = 0;
-	counts[1] = 0;
-	counts[2] = 0;
 	printf("before if condition/sending to ft sort a\n");
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
 	
-	// Process all elements in the current chunk
-	i = 0;
-	while (i++ < n && len[0] > 0)
+	// Process all elements in the current subtacks
+	if (counts[2] > 0)
 	{
-		sort_a_top(stacks, len, sml_bg, counts);
+		count_next = sort_a_top(stacks, len, sml_bg_tmp, counts[2]);
+		ft_sort_b(stacks, len, sml_bg, count_next, iter);
 	}
-	
-	printf("after sort a logic\n");
-	print_stack(stacks[0], len, 'a');
-	print_stack(stacks[1], len, 'b');
-	
-	// Sort remaining elements in stack A if any
-	if (len[0] > 0)
+	if(counts[1] > 0)
 	{
-		if (len[0] <= 5)
-			sort_small_a(stacks, len, len[0]);
-		else if (len[0] > 0)
-			ft_sort_a(stacks, len, sml_bg, len[0], iter);
+		count_next = sort_a_btm(stacks, len, sml_bg_tmp, counts[1]);
+		ft_sort_b(stacks, len, sml_bg, count_next, iter);
 	}
-	
-	// Sort elements in stack B
-	// Push back middle elements first
-	printf("[ft_sort_a] Handling counts[1]=%d, len[1]=%d\n", counts[1], len[1]);
-	if (counts[1] <= 3)
-	{
-		sort_small_b(stacks, len, counts[1]);
-		printf("after sort b top\n");
-		print_stack(stacks[0], len, 'a');
-		print_stack(stacks[1], len, 'b');
-		// sort_stack_b(stacks[1], len, counts[1]);
-		i = 0;
-		while (i++ < counts[1] && len[1] > 0)
-		{
-			printf("[ft_sort_a] pusha (counts[0]), len[1]=%d\n", len[1]);
-			pusha(stacks[0], stacks[1], len);
-		}
-	}
-	else if (counts[1] > 0 && len[1] >= counts[1])
-	{
-		printf("[ft_sort_a] recursive ft_sort_b (counts[1]=%d, len[1]=%d)\n", counts[1], len[1]);
-		find_mids_b(stacks[1], counts[1], sml_bg);
-		i = 0;
-		while (i++ < counts[1])
-			sort_b_top(stacks, len, sml_bg, counts);
-	}
-	print_stack(stacks[0], len, 'a');
-	print_stack(stacks[1], len, 'b');
-	
-	// Push back smallest elements
 	if (counts[0] > 0)
 	{
-		printf("[ft_sort_a] Handling counts[0]=%d, len[1]=%d\n", counts[0], len[1]);
-		if (counts[0] <= 3)
-		{
-			i = 0;
-			while (i++ < counts[0])
-				rev_rot(stacks[1], len, 'b');
-			sort_small_b(stacks, len, counts[1]);
-		}
-		else if (counts[0] > 0 && len[1] >= counts[0])
-		{
-			printf("[ft_sort_a] recursive ft_sort_b (counts[0]=%d, len[1]=%d)\n", counts[0], len[1]);
-			sort_b_btm(stacks, len, counts);
-		}
-		print_stack(stacks[0], len, 'a');
-		print_stack(stacks[1], len, 'b');
+		count_next = sort_b_btm(stacks, len, sml_bg_tmp, counts[0]);
+		ft_sort_b(stacks, len, sml_bg, count_next, iter);
 	}
+	free(count_next);
+	
+	// // Sort remaining elements in stack A if any
+	// if (len[0] > 0)
+	// {
+	// 	if (len[0] <= 5)
+	// 		sort_small_a(stacks, len, len[0]);
+	// 	else if (len[0] > 0)
+	// 		ft_sort_a(stacks, len, sml_bg, len[0], iter);
+	// }
+	
+	// // Sort elements in stack B
+	// // Push back middle elements first
+	// printf("[ft_sort_a] Handling counts[1]=%d, len[1]=%d\n", counts[1], len[1]);
+	// if (counts[1] <= 3)
+	// {
+	// 	sort_small_b(stacks, len, counts[1]);
+	// 	printf("after sort b top\n");
+	// 	print_stack(stacks[0], len, 'a');
+	// 	print_stack(stacks[1], len, 'b');
+	// 	// sort_stack_b(stacks[1], len, counts[1]);
+	// 	i = 0;
+	// 	// while (i++ < counts[1] && len[1] > 0)
+	// 	// {
+	// 	// 	printf("[ft_sort_a] pusha (counts[0]), len[1]=%d\n", len[1]);
+	// 	// 	pusha(stacks[0], stacks[1], len);
+	// 	// }
+	// }
+	// else if (counts[1] > 0 && len[1] >= counts[1])
+	// {
+	// 	printf("[ft_sort_a] recursive ft_sort_b (counts[1]=%d, len[1]=%d)\n", counts[1], len[1]);
+	// 	find_mids_b(stacks[1], counts[1], sml_bg);
+	// 	i = 0;
+	// 	while (i++ < counts[1])
+	// 		sort_b_top(stacks, len, sml_bg, counts);
+	// }
+	// print_stack(stacks[0], len, 'a');
+	// print_stack(stacks[1], len, 'b');
+	
+	// // Push back smallest elements
+	// if (counts[0] > 0)
+	// {
+	// 	printf("[ft_sort_a] Handling counts[0]=%d, len[1]=%d\n", counts[0], len[1]);
+	// 	if (counts[0] <= 3)
+	// 	{
+	// 		i = 0;
+	// 		while (i++ < counts[0])
+	// 			rev_rot(stacks[1], len, 'b');
+	// 		sort_small_b(stacks, len, counts[1]);
+	// 	}
+	// 	else if (counts[0] > 0 && len[1] >= counts[0])
+	// 	{
+	// 		printf("[ft_sort_a] recursive ft_sort_b (counts[0]=%d, len[1]=%d)\n", counts[0], len[1]);
+	// 		sort_b_btm(stacks, len, counts);
+	// 	}
+	// 	print_stack(stacks[0], len, 'a');
+	// 	print_stack(stacks[1], len, 'b');
+	// }
 		
 	// 	// Push back largest elements last
 	// 	if (counts[2] > 0)
@@ -302,98 +335,121 @@ void	ft_sort_a(int **stacks, int *len, int *sml_bg, int n, int iter)
 	// 		}
 	// 	}
 	
-	printf("n = %d, counts[0] = %d, counts[1] = %d, counts[2] = %d\n", n, counts[0], counts[1], counts[2]);
+	// printf("n = %d, counts[0] = %d, counts[1] = %d, counts[2] = %d\n", n, counts[0], counts[1], counts[2]);
+	printf("before exiting ft_sort_a\n");
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
 }
 
-void	ft_sort_b(int **stacks, int *len, int *sml_bg, int n, int iter)
+void	ft_sort_b(int **stacks, int *len, int *sml_bg, int *counts, int iter)
 {
-	int i;
-	int	counts[3];
+	int	*count_next;
+	int	*sml_bg_tmp;
+	// int	counts[3];
 
 	iter++;
-	printf("[ft_sort_b] iter = %d, n = %d, len[0] = %d, len[1] = %d\n", iter, n, len[0], len[1]);
-	counts[0] = 0; // bottom of stack b -- smallest third
-	counts[1] = 0; // bottom of stack a -- middle third
-	counts[2] = 0; // top of stack a -- largest third
-	if (n <= 3)
-	{
-		// sort_stack_b(stacks[1], len, n);
-		// i = 0;
-		// while (i++ < n && len[1] > 0)
-		// {
-		// 	printf("[ft_sort_b] pusha (n<=3), len[1]=%d\n", len[1]);
-		// 	pusha(stacks[0], stacks[1], len);
-		// }
-		sort_small_b(stacks, len, n);
+	count_next = malloc(3 * sizeof (int));
+	sml_bg_tmp = malloc(2 * sizeof(int));
+	if (!count_next || sml_bg_tmp)
 		return ;
-	}
-	if (stacks[1][0] >= sml_bg[0] && stacks[1][0] <= sml_bg[1])
+	printf("[ft_sort_b] iter = %d, counts[0] = %d, counts[1] = %d, counts[2] = %d, len[0] = %d, len[1] = %d\n", iter, counts[0], counts[1], counts[2], len[0], len[1]);
+	// counts[0] = 0; // bottom of stack b -- smallest third
+	// counts[1] = 0; // bottom of stack a -- middle third
+	// counts[2] = 0; // top of stack a -- largest third
+	if (counts[2] > 0)
 	{
-		find_mids_b(stacks[1], counts[1], sml_bg);
-		sort_b_top(stacks, len, sml_bg, counts);
+		count_next = sort_a_btm(stacks, len, sml_bg_tmp, counts[2]);
+		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
 	}
-	else if (stacks[1][0] < sml_bg[0])
-	{
-		i = 0;
-		while (i++ < counts[0])
-			rev_rot(stacks[1], len, 'b');
-		find_mids_b(stacks[1], counts[1], sml_bg);
-	}
-		
-	// find_mids_b(stacks[1], counts[1], sml_bg);
-	// printf("sort b: sml_bg[0] = %d, sml_bg[1] = %d\n", sml_bg[0], sml_bg[1]);
-	i = 0;
-	if (len[1] >= 6)
-		while (i++ < n && len[1] > 0)
-			sort_b_top(stacks, len, sml_bg, counts);
-	printf("after sorting b logic\n");
-	print_stack(stacks[0], len, 'a');
-	print_stack(stacks[1], len, 'b');
-	printf("counts[0] = %d, counts[1] = %d, counts[2] = %d\n", counts[0], counts[1], counts[2]);
-	
-	// Handle the smallest elements first (counts[0])
-	if (counts[0] > 0)
-	{
-		printf("[ft_sort_b] Handling counts[0]=%d, len[1]=%d\n", counts[0], len[1]);
-		if (counts[0] <= 3)
-		{
-			sort_stack_b(stacks[1], len, counts[0]);
-			i = 0;
-			while (i++ < counts[0] && len[1] > 0)
-			{
-				printf("[ft_sort_b] pusha (counts[0]), len[1]=%d\n", len[1]);
-				pusha(stacks[0], stacks[1], len);
-			}
-		}
-		else if (counts[0] > 0 && len[1] >= counts[0])
-		{
-			printf("[ft_sort_b] recursive ft_sort_b (counts[0]=%d, len[1]=%d)\n", counts[0], len[1]);
-			ft_sort_b(stacks, len, sml_bg, counts[0], iter);
-		}
-	}
-	
-	// Handle the middle elements (counts[1])
 	if (counts[1] > 0)
 	{
-		printf("[ft_sort_b] Handling counts[1]=%d, len[1]=%d\n", counts[1], len[1]);
-		if (counts[1] <= 3)
-		{
-			sort_stack_b(stacks[1], len, counts[1]);
-			i = 0;
-			while (i++ < counts[1] && len[1] > 0)
-			{
-				printf("[ft_sort_b] pusha (counts[1]), len[1]=%d\n", len[1]);
-				pusha(stacks[0], stacks[1], len);
-			}
-		}
-		else if (counts[1] > 0 && len[1] >= counts[1])
-		{
-			printf("[ft_sort_b] recursive ft_sort_b (counts[1]=%d, len[1]=%d)\n", counts[1], len[1]);
-			ft_sort_b(stacks, len, sml_bg, counts[1], iter);
-		}
+		count_next = sort_b_top(stacks, len, sml_bg_tmp, counts[1]);
+		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
 	}
+	if (counts[0] > 0)
+	{
+		count_next = sort_b_btm(stacks, len, sml_bg_tmp, counts[0]);
+		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
+	}
+	
+	// if (counts[1] <= 3)
+	// {
+	// 	// sort_stack_b(stacks[1], len, n);
+	// 	// i = 0;
+	// 	// while (i++ < n && len[1] > 0)
+	// 	// {
+	// 	// 	printf("[ft_sort_b] pusha (n<=3), len[1]=%d\n", len[1]);
+	// 	// 	pusha(stacks[0], stacks[1], len);
+	// 	// }
+	// 	sort_small_b(stacks, len, counts[1]);
+	// 	return ;
+	// }
+
+	// if (ciybts)
+	// {
+	// 	find_mids_b(stacks[1], counts[1], sml_bg);
+	// 	sort_b_top(stacks, len, counts);
+	// }
+	// else if (stacks[1][0] < sml_bg[0])
+	// {
+	// 	i = 0;
+	// 	while (i++ < counts[0])
+	// 		rev_rot(stacks[1], len, 'b');
+	// 	find_mids_b(stacks[1], counts[1], sml_bg);
+	// }
+		
+	// // find_mids_b(stacks[1], counts[1], sml_bg);
+	// // printf("sort b: sml_bg[0] = %d, sml_bg[1] = %d\n", sml_bg[0], sml_bg[1]);
+	// i = 0;
+	// if (len[1] >= 6)
+	// 	while (i++ < n && len[1] > 0)
+	// 		sort_b_top(stacks, len, counts);
+	// printf("after sorting b logic\n");
+	// print_stack(stacks[0], len, 'a');
+	// print_stack(stacks[1], len, 'b');
+	// printf("counts[0] = %d, counts[1] = %d, counts[2] = %d\n", counts[0], counts[1], counts[2]);
+	
+	// // Handle the smallest elements first (counts[0])
+	// if (counts[0] > 0)
+	// {
+	// 	printf("[ft_sort_b] Handling counts[0]=%d, len[1]=%d\n", counts[0], len[1]);
+	// 	if (counts[0] <= 3)
+	// 	{
+	// 		sort_stack_b(stacks[1], len, counts[0]);
+	// 		i = 0;
+	// 		while (i++ < counts[0] && len[1] > 0)
+	// 		{
+	// 			printf("[ft_sort_b] pusha (counts[0]), len[1]=%d\n", len[1]);
+	// 			pusha(stacks[0], stacks[1], len);
+	// 		}
+	// 	}
+	// 	else if (counts[0] > 0 && len[1] >= counts[0])
+	// 	{
+	// 		printf("[ft_sort_b] recursive ft_sort_b (counts[0]=%d, len[1]=%d)\n", counts[0], len[1]);
+	// 		ft_sort_b(stacks, len, sml_bg, counts[0], iter);
+	// 	}
+	// }
+	
+	// // Handle the middle elements (counts[1])
+	// if (counts[1] > 0)
+	// {
+	// 	printf("[ft_sort_b] Handling counts[1]=%d, len[1]=%d\n", counts[1], len[1]);
+	// 	if (counts[1] <= 3)
+	// 	{
+	// 		sort_stack_b(stacks[1], len, counts[1]);
+	// 		i = 0;
+	// 		while (i++ < counts[1] && len[1] > 0)
+	// 		{
+	// 			printf("[ft_sort_b] pusha (counts[1]), len[1]=%d\n", len[1]);
+	// 			pusha(stacks[0], stacks[1], len);
+	// 		}
+	// 	}
+	// 	else if (counts[1] > 0 && len[1] >= counts[1])
+	// 	{
+	// 		printf("[ft_sort_b] recursive ft_sort_b (counts[1]=%d, len[1]=%d)\n", counts[1], len[1]);
+	// 		ft_sort_b(stacks, len, sml_bg, counts[1], iter);
+	// 	}
+	// }
 	
 	// // Handle the largest elements last (counts[2])
 	// if (counts[2] > 0)
@@ -420,4 +476,53 @@ void	ft_sort_b(int **stacks, int *len, int *sml_bg, int n, int iter)
 	printf("end of ft sort b\n");
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
+}
+
+
+int	*presort_stack(int **stacks, int *len, int *sml_bg, int n, int iter)
+{
+	int i;
+	int	*counts;
+
+	iter++;
+	counts = malloc(3 * sizeof(int));
+	if (!counts)
+		return (NULL);
+	printf("[ft_sort_a] iter = %d, n = %d, len[0] = %d, len[1] = %d\n", iter, n, len[0], len[1]);
+	if (n <= 5)
+	{
+		sort_small_a(stacks, len, n);
+		return (NULL);
+	}
+	find_mids_a(stacks[0], n, sml_bg);
+	printf("sort a: sml_bg[0] = %d, sml_bg[1] = %d\n", sml_bg[0], sml_bg[1]);
+	counts[0] = 0;
+	counts[1] = 0;
+	counts[2] = 0;
+	printf("before if condition/sending to ft sort a\n");
+	print_stack(stacks[0], len, 'a');
+	print_stack(stacks[1], len, 'b');
+	
+	// Process all elements in the current stack
+	i = 0;
+	while (i++ < n && len[0] > 0)
+	{
+		counts = sort_a_top(stacks, len, sml_bg, n);
+	}
+	
+	printf("after sort a logic\n");
+	print_stack(stacks[0], len, 'a');
+	print_stack(stacks[1], len, 'b');
+	
+	// Sort remaining elements in stack A if any
+	if (len[0] > 6)
+	{
+		if (len[0] <= 5)
+			sort_small_a(stacks, len, len[0]);
+		else if (len[0] > 0)
+			ft_sort_a(stacks, len, sml_bg, counts, iter);
+	}
+	print_stack(stacks[0], len, 'a');
+	print_stack(stacks[1], len, 'b');
+	return (counts);
 }

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/22 02:02:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 09:54:01 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ void			ft_lstadd_back_splt(t_list_split **lst, t_list_split *new);
 int				ft_lstsize(t_list_split *list);
 void			create_list_split(int *sml_bg, t_list_split **lsts);
 // int				is_in_range(int	*stack, int len, t_list_split *curr);
-void			ft_sort_a(int **stacks, int *sml_bg, int *len, int n, int iter);		// remove iter
-void			ft_sort_b(int **stacks, int *sml_bg, int *len, int n, int iter);		// remove iter
+int				*presort_stack(int **stacks, int *len, int *sml_bg, int n, int iter);
+void			ft_sort_a(int **stacks, int *sml_bg, int *len, int *counts, int iter);		// remove iter
+void			ft_sort_b(int **stacks, int *sml_bg, int *len, int *counts, int iter);		// remove iter
 void			print_stack(int	*s, int *len, char ab);									// remove this before submission
 
 # endif

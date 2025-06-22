@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/22 02:02:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 11:39:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int push_swap(int *stack, int *len)
 	int	*copy;
 	int	sml_bg[4];
 	static int	iter = 0;		// remove later
+	int	*counts;
 
 	len[1] = 0;
 	sml_bg[0] = 0;
@@ -66,7 +67,11 @@ int push_swap(int *stack, int *len)
 			stacks[0] = copy;
 			printf("before sorting\n");
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
-			ft_sort_a(stacks, len, sml_bg, len[0], iter);					// remoive iter
+			counts = presort_stack(stacks, len, sml_bg, len[0], iter);
+			if (!counts)
+				return (0);
+			ft_sort_b(stacks, sml_bg, len, counts, iter);
+			// ft_sort_a(stacks, len, sml_bg, len[0], iter);					// remoive iter
 			printf("after sorting\n");
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
 			print_stack(stacks[1], len, 'b');		// remove this before submission.
