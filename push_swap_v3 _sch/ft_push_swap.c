@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/22 11:39:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 15:12:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,10 @@ int push_swap(int *stack, int *len)
 {
 	int	*stacks[2];
 	int	*copy;
-	int	sml_bg[4];
 	static int	iter = 0;		// remove later
 	int	*counts;
 
 	len[1] = 0;
-	sml_bg[0] = 0;
 	if (len[0] > 1 && !check_order(len[0], stack))
 	{
 		stacks[1] = malloc(len[0] * sizeof(int));
@@ -67,10 +65,10 @@ int push_swap(int *stack, int *len)
 			stacks[0] = copy;
 			printf("before sorting\n");
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
-			counts = presort_stack(stacks, len, sml_bg, len[0], iter);
+			counts = presort_stack(stacks, len, len[0], iter);
 			if (!counts)
 				return (0);
-			ft_sort_b(stacks, sml_bg, len, counts, iter);
+			ft_sort_b(stacks, len, counts, iter);
 			// ft_sort_a(stacks, len, sml_bg, len[0], iter);					// remoive iter
 			printf("after sorting\n");
 			print_stack(stacks[0], len, 'a');			// remove this before submission.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_flow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/22 11:47:04 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/22 15:37:08 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,24 @@ static void	sort_a_base(int **stacks, int *len, int *sml_bg, int *counts)
 	}
 }
 
-static int	*sort_a_top(int **stacks, int *len, int *sml_bg_tmp, int n)
+static int	*sort_a_top(int **stacks, int *len, int n)
 {
 	int i;
 	int	*count_tmp;
+	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = (int *)malloc(3 * sizeof(int));
+	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
 	if (!count_tmp || ! sml_bg_tmp)
 		return (NULL);
 	if (n <= 5)
 		sort_small_a(stacks, len, n);
 	else
 	{
+		printf("n = %d\n", n);
 		find_mids_a(stacks[0], n, sml_bg_tmp);
+		printf("pivots:%d & %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
 		while (i++ < n)
 			sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
 	}
@@ -122,13 +126,16 @@ static int	*sort_a_top(int **stacks, int *len, int *sml_bg_tmp, int n)
 	return (count_tmp);
 }
 
-static int *sort_a_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
+static int *sort_a_btm(int **stacks, int *len, int n)
 {
 	int i;
 	int	*count_tmp;
+	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = (int *)malloc(3 * sizeof(int));
+	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
+	find_mids_a(stacks[0], n, sml_bg_tmp);
 	if (!count_tmp || !sml_bg_tmp)
 		return (NULL);
 	i = 0;
@@ -142,6 +149,7 @@ static int *sort_a_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
 			while (i++ < n)
 				sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
 		}
+	free(sml_bg_tmp);
 	return (count_tmp);
 }
 
@@ -177,13 +185,14 @@ static void	sort_b_base(int **stacks, int *len, int *sml_bg, int *counts)
 	}
 }
 
-static int	*sort_b_top(int **stacks, int *len, int *sml_bg_tmp, int n)
+static int	*sort_b_top(int **stacks, int *len, int n)
 {
 	int i;
 	int *count_tmp;
+	int *sml_bg_tmp;
 
-	i = 0;
-	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = (int *)malloc(3 * sizeof(int));
+	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
 	count_tmp = NULL;
 	if (!count_tmp || sml_bg_tmp)
 		return (NULL);
@@ -191,20 +200,24 @@ static int	*sort_b_top(int **stacks, int *len, int *sml_bg_tmp, int n)
 		sort_small_b(stacks, len, n);
 	else
 	{
+		i = 0;
 		find_mids_b(stacks[1], len[1], sml_bg_tmp);
 		while (i++ < n)
 			sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
 	}
+	free(sml_bg_tmp);
 	return(count_tmp);
 }
 
-static int *sort_b_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
+static int *sort_b_btm(int **stacks, int *len, int n)
 {
 	int i;
 	int *count_tmp;
+	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = malloc(3 * sizeof(int));
+	count_tmp = (int *)(3 * sizeof(int));
+	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
 	count_tmp = NULL;
 	if (!count_tmp || !sml_bg_tmp)
 		return (NULL);
@@ -219,22 +232,19 @@ static int *sort_b_btm(int **stacks, int *len, int *sml_bg_tmp, int n)
 		while (i++ < n)
 			sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
 	}
+	free(sml_bg_tmp);
 	return(count_tmp);
 }
 
-void	ft_sort_a(int **stacks, int *len, int *sml_bg, int *counts, int iter)
+void	ft_sort_a(int **stacks, int *len, int *counts, int iter)
 {
 	int	*count_next;
-	int	*sml_bg_tmp;
 
 	iter++;
-	count_next = malloc(3 * sizeof(int));
-	sml_bg_tmp = malloc(2 * sizeof(int));
+	count_next = (int *)malloc(3 * sizeof(int));
 	printf("[ft_sort_a] iter = %d, counts[0]= %d, counts[1]= %d, counts[2]= %d, len[0] = %d, len[1] = %d\n", iter, counts[0], counts[1], counts[2], len[0], len[1]);
 	if (counts[2] <= 5)
 		return(sort_small_a(stacks, len, counts[2]));
-	find_mids_a(stacks[0], counts[2], sml_bg);
-	printf("sort a: sml_bg[0] = %d, sml_bg[1] = %d\n", sml_bg[0], sml_bg[1]);
 	printf("before if condition/sending to ft sort a\n");
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
@@ -242,18 +252,18 @@ void	ft_sort_a(int **stacks, int *len, int *sml_bg, int *counts, int iter)
 	// Process all elements in the current subtacks
 	if (counts[2] > 0)
 	{
-		count_next = sort_a_top(stacks, len, sml_bg_tmp, counts[2]);
-		ft_sort_b(stacks, len, sml_bg, count_next, iter);
+		count_next = sort_a_top(stacks, len, counts[2]);
+		ft_sort_b(stacks, len, count_next, iter);
 	}
 	if(counts[1] > 0)
 	{
-		count_next = sort_a_btm(stacks, len, sml_bg_tmp, counts[1]);
-		ft_sort_b(stacks, len, sml_bg, count_next, iter);
+		count_next = sort_a_btm(stacks, len, counts[1]);
+		ft_sort_b(stacks, len, count_next, iter);
 	}
 	if (counts[0] > 0)
 	{
-		count_next = sort_b_btm(stacks, len, sml_bg_tmp, counts[0]);
-		ft_sort_b(stacks, len, sml_bg, count_next, iter);
+		count_next = sort_b_btm(stacks, len, counts[0]);
+		ft_sort_b(stacks, len, count_next, iter);
 	}
 	free(count_next);
 	
@@ -341,16 +351,14 @@ void	ft_sort_a(int **stacks, int *len, int *sml_bg, int *counts, int iter)
 	print_stack(stacks[1], len, 'b');
 }
 
-void	ft_sort_b(int **stacks, int *len, int *sml_bg, int *counts, int iter)
+void	ft_sort_b(int **stacks, int *len, int *counts, int iter)
 {
 	int	*count_next;
-	int	*sml_bg_tmp;
 	// int	counts[3];
 
 	iter++;
-	count_next = malloc(3 * sizeof (int));
-	sml_bg_tmp = malloc(2 * sizeof(int));
-	if (!count_next || sml_bg_tmp)
+	count_next = (int *)malloc(3 * sizeof (int));
+	if (!count_next)
 		return ;
 	printf("[ft_sort_b] iter = %d, counts[0] = %d, counts[1] = %d, counts[2] = %d, len[0] = %d, len[1] = %d\n", iter, counts[0], counts[1], counts[2], len[0], len[1]);
 	// counts[0] = 0; // bottom of stack b -- smallest third
@@ -358,18 +366,18 @@ void	ft_sort_b(int **stacks, int *len, int *sml_bg, int *counts, int iter)
 	// counts[2] = 0; // top of stack a -- largest third
 	if (counts[2] > 0)
 	{
-		count_next = sort_a_btm(stacks, len, sml_bg_tmp, counts[2]);
-		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
+		count_next = sort_a_btm(stacks, len, counts[2]);
+		ft_sort_a(stacks, len, count_next, iter);
 	}
 	if (counts[1] > 0)
 	{
-		count_next = sort_b_top(stacks, len, sml_bg_tmp, counts[1]);
-		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
+		count_next = sort_b_top(stacks, len, counts[1]);
+		ft_sort_a(stacks, len, count_next, iter);
 	}
 	if (counts[0] > 0)
 	{
-		count_next = sort_b_btm(stacks, len, sml_bg_tmp, counts[0]);
-		ft_sort_a(stacks, len, sml_bg_tmp, count_next, iter);
+		count_next = sort_b_btm(stacks, len, counts[0]);
+		ft_sort_a(stacks, len, count_next, iter);
 	}
 	
 	// if (counts[1] <= 3)
@@ -479,14 +487,17 @@ void	ft_sort_b(int **stacks, int *len, int *sml_bg, int *counts, int iter)
 }
 
 
-int	*presort_stack(int **stacks, int *len, int *sml_bg, int n, int iter)
+int	*presort_stack(int **stacks, int *len, int n, int iter)
 {
 	int i;
 	int	*counts;
+	int	*sml_bg;
 
 	iter++;
-	counts = malloc(3 * sizeof(int));
-	if (!counts)
+	printf("starting presort\n");
+	counts = (int *)malloc(3 * sizeof(int));
+	sml_bg = (int *)malloc(2 * sizeof(int));
+	if (!counts || !sml_bg)
 		return (NULL);
 	printf("[ft_sort_a] iter = %d, n = %d, len[0] = %d, len[1] = %d\n", iter, n, len[0], len[1]);
 	if (n <= 5)
@@ -507,7 +518,8 @@ int	*presort_stack(int **stacks, int *len, int *sml_bg, int n, int iter)
 	i = 0;
 	while (i++ < n && len[0] > 0)
 	{
-		counts = sort_a_top(stacks, len, sml_bg, n);
+		printf("(i = %d) sorting a top\n", i);
+		counts = sort_a_top(stacks, len, n);
 	}
 	
 	printf("after sort a logic\n");
@@ -520,9 +532,13 @@ int	*presort_stack(int **stacks, int *len, int *sml_bg, int n, int iter)
 		if (len[0] <= 5)
 			sort_small_a(stacks, len, len[0]);
 		else if (len[0] > 0)
-			ft_sort_a(stacks, len, sml_bg, counts, iter);
+		{
+			printf("calling sort a\n");
+			ft_sort_a(stacks, len, counts, iter);
+		}
 	}
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
+	printf("ending presort\n");
 	return (counts);
 }
