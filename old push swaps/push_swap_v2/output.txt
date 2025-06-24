@@ -1,0 +1,85 @@
+pb
+pb
+ra
+ra
+ra
+ra
+pb
+pb
+pb
+rb
+pb
+rb
+rra
+rra
+rra
+sa
+rra
+rra
+rra
+rra
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+rra
+rra
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+sa
+rra
+rra
+pa
+pa
+pa
+pa
+pa
+pa
+stack a = 1 2 3 6 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 
+start split
+stack a = 1 2 3 6 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 
+stack b = 
+bgr is 3
+smlr is -261
+stack a = 2 3 6 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 
+stack b = 1 
+stack a = 3 6 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 
+stack b = 2 1 
+stack a = 6 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 3 
+stack b = 2 1 
+stack a = 5 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 3 6 
+stack b = 2 1 
+stack a = 8 -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 3 6 5 
+stack b = 2 1 
+stack a = -10 -22 -500 -92341 394 837 -2891 -27384 230192 -364823 3 6 5 8 
+stack b = 2 1 
+stack a = -22 -500 -92341 394 837 -2891 -27384 230192 -364823 3 6 5 8 
+stack b = -10 2 1 
+stack a = -500 -92341 394 837 -2891 -27384 230192 -364823 3 6 5 8 
+stack b = -22 -10 2 1 
+push and rotate
+stack a = -92341 394 837 -2891 -27384 230192 -364823 3 6 5 8 
+stack b = -22 -10 2 1 -500 
+push and rotate
+stack a = 394 837 -2891 -27384 230192 -364823 3 6 5 8 
+stack b = -22 -10 2 1 -500 -92341 

@@ -1,0 +1,343 @@
+before sorting
+stack a = 13 17 7 41 27 46 33 1 4 40 5 37 29 9 32 6 48 23 10 36 25 15 16 21 34 14 8 42 11 22 3 0 2 47 20 44 35 28 18 31 30 24 43 45 26 49 19 38 39 12 
+starting presort
+malloced sml_bg
+len = 50
+start set psrt count
+iter_count = 5
+presort count malloced sucessfully
+setting counts psrt
+[presort_stack] iter = 1, n = 50, len[0] = 50, len[1] = 0
+stack a = 13 17 7 41 27 46 33 1 4 40 5 37 29 9 32 6 48 23 10 36 25 15 16 21 34 14 8 42 11 22 3 0 2 47 20 44 35 28 18 31 30 24 43 45 26 49 19 38 39 12 
+stack b = 
+if flow for pivots
+presort stack: sml_bg[0] = 15, sml_bg[1] = 32
+sort_a_base: smallest stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: middle stack
+pb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+stack a = 41 46 33 40 37 32 48 36 34 42 47 44 35 43 45 49 38 39 
+stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 
+if flow for pivots
+presort stack: sml_bg[0] = 37, sml_bg[1] = 44
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: smallest stack
+pb
+rb
+sort_a_base: middle stack
+pb
+sort_a_base: largest stack
+ra
+sort_a_base: largest stack
+ra
+sort_a_base: middle stack
+pb
+sort_a_base: middle stack
+pb
+stack a = 46 48 47 44 45 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+sorting a
+ra
+ra
+ra
+pb
+pb
+ra
+pb
+stack a = 48 47 49 
+sorting stack a
+sa
+exiting sorting stack a
+pa
+pa
+pa
+after small sort
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+after presorting logic
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+ending presort
+sorting back
+n_substacks = 5
+[ft_sort_b] iter = 1, counts[0] = 0, counts[1] = 0, counts[2] = 0, len[0] = 6, len[1] = 44
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+end of ft sort b
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+[ft_sort_b] iter = 1, counts[0] = 5, counts[1] = 7, counts[2] = 6, len[0] = 6, len[1] = 44
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+[sort_a_btm] iter = 2
+sort a btm
+else flow for pivots
+n = 6
+[sort_a_btm] pivots: 44 44
+else flow for pivots
+after sorting a base in sort_a_btm
+stack a = 44 45 46 47 48 49 
+stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
+[sort_b_top] iter = 2
+[sort_b_top] pivots: 39 41
+start sorting b top logic
+smlbg: [39 41]
+pa
+ra
+start sorting b top logic
+smlbg: [39 41]
+rb
+start sorting b top logic
+smlbg: [39 41]
+pa
+start sorting b top logic
+smlbg: [39 41]
+pa
+start sorting b top logic
+smlbg: [39 41]
+rb
+start sorting b top logic
+smlbg: [39 41]
+pa
+ra
+start sorting b top logic
+smlbg: [39 41]
+pa
+after sorting a base in sort_b_top
+n = 7
+stack a = 41 42 43 44 45 46 47 48 49 39 40 
+stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 38 37 
+[sort_a_top] iter = 3
+sort a top
+sorting a
+stack a = 41 42 43 44 45 46 47 48 49 39 40 
+sorting stack a
+exiting sorting stack a
+after small sort
+stack a = 41 42 43 44 45 46 47 48 49 39 40 
+stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 38 37 
+[sort_a_btm] iter = 3
+sort a btm
+else flow for pivots
+n = 2
+[sort_a_btm] pivots: 0 0
+rra
+rra
+sorting b (n= 2)
+sorting stack b
+sb
+pa
+pa
+pa
+after small sort
+stack a = 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 38 37 
+[sort_b_btm] iter = 2
+rrb
+rrb
+rrb
+rrb
+rrb
+sorting b (n= 5)
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+pa
+sorting stack b
+sb
+rb
+sb
+rrb
+exiting sorting stack b
+pa
+pa
+pa
+after small sort
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+end of ft sort b
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+[ft_sort_b] iter = 1, counts[0] = 0, counts[1] = 0, counts[2] = 0, len[0] = 50, len[1] = 0
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+end of ft sort b
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+[ft_sort_b] iter = 1, counts[0] = 0, counts[1] = 0, counts[2] = 0, len[0] = 50, len[1] = 0
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+end of ft sort b
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
+after sorting
+stack a = 12 32 33 2 0 3 11 8 14 10 6 9 5 4 1 7 13 17 27 29 23 25 15 16 21 22 20 28 18 31 30 37 38 35 34 36 24 19 26 39 40 41 42 43 44 45 46 47 48 49 
+stack b = 
