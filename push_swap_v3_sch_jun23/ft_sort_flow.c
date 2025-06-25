@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/26 00:50:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/26 01:19:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -365,7 +365,7 @@ int	set_psrt_count(int len, int ***counts_psrt)
 	*counts_psrt = malloc((iter_count + 1) * sizeof(int *));
 	if (!*counts_psrt)
 		return (0);
-	while (i++ < iter_count)
+	while (i++ <= iter_count)
 		(*counts_psrt)[i] = NULL;
 	printf("presort count malloced sucessfully\n");
 	(*counts_psrt)[0] = malloc(1 * sizeof(int));
@@ -436,6 +436,7 @@ int	**presort_stack(int **stacks, int *len, int n, int iter)
 		while (i++ < len_tmp)
 		{
 			sort_a_base(stacks, len, sml_bg, counts_psrt[j]);
+			printf("inserted %d into counts[%d][1]\n", counts_psrt[j][1], j);
 		}
 		print_stack(stacks[0], len, 'a');
 		print_stack(stacks[1], len, 'b');
@@ -465,7 +466,7 @@ void	sort_back(int **stacks, int *len, int **counts, int *iter)
 	n_substacks = counts[0][0];
 	printf("n_substacks = %d\n", n_substacks);
 	i = 1;
-	while (i < n_substacks)
+	while (i <= n_substacks)
 	{
 		ft_sort_b(stacks, len, counts[i], *iter);
 		i++;

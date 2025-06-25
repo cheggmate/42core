@@ -14,163 +14,231 @@ if flow for pivots
 presort stack: sml_bg[0] = 15, sml_bg[1] = 32
 sort_a_base: smallest stack
 pb
+inserted 0 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 1 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 1 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 1 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 2 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 2 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 2 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 2 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 2 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 2 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 2 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 2 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 3 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 3 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 3 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 3 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 3 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 4 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 4 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 4 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 5 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 6 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 7 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 8 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 8 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 8 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 8 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 8 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 8 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 9 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 9 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 9 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 9 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 9 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 10 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 10 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 10 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 11 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 12 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 13 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 14 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 15 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 15 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 15 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 16 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 16 into counts[1][1]
 sort_a_base: middle stack
 pb
+inserted 17 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 17 into counts[1][1]
 sort_a_base: largest stack
 ra
+inserted 17 into counts[1][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 17 into counts[1][1]
 stack a = 41 46 33 40 37 32 48 36 34 42 47 44 35 43 45 49 38 39 
 stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 
 if flow for pivots
 presort stack: sml_bg[0] = 37, sml_bg[1] = 44
 sort_a_base: middle stack
 pb
+inserted 1 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 1 into counts[2][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 1 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 2 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 3 into counts[2][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 3 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 3 into counts[2][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 3 into counts[2][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 3 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 4 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 4 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 4 into counts[2][1]
 sort_a_base: smallest stack
 pb
 rb
+inserted 4 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 5 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 5 into counts[2][1]
 sort_a_base: largest stack
 ra
+inserted 5 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 6 into counts[2][1]
 sort_a_base: middle stack
 pb
+inserted 7 into counts[2][1]
 stack a = 46 48 47 44 45 49 
 stack b = 39 38 43 42 37 40 41 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 33 32 36 34 35 
 sorting a
@@ -371,8 +439,5 @@ sorting small b (n= 0)
 sorting small b
 sorting small b (n= 0)
 end of ft sort b
-stack a = 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 
-stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 
-after sorting
 stack a = 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 
 stack b = 19 26 24 30 31 18 28 20 22 21 16 15 25 23 29 27 17 13 7 1 4 5 9 6 10 14 8 11 3 0 2 12 
