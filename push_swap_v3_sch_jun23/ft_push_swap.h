@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/24 21:23:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/26 00:50:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int				prep_values(int len, int *stack, char **argv);
 int				find_largest(int *stack, int len);
 int				find_smallest(int *stack, int len);
 int				is_sorted(int *stack, int len);
+int				is_rev_sorted(int *stack, int len);
 int				find_ind_max(int *stack_b, int b_len);
 void			free_entire_array(int **counts_psrt, int i);
 void			move_btoa_base_case(int **stacks, int *len, int sub_len);
@@ -56,7 +57,7 @@ void			calc_mids(t_list_split *curr, int *sml_bg);
 void			insertion_sort(int	*stack_dup, int len);
 void			iter_quicksort(int *stack, int *stack_b, int *len);
 void			replace_with_rank(int *stack, int len, int *copy);
-void			mv_smallest_frm_a(int **stacks, int *len);
+void			mv_smallest_frm_a(int **stacks, int *len, int n);
 int				pusha(int	*stack_dest, int *stack_src, int *len);
 int				pushb(int	*stack_dest, int *stack_src, int *len);
 int				push_swap(int *stack, int *len);

@@ -6,37 +6,66 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/25 00:53:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/26 00:50:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	mv_smallest_frm_a(int **stacks, int *len)
+void	mv_smallest_frm_a(int **stacks, int *len, int n)
 {
 	int	smallest;
 	int	s_index;
-	while(len[0] > 3)
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	printf("moving smallest from a\n");
+	while(i++ < n - 3)
 	{
 		smallest = find_smallest(stacks[0], len[0]);
 		s_index = find_pos(stacks[0], smallest, len[0]);
-		while (s_index--)
+		printf("smallest is %d at pos %d\n", smallest, s_index);
+		while (j < s_index)
+		{
 			rotate(stacks[0], len, 'a');
+			j++;
+		}
 		pushb(stacks[1], stacks[0], len);
+		while (j > 0)
+		{
+			rev_rot(stacks[0], len, 'a');
+			j--;
+		}
 	}
 }
 
-void	mv_largest_frm_b(int **stacks, int *len)
+void	mv_largest_frm_b(int **stacks, int *len, int n)
 {
 	int	largest;
 	int	s_index;
-	while(len[1] > 3)
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(i++ < n - 3)
 	{
 		largest = find_largest(stacks[1], len[1]);
-		s_index = find_pos(stacks[1], largest, len[1]);
-		while (s_index--)
+		s_index = find_ind_max(stacks[1], n);
+		printf("largest is %d at pos %d\n", largest, s_index);
+		while (j < s_index)
+		{
 			rotate(stacks[1], len, 'b');
+			j++;
+		}
 		pusha(stacks[0], stacks[1], len);
+		while (j > 0)
+		{
+			rev_rot(stacks[1], len, 'b');
+			j--;
+		}
 	}
 }
 
@@ -51,10 +80,12 @@ void	sort_small_a(int **stacks, int *len, int n)
 	int moved_out;
 
 	moved_out = 0;
+	if (n == 0)
+		return ;
 	printf("sorting a\n");
 	if (n > 3)
 	{
-		mv_smallest_frm_a(stacks, len);
+		mv_smallest_frm_a(stacks, len, n);
 		moved_out = 1;
 	}
 	print_stack(stacks[0], len, 'a');
@@ -71,13 +102,18 @@ void	sort_small_b(int **stacks, int *len, int n)
 	int i;
 
 	i = 0;
-	printf("sorting b (n= %d)\n", n);
+	printf("sorting small b (n= %d)\n", n);
+	if (n == 0)
+		return ;
 	if (n > 3)
 	{
-		mv_largest_frm_b(stacks, len);
+		mv_largest_frm_b(stacks, len, n);
 		n -= 2;
 	}
+	print_stack(stacks[0], len, 'a');
+	print_stack(stacks[1], len, 'b');
 	sort_stack_b(stacks[1], len, n);
+	printf("n after mv largest frm b: %d\n", n );
 	// if (len[1] < n)
 	// 	move_back_b(stacks, len, n);
 	while (i++ < n)
@@ -173,7 +209,7 @@ void	sort_a_btm(int **stacks, int *len, int n, int iter)
 		while (i++ < n)
 			rev_rot(stacks[0], len, 'a');
 	if (n <= 5)
-		sort_small_b(stacks, len, n);
+		sort_small_a(stacks, len, n);
 	else
 		{
 			find_mids_a(stacks[0], n, sml_bg_tmp);
@@ -238,12 +274,15 @@ void sort_b_btm(int **stacks, int *len, int n, int iter)
 	while (i++ < n)
 		rev_rot(stacks[1], len, 'b');
 	if (n <= 5)
+	{
+		printf("sorting small b\n");
 		sort_small_b(stacks, len, n);
+	}
 	else
 	{
 		find_mids_b(stacks[1], n, sml_bg_tmp);
 		printf("[sort_b_btm] pivots: %d %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
-		if (!is_sorted(stacks[1], n))
+		if (!is_rev_sorted(stacks[1], n))
 			while (i++ < n)
 				sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
 		printf("n = %d\n", n);
@@ -287,41 +326,13 @@ void	sort_b_top(int **stacks, int *len, int n, int iter)
 		printf("n = %d\n", n);
 		print_stack(stacks[0], len, 'a');
 		print_stack(stacks[1], len, 'b');
-		if (count_tmp[2] > 0)
-			sort_a_top(stacks, len, count_tmp[2], iter);
-		if (count_tmp[1] > 0)
-			sort_a_btm(stacks, len, count_tmp[1], iter);
-		else if (count_tmp[0] > 0)
-			sort_b_btm(stacks, len, count_tmp[0], iter);
+		sort_a_top(stacks, len, count_tmp[2], iter);
+		sort_a_btm(stacks, len, count_tmp[1], iter);
+		sort_b_btm(stacks, len, count_tmp[0], iter);
 	}
 	free(sml_bg_tmp);
 	free(count_tmp);
 }
-// 	printf("[ft_sort_a] iter = %d, counts[0]= %d, counts[1]= %d, counts[2]= %d, len[0] = %d, len[1] = %d\n", iter, counts[0], counts[1], counts[2], len[0], len[1]);
-// 	if (counts[2] <= 5)
-// 		return(sort_small_a(stacks, len, counts[2]));
-// 	printf("before if condition/sending to ft sort a\n");
-// 	print_stack(stacks[0], len, 'a');
-// 	print_stack(stacks[1], len, 'b');
-	
-// 	// Process all elements in the current subtacks
-// 	if (counts[2] > 0)
-// 	{
-// 		count_next = sort_a_top(stacks, len, counts[2]);
-// 		// ft_sort_b(stacks, len, count_next, iter);
-// 	}
-// 	if(counts[1] > 0)
-// 	{
-// 		count_next = sort_a_btm(stackcounts_psrt = NULL;
-// 	{
-// 		count_next = sort_b_btm(stacks, len, counts[0]);
-// 		// ft_sort_b(stacks, len, count_next, iter);
-// 	}
-// 	free(count_next);
-// 	printf("before exiting ft_sort_a\n");
-// 	print_stack(stacks[0], len, 'a');
-// 	print_stack(stacks[1], len, 'b');
-// }
 
 void	ft_sort_b(int **stacks, int *len, int *counts, int iter)
 {
@@ -330,21 +341,13 @@ void	ft_sort_b(int **stacks, int *len, int *counts, int iter)
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len,
 		 'b');
-	if (counts[2] > 0)
-	{
-		// TODO: add len check adn use sort_a_top if len of a = counts[2]
-		sort_a_btm(stacks, len, counts[2], iter);
-		// ft_sort_a(stacks, len, count_next, iter);
-	}
-	if (counts[1] > 0)
-	{
-		sort_b_top(stacks, len, counts[1], iter);
-		// ft_sort_a(stacks, len, count_next, iter);
-	}
-	if (counts[0] > 0)
-	{
-		sort_b_btm(stacks, len, counts[0], iter);
-	}
+	// TODO: add len check adn use sort_a_top if len of a = counts[2]
+	sort_a_btm(stacks, len, counts[2], iter);
+	// ft_sort_a(stacks, len, count_next, iter);
+	sort_b_top(stacks, len, counts[1], iter);
+	// ft_sort_a(stacks, len, count_next, iter);
+	sort_b_btm(stacks, len, counts[0], iter);
+	
 	printf("end of ft sort b\n");
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');

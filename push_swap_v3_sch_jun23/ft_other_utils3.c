@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/24 22:12:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/25 23:20:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,18 @@ void	free_entire_array(int **counts_psrt, int i)
 		j++;
 	}
 	free(counts_psrt);
+}
+
+int	is_rev_sorted(int *stack, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len - 1)
+	{
+		if (!(stack[i] > stack[i + 1]))
+			return (0);
+		i++;
+	}
+	return (1);
 }
