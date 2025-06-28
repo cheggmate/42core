@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/24 22:29:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/28 22:25:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,19 @@ int push_swap(int *stack, int *len)
 			replace_with_rank(stacks[0], len[0], copy);
 			stacks[0] = copy;
 			printf("before sorting\n");
-			fflush(stdout);
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
 			counts = presort_stack(stacks, len, len[0], iter);
 			if (!counts)
 				return (0);
+			int j;
+			j = 0;
+			while (j < counts[0][0])
+			{
+				printf("counts[%d][0] = %d\n", j, counts[j][0]);
+				printf("counts[%d][1] = %d\n", j, counts[j][1]);
+				printf("counts[%d][2] = %d\n", j, counts[j][2]);
+				j++;
+			}
 			printf("sorting back\n");
 			sort_back(stacks, len, counts, &iter);
 			// ft_sort_b(stacks, len, counts, iter);								// this needs to change one instance of count later counts[3] for example.
@@ -77,6 +85,7 @@ int push_swap(int *stack, int *len)
 			fflush(stdout);
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
 			print_stack(stacks[1], len, 'b');		// remove this before submission.
+			fflush(stdout);
 			free (stacks[1]);
 			free (copy);
 			free (counts);

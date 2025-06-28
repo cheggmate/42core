@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/28 08:02:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/28 21:25:01 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ void			create_list_split(int *sml_bg, t_list_split **lsts);
 // int				is_in_range(int	*stack, int len, t_list_split *curr);
 // void			ft_sort_a(int **stacks, int *len, int *counts, int iter);		// remove iter
 void			ft_sort_b(int **stacks, int *len, int *counts, int iter);		// remove iter
-void			sort_a_base(int **stacks, int *len, int *sml_bg, int *counts);
+int				*sort_a_base(int **stacks, int *len, int *sml_bg, int *counts);
 void			sort_a_top(int **stacks, int *len, int n, int iter);
 void			sort_a_btm(int **stacks, int *len, int n, int iter);
-void			sort_b_base(int **stacks, int *len, int *sml_bg, int *counts);
+int				*sort_b_base(int **stacks, int *len, int *sml_bg, int *counts);
 void 			sort_b_btm(int **stacks, int *len, int n, int iter);
 void			sort_b_top(int **stacks, int *len, int n, int iter);
 int				**presort_stack(int **stacks, int *len, int n, int iter);
