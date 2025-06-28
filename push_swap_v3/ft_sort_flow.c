@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_flow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/26 01:19:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/28 08:21:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -353,7 +353,43 @@ void	ft_sort_b(int **stacks, int *len, int *counts, int iter)
 	print_stack(stacks[1], len, 'b');
 }
 
-int	set_psrt_count(int len, int ***counts_psrt)
+// int	set_psrt_count(int len, int ***counts_psrt)
+// {
+// 	int i;
+// 	int	iter_count;
+
+// 	i = 0;
+// 	printf("start set psrt count\n");
+// 	iter_count = (log10(len) / log10(3)) + 2;
+// 	printf("iter_count = %d\n", iter_count);
+// 	*counts_psrt = malloc((iter_count + 1) * sizeof(int *));
+// 	if (!*counts_psrt)
+// 		return (0);
+// 	while (i++ <= iter_count)
+// 		*(counts_psrt)[i] = NULL;
+// 	printf("presort count malloced sucessfully till %d\n", i);
+// 	*(counts_psrt)[0] = malloc(1 * sizeof(int));
+// 	if (!*(counts_psrt)[0])
+// 		return (0);
+// 	i = 1;
+// 	while (i < iter_count)
+// 	{
+// 		*(counts_psrt)[i] = malloc(3 * sizeof(int));
+// 		if (!*(counts_psrt)[i])
+// 		{
+// 			printf("failed to create counts_psrt[%d]\n", i);
+// 			free_entire_array(*counts_psrt, i);
+// 			break;
+// 		}
+// 		i++;
+// 	}
+// 	printf("setting counts psrt\n");
+// 	*(counts_psrt)[0][0] = iter_count;
+// 	printf("counts_psrt[0][0] = %d\n", *(counts_psrt)[0][0]);
+// 	return (1);
+// }
+
+int	set_psrt_count(int len, int **counts_psrt)
 {
 	int i;
 	int	iter_count;
@@ -362,29 +398,30 @@ int	set_psrt_count(int len, int ***counts_psrt)
 	printf("start set psrt count\n");
 	iter_count = (log10(len) / log10(3)) + 2;
 	printf("iter_count = %d\n", iter_count);
-	*counts_psrt = malloc((iter_count + 1) * sizeof(int *));
-	if (!*counts_psrt)
+	// *counts_psrt = malloc((iter_count + 1) * sizeof(int *));
+	if (!counts_psrt)
 		return (0);
 	while (i++ <= iter_count)
-		(*counts_psrt)[i] = NULL;
-	printf("presort count malloced sucessfully\n");
-	(*counts_psrt)[0] = malloc(1 * sizeof(int));
-	if (!(*counts_psrt)[0])
+		(counts_psrt)[i] = NULL;
+	printf("presort count malloced sucessfully till %d\n", i);
+	(counts_psrt)[0] = malloc(1 * sizeof(int));
+	if (!(counts_psrt)[0])
 		return (0);
 	i = 1;
 	while (i < iter_count)
 	{
-		(*counts_psrt)[i] = malloc(3 * sizeof(int));
-		if (!(*counts_psrt)[i])
+		(counts_psrt)[i] = malloc(3 * sizeof(int));
+		if (!(counts_psrt)[i])
 		{
 			printf("failed to create counts_psrt[%d]\n", i);
-			free_entire_array(*counts_psrt, i);
+			free_entire_array(counts_psrt, i);
 			break;
 		}
 		i++;
 	}
 	printf("setting counts psrt\n");
-	(*counts_psrt)[0][0] = iter_count;
+	(counts_psrt)[0][0] = iter_count;
+	printf("counts_psrt[0][0] = %d\n", (counts_psrt)[0][0]);
 	return (1);
 }
 
@@ -399,17 +436,19 @@ int	**presort_stack(int **stacks, int *len, int n, int iter)
 	iter++;
 	printf("starting presort\n");
 	j = 1;
-	counts_psrt = NULL;
+	counts_psrt = malloc(((log10(*len) / log10(3)) + 3) * sizeof(int *));
 	sml_bg = (int *)malloc(2 * sizeof(int)); 
 	printf("malloced sml_bg\n");
 	printf("len = %d\n", *len);
-	if (set_psrt_count(*len, &counts_psrt) == 0 || !sml_bg)
+	if (set_psrt_count(*len, counts_psrt) == 0 || !sml_bg)
 	{
 		free_entire_array(counts_psrt, 4);
 		free(sml_bg);
 		return (NULL);
 	}
 	printf("[presort_stack] iter = %d, n = %d, len[0] = %d, len[1] = %d\n", iter, n, len[0], len[1]);
+
+	printf("counts_psrt[0][0] = %d\n", counts_psrt[0][0]);
 	if (n <= 5)
 	{
 		sort_small_a(stacks, len, n);
