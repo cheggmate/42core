@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/28 21:25:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 00:39:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			calc_mids(t_list_split *curr, int *sml_bg);
 void			insertion_sort(int	*stack_dup, int len);
 void			iter_quicksort(int *stack, int *stack_b, int *len);
 void			replace_with_rank(int *stack, int len, int *copy);
-void			mv_smallest_frm_a(int **stacks, int *len, int n);
+int				mv_smallest_frm_a(int **stacks, int *len, int n);
 int				pusha(int	*stack_dest, int *stack_src, int *len);
 int				pushb(int	*stack_dest, int *stack_src, int *len);
 int				push_swap(int *stack, int *len);
