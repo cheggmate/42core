@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 13:04:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 17:48:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	free_entire_array(int **counts_psrt, int i)
 	j = 0;
 	while (j < i)
 	{
-		if (counts_psrt[i] != NULL)
-			free(counts_psrt[i]);
+		if (counts_psrt[j] != NULL)
+			free(counts_psrt[j]);
 		j++;
 	}
 	free(counts_psrt);
