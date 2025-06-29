@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 17:39:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 17:50:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -423,7 +423,7 @@ int	**presort_stack(int **stacks, int *len, int n, int iter)
 	printf("len = %d\n", *len);
 	if (!counts_psrt || !sml_bg)
 	{
-		free_entire_array(counts_psrt, counts_psrt[0]);
+		free_entire_array(counts_psrt, counts_psrt[0][0]);
 		free(sml_bg);
 		return (NULL);
 	}
