@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:24:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:39:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,23 +207,27 @@ void	sort_a_btm(int **stacks, int *len, int n, int iter)
 	printf("sort a btm\n");
 	count_tmp = (int *)malloc(3 * sizeof(int));
 	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
-	find_mids_a(stacks[0], n, sml_bg_tmp);
 	printf("n = %d\n", n);
-	printf("[sort_a_btm] pivots: %d %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
 	i = 0;
 	if (len[0] > n) // if the len of the array is less than the size of the substack.
 		while (i++ < n)
 			rev_rot(stacks[0], len, 'a');
+	// find_mids_a(stacks[0], n, sml_bg_tmp);
+	// printf("[sort_a_btm] pivots: %d %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
 	if (n <= 5)
 		sort_small_a(stacks, len, n);
 	else
 		{
 			find_mids_a(stacks[0], n, sml_bg_tmp);
+			printf("[sort_a_btm] pivots: %d %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
 			if (!is_sorted(stacks[0], n))
+			{
+				printf("sorting %d\n", stacks[0][0]);
 				while (i++ < n)
 					count_tmp = sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
+			}
 			printf("after sorting a base in sort_a_btm\n");
 			print_stack(stacks[0], len, 'a');
 			print_stack(stacks[1], len, 'b');
@@ -378,10 +382,10 @@ int	**set_psrt_count(int len)
 	counts_psrt = malloc((iter_count + 1) * sizeof(int *));
 	if (!counts_psrt)
 		return (NULL);
-	while (i++ <= iter_count)
+	while (i++ < iter_count)
 		counts_psrt[i] = NULL;
 	printf("presort count malloced sucessfully till %d\n", i);
-	counts_psrt[0] = malloc(1 * sizeof(int));
+	counts_psrt[0] = malloc(2 * sizeof(int));
 	if (!counts_psrt[0])
 	{
 		free (counts_psrt);

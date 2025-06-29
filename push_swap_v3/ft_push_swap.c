@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:23:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:41:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int push_swap(int *stack, int *len)
 	if (len[0] > 1 && !check_order(len[0], stack))
 	{
 		stacks[1] = malloc(len[0] * sizeof(int));
-		copy = malloc(len[0] * sizeof(int));
+		copy = malloc((len[0] + 1) * sizeof(int));
 		if (stacks[1] && copy)
 		{
 			stacks[1][0] = 0;
@@ -69,7 +69,7 @@ int push_swap(int *stack, int *len)
 			if (!counts)
 				return (0);
 			int j;
-			j = 0;
+			j = 1;
 			while (j < counts[0][0])
 			{
 				printf("counts[%d][0] = %d\n", j, counts[j][0]);

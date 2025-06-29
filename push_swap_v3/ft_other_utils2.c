@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 13:28:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:33:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	replace_with_rank(int *stack, int len, int *copy)
 	int	*sorted;
 
 	index[0] = -1;
-	sorted = malloc (len * sizeof(int));
+	sorted = malloc ((len + 1) * sizeof(int));
 	if (sorted)
 	{
 		while (index[0]++ < len)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prep_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/23 20:07:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:45:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	prep_string(int len, char **str, int *stack)
 			stack[i] = (int)to_save;
 		free (str_check);
 	}
-	free (str);
+	// free (str);
 	return (1);
 }
 
