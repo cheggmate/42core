@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:52:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 17:10:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ char	**ft_split_count(const char *s, char c, int *word_count)
 		{
 			result[i] = word_dup(s, c, result, i);
 			if (!result[i])
+			{
+				free_split(result, i);
 				return (NULL);
+			}
 			i++;
 			while (*s && *s != c)
 				s++;

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 16:33:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 17:18:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int push_swap(int *stack, int *len)
 			print_stack(stacks[0], len, 'a');			// remove this before submission.
 			print_stack(stacks[1], len, 'b');		// remove this before submission.
 			fflush(stdout);
-			// free (stacks[1]);
-			// free (copy);
+			free (stacks[1]);
+			free (copy);
 			free (counts);
 		}
 		if (!stacks[1])
