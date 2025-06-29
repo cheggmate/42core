@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:01:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:24:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -433,6 +433,7 @@ int	**presort_stack(int **stacks, int *len, int n, int iter)
 	if (n <= 5)
 	{
 		sort_small_a(stacks, len, n);
+		free(sml_bg);
 		return (0);
 	}
 	print_stack(stacks[0], len, 'a');

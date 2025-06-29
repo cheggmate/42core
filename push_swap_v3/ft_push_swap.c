@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:06:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:23:08 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int push_swap(int *stack, int *len)
 			fflush(stdout);
 			free (stacks[1]);
 			free (copy);
-			free (counts);
+			free_entire_array(counts, counts[0][0]);
 		}
 		if (!stacks[1])
 			return (0);
@@ -136,14 +136,15 @@ int	pswap_for_string(int *len, char **argv)
 		result = prep_string(len[0], str, stack);
 		if (result == 1)
 			result = check_dups(stack, len[0]);
-		// print_stack(stack, len, 'a');
 		if (result == 0)
+		{
+			free_everything(str, stack);
 			return (0);
+		}
 		result = push_swap(stack, len);
+		free_everything(str, stack);
 		if (result == 0)
 			return (0);
-		free(stack);
-		free_entire_str_array(str);
 		return (1);
 	}
 	return (0);
@@ -158,14 +159,9 @@ int	main(int argc, char **argv)
 	result = 0;
 	len[0] = argc - 1;
 	if (argc == 2)
-	{
-		// printf("inputs; %s\n", argv[1]);
 		result = pswap_for_string(len, argv);
-	}
 	else if (argc != 1)
-	{
 		result = pswap_for_int(len, argv);
-	}
 	if (argc == 1 || result == 0)
 		write(2, "Error\n", 6);
 	return (0);
