@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 20:28:40 by jotong            #+#    #+#              #
-#    Updated: 2025/06/23 20:38:10 by jotong           ###   ########.fr        #
+#    Updated: 2025/06/29 16:24:56 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ all: $(NAME)
 
 # Compile .o files into ft_push_swap
 $(NAME): $(OBJ)
-	${CC} ${FLAG} ${OBJ} -o ${NAME}
+	${CC} ${FLAG} ${OBJ} -o ${NAME} -lm
 
 # Compile .c to .o
 %.o : %.c ${HEADER}

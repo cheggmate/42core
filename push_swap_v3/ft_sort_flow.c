@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 16:10:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 16:12:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,6 @@ void	sort_small_b(int **stacks, int *len, int n)
 	sort_stack_b(stacks[1], len, n);
 	print_stack(stacks[1], len, 'b');
 	printf("n after mv largest frm b: %d\n", n );
-	// i = 0;
-	// if (i++ < n)
-	// 	move_back_b(stacks, len, n);
 	while (i++ < n)
 		pusha(stacks[0], stacks[1], len);
 	printf("after small sort\n");
