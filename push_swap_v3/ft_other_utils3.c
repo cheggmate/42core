@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/25 23:20:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 13:04:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	find_ind_max(int *stack_b, int b_len)
 	int	index;
 
 	i = 0;
+	index = 0;
 	max = stack_b[0];
 	while (i++ < b_len)
 	{

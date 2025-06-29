@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:37:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/20 00:57:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 16:07:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,27 @@ int	is_num(char *str)
 		return (1);
 }
 
+int	find_ind_min(int *str, int len)
+{
+	int i;
+	int	smallest;
+	int	index;
+
+	i = 1;
+	index = 0;
+	smallest = str[0];
+	while (i < len)
+	{
+		if (str[i] < smallest)
+		{
+			smallest = str[i];
+			index = i;
+		}
+		i++;
+	}
+	return (index);
+}
+
 int	find_pos(int *str, int val, int len)
 {
 	int i;
@@ -64,13 +85,14 @@ int	find_pos(int *str, int val, int len)
 	i = 0;
 	while (i < len)
 	{
-		if (val < str[i])
+		if (val != str[i])
 			i++;
 		else
 			return (i);
 	}
 	return (i);
 }
+
 int	find_largest(int *stack, int len)
 {
 	int	largest;

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 01:03:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 16:10:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int	mv_smallest_frm_a(int **stacks, int *len, int n)
 	printf("moving smallest from a\n");
 	while(i++ < n - 3)
 	{
-		smallest = find_smallest(stacks[0], len[0]);
+		if (len[0] < n)
+			smallest = find_smallest(stacks[0], len[0]);
+		else
+			smallest = find_smallest(stacks[0], n);
 		s_index = find_pos(stacks[0], smallest, len[0]);
+		// s_index = find_ind_min(stacks[0], n);
 		printf("smallest is %d at pos %d\n", smallest, s_index);
 		while (j++ < s_index)
 			rotate(stacks[0], len, 'a');
@@ -84,6 +88,7 @@ void	sort_small_a(int **stacks, int *len, int n)
 	if (n == 0)
 		return ;
 	printf("sorting a\n");
+	printf("[sort small a]: %d, len[0] = %d\n", n, len[0]);
 	if (n > 3)
 		moved = mv_smallest_frm_a(stacks, len, n);
 	print_stack(stacks[0], len, 'a');
@@ -111,7 +116,7 @@ void	sort_small_b(int **stacks, int *len, int n)
 	if (n > 3)
 	{
 		moved = mv_largest_frm_b(stacks, len, n);
-		n -= (moved - 1);
+		n -= moved;
 	}
 	print_stack(stacks[0], len, 'a');
 	print_stack(stacks[1], len, 'b');
@@ -292,6 +297,7 @@ void sort_b_btm(int **stacks, int *len, int n, int iter)
 	{
 		find_mids_b(stacks[1], n, sml_bg_tmp);
 		printf("[sort_b_btm] pivots: %d %d\n", sml_bg_tmp[0], sml_bg_tmp[1]);
+		i = 0;
 		if (!is_rev_sorted(stacks[1], n))
 			while (i++ < n)
 				count_tmp = sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
