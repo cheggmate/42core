@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:39:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/15 01:52:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 22:56:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ int	check_order(int len, int *stack)
 	i = 0;
 	while (i < len - 1)
 	{
-		// printf("checking %d\n", i);
-		// printf("stack[0] = %d\n", stack[0]);
-		// printf("stack1 = %d\n", stack[1]);
 		if (stack[i] < stack[i + 1])
 			i++;
 		else

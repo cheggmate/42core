@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 20:28:40 by jotong            #+#    #+#              #
-#    Updated: 2025/06/29 16:24:56 by jotong           ###   ########.fr        #
+#    Updated: 2025/06/29 23:24:03 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ FLAG		= -Wall -Wextra -Werror
 NAME		= push_swap
 REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c ft_libft_utils.c \
 				ft_libft_utils2.c ft_libft_utils3.c ft_split_sort_logic.c ft_other_utils2.c ft_check_utils.c \
-				ft_median_utils.c ft_prep_utils.c ft_iter_quicksort.c ft_list_split.c ft_list_ops.c \
+				ft_median_utils.c ft_prep_utils.c ft_list_split.c ft_list_ops.c ft_sort_rest.c \
 				 ft_list_split2.c ft_other_utils3.c ft_sort_flow.c
 OBJ 		= $(REQ_SRC:.c=.o)
 HEADER		= ft_push_swap.h

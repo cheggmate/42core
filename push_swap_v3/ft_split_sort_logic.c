@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 09:27:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/28 20:16:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 22:49:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	sort_stack(int *stack, int *len, int n)
 {
-	printf("sorting stack a\n");
 	if (n == 2)
 	{
 		if (stack[0] > stack[1])
@@ -51,12 +50,10 @@ void	sort_stack(int *stack, int *len, int n)
 		swap(stack, len , 'a');
 		rev_rot(stack, len, 'a');
 	}
-	printf("exiting sorting stack a\n");
 }
 
 void	sort_stack_b(int *stack_b, int *len, int n)
 {
-	printf("sorting stack b\n");
 	if (n == 2)
 	{
 		if (stack_b[0] < stack_b[1])
@@ -93,5 +90,4 @@ void	sort_stack_b(int *stack_b, int *len, int n)
 		swap(stack_b, len, 'b');
 		rev_rot(stack_b, len, 'b');
 	}
-	printf("exiting sorting stack b\n");
 }

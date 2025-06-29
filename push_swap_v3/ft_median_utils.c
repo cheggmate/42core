@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 22:37:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/28 22:54:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 22:54:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	find_mids_a(int *stack, int len, int *sml_bg)
 		insertion_sort(stack_dup, len);
 		if (len > 7 && len % 2 == 0)
 		{
-			printf("if flow for pivots\n");
+			// printf("if flow for pivots\n");
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3 - 1];
 		}
 		else if (len > 7)
 		{
-			printf("else if flow for pivots\n");
+			// printf("else if flow for pivots\n");
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3];
 		}
 		else
 		{
-			printf("else flow for pivots\n");
+			// printf("else flow for pivots\n");
 			sml_bg[1] = stack_dup[len - 2];
 			sml_bg[0] = stack_dup[(len / 2) - 1];
 		}
@@ -85,41 +85,3 @@ void	find_mids_b(int *stack, int len, int *sml_bg)
 	}
 	free (stack_dup);
 }
-
-// void	find_mids_b_bottom(int *stack, int len, int *sml_bg)
-// {
-// 	int			*stack_dup;
-// 	int			ctr;
-
-// 	ctr = 0;
-// 	if (len == 0)
-// 		while (stack[ctr] >= sml_bg[0] &&  stack[ctr] <= sml_bg[1] && ctr < sml_bg[1])
-// 		{
-// 			len++;
-// 			ctr++;
-// 		}
-// 	stack_dup = ft_arr_dup(stack, len);
-// 	if (stack_dup)
-// 	{
-// 		insertion_sort(stack_dup, len);
-// 		if (len > 3 && len % 2 == 0)
-// 		{
-// 			sml_bg[1] = stack_dup[len / 3 * 2];
-// 			sml_bg[0] = stack_dup[len / 3 - 1];
-// 		}
-// 		else if (len > 3)
-// 		{
-// 			sml_bg[1] = stack_dup[len / 3 * 2];
-// 			sml_bg[0] = stack_dup[len / 3];
-// 		}
-// 	}
-// 	free (stack_dup);
-// }
-
-// void	calc_mids(t_list_split *curr, int *sml_bg)
-// {
-// 	sml_bg[0] = (curr->smlr - curr->start) / 3;
-// 	sml_bg[1] = (curr->end - curr->bgr) / 3 * 2;
-// 	sml_bg[2] = curr->start;
-// 	sml_bg[3] = curr->end;
-// }

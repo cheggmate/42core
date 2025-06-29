@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 20:45:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 22:37:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int	prep_values(int len, int *stack, char **argv)
 
 	i = -1;
 	if (!stack)
-	{
-		// free (stack);
 		return (0);
-	}
 	if (is_num(argv[1]))
 	{
 		while (i++ < len - 1)
@@ -50,10 +47,7 @@ int	prep_string(int len, char **str, int *stack)
 	i = -1;
 	to_save = 0;
 	if (!stack)
-	{
-		// free (stack);
 		return (0);
-	}
 	while (i++ < len - 1)
 	{
 		str_check = ft_itoa(ft_atoi(str[i]));
@@ -65,7 +59,6 @@ int	prep_string(int len, char **str, int *stack)
 			stack[i] = (int)to_save;
 		free (str_check);
 	}
-	// free (str);
 	return (1);
 }
 

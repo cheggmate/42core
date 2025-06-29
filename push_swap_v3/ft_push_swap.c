@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 20:41:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/30 00:16:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int push_swap(int *stack, int *len)
 {
 	int	*stacks[2];
 	int	*copy;
-	static int	iter = 0;		// remove later
 	int	**counts;
 
 	len[1] = 0;
@@ -63,28 +62,14 @@ int push_swap(int *stack, int *len)
 			stacks[0] = stack;
 			replace_with_rank(stacks[0], len[0], copy);
 			stacks[0] = copy;
-			printf("before sorting\n");
-			print_stack(stacks[0], len, 'a');			// remove this before submission.
-			counts = presort_stack(stacks, len, len[0], iter);
+			counts = presort_stack(stacks, len, len[0]);
 			if (!counts)
 				return (0);
-			int j;
-			j = 1;
-			while (j < counts[0][0])
-			{
-				printf("counts[%d][0] = %d\n", j, counts[j][0]);
-				printf("counts[%d][1] = %d\n", j, counts[j][1]);
-				printf("counts[%d][2] = %d\n", j, counts[j][2]);
-				j++;
-			}
-			printf("sorting back\n");
-			sort_back(stacks, len, counts, &iter);
-			// ft_sort_b(stacks, len, counts, iter);								// this needs to change one instance of count later counts[3] for example.
-			// ft_sort_a(stacks, len, sml_bg, len[0], iter);					// remoive iter
-			printf("after sorting\n");
-			fflush(stdout);
-			print_stack(stacks[0], len, 'a');			// remove this before submission.
-			print_stack(stacks[1], len, 'b');		// remove this before submission.
+			sort_back(stacks, len, counts);
+			// if (!is_sorted(stacks[0], len[0]))
+			// 	sort_rest(stacks, len);
+			print_stack(stacks[0], len, 'a');
+			print_stack(stacks[1], len, 'b');
 			fflush(stdout);
 			free (stacks[1]);
 			free (copy);
@@ -106,12 +91,10 @@ int	pswap_for_int(int *len, char **argv)
 	if (stack)
 	{
 		result = prep_values(len[0], stack, argv);
-		// print_stack(stack, len, 'a');
 		if (result == 1)
 			result = check_dups(stack, len[0]);
 		if (result == 0)
 			return (0);
-		// print_stack(stack, len, 'a');
 		result = push_swap(stack, len);
 		if (!stack || result == 0)
 			return (0);
