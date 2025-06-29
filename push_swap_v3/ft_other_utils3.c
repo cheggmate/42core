@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:26:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:27:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	free_entire_str_array(char **str)
 
 void free_everything(char **str, int *stack)
 {
-	free(stack);
-	free_entire_str_array(str);
+	if (stack)
+		free(stack);
+	if (str)
+		free_entire_str_array(str);
 }
