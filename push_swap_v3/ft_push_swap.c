@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:02:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:06:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int	pswap_for_string(int *len, char **argv)
 		if (result == 0)
 			return (0);
 		free(stack);
-		free_entire_str_array(str, len[0]);
+		free_entire_str_array(str);
 		return (1);
 	}
 	return (0);

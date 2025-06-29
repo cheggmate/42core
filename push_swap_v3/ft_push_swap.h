@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:02:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:06:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				is_rev_sorted(int *stack, int len);
 int				find_ind_max(int *stack_b, int b_len);
 int				find_ind_min(int *stack, int len);
 void			free_entire_array(int **counts_psrt, int i);
-void			free_entire_str_array(char **str, int i);
+void			free_entire_str_array(char **str);
 // void			move_btoa_base_case(int **stacks, int *len, int sub_len);
 void			find_mids_a(int *stack, int len, int *sml_bg);
 void			find_mids_b(int *stack, int len, int *sml_bg);
