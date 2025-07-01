@@ -36,7 +36,7 @@ void	ft_lstadd_back_ops(t_list_ops **lst, t_list_ops *new)
 	}
 }
 
-t_list_ops	*ft_lstnew_ops(int *op_type)
+t_list_ops	*ft_lstnew_ops(char *op_type)
 {
 	t_list_ops	*new;
 
@@ -80,12 +80,12 @@ int	ft_lstsize_ops(t_list_ops *list)
 	return (count);
 }
 
-void	ft_lstclear_ops(t_list_split **lst)
+void	ft_lstclear_ops(t_list_ops *lst)
 {
-	t_list_split	*curr;
-	t_list_split	*succ;
+	t_list_ops	*curr;
+	t_list_ops	*succ;
 
-	curr = *lst;
+	curr = lst;
 	while (curr -> next)
 	{
 		succ = curr -> next;
@@ -93,5 +93,5 @@ void	ft_lstclear_ops(t_list_split **lst)
 		curr = succ;
 	}
 	free(curr);
-	*lst = NULL;
+	lst = NULL;
 }

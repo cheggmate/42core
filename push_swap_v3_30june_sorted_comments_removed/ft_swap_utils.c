@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:33:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/01 23:36:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,41 @@
 
 #include "ft_push_swap.h"
 
-void	swap(int *stack, int *len, int ab)
+void	swap(t_stack *stack, t_list_ops *curr, int ab)
 {
 	int	tmp;
 	int	*len_ptr;
+	int	*stack_toswap;
 
 	if (ab == 'a' || ab == 'x')
-		len_ptr = &len[0];
+	{
+		len_ptr = &stack->len_a;
+		stack_toswap = stack->stack_a;
+	}
 	else
-		len_ptr = &len[1];
-
+	{
+		len_ptr = &stack->len_b;
+		stack_toswap = stack->stack_b;
+	}
 	if (*len_ptr >= 2)
 	{
-		tmp = stack[0];
-		stack[0] = stack[1];
-		stack[1] = tmp;
+		tmp = stack_toswap[0];
+		stack_toswap[0] = stack_toswap[1];
+		stack_toswap[1] = tmp;
 		if (ab == 'a')
 			write (1, "sa", 2);
 		else if (ab == 'b')
 			write (1, "sb", 2);
 		if (ab == 'a' || ab == 'b')
 			write (1, "\n", 1);
+		printf("curr->len = %d\n", curr->len);
 	}
 }
 
-void	swap_both(int *stack_a, int *stack_b, int *len)
+void	swap_both(t_stack *stack, t_list_ops *curr)
 {
-	swap(stack_a, &len[0], 'x');
-	swap(stack_b, &len[1], 'x');
+	swap(stack, curr, 'x');
+	swap(stack, curr, 'y');
 	write(1, "ss", 2);
 	write (1, "\n", 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:39:44 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 08:21:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/01 21:45:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ int	check_order(int len, int *stack)
 	return (1);
 }
 
-int	check_dups(int	*stack, int len)
+int	check_dups(t_stack *stack)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < len)
+	while (i < stack->len_a)
 	{
 		j = 0;
-		while (j < len)
+		while (j < stack->len_a)
 		{
-			if (stack[j] == stack[i] && i != j)
+			if (stack->stack_a[j] == stack->stack_a[i] && i != j)
 				return (0);
 			else
 				j++;

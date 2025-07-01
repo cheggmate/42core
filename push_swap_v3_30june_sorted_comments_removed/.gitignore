@@ -7,3 +7,4 @@ a.out
 checker_linux
 checker_Mac
 *.dSYM
+*.gch

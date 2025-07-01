@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 10:00:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 00:22:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,93 +45,93 @@
 
 #include "ft_push_swap.h"
 
-// static int	push_swap_helper(int **stacks, int *len, int *copy, int **counts)
+// static int	push_swap_helper(int **stacks, int *len_smlbg, int *copy, int **counts)
 // {
 	
 // 	return (1);
 // }
 
-int push_swap(int *stack, int *len)
+int push_swap(t_stack *stack)
 {
-	int	*stacks[2];
-	int	*copy;
-	int	**counts;
+	int			*copy;
+	int			**counts;
+	t_list_ops	*curr;
 
-	len[1] = 0;
-	if (len[0] > 1 && !check_order(len[0], stack))
+	stack->len_b = 0;
+	if (stack->len_a > 1 && !check_order(stack->len_a, stack->stack_a))
 	{
-		stacks[1] = (int *)ft_calloc(len[0], sizeof(int));
-		copy = (int *)ft_calloc((len[0] + 1), sizeof(int));
-		if (stacks[1] && copy)
+		stack->stack_b = (int *)ft_calloc(stack->len_a, sizeof(int));
+		copy = (int *)ft_calloc((stack->len_a + 1), sizeof(int));
+		curr = malloc(sizeof(t_list_ops));
+		if (stack->stack_b && copy)
 		{
-			stacks[1][0] = 0;
-			stacks[0] = stack;
-			replace_with_rank(stacks[0], len[0], copy);
-			stacks[0] = copy;
-			print_stack(stacks[0], len, 'a');
+			stack->stack_b[0] = 0;
+			replace_with_rank(stack->stack_a, stack->len_a, copy);
+			stack->stack_a = copy;
+			print_stack(stack, 'a');
 			printf("-------\n");
-			counts = presort_stack(stacks, len, len[0]);
+			curr->len = stack->len_a;
+			curr->op_type = "x";
+			counts = presort_stack(stack, curr);
 			if (!counts)
 				return (0);
-			
-			sort_back(stacks, len, counts);
-			print_stack(stacks[0], len, 'a');
+			sort_back(stack, curr, counts);
+			print_stack(stack, 'a');
 			fflush(stdout);							//remove before submission
-			free (stacks[1]);
+			free (stack->stack_b);
 			free (copy);
 			free_entire_array(counts, counts[0][0]);
 		}
-		if (!stacks[1])
+		if (!stack->stack_b)
 			return (0);
 	}
 	return (1);
 }
 
-int	pswap_for_int(int *len, char **argv)
+int	pswap_for_int(t_stack *stack, char **argv)
 {
-	int			*stack;
 	int			result;
 
 	result = 0;
-	stack = ft_calloc ((len[0] + 1), sizeof(int));
-	if (stack)
+	stack->stack_a = ft_calloc ((stack->len_a + 1), sizeof(int));
+	if (stack->stack_a)
 	{
-		result = prep_values(len[0], stack, argv);
+		result = prep_values(stack, argv);
 		if (result == 1)
-			result = check_dups(stack, len[0]);
+			result = check_dups(stack);
 		if (result == 0)
 			return (0);
-		result = push_swap(stack, len);
+		result = push_swap(stack);
 		if (!stack || result == 0)
 			return (0);
 		return (1);
 	}
-	free(stack);
 	return (0);
 }
 
-int	pswap_for_string(int *len, char **argv)
+int	pswap_for_string(t_stack *stack, char **argv)
 {
-	int			*stack;
 	char		**str;
 	int			result;
 
 	result = 0;
-	stack = NULL;
-	str = ft_split_count(argv[1], ' ', len);
-	stack = ft_calloc ((len[0] + 1), sizeof(int));
+	stack->stack_a = NULL;
+	str = ft_split_count(argv[1], ' ', &stack->len_a);
+	stack->stack_a = ft_calloc ((stack->len_a + 1), sizeof(int));
 	if (stack)
 	{
-		result = prep_string(len[0], str, stack);
+		result = prep_string(stack, str);
 		if (result == 1)
-			result = check_dups(stack, len[0]);
+			result = check_dups(stack);
 		if (result == 0)
 		{
-			free_everything(str, stack);
+			// free_everything(str, stack->stack_a);
+			free(str);
 			return (0);
 		}
-		result = push_swap(stack, len);
-		free_everything(str, stack);
+		result = push_swap(stack);
+		// free_everything(str, stack->stack_a);
+		free(str);
 		if (result == 0)
 			return (0);
 		return (1);
@@ -141,18 +141,23 @@ int	pswap_for_string(int *len, char **argv)
 
 int	main(int argc, char **argv)
 {
-	int	len[2];
-	int	result;
+	int		result;
+	t_stack	*stack;
 
 	setvbuf(stdout, NULL, _IONBF, 0);
 	result = 0;
-	len[0] = argc - 1;
-	if (argc == 2)
-		result = pswap_for_string(len, argv);
-	else if (argc != 1)
-		result = pswap_for_int(len, argv);
-	if (argc == 1 || result == 0)
-		write(2, "Error\n", 6);
+	stack = malloc(sizeof(t_stack));
+	if (stack)
+	{
+		stack->len_a = argc - 1;
+		if (argc == 2)
+			result = pswap_for_string(stack, argv);
+		else if (argc != 1)
+			result = pswap_for_int(stack, argv);
+		if (argc == 1 || result == 0)
+			write(2, "Error\n", 6);
+		free(stack);
+	}
 	return (0);
 }
 

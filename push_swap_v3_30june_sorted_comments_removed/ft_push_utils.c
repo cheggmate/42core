@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:19:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:25:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 00:57:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,37 +17,43 @@
 
 #include "ft_push_swap.h"
 
-int	pusha(int	*stack_dest, int *stack_src, int *len)
+int	pusha(t_stack *stack, t_list_ops *curr)
 {
-	if (len[1] > 0)
+	if (stack->len_b > 0)
 	{
-		if (len[0] > 0)
-			ft_memmove(&stack_dest[1], &stack_dest[0], (len[0]) * sizeof(int));
-		stack_dest[0] = stack_src[0];
-		len[0] += 1;
-		ft_memmove(&stack_src[0], &stack_src[1], (len[1] - 1) * sizeof(int));
-		stack_src[len[1] - 1] = 0;
-		len[1] -= 1;
+		if (stack->len_a > 0)
+			ft_memmove(&stack->stack_a[1], &stack->stack_a[0], (stack->len_a) * sizeof(int));
+		stack->stack_a[0] = stack->stack_b[0];
+		stack->len_a += 1;
+		ft_memmove(&stack->stack_b[0], &stack->stack_b[1], (stack->len_b - 1) * sizeof(int));
+		stack->stack_b[stack->len_b - 1] = 0;
+		stack->len_b -= 1;
 		write (1, "pa", 2);
 		write (1, "\n", 1);
+		printf("curr->len = %d\n", curr->len);
+		print_stack(stack, 'a');
+		print_stack(stack, 'b');
 		return (1);
 	}
 	return (0);
 }
 
-int	pushb(int	*stack_dest, int *stack_src, int *len)
+int	pushb(t_stack *stack, t_list_ops *curr)
 {
-	if (len[0] > 0)
+	if (stack->len_a > 0)
 	{
-		if (len[1] > 0)
-			ft_memmove(&stack_dest[1], &stack_dest[0], (len[1]) * sizeof(int));
-		stack_dest[0] = stack_src[0];
-		len[1] += 1;
-		ft_memmove(&stack_src[0], &stack_src[1], (len[0] - 1) * sizeof(int));
-		stack_src[len[0] - 1] = 0;
-		len[0] -= 1;
+		if (stack->len_b > 0)
+			ft_memmove(&stack->stack_b[1], &stack->stack_b[0], (stack->len_b) * sizeof(int));
+		stack->stack_b[0] = stack->stack_a[0];
+		stack->len_b += 1;
+		ft_memmove(&stack->stack_a[0], &stack->stack_a[1], (stack->len_a - 1) * sizeof(int));
+		stack->stack_a[stack->len_a - 1] = 0;
+		stack->len_a -= 1;
 		write (1, "pb", 2);
 		write (1, "\n", 1);
+		printf("curr->len = %d\n", curr->len);
+		print_stack(stack, 'a');
+		print_stack(stack, 'b');
 		return (1);
 	}
 	return (0);

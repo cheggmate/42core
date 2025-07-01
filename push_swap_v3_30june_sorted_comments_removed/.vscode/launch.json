@@ -1,6 +1,20 @@
 {
 	"version": "0.2.0",
 	"configurations": [
+		{
+			"name": "(lldb) Launch",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/a.out",
+			"args": [
+				"11 15 9 12 10 18 14 17 8 19 13 7 -1 1 16 4 5 3 6 2 "
+		],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
 		
 
 		{

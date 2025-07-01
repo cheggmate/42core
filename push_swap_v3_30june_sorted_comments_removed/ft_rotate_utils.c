@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rotate_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:18:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:31:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 00:38:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,44 +23,35 @@
 
 #include "ft_push_swap.h"
 
-void	rotate(int *stack, int *len, int ab)
+void	rotate(int *stack, int len, t_list_ops *curr, int ab)
 {
 	int	tmp;
-	int	*len_ptr;
 
-	if (ab == 'a' || ab == 'x')
-		len_ptr = &len[0];
-	else
-		len_ptr = &len[1];
 	tmp = 0;
-	if (*len_ptr >= 2)
+	if (len >= 2)
 	{
 		tmp = stack[0];
-		ft_memmove(&stack[0], &stack[1], (*len_ptr - 1) * sizeof(int));
-		stack[*len_ptr - 1] = tmp;
+		ft_memmove(&stack[0], &stack[1], (len - 1) * sizeof(int));
+		stack[len- 1] = tmp;
 		if (ab == 'a')
 			write (1, "ra", 2);
 		else if (ab == 'b')
 			write (1, "rb", 2);
 		if (ab == 'a' || ab == 'b')
 			write (1, "\n", 1);
+		printf("curr->len = %d\n", curr->len);
 	}
 }
 
-void	rev_rot(int *stack, int *len, int ab)
+void	rev_rot(int *stack, int len, t_list_ops *curr, int ab)
 {
 	int	tmp;
-	int	*len_ptr;
 
 	tmp = 0;
-	if (ab == 'a' || ab == 'x')
-		len_ptr = &len[0];
-	else
-		len_ptr = &len[1];
-	if (*len >= 2)
+	if (len >= 2)
 	{
-		tmp = stack[*len_ptr - 1];
-		ft_memmove(&stack[1], &stack[0], (*len_ptr - 1) * sizeof(int));
+		tmp = stack[len- 1];
+		ft_memmove(&stack[1], &stack[0], (len - 1) * sizeof(int));
 		stack[0] = tmp;
 		if (ab == 'a')
 			write (1, "rra", 3);
@@ -68,22 +59,22 @@ void	rev_rot(int *stack, int *len, int ab)
 			write (1, "rrb", 3);
 		if (ab == 'a' || ab == 'b')
 			write (1, "\n", 1);
+		printf("curr->len = %d\n", curr->len);
 	}
 }
 
-void	rr(int	*stack_a, int *stack_b, int *len)
+void	rr(t_stack *stack, t_list_ops *curr)
 {
-	rotate(stack_a, &len[0], 'x');
-	rotate(stack_b, &len[1], 'y');
+	rotate(stack->stack_a, stack->len_a, curr, 'x');
+	rotate(stack->stack_b, stack->len_b, curr, 'y');
 	write (1, "rr", 2);
 	write (1, "\n", 1);
 }
 
-void	rrr(int	*stack_a, int *stack_b, int *len)
+void	rrr(t_stack *stack, t_list_ops *curr)
 {
-	rev_rot(stack_a, &len[0], 'r');
-	rev_rot(stack_b, &len[1], 'r');
+	rev_rot(stack->stack_a, stack->len_a, curr, 'r');
+	rev_rot(stack->stack_b, stack->len_b, curr, 'r');
 	write (1, "rrr", 3);
 	write (1, "\n", 1);
-
 }
