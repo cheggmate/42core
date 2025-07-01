@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/30 00:18:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/01 08:54:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	mv_smallest_frm_a(int **stacks, int *len, int n)
 
 int	mv_largest_frm_b(int **stacks, int *len, int n)
 {
-	// int	largest;
 	int	s_index;
 	int i;
 	int j;
@@ -53,7 +52,6 @@ int	mv_largest_frm_b(int **stacks, int *len, int n)
 	moved = 0;
 	while(i++ < n - 3)
 	{
-		// largest = find_largest(stacks[1], len[1]);
 		s_index = find_ind_max(stacks[1], n);
 		while (j++ < s_index)
 			rotate(stacks[1], len, 'b');
@@ -115,19 +113,16 @@ int	*sort_a_base(int **stacks, int *len, int *sml_bg, int *counts)
 	// pushes the top n into the respective parts of the stacks
 	if (stacks[0][0] >= sml_bg[1])
 	{
-		// printf("sort_a_base: largest stack\n");
 		rotate(stacks[0], len, 'a');
 		counts[2]++;
 	}
 	else if (stacks[0][0] >= sml_bg[0])
 	{
-		// printf("sort_a_base: middle stack\n");
 		pushb(stacks[1], stacks[0], len);
 		counts[1]++;
 	}
 	else
 	{
-		// printf("sort_a_base: smallest stack\n");
 		pushb(stacks[1], stacks[0], len);
 		rotate(stacks[1], len, 'b');
 		counts[0]++;
@@ -142,8 +137,8 @@ void	sort_a_top(int **stacks, int *len, int n)
 	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = (int *)malloc(3 * sizeof(int));
-	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
+	count_tmp = (int *)ft_calloc(3, sizeof(int));
+	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
 	if (!count_tmp || ! sml_bg_tmp)
 		return ;
 	if (n <= 5)
@@ -154,18 +149,9 @@ void	sort_a_top(int **stacks, int *len, int n)
 		if (!is_sorted(stacks[0], n))
 			while (i++ < n)
 				count_tmp = sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
-		// if (count_tmp[2] > 0)
-		// 	sort_a_btm(stacks, len, count_tmp[2]);
-		// if (count_tmp[1] > 0)
-		// 	sort_b_top(stacks, len, count_tmp[1]);
-		// if (count_tmp[0] > 0)
-		// 	sort_b_btm(stacks, len, count_tmp[0]);
 		sort_a_btm(stacks, len, count_tmp[2]);
 		sort_b_top(stacks, len, count_tmp[1]);
 		sort_b_btm(stacks, len, count_tmp[0]);
-		printf("sort a top (n = %d)\n", n);
-		print_stack(stacks[0], len, 'a');
-		print_stack(stacks[1], len, 'b');
 	}
 	free(sml_bg_tmp);
 	free (count_tmp);
@@ -178,12 +164,12 @@ void	sort_a_btm(int **stacks, int *len, int n)
 	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = (int *)malloc(3 * sizeof(int));
-	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
+	count_tmp = (int *)ft_calloc(3, sizeof(int));
+	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
 	i = 0;
-	if (len[0] > n) // if the len of the array is less than the size of the substack.
+	if (len[0] > n)
 		while (i++ < n)
 			rev_rot(stacks[0], len, 'a');
 	if (n <= 5)
@@ -197,19 +183,11 @@ void	sort_a_btm(int **stacks, int *len, int n)
 				while (i++ < n)
 					count_tmp = sort_a_base(stacks, len, sml_bg_tmp, count_tmp);
 			}
-			// if (count_tmp[2] > 0 && len[0] > count_tmp[2])
-			// 	sort_a_btm(stacks, len, count_tmp[2]);		
-			// if (count_tmp[1] > 0)
-			// 	sort_b_top(stacks, len, count_tmp[1]);
-			// if (count_tmp[0] > 0)
-			// 	sort_b_top(stacks, len, count_tmp[0]);
 			if (count_tmp[2] > 0 && len[0] > count_tmp[2])
-				sort_a_btm(stacks, len, count_tmp[2]);		
-			sort_b_top(stacks, len, count_tmp[1]);
-			sort_b_top(stacks, len, count_tmp[0]);
-			printf("sort a btm (n = %d)\n", n);
-			print_stack(stacks[0], len, 'a');
-			print_stack(stacks[1], len, 'b');
+				sort_a_btm(stacks, len, count_tmp[2]);
+			if (count_tmp[1] > 0 && (stacks[0][0] - stacks[1][0]) <= count_tmp[1])
+				sort_b_top(stacks, len, count_tmp[1]);
+			sort_b_btm(stacks, len, count_tmp[0]);
 		}
 	free(sml_bg_tmp);
 	free (count_tmp);
@@ -217,7 +195,6 @@ void	sort_a_btm(int **stacks, int *len, int n)
 
 int	*sort_b_base(int **stacks, int *len, int *sml_bg, int *counts)
 {
-	// This pushses the top of b into the respective parts of the stack.
 	if (stacks[1][0] >= sml_bg[1])
 	{
 		// largest
@@ -248,8 +225,8 @@ void sort_b_btm(int **stacks, int *len, int n)
 	int	*sml_bg_tmp;
 
 	i = 0;
-	count_tmp = malloc (3 * sizeof(int));
-	sml_bg_tmp = (int *) malloc(2 * sizeof(int));
+	count_tmp = ft_calloc(3, sizeof(int));
+	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
 	sml_bg_tmp[0] = 0;
@@ -264,18 +241,9 @@ void sort_b_btm(int **stacks, int *len, int n)
 		if (!is_rev_sorted(stacks[1], n))
 			while (i++ < n)
 				count_tmp = sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
-		// if (count_tmp[2] > 0)
-		// 	sort_a_top(stacks, len, count_tmp[2]);
-		// if (count_tmp[1] > 0)
-		// 	sort_a_btm(stacks, len, count_tmp[1]);
-		// if (count_tmp[0] > 0)
-		// 	sort_b_btm(stacks, len, count_tmp[0]);
 		sort_a_top(stacks, len, count_tmp[2]);
 		sort_a_btm(stacks, len, count_tmp[1]);
 		sort_b_btm(stacks, len, count_tmp[0]);
-		printf("sort b btm (n = %d)\n", n);
-		print_stack(stacks[0], len, 'a');
-		print_stack(stacks[1], len, 'b');
 	}
 	free(sml_bg_tmp);
 	free(count_tmp);
@@ -287,8 +255,8 @@ void	sort_b_top(int **stacks, int *len, int n)
 	int *count_tmp;
 	int *sml_bg_tmp;
 
-	count_tmp = (int *)malloc(3 * sizeof(int));
-	sml_bg_tmp = (int *)malloc(2 * sizeof(int));
+	count_tmp = (int *)ft_calloc(3, sizeof(int));
+	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
 	if (n <= 5)
@@ -299,13 +267,10 @@ void	sort_b_top(int **stacks, int *len, int n)
 		find_mids_b(stacks[1], n, sml_bg_tmp);
 		if (!is_sorted(stacks[1], n))
 			while (i++ < n)
-				count_tmp = sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
+			count_tmp = sort_b_base(stacks, len, sml_bg_tmp, count_tmp);
 		sort_a_top(stacks, len, count_tmp[2]);
 		sort_a_btm(stacks, len, count_tmp[1]);
 		sort_b_btm(stacks, len, count_tmp[0]);
-		printf("sort b top (n = %d)\n", n);
-		print_stack(stacks[0], len, 'a');
-		print_stack(stacks[1], len, 'b');
 	}
 	free(sml_bg_tmp);
 	free(count_tmp);
@@ -326,12 +291,12 @@ int	**set_psrt_count(int len)
 
 	i = 0;
 	iter_count = (log10(len) / log10(3)) + 2;
-	counts_psrt = malloc((iter_count + 1) * sizeof(int *));
+	counts_psrt = ft_calloc((iter_count + 1),  sizeof(int *));
 	if (!counts_psrt)
 		return (NULL);
 	while (i++ < iter_count)
 		counts_psrt[i] = NULL;
-	counts_psrt[0] = malloc(2 * sizeof(int));
+	counts_psrt[0] = ft_calloc(2,  sizeof(int));
 	if (!counts_psrt[0])
 	{
 		free (counts_psrt);
@@ -340,7 +305,7 @@ int	**set_psrt_count(int len)
 	i = 1;
 	while (i < iter_count)
 	{
-		counts_psrt[i] = malloc(3 * sizeof(int));
+		counts_psrt[i] = ft_calloc(3,  sizeof(int));
 		if (!counts_psrt[i])
 		{
 			free_entire_array(counts_psrt, i);
@@ -362,7 +327,7 @@ int	**presort_stack(int **stacks, int *len, int n)
 
 	j = 1;
 	counts_psrt = set_psrt_count(*len);
-	sml_bg = (int *)malloc(2 * sizeof(int)); 
+	sml_bg = (int *)ft_calloc(2, sizeof(int)); 
 	if (!counts_psrt || !sml_bg)
 	{
 		free_entire_array(counts_psrt, counts_psrt[0][0]);
@@ -380,15 +345,9 @@ int	**presort_stack(int **stacks, int *len, int n)
 		find_mids_a(stacks[0], len[0], sml_bg);
 		i = 0;
 		len_tmp = len[0];
-		while (i++ <= counts_psrt[0][0] - 1)
-		{
-			counts_psrt[j][0] = 0;
-			counts_psrt[j][1] = 0;
-			counts_psrt[j][2] = 0;
-		}
 		i = 0;
 		while (i++ < len_tmp)
-			counts_psrt[j] = sort_a_base(stacks, len, sml_bg, &counts_psrt[j][0]);
+			counts_psrt[j] = sort_a_base(stacks, len, sml_bg, counts_psrt[j]);
 		j++;
 	}
 	sort_small_a(stacks, len, len[0]);

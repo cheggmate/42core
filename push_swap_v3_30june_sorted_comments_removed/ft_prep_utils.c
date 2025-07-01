@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prep_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/26 18:36:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:45:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	prep_values(int len, int *stack, char **argv)
 
 	i = -1;
 	if (!stack)
+	{
+		// free (stack);
 		return (0);
+	}
 	if (is_num(argv[1]))
 	{
 		while (i++ < len - 1)
@@ -29,10 +32,7 @@ int	prep_values(int len, int *stack, char **argv)
 			str_chk = ft_itoa(to_save);
 			if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0 || \
 				ft_strncmp(str_chk, argv[i + 1], ft_strlen(argv[i + 1])) != 0)
-				{
-					free(str_chk);
-					return (0);
-				}
+				return (0);
 			else
 				stack[i] = to_save;
 		}
@@ -65,7 +65,7 @@ int	prep_string(int len, char **str, int *stack)
 			stack[i] = (int)to_save;
 		free (str_check);
 	}
-	free (str);
+	// free (str);
 	return (1);
 }
 

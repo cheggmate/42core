@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/30 00:16:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:00:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@
 
 #include "ft_push_swap.h"
 
+// static int	push_swap_helper(int **stacks, int *len, int *copy, int **counts)
+// {
+	
+// 	return (1);
+// }
+
 int push_swap(int *stack, int *len)
 {
 	int	*stacks[2];
@@ -54,23 +60,23 @@ int push_swap(int *stack, int *len)
 	len[1] = 0;
 	if (len[0] > 1 && !check_order(len[0], stack))
 	{
-		stacks[1] = malloc(len[0] * sizeof(int));
-		copy = malloc((len[0] + 1) * sizeof(int));
+		stacks[1] = (int *)ft_calloc(len[0], sizeof(int));
+		copy = (int *)ft_calloc((len[0] + 1), sizeof(int));
 		if (stacks[1] && copy)
 		{
 			stacks[1][0] = 0;
 			stacks[0] = stack;
 			replace_with_rank(stacks[0], len[0], copy);
 			stacks[0] = copy;
+			print_stack(stacks[0], len, 'a');
+			printf("-------\n");
 			counts = presort_stack(stacks, len, len[0]);
 			if (!counts)
 				return (0);
+			
 			sort_back(stacks, len, counts);
-			// if (!is_sorted(stacks[0], len[0]))
-			// 	sort_rest(stacks, len);
 			print_stack(stacks[0], len, 'a');
-			print_stack(stacks[1], len, 'b');
-			fflush(stdout);
+			fflush(stdout);							//remove before submission
 			free (stacks[1]);
 			free (copy);
 			free_entire_array(counts, counts[0][0]);
@@ -87,7 +93,7 @@ int	pswap_for_int(int *len, char **argv)
 	int			result;
 
 	result = 0;
-	stack = malloc ((len[0] + 1) * sizeof(int));
+	stack = ft_calloc ((len[0] + 1), sizeof(int));
 	if (stack)
 	{
 		result = prep_values(len[0], stack, argv);
@@ -113,7 +119,7 @@ int	pswap_for_string(int *len, char **argv)
 	result = 0;
 	stack = NULL;
 	str = ft_split_count(argv[1], ' ', len);
-	stack = malloc ((len[0] + 1) * sizeof(int));
+	stack = ft_calloc ((len[0] + 1), sizeof(int));
 	if (stack)
 	{
 		result = prep_string(len[0], str, stack);

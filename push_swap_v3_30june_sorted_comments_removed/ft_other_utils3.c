@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_other_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/26 09:07:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:27:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	find_ind_max(int *stack_b, int b_len)
 	int	index;
 
 	i = 0;
+	index = 0;
 	max = stack_b[0];
 	while (i++ < b_len)
 	{
@@ -33,25 +34,13 @@ int	find_ind_max(int *stack_b, int b_len)
 
 void	free_entire_array(int **counts_psrt, int i)
 {
-	// int j;
+	int j;
 
-	// j = 0;
-	// if (!counts_psrt)
-	// 	return ;
-	// while (j < i)
-	// {
-	// 	if (counts_psrt[i] != NULL)
-	// 		free(counts_psrt[i]);
-	// 	j++;
-	// }
-	// free(counts_psrt);
-	int j = 0;
-	if (!counts_psrt)
-		return;
+	j = 0;
 	while (j < i)
 	{
-		if (counts_psrt[j])
-			free(counts_psrt[j]);  // make sure arr[i] is not NULL or invalid
+		if (counts_psrt[j] != NULL)
+			free(counts_psrt[j]);
 		j++;
 	}
 	free(counts_psrt);
@@ -69,4 +58,25 @@ int	is_rev_sorted(int *stack, int len)
 		i++;
 	}
 	return (1);
+}
+
+void	free_entire_str_array(char **str)
+{
+	int index;
+
+	index = 0;
+	while (str[index])
+	{
+			free(str[index]);
+			index++;
+	}
+	free(str);
+}
+
+void free_everything(char **str, int *stack)
+{
+	if (stack)
+		free(stack);
+	if (str)
+		free_entire_str_array(str);
 }

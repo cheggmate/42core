@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/16 22:52:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/30 20:48:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,32 @@ char	**ft_split_count(const char *s, char c, int *word_count)
 		{
 			result[i] = word_dup(s, c, result, i);
 			if (!result[i])
+			{
+				free_split(result, i);
 				return (NULL);
+			}
 			i++;
 			while (*s && *s != c)
 				s++;
 		}
 	}
 	return (result);
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	unsigned char		*arr;
+
+	arr = NULL;
+	if (num <= 0 || size <= 0)
+		return (malloc(0));
+	if (num == (size_t)INT_MAX || size == (size_t)INT_MAX)
+		return (NULL);
+	if ((num > 0 && size > SIZE_MAX / num) || (num * size) / num != size)
+		return (NULL);
+	arr = malloc(num * size);
+	if (!arr)
+		return (NULL);
+	ft_memset(arr, 0, (num * size));
+	return (arr);
 }

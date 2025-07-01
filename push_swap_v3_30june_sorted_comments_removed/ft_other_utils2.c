@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_other_utils2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/26 18:36:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/06/29 20:33:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,20 +58,20 @@ int	find_smallest(int *stack, int len)
 	return (smallest);
 }
 
-void	move_btoa_base_case(int **stacks, int *len, int sub_len)
-{
-	int	s_index;
-	int	pushed;
+// void	move_btoa_base_case(int **stacks, int *len, int sub_len)
+// {
+// 	int	s_index;
+// 	int	pushed;
 
-	pushed = -1;
-	while (pushed++ < 2)
-	{
-		s_index = find_pos(stacks[1], find_largest(stacks[1], sub_len), sub_len);
-		while (s_index-- > 0)
-			rotate(stacks[1], len, 'a');
-		pusha(stacks[0], stacks[1], len);
-	}
-}
+// 	pushed = -1;
+// 	while (pushed++ < 2)
+// 	{
+// 		s_index = find_pos(stacks[1], find_largest(stacks[1], sub_len), sub_len);
+// 		while (s_index-- > 0)
+// 			rotate(stacks[1], len, 'a');
+// 		pusha(stacks[0], stacks[1], len);
+// 	}
+// }
 
 void	replace_with_rank(int *stack, int len, int *copy)
 {
@@ -79,29 +79,24 @@ void	replace_with_rank(int *stack, int len, int *copy)
 	int	*sorted;
 
 	index[0] = -1;
-	sorted = malloc (len * sizeof(int));
+	sorted = malloc ((len + 1) * sizeof(int));
 	if (sorted)
 	{
-		while (index[0] < len)
-		{
+		while (index[0]++ < len)
 			sorted[index[0]] = stack[index[0]];
-			index[0]++;
-		}
 		insertion_sort(sorted, len);
 		index[0] = -1;
-		while (index[0] < len)
+		while (index[0]++ < len)
 		{
 			index[1] = -1;
-			while (index[1] < len)
+			while (index[1]++ < len)
 			{
 				if (stack[index[0]] == sorted[index[1]])
 				{
 					copy[index[0]] = index[1];
 					break;
 				}
-				index[1]++;
 			}
-			index[0]++;
 		}
 		free(sorted);
 	}
