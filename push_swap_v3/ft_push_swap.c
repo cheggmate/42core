@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 17:28:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 18:07:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int push_swap(t_stack *stack)
 			sort_back(stack, curr, counts);
 			// optimise_list(curr);
 			ft_print_lst(curr);
-			// print_stack(stack, 'a');
+			print_stack(stack, 'a');
 			fflush(stdout);							//remove before submission
 			free (stack->stack_b);
 			// free (copy);
