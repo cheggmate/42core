@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 18:07:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:53:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,73 +18,56 @@
 // exit 
 // ft_printf
 
-// Other things to note:
-// - Stack a will contain a list of UNIQUE negative and / or positive integers
-// - Stack b is empty
-
-// Operations available: 
-// - sa (swap a): Swap the first 2 elements at the top of stack a.
-//     Do nothing if there is only one element or none.
-// - sb (swap b): Swap the first 2 elements at the top of stack b.
-//     Do nothing if there is only one element or none.
-// - ss : sa and sb at the same time.
-// - pa (push a): Take the first element at the top of b and put it at the top of a.
-//     Do nothing if b is empty.
-// - pb (push b): Take the first element at the top of a and put it at the top of b.
-//     Do nothing if a is empty.
-// - ra (rotate a): Shift up all elements of stack a by 1.
-//     The first element becomes the last one.
-// - rb (rotate b): Shift up all elements of stack b by 1.
-//     The first element becomes the last one.
-// - rr : ra and rb at the same time.
-// - rra (reverse rotate a): Shift down all elements of stack a by 1. 
-//     The last element becomes the first one.
-// - rrb (reverse rotate b): Shift down all elements of stack b by 1.
-//     The last element becomes the first one.
-// - rrr : rra and rrb at the same time.	
-
 #include "ft_push_swap.h"
 
-// static int	push_swap_helper(int **stacks, int *len_smlbg, int *copy, int **counts)
-// {
-	
-// 	return (1);
-// }
+static int	init_entities(t_stack *stack, int **copy,
+	t_list_ops **curr, int **sml_bg)
+{
+	stack->stack_b = (int *)ft_calloc(stack->len_a, sizeof(int));
+	*copy = (int *)ft_calloc((stack->len_a + 1), sizeof(int));
+	*curr = ft_lstnew_ops("x", stack->len_a);
+	*sml_bg = (int *)ft_calloc(2, sizeof(int));
+	if (!(stack->stack_b) || !(*copy) || !(*curr) || !(*sml_bg))
+	{
+		if (stack->stack_b)
+			free(stack->stack_b);
+		if (*copy)
+			free(*copy);
+		if (*curr)
+			free(*curr);
+		if (*sml_bg)
+			free(*sml_bg);
+		return (0);
+	}
+	return (1);
+}
 
 int push_swap(t_stack *stack)
 {
 	int			*copy;
 	int			**counts;
 	t_list_ops	*curr;
+	int			*sml_bg;
 
 	stack->len_b = 0;
 	if (stack->len_a > 1 && !check_order(stack->len_a, stack->stack_a))
 	{
-		stack->stack_b = (int *)ft_calloc(stack->len_a, sizeof(int));
-		copy = (int *)ft_calloc((stack->len_a + 1), sizeof(int));
-		curr = ft_lstnew_ops("x", stack->len_a);
-		if (stack->stack_b && copy && curr)
-		{
-			stack->stack_b[0] = 0;
-			replace_with_rank(stack->stack_a, stack->len_a, copy);
-			free (stack->stack_a);
-			stack->stack_a = copy;
-			// print_stack(stack, 'a');
-			counts = presort_stack(stack, curr);
-			if (!counts)
-				return (0);
-			sort_back(stack, curr, counts);
-			// optimise_list(curr);
-			ft_print_lst(curr);
-			print_stack(stack, 'a');
-			fflush(stdout);							//remove before submission
-			free (stack->stack_b);
-			// free (copy);
-			ft_lstclear_ops(curr);
-			free_entire_array(counts, counts[0][0]);
-		}
-		if (!stack->stack_b)
+		if (!init_entities(stack, &copy, &curr, &sml_bg))
 			return (0);
+		replace_with_rank(stack->stack_a, stack->len_a, copy);
+		free (stack->stack_a);
+		stack->stack_a = copy;
+		counts = presort_stack(stack, curr, sml_bg);
+		if (!counts)
+			return (0);
+		sort_back(stack, curr, counts);
+		optimise_list(curr);
+		ft_print_lst(curr);
+		// print_stack(stack, 'a');
+		fflush(stdout);//remove before submission
+		free (stack->stack_b);
+		ft_lstclear_ops(curr);
+		free_entire_array(counts, counts[0][0]);
 	}
 	return (1);
 }
@@ -161,4 +144,3 @@ int	main(int argc, char **argv)
 	}
 	return (0);
 }
-

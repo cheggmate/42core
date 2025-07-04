@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 21:58:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 23:00:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:51:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	prep_values(t_stack *stack, char **argv)
 {
-	int 	i;
+	int		i;
 	int		to_save;
 	char	*str_chk;
 
@@ -27,8 +27,9 @@ int	prep_values(t_stack *stack, char **argv)
 		{
 			to_save = ft_atoi(argv[i + 1]);
 			str_chk = ft_itoa(to_save);
-			if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0 || \
-				ft_strncmp(str_chk, argv[i + 1], ft_strlen(argv[i + 1])) != 0)
+			if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0
+				|| ft_strncmp(str_chk, argv[i + 1],
+					ft_strlen(argv[i + 1])) != 0)
 				return (0);
 			else
 				stack->stack_a[i] = to_save;
@@ -50,10 +51,10 @@ int	prep_string(t_stack *stack, char **str)
 		return (0);
 	while (i++ < stack->len_a - 1)
 	{
-		str_check = ft_itoa(ft_atoi(str[i]));
+		str_check = ft_itoa (ft_atoi (str[i]));
 		to_save = ft_atoi(str[i]);
-		if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0 || \
-			ft_strncmp(str_check, str[i], ft_strlen(str[i]))!= 0)
+		if (to_save > INT_MAX || to_save < INT_MIN || to_save == 0
+			|| ft_strncmp (str_check, str[i], ft_strlen (str[i])) != 0)
 			return (0);
 		else
 			stack->stack_a[i] = (int)to_save;
@@ -61,4 +62,3 @@ int	prep_string(t_stack *stack, char **str)
 	}
 	return (1);
 }
-

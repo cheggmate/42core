@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 16:04:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:56:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	*ft_arr_dup(int *stack, int len)
 {
 	int	*dup;
 	int	i;
-	
+
 	i = -1;
 	dup = NULL;
 	if (len > 0)
@@ -79,10 +79,37 @@ void	replace_with_rank(int *stack, int len, int *copy)
 				if (stack[index[0]] == sorted[index[1]])
 				{
 					copy[index[0]] = index[1];
-					break;
+					break ;
 				}
 			}
 		}
 		free(sorted);
 	}
+}
+
+
+void	print_stack(t_stack *stack, char ab)// remove this function b4 sub
+{
+	int		i;
+	int		*len_ptr;
+	int		*s;
+
+	i = 0;
+	if (ab == 'a' || ab == 'x')
+	{
+		len_ptr = &stack->len_a;
+		s = stack->stack_a;
+	}
+	else
+	{
+		len_ptr = &stack->len_b;
+		s = stack->stack_b;
+	}
+	printf("stack %c = ", ab);
+	while (i < *len_ptr)
+	{
+		printf("%d ", s[i]);
+		i++;
+	}
+	printf("\n");
 }

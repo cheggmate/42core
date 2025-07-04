@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 22:37:37 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/03 23:16:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:24:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	insertion_sort(int	*stack_dup, int len)
 {
-	int i;
+	int	i;
 	int	val;
-	int j;
+	int	j;
 
 	i = 1;
 	while (i < len)
 	{
 		val = stack_dup[i];
 		j = i - 1;
-
 		while (j >= 0 && stack_dup[j] > val)
 		{
 			stack_dup[j + 1] = stack_dup[j];
@@ -44,19 +43,16 @@ void	find_mids_a(int *stack, int len, int *sml_bg)
 		insertion_sort(stack_dup, len);
 		if (len > 7 && len % 2 == 0)
 		{
-			// printf("if flow for pivots\n");
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3 - 1];
 		}
 		else if (len > 7)
 		{
-			// printf("else if flow for pivots\n");
 			sml_bg[1] = stack_dup[len / 3 * 2];
 			sml_bg[0] = stack_dup[len / 3];
 		}
 		else
 		{
-			// printf("else flow for pivots\n");
 			sml_bg[1] = stack_dup[len - 2];
 			sml_bg[0] = stack_dup[(len / 2) - 1];
 		}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/15 20:28:40 by jotong            #+#    #+#              #
-#    Updated: 2025/07/02 13:36:04 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/04 22:18:15 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME		= push_swap
 REQ_SRC		= ft_push_swap.c ft_push_utils.c ft_rotate_utils.c ft_swap_utils.c ft_other_utils.c ft_libft_utils.c \
 				ft_libft_utils2.c ft_libft_utils3.c ft_split_sort_logic_stacka.c ft_other_utils2.c ft_check_utils.c \
 				ft_median_utils.c ft_prep_utils.c ft_list_ops.c ft_other_utils3.c ft_sort_flow.c ft_libft_utils4.c \
-				ft_split_sort_logic_stackb.c ft_optimise.c ft_optimise2.c ft_list_ops2.c
+				ft_split_sort_logic_stackb.c ft_optimise.c ft_optimise2.c ft_list_ops2.c ft_sort_b.c ft_sort_a.c
 OBJ 		= $(REQ_SRC:.c=.o)
 HEADER		= ft_push_swap.h
 

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 22:06:41 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/12 22:14:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:58:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	count = 0;
 	if (!src || !dest)
 		return (0);
-
 	if (size > 0)
 	{
 		while (src[count] && count < (size - 1))
@@ -27,10 +26,9 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 			dest[count] = src[count];
 			count++;
 		}
-		dest[count] = '\0'; 
+		dest[count] = '\0';
 	}
-
-	return ft_strlen(src);
+	return (ft_strlen(src));
 }
 
 static int	count_digits(int m, int n_digits)

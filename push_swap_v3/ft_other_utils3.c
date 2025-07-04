@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:10:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 18:27:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:26:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	find_ind_max(int *stack_b, int b_len)
 		{
 			max = stack_b[i];
 			index = i;
-		} 
+		}
 	}
 	return (index);
 }
 
 void	free_entire_array(int **counts_psrt, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (j < i)
@@ -62,18 +62,18 @@ int	is_rev_sorted(int *stack, int len)
 
 void	free_entire_str_array(char **str)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (str[index])
 	{
-			free(str[index]);
-			index++;
+		free(str[index]);
+		index++;
 	}
 	free(str);
 }
 
-void free_everything(char **str, int *stack)
+void	free_everything(char **str, int *stack)
 {
 	if (stack)
 		free(stack);

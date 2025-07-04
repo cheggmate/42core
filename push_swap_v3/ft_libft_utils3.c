@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_libft_utils3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/02 13:10:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:35:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,3 @@ void	*ft_calloc(size_t num, size_t size)
 	ft_memset(arr, 0, (num * size));
 	return (arr);
 }
-

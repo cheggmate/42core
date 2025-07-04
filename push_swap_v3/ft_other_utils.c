@@ -6,37 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 22:37:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 21:38:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 23:55:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-void	print_stack(t_stack *stack, char ab)			// remove this function before submission.
-{
-	int		i;
-	int		*len_ptr;
-	int		*s;
-
-	i = 0;
-	if (ab == 'a' || ab == 'x')
-	{
-		len_ptr = &stack->len_a;
-		s = stack->stack_a;
-	}
-	else
-	{
-		len_ptr = &stack->len_b;
-		s = stack->stack_b;
-	}
-	printf("stack %c = ", ab);
-	while (i < *len_ptr)
-	{
-		printf("%d ", s[i]);
-		i++;
-	}
-	printf("\n");
-}
 
 int	ft_arr_len(int	*str)
 {
@@ -66,7 +40,7 @@ int	is_num(char *str)
 
 int	find_ind_min(int *str, int len)
 {
-	int i;
+	int	i;
 	int	smallest;
 	int	index;
 
@@ -87,7 +61,7 @@ int	find_ind_min(int *str, int len)
 
 int	find_pos(int *str, int val, int len)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < len)
