@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/29 20:33:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 16:04:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,6 @@ int	find_smallest(int *stack, int len)
 	}
 	return (smallest);
 }
-
-// void	move_btoa_base_case(int **stacks, int *len, int sub_len)
-// {
-// 	int	s_index;
-// 	int	pushed;
-
-// 	pushed = -1;
-// 	while (pushed++ < 2)
-// 	{
-// 		s_index = find_pos(stacks[1], find_largest(stacks[1], sub_len), sub_len);
-// 		while (s_index-- > 0)
-// 			rotate(stacks[1], len, 'a');
-// 		pusha(stacks[0], stacks[1], len);
-// 	}
-// }
 
 void	replace_with_rank(int *stack, int len, int *copy)
 {

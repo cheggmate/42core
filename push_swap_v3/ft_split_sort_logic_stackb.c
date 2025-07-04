@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_sort_logic_stackb.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 08:40:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 23:53:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 09:09:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	s_r_s_rr_s(t_stack *stack, t_list_ops *curr, int n)
+static void	s_r_s_rr_s(t_stack *stack, t_list_ops *curr)
 {
 	swap(stack, curr, 'b');
 	rotate(stack->stack_b, stack->len_b, curr, 'b');
@@ -21,14 +21,14 @@ static void	s_r_s_rr_s(t_stack *stack, t_list_ops *curr, int n)
 	swap(stack, curr, 'b');
 }
 
-static void	r_s_rr(t_stack *stack, t_list_ops *curr, int n)
+static void	r_s_rr(t_stack *stack, t_list_ops *curr)
 {
 	rotate(stack->stack_b, stack->len_b, curr, 'b');
 	swap(stack, curr, 'b');
 	rev_rot(stack->stack_b, stack->len_b, curr, 'b');
 }
 
-static void r_s_rr_s(t_stack *stack, t_list_ops *curr, int n)
+static void r_s_rr_s(t_stack *stack, t_list_ops *curr)
 {
 	rotate(stack->stack_b, stack->len_b, curr, 'b');
 	swap(stack, curr, 'b');
@@ -36,7 +36,7 @@ static void r_s_rr_s(t_stack *stack, t_list_ops *curr, int n)
 	swap(stack, curr, 'b');
 }
 
-static void	s_r_s_rr(t_stack *stack, t_list_ops *curr, int n)
+static void	s_r_s_rr(t_stack *stack, t_list_ops *curr)
 {
 	swap(stack, curr, 'b');
 	rotate(stack->stack_b, stack->len_b, curr, 'b');
@@ -56,15 +56,15 @@ void	sort_stack_b(t_stack *stack, t_list_ops *curr, int n)
 		stack->stack_b[0] > stack->stack_b[2]) // 1 2 0
 	swap(stack, curr, 'b');
 	else if (stack->stack_b[0] < stack->stack_b[1] && stack->stack_b[1] < stack->stack_b[2]) // 0 1 2
-		s_r_s_rr_s(stack, curr, n);
+		s_r_s_rr_s(stack, curr);
 	else if (stack->stack_b[0] > stack->stack_b[1] && stack->stack_b[1] < stack->stack_b[2] && \
 		stack->stack_b[0] > stack->stack_b[2]) // 2 0 1
-		r_s_rr(stack, curr, n);
+		r_s_rr(stack, curr);
 	else if (stack->stack_b[0] > stack->stack_b[1] && stack->stack_b[1] < stack->stack_b[2] && \
 		stack->stack_b[0] < stack->stack_b[2]) // 1 0 2
-		r_s_rr_s(stack, curr, n);
+		r_s_rr_s(stack, curr);
 	else if (stack->stack_b[0] < stack->stack_b[1] && stack->stack_b[1] > stack->stack_b[2] && \
 		stack->stack_b[0] < stack->stack_b[2]) // 0 2 1
-		s_r_s_rr(stack, curr, n);
+		s_r_s_rr(stack, curr);
 
 }

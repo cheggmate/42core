@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/02 00:58:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 16:10:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	sort_small_a(t_stack *stack, t_list_ops *curr, int n)
 	sort_stack(stack, curr, n);
 	if (stack->len_a < n && moved > 0)
 		move_back_a(stack, curr, n);
+		
 	else if (moved > 0)
 		move_back_a(stack, curr, moved);
 }
@@ -172,23 +173,7 @@ void	sort_a_btm(t_stack *stack, t_list_ops *curr, int n)
 	if (stack->len_a > n)
 		while (i++ < n)
 			rev_rot(stack->stack_a, stack->len_a, curr, 'a');
-	if (n <= 5)
-		sort_small_a(stack, curr, n);
-	else
-		{
-			find_mids_a(stack->stack_a, n, sml_bg_tmp);
-			if (!is_sorted(stack->stack_a, n))
-			{
-				i = 0;
-				while (i++ < n)
-					count_tmp = sort_a_base(stack, sml_bg_tmp, count_tmp, curr);
-			}
-			if (count_tmp[2] > 0 && stack->len_a > count_tmp[2])
-				sort_a_btm(stack, curr, count_tmp[2]);
-			if (count_tmp[1] > 0 && (stack->stack_a[0] - stack->stack_b[0]) <= count_tmp[1])
-				sort_b_top(stack, curr, count_tmp[1]);
-			sort_b_btm(stack, curr, count_tmp[0]);
-		}
+	sort_a_top(stack, curr, n);
 	free(sml_bg_tmp);
 	free (count_tmp);
 }
@@ -215,38 +200,6 @@ int	*sort_b_base(t_stack *stack, int *sml_bg, int *counts, t_list_ops *curr)
 		counts[0]++;
 	}
 	return (counts);
-}
-
-
-void sort_b_btm(t_stack *stack, t_list_ops *curr, int n)
-{
-	int i;
-	int *count_tmp;
-	int	*sml_bg_tmp;
-
-	i = 0;
-	count_tmp = ft_calloc(3, sizeof(int));
-	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
-	if (!count_tmp || !sml_bg_tmp)
-		return ;
-	sml_bg_tmp[0] = 0;
-	while (i++ < n)
-		rev_rot(stack->stack_b, stack->len_b, curr, 'b');
-	if (n <= 5)
-		sort_small_b(stack, curr, n);
-	else
-	{
-		find_mids_b(stack->stack_b, n, sml_bg_tmp);
-		i = 0;
-		if (!is_rev_sorted(stack->stack_b, n))
-			while (i++ < n)
-				count_tmp = sort_b_base(stack, sml_bg_tmp, count_tmp, curr);
-		sort_a_top(stack, curr, count_tmp[2]);
-		sort_a_btm(stack, curr, count_tmp[1]);
-		sort_b_btm(stack, curr, count_tmp[0]);
-	}
-	free(sml_bg_tmp);
-	free(count_tmp);
 }
 
 void	sort_b_top(t_stack *stack, t_list_ops *curr, int n)
@@ -276,6 +229,26 @@ void	sort_b_top(t_stack *stack, t_list_ops *curr, int n)
 	free(count_tmp);
 }
 
+
+void sort_b_btm(t_stack *stack, t_list_ops *curr, int n)
+{
+	int i;
+	int *count_tmp;
+	int	*sml_bg_tmp;
+
+	i = 0;
+	count_tmp = ft_calloc(3, sizeof(int));
+	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
+	if (!count_tmp || !sml_bg_tmp)
+		return ;
+	sml_bg_tmp[0] = 0;
+	while (i++ < n)
+		rev_rot(stack->stack_b, stack->len_b, curr, 'b');
+	sort_b_top(stack, curr, n);
+	free(sml_bg_tmp);
+	free(count_tmp);
+}
+
 void	ft_sort_b(t_stack *stack, t_list_ops *curr, int *counts)
 {
 	sort_a_btm(stack, curr, counts[2]);
@@ -290,7 +263,7 @@ int	**set_psrt_count(int len)
 	int	**counts_psrt;
 
 	i = 0;
-	iter_count = (log10(len) / log10(3)) + 2;
+	iter_count = (log10(len) / log10(3)) + 4;
 	counts_psrt = ft_calloc((iter_count + 1),  sizeof(int *));
 	if (!counts_psrt)
 		return (NULL);
@@ -334,12 +307,6 @@ int	**presort_stack(t_stack *stack, t_list_ops *curr)
 		free(sml_bg);
 		return (NULL);
 	}
-	if (stack->len_a <= 5)
-	{
-		sort_small_a(stack, curr, stack->len_a);
-		free(sml_bg);
-		return (0);
-	}
 	while (stack->len_a > 7)
 	{
 		find_mids_a(stack->stack_a, stack->len_a, sml_bg);
@@ -347,10 +314,10 @@ int	**presort_stack(t_stack *stack, t_list_ops *curr)
 		len_tmp = stack->len_a;
 		i = 0;
 		while (i++ < len_tmp)
-			counts_psrt[j] = sort_a_base(stack, sml_bg, counts_psrt[j], curr);
+			counts_psrt[j] = sort_a_base(stack, sml_bg, counts_psrt[j], curr);	
 		j++;
 	}
-	sort_small_a(stack, curr, stack->len_a);
+	sort_small_a(stack, curr, stack->len_a);;
 	free(sml_bg);
 	return (counts_psrt);
 }

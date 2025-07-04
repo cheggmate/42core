@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_libft_utils4.c                                  :+:      :+:    :+:   */
+/*   ft_list_ops2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/30 20:55:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/30 20:56:18 by jotong           ###   ########.fr       */
+/*   Created: 2025/07/02 11:17:15 by jotong            #+#    #+#             */
+/*   Updated: 2025/07/02 20:01:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	*ft_memset(void *ptr, int value, size_t num)
+t_list_ops	*del_two_and_replace(t_list_ops *del1, t_list_ops *del2, \
+	char *op_type, int length)
 {
-	size_t			count;
-	unsigned char	*dest;
+	t_list_ops	*new;
+	t_list_ops	*prev;
+	t_list_ops	*to_delete;
 
-	count = 0;
-	dest = (unsigned char *)ptr;
-	while (count < num)
+	new = ft_lstnew_ops(op_type, length);
+	if (new)
 	{
-		dest[count] = value;
-		count++;
+		new->next = del1->next->next;
+		new->before = del1->before;
+		prev = del1->before;
+		prev->next = new;
+		to_delete = del1;
+		ft_lst_delone(&to_delete);
+		to_delete = del2;
+		ft_lst_delone(&to_delete);
+		del1 = new;
 	}
-	return (ptr);
+	return (new);
 }
 

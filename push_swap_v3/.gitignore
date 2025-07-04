@@ -8,3 +8,5 @@ checker_linux
 checker_Mac
 *.dSYM
 *.gch
+diff_lines.sh
+*.py

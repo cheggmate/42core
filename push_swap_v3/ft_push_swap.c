@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/02 00:22:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 17:01:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,25 @@ int push_swap(t_stack *stack)
 	{
 		stack->stack_b = (int *)ft_calloc(stack->len_a, sizeof(int));
 		copy = (int *)ft_calloc((stack->len_a + 1), sizeof(int));
-		curr = malloc(sizeof(t_list_ops));
-		if (stack->stack_b && copy)
+		curr = ft_lstnew_ops("x", stack->len_a);
+		if (stack->stack_b && copy && curr)
 		{
 			stack->stack_b[0] = 0;
 			replace_with_rank(stack->stack_a, stack->len_a, copy);
+			free (stack->stack_a);
 			stack->stack_a = copy;
-			print_stack(stack, 'a');
-			printf("-------\n");
-			curr->len = stack->len_a;
-			curr->op_type = "x";
+			// print_stack(stack, 'a');
 			counts = presort_stack(stack, curr);
 			if (!counts)
 				return (0);
 			sort_back(stack, curr, counts);
-			print_stack(stack, 'a');
+			// optimise_list(curr);
+			ft_print_lst(curr);
+			// print_stack(stack, 'a');
 			fflush(stdout);							//remove before submission
 			free (stack->stack_b);
-			free (copy);
+			// free (copy);
+			ft_lstclear_ops(curr);
 			free_entire_array(counts, counts[0][0]);
 		}
 		if (!stack->stack_b)
@@ -125,17 +126,16 @@ int	pswap_for_string(t_stack *stack, char **argv)
 			result = check_dups(stack);
 		if (result == 0)
 		{
-			// free_everything(str, stack->stack_a);
-			free(str);
+			free_entire_str_array(str);
 			return (0);
 		}
 		result = push_swap(stack);
-		// free_everything(str, stack->stack_a);
-		free(str);
+		free_entire_str_array(str);
 		if (result == 0)
 			return (0);
 		return (1);
 	}
+	free_entire_str_array(str);
 	return (0);
 }
 
@@ -156,6 +156,7 @@ int	main(int argc, char **argv)
 			result = pswap_for_int(stack, argv);
 		if (argc == 1 || result == 0)
 			write(2, "Error\n", 6);
+		free(stack->stack_a);
 		free(stack);
 	}
 	return (0);

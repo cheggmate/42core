@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 00:48:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/06/30 20:48:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 13:10:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,4 @@ void	*ft_calloc(size_t num, size_t size)
 	ft_memset(arr, 0, (num * size));
 	return (arr);
 }
+

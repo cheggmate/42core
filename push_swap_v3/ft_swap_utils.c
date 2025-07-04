@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:07:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/01 23:36:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/02 11:00:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,41 +19,62 @@
 
 #include "ft_push_swap.h"
 
-void	swap(t_stack *stack, t_list_ops *curr, int ab)
+static void	create_listops(t_list_ops *curr, int **swap, int ab)
 {
-	int	tmp;
-	int	*len_ptr;
-	int	*stack_toswap;
+	t_list_ops	*new;
+	char		*ops;
 
 	if (ab == 'a' || ab == 'x')
 	{
-		len_ptr = &stack->len_a;
-		stack_toswap = stack->stack_a;
+		if (ab == 'a')
+			ops = "sa\n";
 	}
 	else
 	{
-		len_ptr = &stack->len_b;
-		stack_toswap = stack->stack_b;
+		if (ab == 'b')
+			ops = "sb\n";
 	}
-	if (*len_ptr >= 2)
+	if (ab == 'a' || ab == 'b')
+		{
+			new = ft_lstnew_ops(ops, *swap[0]);
+			if (new)
+				ft_lstadd_back_ops(curr, new);
+		}
+}
+
+void	swap(t_stack *stack, t_list_ops *curr, int ab)
+{
+	int			tmp;
+	int			*swap[2];
+
+	if (ab == 'a' || ab == 'x')
 	{
-		tmp = stack_toswap[0];
-		stack_toswap[0] = stack_toswap[1];
-		stack_toswap[1] = tmp;
-		if (ab == 'a')
-			write (1, "sa", 2);
-		else if (ab == 'b')
-			write (1, "sb", 2);
-		if (ab == 'a' || ab == 'b')
-			write (1, "\n", 1);
-		printf("curr->len = %d\n", curr->len);
+		swap[0] = &stack->len_a;
+		swap[1] = stack->stack_a;
+	}
+	else
+	{
+		swap[0] = &stack->len_b;
+		swap[1] = stack->stack_b;
+	}
+	if (*swap[0] >= 2)
+	{
+		tmp = swap[1][0];
+		swap[1][0] = swap[1][1];
+		swap[1][1] = tmp;
+		create_listops(curr, swap, ab);
 	}
 }
 
 void	swap_both(t_stack *stack, t_list_ops *curr)
 {
+	t_list_ops	*new;
+
 	swap(stack, curr, 'x');
 	swap(stack, curr, 'y');
-	write(1, "ss", 2);
-	write (1, "\n", 1);
+	new = ft_lstnew_ops("ss\n", stack->len_a);
+	if (new)
+		ft_lstadd_back_ops(curr, new);
+	// write(1, "ss", 2);
+	// write (1, "\n", 1);
 }
