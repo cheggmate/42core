@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_optimise.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 09:58:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/02 22:19:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/04 17:28:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	replace_sasb_ss(t_list_ops *curr)
 	changed = 0;
 	while (curr->next)
 	{
-		// if (opt_checker(curr, curr->next, "sa\n", "sb\n"))
-		if (ft_strncmp(curr->op_type, "sa\n", 3) == 0 && \
-		ft_strncmp(curr->next->op_type, "sb\n", 3) == 0)
+		/*if (ft_strncmp(curr->op_type, "sa\n", 3) == 0 && \
+		ft_strncmp(curr->next->op_type, "sb\n", 3) == 0)*/
+		if (opt_checker(curr, curr->next, "sa\n", "sb\n"))
 		{
 			front_op = curr;
 			back_op = curr->next;
@@ -56,8 +56,6 @@ static int	replace_rarb_rr(t_list_ops *curr)
 		return (0);
 	while (curr && curr->next)
 	{
-		// if (ft_strncmp(curr->op_type, "ra\n", 3) == 0 && \
-		// ft_strncmp(curr->next->op_type, "rb\n", 3) == 0)
 		if (opt_checker(curr, curr->next, "ra\n", "rb\n"))
 		{
 			front_op = curr;
