@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 09:58:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 20:35:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:15:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ static int	replace_sasb_ss(t_list_ops *c, t_list_ops *bk_op)
 			while (bk_op->next)
 			{
 				if (ft_strncmp(bk_op->op_type, "ss\n", 3) == 0)
+				{
+					bk_op = bk_op->next;
 					continue ;
+				}
 				else if (opt_checker(c, bk_op, "sa\n", "sb\n"))
 				{
 					bk_op = del_two_and_replace(c, bk_op, "ss\n", c->len);
@@ -71,15 +74,15 @@ static int	replace_rarb_rr(t_list_ops *curr, t_list_ops *bk_op)
 // 			|| ft_strncmp(c->op_type, "rrb\n", 4) == 0)
 // 		{
 // 			bk_op = c->next;
-// 			while (bk_op->next)
+// 			while (bk_op && bk_op->next)
 // 			{
-// 				if (bk_op)
-// 					printf("replace rra rrb\n");
 // 				if (ft_strncmp (bk_op->op_type, "rrr\n", 4) == 0)
+// 				{
+// 					bk_op = bk_op->next;
 // 					continue ;
+// 				}
 // 				else if (opt_checker(c, bk_op, "rra\n", "rrb\n"))
 // 				{
-// 					printf("deleted\n");
 // 					bk_op = del_two_and_replace(c, bk_op, "rrr\n", c->len);
 // 					return (1);
 // 				}
@@ -109,7 +112,7 @@ void	optimise_list(t_list_ops *head)
 	while (head_tmp && (cancel_out_chks (head_tmp) == 1
 			|| replace_sasb_ss (head_tmp1, bk_op) == 1
 			|| replace_rarb_rr (head_tmp2, bk_op) == 1))
-			// || replace_rrarrb_rrr (head_tmp3, bk_op) == 1
+			// || replace_rrarrb_rrr (head_tmp3, bk_op) == 1))
 	{
 		head_tmp = head->next;
 		head_tmp1 = head->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:13:31 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/05 21:50:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:22:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,17 @@ void	sort_small_b(t_stack *stack, t_list_ops *curr, int n)
 {
 	int	i;
 	int	moved;
+	int	smallest;
 
 	i = 0;
 	moved = 0;
+	smallest = find_ind_min(stack->stack_b, stack->len_b);
 	if (n == 0)
 		return ;
 	if (n > 3)
 	{
+		if (smallest == n - 1)
+			sort_small_b(stack, curr, n - 1);
 		moved = mv_largest_frm_b(stack, curr, n);
 		n -= moved;
 	}
@@ -97,9 +101,6 @@ void	sort_b_btm(t_stack *stack, t_list_ops *curr, int n)
 		while (i++ < n)
 			rev_rot(stack->stack_b, stack->len_b, curr, 'b');
 	sort_b_top(stack, curr, n);
-	// printf("[sort_b_btm] after sort_b_top\n");
-	// print_stack(stack, 'a');
-	// print_stack(stack, 'b');
 	free(sml_bg_tmp);
 	free(count_tmp);
 }

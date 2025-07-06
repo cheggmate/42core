@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 20:36:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:22:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ int push_swap(t_stack *stack)
 		replace_with_rank(stack->stack_a, stack->len_a, copy);
 		free (stack->stack_a);
 		stack->stack_a = copy;
+		// printf("before presort\n");
+		// print_stack(stack, 'a');
+		// print_stack(stack, 'b');
 		counts = presort_stack(stack, curr, sml_bg);
 		if (!counts)
 			return (0);
