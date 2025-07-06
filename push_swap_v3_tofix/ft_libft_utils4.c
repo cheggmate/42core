@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 20:55:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/05 00:46:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:46:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	*ft_memset(void *ptr, int value, size_t num)
 	}
 	return (ptr);
 }
-
 
 char	*ft_strchr(const char *str, int c)
 {

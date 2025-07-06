@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:18:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 23:16:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:25:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	sort_small_a(t_stack *stack, t_list_ops *curr, int n)
 	if (n == 0)
 		return ;
 	if (find_ind_max(stack->stack_a, n) == n - 1)
-		n -= 1;
+		sort_small_a(stack, curr, n - 1);
 	if (n > 3)
 		moved = mv_smallest_frm_a(stack, curr, n);
 	sort_stack(stack, curr, n);

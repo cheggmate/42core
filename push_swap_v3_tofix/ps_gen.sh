@@ -5,7 +5,8 @@ TESTS=500
 SIZE=100
 NEGATIVE=true
 PROG="push_swap"
-CHECKER="checker_linux"
+CHECKER="checker_Mac"
+# CHECKER="checker_linux"
 OUTFILE="gen_out.txt"
 true > "$OUTFILE" # Reset file
 
@@ -151,7 +152,9 @@ main () {
 		echo "(note: valgrind can take a while)"
 	fi
 	for i in $(seq 1 "$TESTS"); do
-		ARGS=$(shuf -i 0-2147483647 -n "$SIZE" | if "$NEGATIVE"; then while read -r line; do echo "$((line * (1 - 2 * (RANDOM % 2))))"; done else cat; fi | tr '\n' ' ')
+		#ARGS=$(shuf -i 0-2147483647 -n "$SIZE" | if "$NEGATIVE"; then while read -r line; do echo "$((line * (1 - 2 * (RANDOM % 2))))"; done else cat; fi | tr '\n' ' ')
+		ARGS=$(gshuf -i 0-2147483647 -n "$SIZE" |  if "$NEGATIVE"; then while read -r line; do echo "$((line * (1 - 2 * (RANDOM % 2))))"; done else cat; fi | tr '\n' ' ')
+
 		if $MEMTEST; then
 			printf "%s" "$(tput rc)$(tput el)"
 			printf "Processing... %d/%d" "$i" "$TESTS"

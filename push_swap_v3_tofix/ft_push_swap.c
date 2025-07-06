@@ -6,17 +6,9 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:22:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:47:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Allowed functions:
-// read 
-// write 
-// malloc  
-// free
-// exit 
-// ft_printf
 
 #include "ft_push_swap.h"
 

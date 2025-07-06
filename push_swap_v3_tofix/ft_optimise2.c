@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:33:52 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 15:54:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:48:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ int	opt_checker(t_list_ops *frnt, t_list_ops *bk, char	*op1, char *op2)
 	if (!frnt || !bk || !frnt->op_type || !bk->op_type)
 		return (0);
 	else if ((ft_strncmp(frnt->op_type, op1, ft_strlen(op1)) == 0
-			&& ft_strncmp(bk->op_type, op2, ft_strlen(op2))  == 0)
+			&& ft_strncmp(bk->op_type, op2, ft_strlen(op2)) == 0)
 		|| (ft_strncmp(frnt->op_type, op2, ft_strlen(op2)) == 0
 			&& ft_strncmp(bk->op_type, op1, ft_strlen(op1)) == 0))
-				return (1);
+		return (1);
 	else
 		return (0);
 }

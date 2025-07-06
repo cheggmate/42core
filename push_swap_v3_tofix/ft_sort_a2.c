@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 11:07:27 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:01:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:49:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,6 @@ static void	put_scnd_lrgst(t_stack *stack, t_list_ops *curr, int scnd, int n)
 	}
 }
 
-static int	put_two_lrgst(t_stack *stack, t_list_ops *curr, int lrg)
-{
-	int i;
-	int	pushed;
-
-	pushed = 1;
-	i = 0;
-	if (lrg > stack->len_a / 2)
-		while (i++ < (stack->len_a - lrg))
-			rev_rot(stack->stack_a, stack->len_a, curr, 'a');
-	else
-		while (i++ < lrg)
-			rotate(stack->stack_a, stack->len_a, curr, 'a');
-	pushb(stack, curr);
-	if (stack->len_a > 3)
-	{
-		lrg = find_ind_max(stack->stack_a, stack->len_a);
-		put_scnd_lrgst(stack, curr, lrg, 4);
-		swap(stack, curr, 'b');
-		pushed += 1;
-	}
-	return (pushed);
-}
-
 static void	sort_n_put_lrgst_back_to_end(t_stack *stack, t_list_ops *curr)
 {
 	if (!is_sorted(stack->stack_a, stack->len_a - 1))
@@ -78,9 +54,9 @@ static void	sort_n_put_lrgst_back_to_end(t_stack *stack, t_list_ops *curr)
 
 static void	sort_five(t_stack *stack, t_list_ops *curr, int n, int *top_two)
 {
-	int	pushed;
+	int	moved;
 
-	pushed = 0;
+	moved = 0;
 	if (top_two[0] == stack->len_a - 1)
 	{
 		if (top_two[1] == stack->len_a - 2)
@@ -93,24 +69,24 @@ static void	sort_five(t_stack *stack, t_list_ops *curr, int n, int *top_two)
 	}
 	else
 	{
-		pushed = put_two_lrgst(stack, curr, top_two[0]);
+		if (n == 0)
+			return ;
+		if (n > 3)
+			moved = mv_smallest_frm_a(stack, curr, n);
 		sort_stack(stack, curr, n);
-		if (pushed == 2)
-			swap(stack, curr, 'b');
-		while (pushed-- > 0)
-		{
-			pusha(stack, curr);
-			rotate(stack->stack_a, stack->len_a, curr, 'a');
-		}
+		if (stack->len_a < n && moved > 0)
+			move_back_a(stack, curr, n);
+		else if (moved > 0)
+			move_back_a(stack, curr, moved);
 	}
 }
 
-static void	sort_five_opts(t_stack *stack, t_list_ops *curr, int n, int *top_two)
+static void	sort_five_opts(t_stack *stack, t_list_ops *curr, int n, int *top_2)
 {
 	int	i;
 
 	i = 0;
-	if (top_two[0] == stack->len_a - 2 && top_two[1] == stack->len_a - 1)
+	if (top_2[0] == stack->len_a - 2 && top_2[1] == stack->len_a - 1)
 	{
 		rev_rot(stack->stack_a, stack->len_a, curr, 'a');
 		rev_rot(stack->stack_a, stack->len_a, curr, 'a');
@@ -119,13 +95,13 @@ static void	sort_five_opts(t_stack *stack, t_list_ops *curr, int n, int *top_two
 		rotate(stack->stack_a, stack->len_a, curr, 'a');
 		sort_stack(stack, curr, n);
 	}
-	else if (top_two[0] - top_two[1] == 1)
+	else if (top_2[0] - top_2[1] == 1)
 	{
-		if (top_two[0] > stack->len_a / 2)
-			while (i++ < (stack->len_a - top_two[0] - 1))
+		if (top_2[0] > stack->len_a / 2)
+			while (i++ < (stack->len_a - top_2[0] - 1))
 				rev_rot(stack->stack_a, stack->len_a, curr, 'a');
 		else
-			while (i++ < top_two[0] + 1)
+			while (i++ < top_2[0] + 1)
 				rotate(stack->stack_a, stack->len_a, curr, 'a');
 		sort_stack(stack, curr, n);
 	}
@@ -134,11 +110,13 @@ static void	sort_five_opts(t_stack *stack, t_list_ops *curr, int n, int *top_two
 void	sort_small_a_presort(t_stack *stack, t_list_ops *curr, int n)
 {
 	int	top_two[2];
+
 	if (is_sorted(stack->stack_a, stack->len_a - 1))
 		return ;
 	top_two[0] = find_ind_max(stack->stack_a, stack->len_a);
-	top_two[1] = find_pos(stack->stack_a, 
-		find_second_largest(stack->stack_a, stack->len_a), stack->len_a);
+	top_two[1] = find_pos(stack->stack_a,
+			find_second_largest(stack->stack_a, stack->len_a),
+			stack->len_a);
 	if (n <= 1)
 		return ;
 	else if (n <= 3)
@@ -148,5 +126,5 @@ void	sort_small_a_presort(t_stack *stack, t_list_ops *curr, int n)
 		sort_five_opts(stack, curr, n, top_two);
 		if (!is_sorted(stack->stack_a, stack->len_a - 1))
 			sort_five(stack, curr, n, top_two);
-	}	
+	}
 }

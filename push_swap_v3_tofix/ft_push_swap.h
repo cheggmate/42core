@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 15:46:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:44:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void			iter_quicksort(int *stack, int *stack_b, int *len);
 void			replace_with_rank(int *stack, int len, int *copy);
 int				find_second_largest(int *stack, int len);
 int				mv_smallest_frm_a(t_stack *stack, t_list_ops *curr, int n);
+void			move_back_a(t_stack *stack, t_list_ops *curr, int n);
 int				pusha(t_stack *stack, t_list_ops *curr);
 int				pushb(t_stack *stack, t_list_ops *curr);
 int				push_swap(t_stack *stack);
@@ -122,6 +123,5 @@ int				cancel_out_chks(t_list_ops *head);
 void			optimise_list(t_list_ops *head);
 int				opt_checker(t_list_ops *frnt, t_list_ops *bk,
 					char *op1, char *op2);
-void			print_stack(t_stack *stack, char ab);// remove this before submission
-
+void			print_stack(t_stack *stack, char ab);
 #endif

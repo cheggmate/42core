@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:21:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 00:45:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	replace_with_rank(int *stack, int len, int *copy)
 		free(sorted);
 	}
 }
-
 
 void	print_stack(t_stack *stack, char ab)// remove this function b4 sub
 {
