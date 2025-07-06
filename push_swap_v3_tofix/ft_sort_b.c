@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:13:31 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 23:45:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/05 21:50:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,13 @@ void	sort_b_btm(t_stack *stack, t_list_ops *curr, int n)
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
 	sml_bg_tmp[0] = 0;
-	while (i++ < n)
-		rev_rot(stack->stack_b, stack->len_b, curr, 'b');
+	if (stack->len_b > n)
+		while (i++ < n)
+			rev_rot(stack->stack_b, stack->len_b, curr, 'b');
 	sort_b_top(stack, curr, n);
+	// printf("[sort_b_btm] after sort_b_top\n");
+	// print_stack(stack, 'a');
+	// print_stack(stack, 'b');
 	free(sml_bg_tmp);
 	free(count_tmp);
 }

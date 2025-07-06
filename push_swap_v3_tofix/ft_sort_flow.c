@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 23:37:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/06 14:39:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	**presort_stack(t_stack *stack, t_list_ops *curr, int *sml_bg)
 	cts_psrt = set_psrt_count(stack->len_a);
 	if (cts_psrt)
 	{
-		while (stack->len_a > 7)
+		while (stack->len_a > 6)
 		{
 			find_mids_a(stack->stack_a, stack->len_a, sml_bg);
 			len_tmp = stack->len_a;
@@ -94,7 +94,7 @@ int	**presort_stack(t_stack *stack, t_list_ops *curr, int *sml_bg)
 				cts_psrt[j] = sort_a_base(stack, sml_bg, cts_psrt[j], curr);
 			j++;
 		}
-		sort_small_a(stack, curr, stack->len_a);
+		sort_small_a_presort(stack, curr, stack->len_a);
 		free(sml_bg);
 		return (cts_psrt);
 	}

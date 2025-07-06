@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:18:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 23:34:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/05 21:13:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ int	*sort_a_base(t_stack *stack, int *sml_bg, int *counts, t_list_ops *curr)
 		rotate(stack->stack_b, stack->len_b, curr, 'b');
 		counts[0]++;
 	}
+	// printf("[sort_a_base]\n");
+	// print_stack(stack, 'a');
+	// print_stack(stack, 'b');
 	return (counts);
 }
 
@@ -76,8 +79,10 @@ void	sort_a_top(t_stack *stack, t_list_ops *curr, int n)
 	{
 		find_mids_a(stack->stack_a, n, sml_bg_tmp);
 		if (!is_sorted(stack->stack_a, n))
+		{
 			while (i++ < n)
 				count_tmp = sort_a_base(stack, sml_bg_tmp, count_tmp, curr);
+		}
 		sort_a_btm(stack, curr, count_tmp[2]);
 		sort_b_top(stack, curr, count_tmp[1]);
 		sort_b_btm(stack, curr, count_tmp[0]);
@@ -102,6 +107,9 @@ void	sort_a_btm(t_stack *stack, t_list_ops *curr, int n)
 		while (i++ < n)
 			rev_rot(stack->stack_a, stack->len_a, curr, 'a');
 	sort_a_top(stack, curr, n);
+	// printf("[sort_a_btm] after sort_a_top\n");
+	// print_stack(stack, 'a');
+	// print_stack(stack, 'b');
 	free(sml_bg_tmp);
 	free (count_tmp);
 }

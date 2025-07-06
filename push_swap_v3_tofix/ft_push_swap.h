@@ -6,12 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 23:58:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/06 15:46:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PUSH_SWAP_H
 # define FT_PUSH_SWAP_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 # include <stdio.h>
 # include <stddef.h>
@@ -20,6 +24,7 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <math.h>
+# include <fcntl.h>
 
 typedef struct s_list_ops
 {
@@ -48,6 +53,7 @@ int				check_dups(t_stack *stack);
 int				prep_string(t_stack *stack, char **str);
 int				prep_values(t_stack *stack, char **argv);
 int				find_largest(int *stack, int len);
+int				find_second_largest(int *stack, int len);
 int				find_smallest(int *stack, int len);
 int				is_sorted(int *stack, int len);
 int				is_rev_sorted(int *stack, int len);
@@ -61,6 +67,7 @@ void			find_mids_b(int *stack, int len, int *sml_bg);
 void			insertion_sort(int	*stack_dup, int len);
 void			iter_quicksort(int *stack, int *stack_b, int *len);
 void			replace_with_rank(int *stack, int len, int *copy);
+int				find_second_largest(int *stack, int len);
 int				mv_smallest_frm_a(t_stack *stack, t_list_ops *curr, int n);
 int				pusha(t_stack *stack, t_list_ops *curr);
 int				pushb(t_stack *stack, t_list_ops *curr);
@@ -78,10 +85,14 @@ void			swap_both(t_stack *stack, t_list_ops *curr);
 int				ft_atoi(const char *str);
 char			*ft_itoa(int n);
 void			*ft_memmove(void *dest, const void *src, size_t n);
+char			*ft_strchr(const char *str, int c);
+char			*ft_strjoin(char const *s1, char const *s2);
+size_t			ft_strlcat(char *dest, const char *src, size_t size);
 char			**ft_split_count(const char *s, char c, int *word_count);
 size_t			ft_strlen(const char *str);
 size_t			ft_strlcpy(char *dest, const char *src, size_t size);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*get_next_line(int fd);
 void			ft_lst_delone(t_list_ops **delete);
 void			ft_lstadd_back_ops(t_list_ops *lst, t_list_ops *new);
 t_list_ops		*ft_lstnew_ops(char *op_type, int length);
@@ -95,6 +106,7 @@ int				*sort_a_base(t_stack *stack, int *sml_bg, int *counts,
 					t_list_ops *curr);
 void			sort_a_top(t_stack *stack, t_list_ops *curr, int n);
 void			sort_a_btm(t_stack *stack, t_list_ops *curr, int n);
+void			sort_small_a_presort(t_stack *stack, t_list_ops *curr, int n);
 int				*sort_b_base(t_stack *stack, int *sml_bg, int *counts,
 					t_list_ops *curr);
 void			sort_b_btm(t_stack *stack, t_list_ops *curr, int n);

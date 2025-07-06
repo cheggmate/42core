@@ -1,0 +1,12 @@
+a.out
+*.txt
+*.o
+.DS_Store
+*.yml
+*.gch
+checker_linux
+checker_Mac
+*.dSYM
+*.gch
+diff_lines.sh
+*.py

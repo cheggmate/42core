@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 20:47:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/04 23:56:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/06 16:25:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	is_sorted(int *stack, int len)
 	int	i;
 
 	i = 0;
-	while (i < len - 1)
+	while (i < len)
 	{
-		if (!(stack[i] < stack[i + 1]))
+		if (!(stack[i] + 1 == stack[i + 1]))
 			return (0);
 		i++;
 	}
