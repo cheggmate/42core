@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:18:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:25:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:34:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,11 @@ void	sort_small_a(t_stack *stack, t_list_ops *curr, int n)
 	int	moved;
 
 	moved = 0;
-	if (n == 0)
+	if (n <= 1)
 		return ;
 	if (find_ind_max(stack->stack_a, n) == n - 1)
 		sort_small_a(stack, curr, n - 1);
-	if (n > 3)
-		moved = mv_smallest_frm_a(stack, curr, n);
+	moved = mv_smallest_frm_a(stack, curr, n);
 	sort_stack(stack, curr, n);
 	if (stack->len_a < n && moved > 0)
 		move_back_a(stack, curr, n);
@@ -90,23 +89,23 @@ void	sort_a_top(t_stack *stack, t_list_ops *curr, int n)
 
 void	sort_a_btm(t_stack *stack, t_list_ops *curr, int n)
 {
-	int	i;
 	int	*count_tmp;
 	int	*sml_bg_tmp;
+	int	moved;
 
-	i = 0;
 	count_tmp = (int *)ft_calloc(3, sizeof(int));
 	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
+	moved = 0;
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
-	i = 0;
 	if (stack->len_a > n)
-		while (i++ < n)
-			rev_rot(stack->stack_a, stack->len_a, curr, 'a');
-	sort_a_top(stack, curr, n);
-	// printf("[sort_a_btm] after sort_a_top\n");
-	// print_stack(stack, 'a');
-	// print_stack(stack, 'b');
+		rev_rot_a_push_2(stack, curr, &moved, n);
+	if (moved > 0)
+		sort_a_top(stack, curr, n - moved);
+	else
+		sort_a_top(stack, curr, n);
+	while (moved--)
+		pusha(stack, curr);
 	free(sml_bg_tmp);
 	free (count_tmp);
 }

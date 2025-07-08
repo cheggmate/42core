@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sort_flow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 21:06:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/06 23:38:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 22:16:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	mv_smallest_frm_a(t_stack *stack, t_list_ops *curr, int n)
 {
-	int	smallest;
 	int	s_index;
 	int	i;
 	int	j;
@@ -26,10 +25,9 @@ int	mv_smallest_frm_a(t_stack *stack, t_list_ops *curr, int n)
 	while (i++ < n - 3)
 	{
 		if (stack->len_a < n)
-			smallest = find_smallest(stack->stack_a, stack->len_a);
+			s_index = find_ind_min(stack->stack_a, stack->len_a);
 		else
-			smallest = find_smallest(stack->stack_a, n);
-		s_index = find_pos (stack->stack_a, smallest, stack->len_a);
+			s_index = find_ind_min(stack->stack_a, n);
 		while (j++ < s_index)
 			rotate (stack->stack_a, stack->len_a, curr, 'a');
 		pushb (stack, curr);
@@ -85,7 +83,7 @@ int	**presort_stack(t_stack *stack, t_list_ops *curr, int *sml_bg)
 	cts_psrt = set_psrt_count(stack->len_a);
 	if (cts_psrt)
 	{
-		while (stack->len_a > 6)
+		while (stack->len_a >= 6)
 		{
 			find_mids_a(stack->stack_a, stack->len_a, sml_bg);
 			len_tmp = stack->len_a;

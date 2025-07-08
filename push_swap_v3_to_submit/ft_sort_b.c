@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 22:13:31 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:22:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:34:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,23 @@ void	sort_b_top(t_stack *stack, t_list_ops *curr, int n)
 
 void	sort_b_btm(t_stack *stack, t_list_ops *curr, int n)
 {
-	int	i;
 	int	*count_tmp;
 	int	*sml_bg_tmp;
+	int	moved;
 
-	i = 0;
-	count_tmp = ft_calloc(3, sizeof(int));
+	count_tmp = (int *)ft_calloc(3, sizeof(int));
 	sml_bg_tmp = (int *)ft_calloc(2, sizeof(int));
+	moved = 0;
 	if (!count_tmp || !sml_bg_tmp)
 		return ;
-	sml_bg_tmp[0] = 0;
 	if (stack->len_b > n)
-		while (i++ < n)
-			rev_rot(stack->stack_b, stack->len_b, curr, 'b');
-	sort_b_top(stack, curr, n);
+		rev_rot_b_push_2(stack, curr, &moved, n);
+	if (moved > 0)
+		sort_b_top(stack, curr, n - moved);
+	else
+		sort_b_top(stack, curr, n);
 	free(sml_bg_tmp);
-	free(count_tmp);
+	free (count_tmp);
 }
 
 int	*sort_b_base(t_stack *stack, int *sml_bg, int *counts, t_list_ops *curr)

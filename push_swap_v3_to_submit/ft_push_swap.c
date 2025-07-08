@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 08:57:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:47:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:32:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	init_entities(t_stack *stack, int **copy,
 	return (1);
 }
 
-int push_swap(t_stack *stack)
+int	push_swap(t_stack *stack)
 {
 	int			*copy;
 	int			**counts;
@@ -49,20 +49,12 @@ int push_swap(t_stack *stack)
 		replace_with_rank(stack->stack_a, stack->len_a, copy);
 		free (stack->stack_a);
 		stack->stack_a = copy;
-		// printf("before presort\n");
-		// print_stack(stack, 'a');
-		// print_stack(stack, 'b');
 		counts = presort_stack(stack, curr, sml_bg);
 		if (!counts)
 			return (0);
-		// printf("after presort\n");
-		// print_stack(stack, 'a');
-		// print_stack(stack, 'b');
 		sort_back(stack, curr, counts);
 		optimise_list(curr);
 		ft_print_lst(curr);
-		// print_stack(stack, 'a');
-		fflush(stdout);//remove before submission
 		free (stack->stack_b);
 		ft_lstclear_ops(curr);
 		free_entire_array(counts, counts[0][0]);

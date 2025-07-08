@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:21:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:44:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:42:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ void			replace_with_rank(int *stack, int len, int *copy);
 int				find_second_largest(int *stack, int len);
 int				mv_smallest_frm_a(t_stack *stack, t_list_ops *curr, int n);
 void			move_back_a(t_stack *stack, t_list_ops *curr, int n);
+void			rev_rot_a_push_2(t_stack *stack, t_list_ops *curr,
+					int *moved, int n);
+void			rev_rot_b_push_2(t_stack *stack, t_list_ops *curr,
+					int *moved, int n);
 int				pusha(t_stack *stack, t_list_ops *curr);
 int				pushb(t_stack *stack, t_list_ops *curr);
 int				push_swap(t_stack *stack);
@@ -93,7 +97,6 @@ char			**ft_split_count(const char *s, char c, int *word_count);
 size_t			ft_strlen(const char *str);
 size_t			ft_strlcpy(char *dest, const char *src, size_t size);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-char			*get_next_line(int fd);
 void			ft_lst_delone(t_list_ops **delete);
 void			ft_lstadd_back_ops(t_list_ops *lst, t_list_ops *new);
 t_list_ops		*ft_lstnew_ops(char *op_type, int length);

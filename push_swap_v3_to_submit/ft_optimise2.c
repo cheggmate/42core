@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 13:33:52 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:48:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:29:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	cancel_ra_rra(t_list_ops *curr)
 {
-	int			changed;
-	t_list_ops	*to_delete;
+	t_list_ops	*first;
+	t_list_ops	*second;
+	t_list_ops	*next;
 
-	changed = 0;
 	if (!curr || !(curr->next))
 		return (-1);
 	while (curr->next)
@@ -27,51 +27,53 @@ int	cancel_ra_rra(t_list_ops *curr)
 			|| (ft_strncmp(curr->op_type, "rra\n", 4) == 0
 				&& ft_strncmp(curr->next->op_type, "ra\n", 3) == 0))
 		{
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone(&to_delete);
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone(&to_delete);
-			changed = 1;
+			first = curr;
+			second = curr->next;
+			next = second->next;
+			ft_lst_delone(&first);
+			ft_lst_delone(&second);
+			curr = next;
+			return (1);
 		}
-		curr = curr->next;
+		else
+			curr = curr->next;
 	}
-	return (changed);
+	return (0);
 }
 
 int	cancel_pa_pb(t_list_ops *curr)
 {
-	int			changed;
-	t_list_ops	*to_delete;
+	t_list_ops	*first;
+	t_list_ops	*second;
+	t_list_ops	*next;
 
-	changed = 0;
-	while (curr->next)
+	while (curr && curr->next)
 	{
 		if ((ft_strncmp(curr->op_type, "pa\n", 3) == 0
 				&& ft_strncmp(curr->next->op_type, "pb\n", 3) == 0)
 			|| (ft_strncmp(curr->op_type, "pb\n", 3) == 0
 				&& ft_strncmp(curr->next->op_type, "pa\n", 3) == 0))
 		{
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone (&to_delete);
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone (&to_delete);
-			changed = 1;
+			first = curr;
+			second = curr->next;
+			next = second->next;
+			ft_lst_delone (&first);
+			ft_lst_delone (&second);
+			curr = next;
+			return (1);
 		}
-		curr = curr->next;
+		else
+			curr = curr->next;
 	}
-	return (changed);
+	return (0);
 }
 
 int	cancel_rb_rrb(t_list_ops *curr)
 {
-	int			changed;
-	t_list_ops	*to_delete;
+	t_list_ops	*first;
+	t_list_ops	*second;
+	t_list_ops	*next;
 
-	changed = 0;
 	if (!curr || !(curr->next))
 		return (-1);
 	while (curr->next)
@@ -81,17 +83,18 @@ int	cancel_rb_rrb(t_list_ops *curr)
 			|| (ft_strncmp(curr->op_type, "rrb\n", 4) == 0
 				&& ft_strncmp(curr->next->op_type, "rb\n", 3) == 0))
 		{
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone(&to_delete);
-			to_delete = curr;
-			curr = curr->next;
-			ft_lst_delone(&to_delete);
-			changed = 1;
+			first = curr;
+			second = curr->next;
+			next = second->next;
+			ft_lst_delone(&first);
+			ft_lst_delone(&second);
+			curr = next;
+			return (1);
 		}
-		curr = curr->next;
+		else
+			curr = curr->next;
 	}
-	return (changed);
+	return (0);
 }
 
 int	opt_checker(t_list_ops *frnt, t_list_ops *bk, char	*op1, char *op2)

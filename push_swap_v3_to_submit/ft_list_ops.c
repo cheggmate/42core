@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 19:56:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/05 22:41:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/07 20:26:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_lst_delone(t_list_ops **delete)
 		if (tmp_next)
 			tmp_next->before = tmp_before;
 		free((*delete));
-		(*delete) = tmp_next;
+		(*delete) = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 09:58:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/07 00:56:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/08 13:35:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ static int	replace_sasb_ss(t_list_ops *c, t_list_ops *bk_op)
 			while (bk_op->next)
 			{
 				if (ft_strncmp(bk_op->op_type, "ss\n", 3) == 0)
-				{
 					bk_op = bk_op->next;
-					continue ;
-				}
 				else if (opt_checker(c, bk_op, "sa\n", "sb\n"))
 				{
 					bk_op = del_two_and_replace(c, bk_op, "ss\n", c->len);
@@ -36,7 +33,6 @@ static int	replace_sasb_ss(t_list_ops *c, t_list_ops *bk_op)
 				}
 				else
 					break ;
-				bk_op = bk_op->next;
 			}
 		}
 		c = c->next;
@@ -81,7 +77,6 @@ static int	replace_rrarrb_rrr(t_list_ops *c, t_list_ops *bk_op)
 				else if (opt_checker(c, bk_op, "rra\n", "rrb\n"))
 				{
 					bk_op = del_two_and_replace(c, bk_op, "rrr\n", c->len);
-					bk_op = bk_op->next;
 					return (1);
 				}
 				else

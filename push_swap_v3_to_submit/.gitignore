@@ -10,3 +10,4 @@ checker_Mac
 *.gch
 diff_lines.sh
 *.py
+*.sh
