@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:08:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/09 17:39:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/10 21:42:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ size_t			ft_p_nbr_base(unsigned int nbr, char *base);
 size_t			ft_p_ptr(void *s, const char *hex);
 size_t			ft_p_unbr(unsigned int n, char type);
 ssize_t			ft_p_char(int c);
+int				ft_printf(const char *form, ...);
 
 // bonus functions
 t_list			*ft_lstnew(void *content);
