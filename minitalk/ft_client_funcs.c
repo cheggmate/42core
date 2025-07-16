@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client_funcs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:05:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/11 23:50:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 14:05:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,68 @@ void	send_null_terminator(pid_t s_pid)
 	{
 		kill(s_pid, SIGUSR2);
 		i++;
+		usleep(100);
 	}
 }
 
-
-void	send_signal(pid_t s_pid, char *sig)
+static void	send_character(pid_t s_pid, char sig)
 {
 	int	i;
 	int	s_bit;
-	int	s_len;
+
+	i = 7;
+	s_bit = sig;
+	while (i >= 0)
+	{
+		if (((s_bit >> i) & 1) == 1)
+			kill(s_pid, SIGUSR1);
+		else
+			kill(s_pid, SIGUSR2);
+		usleep(400);
+		i--;
+	}
+}
+
+void	handle_special_char(pid_t s_pid, char *sig)
+{
+	sig++;
+	if (*sig == 't')
+		send_character(s_pid, '\t');
+	else if (*sig == 'n')
+		send_character(s_pid, '\n');
+	else if (*sig == 'v')
+		send_character(s_pid, '\v');
+	else if (*sig == 'f')
+		send_character(s_pid, '\f');
+	else if (*sig == 'r')
+		send_character(s_pid, '\r');
+	else if (*sig == 'b')
+		send_character(s_pid, '\b');
+	else if (*sig == '\\')
+		send_character(s_pid, '\\');
+	else
+	{
+		send_character(s_pid, '\\');
+		send_character(s_pid, *sig);
+	}
+}
+
+void	send_signal(pid_t s_pid, char *sig)
+{
+	int		s_len;
 
 	s_len = ft_strlen(sig);
-	ft_printf("start sending\n");
 	while (s_len--)
 	{
-		i = 7;
-		s_bit = *sig;
-		while (i >= 0)
+		if (*sig == '\\')
 		{
-			if (((s_bit >> i) & 1) == 1)
-				kill(s_pid, SIGUSR1);
-			else
-				kill(s_pid, SIGUSR2);
-			usleep(100);
-			ft_printf("sent bit no '%d'\n", i);
-			i--;
+			handle_special_char(s_pid, sig);
+			sig++;
+			s_len--;
 		}
+		else
+			send_character(s_pid, *sig);
 		sig++;
 	}
 	send_null_terminator(s_pid);
-	
 }

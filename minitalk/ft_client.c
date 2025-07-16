@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:28:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/11 23:33:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 17:16:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,23 @@
 int	main(int argc, char **argv)
 {
 	pid_t		s_pid;
-	char		*sig;
-	
-	if (argc != 3)
-	{
-		ft_printf("Wrong number of arguments!\n");
-		return (1);
-	}
+	int			i;
+
+	i = 2;
+	if (argc <= 2)
+		return (write(2, "wrong num of args.\n", 20), 1);
 	s_pid = ft_atoi(argv[1]);
-	ft_printf("s_pid is %d\n", s_pid);
-	sig = argv[2];
-	// if (!(sig >= 1 && sig <= 22))
-	// {
-	// 	ft_printf("Invalid signal sent\n");
-	// 	return (1);
-	// }
-	send_signal(s_pid, sig);
-	ft_printf("signal sent!\n");
-	return (0);	
+	if (s_pid < 0 || s_pid > INT_MAX)
+		return (write(2, "invalid PID.\n", 14), 1);
+	else if (argc >= 3)
+	{
+		while (i < argc - 1)
+		{
+			send_signal(s_pid, argv[i]);
+			send_signal(s_pid, " ");
+			i++;
+		}
+		send_signal(s_pid, argv[i]);
+	}
+	return (0);
 }

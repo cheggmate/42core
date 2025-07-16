@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   server.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:29:17 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/11 23:30:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 14:40:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,19 @@
 # include <signal.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <sys/socket.h>
-
-// typedef struct s_sig // this needs to be updated.
-// {
-// 	sigset_t	s_mask;
-	
-// }				t_sig;
+# include <sys/types.h>
 
 typedef struct s_word
 {
 	int				b_count;
 	unsigned char	sig_char;
-	char			sig_wrd[1024];
-	int				sig_wrd_len;
-	
 }				t_word;
 
-extern t_word	*word;
+extern t_word	*g_word;
 
 void	process_sigusr(int s);
 void	process_other_signals(int s);
 void	sig_processor(int s);
-
+void	free_gword(void);
 
 #endif
