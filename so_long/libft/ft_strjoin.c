@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:28:27 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 09:53:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/17 23:18:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	new_str = (char *)malloc(total_len + 1);
 	if (!new_str)
 		return (NULL);
-	ft_strlcpy(new_str, s1, total_len + 1);
-	ft_strlcat(new_str, s2, total_len + 1);
+	new_str[0] = '\0';
+	if (s1)
+		ft_strlcat(new_str, s1, total_len + 1);
+	if (s2)
+		ft_strlcat(new_str, s2, total_len + 1);
 	return (new_str);
 }

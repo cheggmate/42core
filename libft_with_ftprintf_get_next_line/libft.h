@@ -6,12 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:08:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/10 21:42:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/17 23:20:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -21,6 +25,7 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdarg.h>
+# include <fcntl.h>
 
 typedef struct s_list
 {
@@ -85,5 +90,12 @@ void			ft_lstiter(t_list *lst, void (*f)(void *));
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+
+// get_next_line
+char			*rem_print(char *buf);
+void			free_buf(char **buf, int fd);
+char			*rd_parse_line(char **buf, int fd, char *tmp_buf, ssize_t *b);
+char			*get_line(char *buf);
+char			*get_next_line(int fd);
 
 #endif
