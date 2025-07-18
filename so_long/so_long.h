@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/19 00:27:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/19 00:29:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,12 @@ typedef struct s_map {
 
 # include <stdio.h>
 
+int			get_map_height(char	*f_map);
 t_pool		*init_mem_pool(size_t size);
 void		*alloc_mem(t_pool *mem_p, size_t size);
 void		free_pool(t_pool *mem_p);
 int			get_map_height(char	*f_map);
-t_map		*load_map(t_pool mem_pool, char *f_map);
+t_map		*load_map(t_pool *mem_pool, char *f_map);
 void		free_end_exit(t_pool *mem_p, int status);
 
 #endif
