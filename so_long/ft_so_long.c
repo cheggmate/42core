@@ -6,16 +6,21 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/17 23:33:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/18 22:35:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "minilibx_opengl_20191021/mlx.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	load_map();
+	char	**map;
+
+	map = NULL;
+	if (argc != 2)
+		return (1, write(2, "incorrect number of inputs!\n", 29));
+	map = load_map(argv[1]);
 	// create a window
 	// load all required sprites
 	// create the different hooks
