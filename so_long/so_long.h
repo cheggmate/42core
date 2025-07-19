@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/19 21:51:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 00:01:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef struct s_pool {
 typedef struct s_map {
 	int		h;
 	int		w;
+	int		c;
+	int		start;
+	int		exit;
+	int		fd;
 	char	**grid;
 } t_map;
 
@@ -33,9 +37,10 @@ int			get_map_height(char	*f_map);
 t_pool		*init_mem_pool(size_t size);
 void		*alloc_mem(t_pool *mem_p, size_t size);
 void		free_pool(t_pool *mem_p);
-t_map		*init_grid(t_pool *mem_p, int width, char *f_map);
+t_map		*init_grid(t_pool *mem_p, int width, char *f_map, int fd);
 int			get_map_height(char	*f_map);
 t_map		*load_map(t_pool *mem_pool, char *f_map);
-void		free_end_exit(t_pool *mem_p, int status);
+void 		check_update_element_ctr(t_pool *mem_p, t_map *map, char c);
+void		free_end_exit(t_pool *mem_p, int *fd, int status);
 
 #endif

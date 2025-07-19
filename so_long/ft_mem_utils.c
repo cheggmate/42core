@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/19 00:27:28 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 00:00:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,14 @@ void	free_pool(t_pool *mem_p)
 	free(mem_p);
 }
 
-void	free_end_exit(t_pool *mem_p, int status)
+void	free_end_exit(t_pool *mem_p, int *fd, int status)
 {
-	free_poo(mem_p);
+	free_pool(mem_p);
+	if (*fd >= 0)
+	{
+		close(*fd);
+		*fd = -1;
+	}
 	if (status == 1)
 		exit(EXIT_FAILURE);
 	else
