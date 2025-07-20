@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/20 15:19:24 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/20 15:54:03 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ all: $(LIBFT) $(MINILIBX) $(NAME)
 
 # Compile and archive .o files
 $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
-	$(CC) $(FLAG) -L${MINILIBX_FOLDER} -lmlx -framework OpenGL -framework appkit -o $(NAME)
+	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -framework OpenGL -framework Appkit -o $(NAME)
 
 # Libft
 $(LIBFT):
@@ -49,7 +49,7 @@ $(MINILIBX):
 
 # Compile .c to .o
 %.o : %.c
-	@$(CC) $(FLAG) -v -Imlx -c $< -o $@ # remove verbose flag before submission
+	@$(CC) $(FLAG) -Imlx -c $< -o $@
 
 # Compile .c to .o
 # $(BONUS_FOLDER)/%.o : $(BONUS_FOLDER)/%.c
@@ -70,12 +70,14 @@ $(MINILIBX):
 # Clean OBJ files
 clean:
 	@rm -f $(OBJ)
-	@$(MAKE) -C $(LIBFT_FOLDER) $(MINILIBX_FOLDER) clean 
+	@$(MAKE) -C $(LIBFT_FOLDER) clean 
+	@$(MAKE) -C $(MINILIBX_FOLDER) clean 
 
 # Clean all
 fclean: clean
-	@rm -f $(NAME) $(NAME)
-	@$(MAKE) -C $(LIBFT_FOLDER) $(MINILIBX_FOLDER) fclean
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_FOLDER) fclean
+	@$(MAKE) -C $(MINILIBX_FOLDER) clean
 
 # Rebuild everything
 re: fclean all

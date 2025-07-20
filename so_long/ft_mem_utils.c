@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 00:00:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 15:55:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	free_pool(t_pool *mem_p)
 	free(mem_p);
 }
 
-void	free_end_exit(t_pool *mem_p, int *fd, int status)
+void	free_and_exit(t_pool *mem_p, int *fd, int status)
 {
 	free_pool(mem_p);
 	if (*fd >= 0)

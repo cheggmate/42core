@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 00:01:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 15:24:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void check_update_element_ctr(t_pool *mem_p, t_map *map, char c)
 	else if (!(c == '1' || c == '0'))
 		free_and_exit(mem_p, &map->fd, 1);
 	if (map->start > 1)
-		free_end_exit(mem_p, &map->fd, 1);
+		free_and_exit(mem_p, &map->fd, 1);
 	else if (map->exit > 1)
-		free_end_exit(mem_p, &map->fd, 1);
+		free_and_exit(mem_p, &map->fd, 1);
 }
