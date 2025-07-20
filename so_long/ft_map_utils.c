@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 22:40:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/21 00:25:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 
 void	populate_row(t_pool *mem_p, t_map *map, int row, char *line)
 {
-	int		y;
+	int		pos[2];
 
-	y = 0;
+	pos[0] = row;
+	pos[1] = 0;
 	if (!(map->grid[row]))
 		free_and_exit(mem_p, &map->fd, 1);
 	while (*line)
 	{
 		if (*line != '\n')
-			map->grid[row][y] = *line;
-		printf("%c ", map->grid[row][y]);
-		check_update_element_ctr(mem_p, map, *line);
-		y++;
+			map->grid[row][pos[1]] = *line;
+		check_update_element_ctr(mem_p, map, *line, pos);
+		pos[1]++;
 		line++;
 	}
-	map->grid[row][y] = '\0';
+	map->grid[row][pos[1]] = '\0';
 }
 
 static void	populate_grid(t_map *map, t_pool *mem_p, int fd)
@@ -41,7 +41,6 @@ static void	populate_grid(t_map *map, t_pool *mem_p, int fd)
 	while (row < map->h)
 	{
 		line = get_next_line(fd);
-		printf("line is %s\n", line);
 		if (!line)
 		{
 			printf("found an empty line at row %d\n", row);
@@ -51,28 +50,20 @@ static void	populate_grid(t_map *map, t_pool *mem_p, int fd)
 			free_and_exit(mem_p, &fd, 1);
 		populate_row(mem_p, map, row, line);
 		free(line);
-		print_map(map);
 		row++;
 	}
 }
 
-int		get_map_height(char	*f_map)
+static void	initialise_map_values(t_map *map, char *f_map, int fd, int width)
 {
-	int		h;
-	int		fd;
-	char	*line;
-
-	h = 0;
-	if (!f_map)
-		return (0);
-	fd = open(f_map, O_RDONLY);
-	while((line = get_next_line(fd)) != NULL)
-	{
-		h++;
-		free(line);
-	}
-	close(fd);
-	return (h);
+	map->fd = fd;
+	map->w = width;
+	map->h = get_map_height(f_map);
+	map->c = 0;
+	map->exit = 0;
+	map->start = 0;
+	map->p_start_x = 0;
+	map->p_start_y = 0;
 }
 
 t_map	*init_grid(t_pool *mem_p, int width, char *f_map, int fd)
@@ -84,12 +75,7 @@ t_map	*init_grid(t_pool *mem_p, int width, char *f_map, int fd)
 	map = alloc_mem(mem_p, sizeof(t_map));
 	if (!map || fd < 0)
 		free_and_exit(mem_p, &fd, 1);
-	map->fd = fd;
-	map->h = get_map_height(f_map);
-	map->w = width;
-	map->c = 0;
-	map->exit = 0;
-	map->start = 0;
+	initialise_map_values(map, f_map, fd, width);
 	map->grid = alloc_mem(mem_p, sizeof(char *) * (map->h + 1));
 	if (!map->grid)
 		free_and_exit(mem_p, &fd, 1);
@@ -103,26 +89,7 @@ t_map	*init_grid(t_pool *mem_p, int width, char *f_map, int fd)
 	return (map);
 }
 
-void	print_map(t_map *map)
-{
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < map->h)
-	{
-		j = 0;
-		while (j < map->w)
-		{
-			ft_printf("%c", map->grid[i][j]);
-			j++;
-		}
-		i++;
-		ft_printf("\n");
-	}
-}
-
-t_map	*load_map(char *f_map)
+t_map	*load_map(char *f_map, t_game *game)
 {
 	t_map	*map;
 	t_pool	*mem_p;
@@ -148,5 +115,6 @@ t_map	*load_map(char *f_map)
 		free_and_exit(mem_p, &fd, 1);
 	close(fd);
 	print_map(map);			// remove before submission
+	render_map(mem_p, map, game);
 	return (map);
 }

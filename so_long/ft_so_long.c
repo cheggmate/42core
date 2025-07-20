@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 16:00:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/21 00:25:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 int	main(int argc, char **argv)
 {
 	t_map	*map;
+	t_game	*game;
 
 	map = NULL;
+	game = NULL;
 	if (argc != 2)
 		return (write(2, "incorrect number of inputs!\n", 29), 1);
-	map = load_map(argv[1]);
+	map = load_map(argv[1], game);
 	ft_printf("map wdith: %d\n", map->w);
 	
 	// create a window
@@ -48,5 +50,6 @@ int	main(int argc, char **argv)
 	// 	* replace collectible with background once collected
 	// 	* move player
 	// 	* collectible counter
+	mlx_loop(game);
 	return (0);
 }
