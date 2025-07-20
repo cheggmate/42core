@@ -6,14 +6,14 @@
 #    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/18 23:33:58 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/20 15:19:24 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FLAG		= -Wall -Wextra -Werror -I$(LIBFT_FOLDER) -I$(MINILIBX_FOLDER)
 
 NAME		= so_long
-REQ_SRC		= ft_so_long.c ft_map_utils.c ft_mem_utils.c
+REQ_SRC		= ft_so_long.c ft_map_utils.c ft_mem_utils.c ft_map_utils2.c
 HEADER		= so_long.h
 OBJ 		= $(REQ_SRC:.c=.o)
 

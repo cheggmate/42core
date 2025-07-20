@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 00:01:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 14:49:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define SO_LONG_H
 # define POOL_SIZE 1024 * 1024
 # define CHUNK_SIZE 64;
+
+# include <stdio.h>
+# include <unistd.h>
+# include <stddef.h>
 
 typedef struct s_pool {
 	char	*head;
@@ -31,16 +35,14 @@ typedef struct s_map {
 	char	**grid;
 } t_map;
 
-# include <stdio.h>
-
 int			get_map_height(char	*f_map);
 t_pool		*init_mem_pool(size_t size);
 void		*alloc_mem(t_pool *mem_p, size_t size);
 void		free_pool(t_pool *mem_p);
 t_map		*init_grid(t_pool *mem_p, int width, char *f_map, int fd);
 int			get_map_height(char	*f_map);
-t_map		*load_map(t_pool *mem_pool, char *f_map);
+t_map		*load_map(char *f_map);
 void 		check_update_element_ctr(t_pool *mem_p, t_map *map, char c);
-void		free_end_exit(t_pool *mem_p, int *fd, int status);
+void		free_and_exit(t_pool *mem_p, int *fd, int status);
 
 #endif

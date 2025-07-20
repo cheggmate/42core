@@ -6,21 +6,23 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/18 22:58:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 14:48:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "libft/libft.h"
 #include "minilibx_opengl_20191021/mlx.h"
 
 int	main(int argc, char **argv)
 {
-	char	**map;
+	t_map	*map;
 
 	map = NULL;
 	if (argc != 2)
-		return (1, write(2, "incorrect number of inputs!\n", 29));
+		return (write(2, "incorrect number of inputs!\n", 29), 1);
 	map = load_map(argv[1]);
+	ft_printf("%d\n", map->w);
 	
 	// create a window
 	// load all required sprites
