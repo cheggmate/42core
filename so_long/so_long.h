@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 14:49:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 22:06:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void		free_pool(t_pool *mem_p);
 t_map		*init_grid(t_pool *mem_p, int width, char *f_map, int fd);
 int			get_map_height(char	*f_map);
 t_map		*load_map(char *f_map);
+void		print_map(t_map *map);
 void 		check_update_element_ctr(t_pool *mem_p, t_map *map, char c);
 void		free_and_exit(t_pool *mem_p, int *fd, int status);
 

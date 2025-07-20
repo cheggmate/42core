@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 15:24:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/20 21:01:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ void check_update_element_ctr(t_pool *mem_p, t_map *map, char c)
 		map->start += 1;
 	else if (c == 'E')
 		map->exit += 1;
-	else if (!(c == '1' || c == '0'))
-		free_and_exit(mem_p, &map->fd, 1);
+	
+	printf("[CTR] char: %c | C: %d, P: %d, E: %d\n", c, map->c, map->start, map->exit);
+	
 	if (map->start > 1)
 		free_and_exit(mem_p, &map->fd, 1);
 	else if (map->exit > 1)
