@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/21 00:24:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 00:59:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,66 @@ static void	*create_window(t_pool *mem_p, t_map *map, void *mlx)
 
 	width = map->w * SPRITE_SIZE;
 	height = map->h * SPRITE_SIZE;
+	printf("before mlx new window\n");
 	window = mlx_new_window(mlx, width, height, "so_long");
 	if (!window)
-		free_and_exit(mem_p, &map->fd, 1);
+		free_and_exit(mem_p, &map->fd, 1, "Failed to open new window.\n");
 	return (window);
 }
 
 static void	show_images(t_map *map, t_game *game)
 {
-	void	*player;
-	int		pic_width;
-	int		pic_height;
-
-	player = mlx_xpm_file_to_image(game->mlx, "assets/player.xpm", &pic_width, &pic_height);
-	mlx_put_image_to_window(game->mlx, game->window, player, map->p_start_x * SPRITE_SIZE, map->p_start_y * SPRITE_SIZE);
+	show_background(map, game);
+	show_walls(map, game);
+	show_exit(map, game, 1);
+	show_collectible(map, game);
+	show_player(game, map->p_start_x, map->p_start_y);
 	mlx_key_hook(game->window, handle_keypress, game);
+	printf("bbbb\n");
 	mlx_hook(game->window, 17, 0, close_window, game); // 17 = destroy Notify activity
 }
 
-void	render_map(t_pool *mem_p, t_map *map, t_game *game)
+void	check_asset_list(void)
 {
-	game = alloc_mem(mem_p, sizeof(t_game));
-	if (!game)
-		free_and_exit(mem_p, &map->fd, 1);
-	game->mlx = mlx_init();
-	game->p_x = map->p_start_x;
-	game->p_y = map->p_start_y;
-	if (!game->mlx)
-		free_and_exit(mem_p, &map->fd, 1);
-	game->window = create_window(mem_p, map, game->mlx);
-	show_images(map, game);
+	if (check_asset_exist("assets/player.xpm") == -1)
+	{
+		write(2, "Error\nPlayer sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/wall.xpm") == -1)
+	{
+		write(2, "Error\nWall sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/door.xpm") == -1)
+	{
+		write(2, "Error\nExit sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/collectible.xpm") == -1)
+	{
+		write(2, "Error\nCollectible sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/floor.xpm") == -1)
+	{
+		write(2, "Error\nFloor sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+}
+
+void	render_map(t_pool **mem_p, t_map *map, t_game **game)
+{
+	*game = alloc_mem(*mem_p, sizeof(t_game));
+	printf("allocating game memory\n");
+	if (!(*game))
+		free_and_exit(*mem_p, &map->fd, 1, "Failed to alloc mem for game.\n");
+	(*game)->mlx = mlx_init();
+	(*game)->p_x = map->p_start_x;
+	(*game)->p_y = map->p_start_y;
+	if (!(*game)->mlx)
+		free_and_exit(*mem_p, &map->fd, 1, "Failed to init mlx.\n");
+	(*game)->window = create_window( *mem_p, map, (*game)->mlx);
+	printf("before show images\n");
+	show_images(map, (*game));
 }

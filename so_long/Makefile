@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/21 00:01:00 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/21 23:40:36 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ FLAG		= -Wall -Wextra -Werror -I$(LIBFT_FOLDER) -I$(MINILIBX_FOLDER)
 
 NAME		= so_long
 REQ_SRC		= ft_so_long.c ft_map_utils.c ft_mem_utils.c ft_map_utils2.c \
-				ft_display_utils.c ft_user_actions.c
+				ft_display_utils.c ft_user_actions.c ft_player_utils.c \
+				ft_map_loader_utils.c
 HEADER		= so_long.h
 OBJ 		= $(REQ_SRC:.c=.o)
 

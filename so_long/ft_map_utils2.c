@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 23:35:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 00:53:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void check_update_element_ctr(t_pool *mem_p, t_map *map, char c, int *pos)
 	else if (c == 'E')
 		map->exit += 1;
 	if (map->start > 1)
-		free_and_exit(mem_p, &map->fd, 1);
+		free_and_exit(mem_p, &map->fd, 1, "More than one start pos found.\n");
 	else if (map->exit > 1)
-		free_and_exit(mem_p, &map->fd, 1);
+		free_and_exit(mem_p, &map->fd, 1, "More than one exit found.\n");
 }
 
 void	print_map(t_map *map)
@@ -67,4 +67,15 @@ int		get_map_height(char	*f_map)
 	}
 	close(fd);
 	return (h);
+}
+
+int	check_asset_exist(char *f_name)
+{
+	int	fd;
+	int	result;
+
+	fd = open(f_name, O_RDONLY);
+	result = fd;
+	close(fd);
+	return (result);
 }

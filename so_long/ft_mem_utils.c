@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/20 18:39:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 00:54:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,7 @@ void	*alloc_mem(t_pool *mem_p, size_t size)
 
 	sub_pool = NULL;
 	if (!mem_p || !mem_p->head)
-	{
-		printf("mem head NULL\n");
 		return (NULL);
-	}
 		
 	if (mem_p->used + size > mem_p->total)
 	{
@@ -64,7 +61,7 @@ void	free_pool(t_pool *mem_p)
 	free(mem_p);
 }
 
-void	free_and_exit(t_pool *mem_p, int *fd, int status)
+void	free_and_exit(t_pool *mem_p, int *fd, int status, char *msg)
 {
 	free_pool(mem_p);
 	if (*fd >= 0)
@@ -73,7 +70,14 @@ void	free_and_exit(t_pool *mem_p, int *fd, int status)
 		*fd = -1;
 	}
 	if (status == 1)
+	{
+		write(2, "Error\n", 6);
+		write(2, msg, ft_strlen(msg));
 		exit(EXIT_FAILURE);
+	}
 	else
+	{
+		(void)msg;
 		exit(EXIT_SUCCESS);
+	}
 }
