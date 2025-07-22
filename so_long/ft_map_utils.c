@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 01:04:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:10:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	populate_row(t_pool *mem_p, t_map *map, int row, char *line)
 		free_and_exit(mem_p, &map->fd, 1, "Failed to alloc mem for grid.\n");
 	while (*line)
 	{
-		if ((row == 0 || row == map->h - 1) && *line != 1)
-			free_and_exit(mem_p, &map->fd, 1, "Map not enclosed by walls.\n"); // need to check if middle rows are starting and ending with walls.
+		printf("row = %d, map->h-1 = %d, *line = %d\n",row, map->h-1, *line);
+		if (((row == 0 || row == map->h - 1) && *line != '1'
+			&& pos[1] != map->w - 1) || ((pos[1] == 0 || pos[1] == map->w - 2)
+			&& *line != '1'))
+			free_and_exit(mem_p, &map->fd, 1, "Map not enclosed by walls.\n");
 		if (*line != '\n')
 			map->grid[row][pos[1]] = *line;
 		check_update_element_ctr(mem_p, map, *line, pos);

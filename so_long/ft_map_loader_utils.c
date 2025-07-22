@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 23:35:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 00:02:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:40:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	show_background(t_map *map, t_game *game)
 	while (i++ < map->h - 1)
 	{
 		j = -1;
-		while (j++ < map->w -1)
-			mlx_put_image_to_window(game->mlx, game->window, bg, i * SPRITE_SIZE, j * SPRITE_SIZE);
+		while (j++ < map->w - 1)
+			mlx_put_image_to_window(game->mlx, game->window, bg, j * SPRITE_SIZE, i * SPRITE_SIZE);
 	}
 	printf("Created background\n");
 }
@@ -51,7 +51,7 @@ void	show_walls(t_map *map, t_game *game)
 		while (j++ < map->w - 1)
 		{
 			if (map->grid[i][j] == '1')
-				mlx_put_image_to_window(game->mlx, game->window, wall, i * SPRITE_SIZE, j * SPRITE_SIZE);
+				mlx_put_image_to_window(game->mlx, game->window, wall, j * SPRITE_SIZE, i * SPRITE_SIZE);
 		}
 	}
 	printf("Created walls\n");
@@ -77,7 +77,7 @@ void	show_exit(t_map *map, t_game *game, int state)
 		while (j++ < map->w - 1)
 		{
 			if (map->grid[i][j] == 'E')
-				mlx_put_image_to_window(game->mlx, game->window, exit, i * SPRITE_SIZE, j * SPRITE_SIZE);
+				mlx_put_image_to_window(game->mlx, game->window, exit, j * SPRITE_SIZE, i * SPRITE_SIZE);
 		}
 	}
 	printf("Created exit\n");
@@ -100,7 +100,7 @@ void	show_collectible(t_map *map, t_game *game)
 		while (j++ < map->w - 1)
 		{
 			if (map->grid[i][j] == 'C')
-				mlx_put_image_to_window(game->mlx, game->window, c, i * SPRITE_SIZE, j * SPRITE_SIZE);
+				mlx_put_image_to_window(game->mlx, game->window, c, j * SPRITE_SIZE, i * SPRITE_SIZE);
 		}
 	}
 	printf("Created collectible\n");

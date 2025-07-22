@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 00:59:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:43:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static void	*create_window(t_pool *mem_p, t_map *map, void *mlx)
 	int		width;
 	int		height;
 
-	width = map->w * SPRITE_SIZE;
+	width = (map->w - 1) * SPRITE_SIZE;
 	height = map->h * SPRITE_SIZE;
-	printf("before mlx new window\n");
 	window = mlx_new_window(mlx, width, height, "so_long");
 	if (!window)
 		free_and_exit(mem_p, &map->fd, 1, "Failed to open new window.\n");
