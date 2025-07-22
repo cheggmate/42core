@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 22:43:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 00:17:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ static int	close_window(t_game *game)
 	return (0);
 }
 
-static void	*create_window(t_pool *mem_p, t_map *map, void *mlx)
+static void	*create_window(t_pool *mem_p, t_game **game, void *mlx)
 {
 	void	*window;
 	int		width;
 	int		height;
 
-	width = (map->w - 1) * SPRITE_SIZE;
-	height = map->h * SPRITE_SIZE;
+	width = ((*game)->map->w - 1) * SPRITE_SIZE;
+	height = (*game)->map->h * SPRITE_SIZE;
 	window = mlx_new_window(mlx, width, height, "so_long");
 	if (!window)
-		free_and_exit(mem_p, &map->fd, 1, "Failed to open new window.\n");
+		free_and_exit(mem_p, game, 1, "Failed to open new window.\n");
 	return (window);
 }
 
@@ -78,16 +78,16 @@ void	check_asset_list(void)
 
 void	render_map(t_pool **mem_p, t_map *map, t_game **game)
 {
-	*game = alloc_mem(*mem_p, sizeof(t_game));
-	printf("allocating game memory\n");
-	if (!(*game))
-		free_and_exit(*mem_p, &map->fd, 1, "Failed to alloc mem for game.\n");
-	(*game)->mlx = mlx_init();
-	(*game)->p_x = map->p_start_x;
-	(*game)->p_y = map->p_start_y;
-	if (!(*game)->mlx)
-		free_and_exit(*mem_p, &map->fd, 1, "Failed to init mlx.\n");
-	(*game)->window = create_window( *mem_p, map, (*game)->mlx);
+	// *game = alloc_mem(*mem_p, sizeof(t_game));
+	// printf("allocating game memory\n");
+	// if (!(*game))
+	// 	free_and_exit(*mem_p, game, 1, "Failed to alloc mem for game.\n");
+	// (*game)->mlx = mlx_init();
+	// (*game)->p_x = map->p_start_x;
+	// (*game)->p_y = map->p_start_y;
+	// if (!(*game)->mlx)
+	// 	free_and_exit(*mem_p, game, 1, "Failed to init mlx.\n");
+	(*game)->window = create_window( *mem_p, game, (*game)->mlx);
 	printf("before show images\n");
 	show_images(map, (*game));
 }

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 01:01:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 00:16:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ typedef struct s_map {
 typedef struct s_game {
 	void	*mlx;
 	void	*window;
+	void	*p_img;
+	void	*c_img;
+	void	*w_img;
+	void	*bg_img;
+	void	*e_img;
 	int		p_x;
 	int		p_y;
 	t_map	*map;
@@ -66,11 +71,13 @@ int			get_map_height(char	*f_map);
 t_pool		*init_mem_pool(size_t size);
 void		*alloc_mem(t_pool *mem_p, size_t size);
 void		free_pool(t_pool *mem_p);
-t_map		*init_grid(t_pool *mem_p, int width, char *f_map, int fd);
+void		init_grid(t_pool *mem_p, char *f_map, t_game **game);
+void		init_game(t_pool *mem_p, t_game **game, char *f_map);
+void		initialise_map_values(t_map *map, char *f_map, int fd, int width);
 int			get_map_height(char	*f_map);
 int			check_asset_exist(char *f_name);
 void		check_asset_list(void);
-t_map		*load_map(char *f_map, t_game **game);
+void		load_map(char *f_map, t_game **game);
 void		show_background(t_map *map, t_game *game);
 void		show_collectible(t_map *map, t_game *game);
 void		show_exit(t_map *map, t_game *game, int state);
@@ -78,8 +85,8 @@ void		show_player(t_game *game, int pos_x, int pos_y);
 void		show_walls(t_map *map, t_game *game);
 void		print_map(t_map *map);
 void		render_map(t_pool **mem_p, t_map *map, t_game **game);
-int			handle_keypress(int keycode, t_game *game);
-void 		check_update_element_ctr(t_pool *mem_p, t_map *map, char c, int *pos);
-void		free_and_exit(t_pool *mem_p, int *fd, int status, char *msg);
+int			handle_keypress(int keycode, t_game *game, t_pool *mem_p);
+void 		check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos);
+void		free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 00:49:19 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 23:59:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@
 
 int	main(int argc, char **argv)
 {
-	t_map	*map;
 	t_game	*game;
 
-	map = NULL;
 	game = NULL;
 	if (argc != 2)
 		return (write(2, "Error\nincorrect number of inputs!\n", 34), 1);
 	check_asset_list();
-	map = load_map(argv[1], &game);
-	printf("map->w = %d\n", map->w);
+	load_map(argv[1], &game);
+	printf("map->w = %d\n", game->map->w);
 	// create a window - DONE
 	// load all required sprites - DONE
 	// create the different hooks

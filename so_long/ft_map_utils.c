@@ -6,44 +6,43 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 22:10:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 00:14:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
 
-void	populate_row(t_pool *mem_p, t_map *map, int row, char *line)
+void	populate_row(t_pool *mem_p, t_game **game, int row, char *line)
 {
 	int		pos[2];
 
 	pos[0] = row;
 	pos[1] = 0;
-	if (!(map->grid[row]))
-		free_and_exit(mem_p, &map->fd, 1, "Failed to alloc mem for grid.\n");
+	if (!((*game)->map->grid[row]))
+		free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
 	while (*line)
 	{
-		printf("row = %d, map->h-1 = %d, *line = %d\n",row, map->h-1, *line);
-		if (((row == 0 || row == map->h - 1) && *line != '1'
-			&& pos[1] != map->w - 1) || ((pos[1] == 0 || pos[1] == map->w - 2)
-			&& *line != '1'))
-			free_and_exit(mem_p, &map->fd, 1, "Map not enclosed by walls.\n");
+		if (((row == 0 || row == (*game)->map->h - 1) && *line != '1'
+			&& pos[1] != (*game)->map->w - 1)
+			|| ((pos[1] == 0 || pos[1] == (*game)->map->w - 2) && *line != '1'))
+			free_and_exit(mem_p, game, 1, "Map not enclosed by walls.\n");
 		if (*line != '\n')
-			map->grid[row][pos[1]] = *line;
-		check_update_element_ctr(mem_p, map, *line, pos);
+			(*game)->map->grid[row][pos[1]] = *line;
+		check_update_element_ctr(mem_p, game, *line, pos);
 		pos[1]++;
 		line++;
 	}
-	map->grid[row][pos[1]] = '\0';
+	(*game)->map->grid[row][pos[1]] = '\0';
 }
 
-static void	populate_grid(t_map *map, t_pool *mem_p, int fd)
+static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 {
 	char	*line;
 	int		row;
 
 	row = 1;
-	while (row < map->h)
+	while (row < (*game)->map->h)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -51,16 +50,18 @@ static void	populate_grid(t_map *map, t_pool *mem_p, int fd)
 			printf("found an empty line at row %d\n", row);
 			break ;
 		}
-		if ((ft_strlen(line) != (size_t)map->w && row < map->h - 1)
-			|| (ft_strlen(line) != ((size_t)(map->w) - 1) && row == map->h - 1))
-			free_and_exit(mem_p, &fd, 1, "Map is not rectangular.\n");
-		populate_row(mem_p, map, row, line);
+		if ((ft_strlen(line) != (size_t)(*game)->map->w
+			&& row < (*game)->map->h - 1)
+			|| (ft_strlen(line) != ((size_t)((*game)->map->w) - 1)
+			&& row == (*game)->map->h - 1))
+			free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
+		populate_row(mem_p, game, row, line);
 		free(line);
 		row++;
 	}
 }
 
-static void	initialise_map_values(t_map *map, char *f_map, int fd, int width)
+void	initialise_map_values(t_map *map, char *f_map, int fd, int width)
 {
 	map->fd = fd;
 	map->w = width;
@@ -72,55 +73,50 @@ static void	initialise_map_values(t_map *map, char *f_map, int fd, int width)
 	map->p_start_y = 0;
 }
 
-t_map	*init_grid(t_pool *mem_p, int width, char *f_map, int fd)
+void	init_grid(t_pool *mem_p, char *f_map, t_game **game)
 {
-	t_map	*map;
 	int		i;
+	int		width;
+	char	*line;
 
 	i = 0;
-	map = alloc_mem(mem_p, sizeof(t_map));
-	if (!map || fd < 0)
-		free_and_exit(mem_p, &fd, 1, "Map is not valid / invalid map.\n");
-	initialise_map_values(map, f_map, fd, width);
-	map->grid = alloc_mem(mem_p, sizeof(char *) * (map->h + 1));
-	if (!map->grid)
-		free_and_exit(mem_p, &fd, 1, "Failed to alloc mem for grid.\n");
-	while (i < map->h)
+	(*game)->map->fd = open(f_map, O_RDONLY);
+	line = get_next_line((*game)->map->fd );
+	width = ft_strlen(line);
+	(*game)->map->w = width;
+	(*game)->map->grid = alloc_mem(mem_p, sizeof(char *) * ((*game)->map->h + 1));
+	if (!(*game)->map->grid)
+		free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
+	while (i < (*game)->map->h)
 	{
-		map->grid[i] = alloc_mem(mem_p, sizeof(char) * (map->w + 1));
-		if (!(map->grid[i]))
-			free_and_exit(mem_p, &fd, 1, "Failed to alloc mem for grid.\n");
+		(*game)->map->grid[i] = alloc_mem(mem_p, sizeof(char) * ((*game)->map->w + 1));
+		if (!((*game)->map->grid[i]))
+			free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
 		i++;
 	}
-	return (map);
 }
 
-t_map	*load_map(char *f_map, t_game **game)
+void	load_map(char *f_map, t_game **game)
 {
-	t_map	*map;
 	t_pool	*mem_p;
-	int		tmp_width;
-	int		fd;
 	char	*line;
 
 	line = NULL;
-	map = NULL;
-	tmp_width = 0;
 	mem_p = init_mem_pool(POOL_SIZE);
 	if (!f_map)
-		free_and_exit(mem_p, &fd, 1, "failed to allocate memory pool.\n");
-	fd = open(f_map, O_RDONLY);
-	line = get_next_line(fd);
-	tmp_width = ft_strlen(line);
-	map = init_grid(mem_p, tmp_width, f_map, fd);
-	if (map->h == 0)
-		free_and_exit(mem_p, &fd, 1, "Empty map file provided.\n");
-	populate_row(mem_p, map, 0, line);
-	populate_grid(map, mem_p, fd);
-	if (map->c == 0)
-		free_and_exit(mem_p, &fd, 1, "No collectibles found.\n");
-	close(fd);
-	print_map(map);			// remove before submission
-	render_map(&mem_p, map, game);
-	return (map);
+		free_and_exit(mem_p, game, 1, "failed to allocate memory pool.\n");
+	// fd = open(f_map, O_RDONLY);
+	// line = get_next_line(fd);
+	// tmp_width = ft_strlen(line);
+	init_game(&mem_p, game, f_map);
+	init_grid(mem_p, f_map, game);
+	if ((*game)->map->h == 0)
+		free_and_exit(mem_p, game, 1, "Empty map file provided.\n");
+	populate_row(mem_p, game, 0, line);
+	populate_grid(game, mem_p, (*game)->map->fd);
+	if ((*game)->map->c == 0)
+		free_and_exit(mem_p, game, 1, "No collectibles found.\n");
+	close((*game)->map->fd);
+	print_map((*game)->map);			// remove before submission
+	render_map(&mem_p, (*game)->map, game);
 }

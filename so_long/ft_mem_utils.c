@@ -6,12 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 00:54:04 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 00:15:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
+#include "minilibx_opengl_20191021/mlx.h"
 
 t_pool	*init_mem_pool(size_t size)
 {
@@ -23,7 +24,6 @@ t_pool	*init_mem_pool(size_t size)
 		printf("error initialising mem_p\n");
 		return (NULL);
 	}
-
 	mem_p->head = ft_calloc(size, sizeof(char));
 	if (!mem_p->head)
 	{
@@ -61,13 +61,14 @@ void	free_pool(t_pool *mem_p)
 	free(mem_p);
 }
 
-void	free_and_exit(t_pool *mem_p, int *fd, int status, char *msg)
+void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
 {
+	// mlx_destroy_image()
 	free_pool(mem_p);
-	if (*fd >= 0)
+	if (game && (*game)->map && (*game)->map->fd >= 0)
 	{
-		close(*fd);
-		*fd = -1;
+		close((*game)->map->fd);
+		(*game)->map->fd = -1;
 	}
 	if (status == 1)
 	{
@@ -80,4 +81,21 @@ void	free_and_exit(t_pool *mem_p, int *fd, int status, char *msg)
 		(void)msg;
 		exit(EXIT_SUCCESS);
 	}
+}
+
+void	init_game(t_pool *mem_p, t_game **game, char *f_map)
+{
+	*game = alloc_mem(mem_p, sizeof(t_game));
+	printf("allocating game memory\n");
+	if (!(*game))
+		free_and_exit(mem_p, game, 1, "Failed to alloc mem for game.\n");
+	(*game)->mlx = mlx_init();
+	(*game)->p_x = (*game)->map->p_start_x;
+	(*game)->p_y = (*game)->map->p_start_y;
+	if (!(*game)->mlx)
+		free_and_exit(mem_p, game, 1, "Failed to init mlx.\n");
+	(*game)->map = alloc_mem(mem_p, sizeof(t_map));
+	if (!(*game)->map)
+		free_and_exit(mem_p, game, 1, "Map is not valid / invalid map.\n");
+	initialise_map_values((*game)->map, f_map, (*game)->map->fd , 0);
 }

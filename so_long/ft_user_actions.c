@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 00:00:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/21 00:26:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/22 22:48:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "libft/libft.h"
 #include "minilibx_opengl_20191021/mlx.h"
 
-int	handle_keypress(int keycode, t_game *game)
+int	handle_keypress(int keycode, t_game *game, t_pool *mem_p)
 {
 	if (keycode == KEY_ESC)
 	{
 		mlx_destroy_window(game->mlx, game->window);
-		exit(0);
+		free_and_exit(mem_p, &game->map->fd, 0, "");
 	}
 	else if (keycode == KEY_W)
 		game->p_y--;
