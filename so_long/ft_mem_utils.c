@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 19:15:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 00:08:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "libft/libft.h"
-// #include "minilibx_opengl_20191021/mlx.h"
-#include "minilibx-linux/mlx.h"
+#include "libft.h"
+#ifdef __APPLE__
+	#include "minilibx_opengl_20191021/mlx.h"
+#elif __linux__
+	#include "minilibx-linux/mlx.h"
+#endif
+
 
 t_pool	*init_mem_pool(size_t size)
 {
@@ -96,12 +100,13 @@ void	init_game(t_pool *mem_p, t_game **game, char *f_map)
 	(*game)->mlx = mlx_init();
 	if (!(*game)->mlx)
 		free_and_exit(mem_p, game, 1, "Failed to init mlx.\n");
-	mlx_get_screen_size((*game)->mlx, &(*game)->win_x, &(*game)->win_y);
-	(*game)->win_x -= 100;
-	(*game)->win_y -= 100;
 	(*game)->c_count = 0;
 	(*game)->mp = f_map;
 	(*game)->n_mvmts = 0;
+	(*game)->v_x = 0;
+	(*game)->v_y = 0;
+	(*game)->view_w = 0;
+	(*game)->view_h = 0;
 	(*game)->map = alloc_mem(mem_p, sizeof(t_map));
 	if (!(*game)->map)
 		free_and_exit(mem_p, game, 1, "Map is not valid / invalid map.\n");

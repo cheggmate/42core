@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 18:44:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/24 09:05:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 {
@@ -51,25 +51,6 @@ void	print_map(t_map *map)
 		ft_printf("\n");
 	}
 }
-
-// int		get_map_height(char	*f_map)
-// {
-// 	int		h;
-// 	int		fd;
-// 	char	*line;
-
-// 	h = 0;
-// 	if (!f_map)
-// 		return (0);
-// 	fd = open(f_map, O_RDONLY);
-// 	while((line = get_next_line(fd)) != NULL)
-// 	{
-// 		h++;
-// 		free(line);
-// 	}
-// 	close(fd);
-// 	return (h);
-// }
 
 void	get_map_edges(t_game **game, char *f_map)
 {

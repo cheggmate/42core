@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 22:28:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 00:17:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "libft/libft.h"
-// #include "minilibx_opengl_20191021/mlx.h"
-#include "minilibx-linux/mlx.h"
+#include "libft.h"
+#ifdef __APPLE__
+	#include "minilibx_opengl_20191021/mlx.h"
+#elif __linux__
+	#include "minilibx-linux/mlx.h"
+#endif
 
 int	close_window(void *game)
 {
@@ -36,75 +39,37 @@ static void	*create_window(t_pool *mem_p, t_game **game, void *mlx)
 	int		width;
 	int		height;
 
-	width = ((*game)->map->w) * SPRITE_SIZE;
-	height = (*game)->map->h * SPRITE_SIZE;
+	// if ((*game)->map->w < VIEWPORT_WIDTH)
+	// 	width = ((*game)->map->w) * SPRITE_SIZE;
+	// else
+	// 	width = VIEWPORT_WIDTH * SPRITE_SIZE;
+	// if ((*game)->map->h < VIEWPORT_HEIGHT)
+	// 	height = (*game)->map->h * SPRITE_SIZE;
+	// else
+	// 	height = VIEWPORT_HEIGHT * SPRITE_SIZE;
+	width = ((*game)->view_w) * SPRITE_SIZE;
+	height = ((*game)->view_h) * SPRITE_SIZE;
 	(*game)->window = mlx_new_window(mlx, width, height, "so_long");
 	if (!(*game)->window)
 		free_and_exit(mem_p, game, 1, "Failed to open new window.\n");
 	return ((*game)->window);
 }
 
-static void	show_images(t_map *map, t_game *game)
+void	show_images(t_game *game)
 {
-	show_background(map, game);
-	show_walls(map, game);
-	show_exit(map, game, 1);
-	show_collectible(map, game);
+	show_background(game);
+	show_walls(game);
+	show_exit(game, 1);
+	show_collectible(game);
 	show_player(game);
-	mlx_key_hook(game->window, handle_keypress, game);
 }
 
-void	check_asset_list2(void)
+void	render_map(t_pool **mem_p, t_game **game)
 {
-	if (check_asset_exist("assets/player_door_c.xpm") == -1)
-	{
-		write(2, "Error\nPlayer sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/player_door_o.xpm") == -1)
-	{
-		write(2, "Error\nPlayer sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/enemy.xpm") == -1)
-	{
-		write(2, "Error\nEnemy sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	check_asset_list(void)
-{
-	if (check_asset_exist("assets/player.xpm") == -1)
-	{
-		write(2, "Error\nPlayer sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/wall.xpm") == -1)
-	{
-		write(2, "Error\nWall sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/door.xpm") == -1)
-	{
-		write(2, "Error\nExit sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/collectible.xpm") == -1)
-	{
-		write(2, "Error\nCollectible sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/floor.xpm") == -1)
-	{
-		write(2, "Error\nFloor sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-}
-
-void	render_map(t_pool **mem_p, t_map *map, t_game **game)
-{
-	(*game)->window = create_window( *mem_p, game, (*game)->mlx);
-	printf("before show images\n");
-	show_images(map, (*game));
+	(*game)->window = create_window(*mem_p, game, (*game)->mlx);
+	printf("after creating window\n");
+	show_images((*game));
+	render_viewable_map(game);
+	mlx_key_hook((*game)->window, handle_keypress, *game);
+	printf("after rendering viewable map\n");
 }

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 20:20:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 00:11:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include "libft/libft.h"
+#include "libft.h"
 
 void	populate_row(t_pool *mem_p, t_game **game, int row, char *line)
 {
@@ -36,11 +36,9 @@ void	populate_row(t_pool *mem_p, t_game **game, int row, char *line)
 			break;
 		}
 		check_update_element_ctr(mem_p, game, *line, pos);
-		printf("after checking update element ctr\n");
 		pos[1]++;
 		line++;
 	}
-	printf("added value into grid\n");
 }
 
 static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
@@ -52,12 +50,12 @@ static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 	row = 1;
 	while (row < (*game)->map->h)
 	{
+		line = get_next_line(fd);
 		if (!line)
 		{
 			printf("found an empty line at row %d\n", row);
 			break ;
 		}
-		line = get_next_line(fd);
 		len = ft_strlen(line) - 1;
 		printf("checking width\n");
 		printf("len = %zu\n", len);
@@ -81,8 +79,6 @@ void	initialise_map_values(t_game **game, char *f_map)
 	(*game)->map->start = 0;
 	(*game)->map->p_start_x = 0;
 	(*game)->map->p_start_y = 0;
-	// close(fd);
-	// fd = -1;
 }
 
 void	init_grid(t_pool *mem_p, char *f_map, t_game **game)
@@ -114,18 +110,15 @@ void	load_map(char *f_map, t_game **game)
 		free_and_exit(mem_p, game, 1, "failed to allocate memory pool.\n");
 	init_game(mem_p, game, f_map);
 	init_grid(mem_p, f_map, game);
-	printf("init grid complete\n");
 	if ((*game)->map->h == 0)
 		free_and_exit(mem_p, game, 1, "Empty map file provided.\n");
 	line = get_next_line((*game)->map->fd);
 	populate_row(mem_p, game, 0, line);
-	printf("populate row completed\n");
 	populate_grid(game, mem_p, (*game)->map->fd);
-	printf("populate grid completed\n");
 	if ((*game)->map->c == 0)
 		free_and_exit(mem_p, game, 1, "No collectibles found.\n");
 	close((*game)->map->fd);
 	print_map((*game)->map);			// remove before submission
-	render_map(&mem_p, (*game)->map, game);
-	printf("p_x: %d and p_y: %d\n", (*game)->p_x, (*game)->p_y);
+	set_view_dimensions(game);
+	render_map(&mem_p, game);
 }
