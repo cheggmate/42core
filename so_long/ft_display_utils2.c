@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:57:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:14:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 00:53:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,10 @@ void	render_viewable_map(t_game **game)
 					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->w_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
 				if (tile == 'C')
 					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->c_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
-				if (tile == 'E' && (*game)->c_count == (*game)->map->c)
+				if (tile == 'E' && (*game)->c_count == (*game)->map->c && m_x == (*game)->p_x && m_y == (*game)->p_y)
 					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e2_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
 				else if (tile == 'E')
-
-				mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
+					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
 				if (tile == '0')
 					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->bg_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
 			}
@@ -94,8 +93,6 @@ void	reload_map(t_game **game, int prev_x, int prev_y)
 		(*game)->c_count += 1;
 		(*game)->map->grid[prev_x][prev_y] = '0';
 	}
-	// if ((*game)->map->grid[prev_x][prev_y] == 'P')
-	// 	(*game)->map->grid[prev_x][prev_y] = '0';
 	render_viewable_map(game);
 	// redraw_tile(*game, prev_x, prev_y);
 	redraw_player(*game);

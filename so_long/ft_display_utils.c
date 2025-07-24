@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:17:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 00:40:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,6 @@ static void	*create_window(t_pool *mem_p, t_game **game, void *mlx)
 	int		width;
 	int		height;
 
-	// if ((*game)->map->w < VIEWPORT_WIDTH)
-	// 	width = ((*game)->map->w) * SPRITE_SIZE;
-	// else
-	// 	width = VIEWPORT_WIDTH * SPRITE_SIZE;
-	// if ((*game)->map->h < VIEWPORT_HEIGHT)
-	// 	height = (*game)->map->h * SPRITE_SIZE;
-	// else
-	// 	height = VIEWPORT_HEIGHT * SPRITE_SIZE;
 	width = ((*game)->view_w) * SPRITE_SIZE;
 	height = ((*game)->view_h) * SPRITE_SIZE;
 	(*game)->window = mlx_new_window(mlx, width, height, "so_long");
@@ -64,12 +56,20 @@ void	show_images(t_game *game)
 	show_player(game);
 }
 
+int	handle_close(void *game_in)
+{
+	t_game *game;
+
+	game = (t_game *)game_in;
+	close_window(game);
+	return (0);
+}
+
 void	render_map(t_pool **mem_p, t_game **game)
 {
 	(*game)->window = create_window(*mem_p, game, (*game)->mlx);
-	printf("after creating window\n");
 	show_images((*game));
 	render_viewable_map(game);
 	mlx_key_hook((*game)->window, handle_keypress, *game);
-	printf("after rendering viewable map\n");
+	mlx_hook((*game)->window, 17, 0, handle_close, *game);
 }
