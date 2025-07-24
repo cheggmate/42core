@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_so_long.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 23:59:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 18:47:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
-#include "minilibx_opengl_20191021/mlx.h"
+// #include "minilibx_opengl_20191021/mlx.h"
+#include "minilibx-linux/mlx.h"
 
 int	main(int argc, char **argv)
 {
@@ -23,7 +24,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Error\nincorrect number of inputs!\n", 34), 1);
 	check_asset_list();
 	load_map(argv[1], &game);
-	printf("map->w = %d\n", game->map->w);
+	// printf("map->w = %d\n", game->map->w);
 	// create a window - DONE
 	// load all required sprites - DONE
 	// create the different hooks
@@ -48,6 +49,7 @@ int	main(int argc, char **argv)
 	// 	* replace collectible with background once collected
 	// 	* move player
 	// 	* collectible counter
-	mlx_loop(game);
+
+	mlx_loop(game->mlx);
 	return (0);
 }

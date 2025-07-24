@@ -3,36 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 00:17:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 22:28:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
-#include "minilibx_opengl_20191021/mlx.h"
+// #include "minilibx_opengl_20191021/mlx.h"
+#include "minilibx-linux/mlx.h"
 
-static int	close_window(t_game *game)
+int	close_window(void *game)
 {
-	mlx_destroy_window(game->mlx, game->window);
-	exit(0);
+	t_game	*game_tmp;
+
+	game_tmp  = (t_game *)game;
+	printf("before destroying window\n");
+	if (game_tmp && game_tmp->mlx && game_tmp->window)
+	{
+		mlx_destroy_window(game_tmp->mlx, game_tmp->window);
+		printf("freeing memory after destroying window\n");
+		game_tmp->window = NULL;
+	}
+	free_and_exit(game_tmp->mem_p, &game_tmp, 0, "Window closed.");
 	return (0);
 }
 
 static void	*create_window(t_pool *mem_p, t_game **game, void *mlx)
 {
-	void	*window;
 	int		width;
 	int		height;
 
-	width = ((*game)->map->w - 1) * SPRITE_SIZE;
+	width = ((*game)->map->w) * SPRITE_SIZE;
 	height = (*game)->map->h * SPRITE_SIZE;
-	window = mlx_new_window(mlx, width, height, "so_long");
-	if (!window)
+	(*game)->window = mlx_new_window(mlx, width, height, "so_long");
+	if (!(*game)->window)
 		free_and_exit(mem_p, game, 1, "Failed to open new window.\n");
-	return (window);
+	return ((*game)->window);
 }
 
 static void	show_images(t_map *map, t_game *game)
@@ -41,10 +50,27 @@ static void	show_images(t_map *map, t_game *game)
 	show_walls(map, game);
 	show_exit(map, game, 1);
 	show_collectible(map, game);
-	show_player(game, map->p_start_x, map->p_start_y);
+	show_player(game);
 	mlx_key_hook(game->window, handle_keypress, game);
-	printf("bbbb\n");
-	mlx_hook(game->window, 17, 0, close_window, game); // 17 = destroy Notify activity
+}
+
+void	check_asset_list2(void)
+{
+	if (check_asset_exist("assets/player_door_c.xpm") == -1)
+	{
+		write(2, "Error\nPlayer sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/player_door_o.xpm") == -1)
+	{
+		write(2, "Error\nPlayer sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/enemy.xpm") == -1)
+	{
+		write(2, "Error\nEnemy sprite not found.\n", 31);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void	check_asset_list(void)
@@ -78,15 +104,6 @@ void	check_asset_list(void)
 
 void	render_map(t_pool **mem_p, t_map *map, t_game **game)
 {
-	// *game = alloc_mem(*mem_p, sizeof(t_game));
-	// printf("allocating game memory\n");
-	// if (!(*game))
-	// 	free_and_exit(*mem_p, game, 1, "Failed to alloc mem for game.\n");
-	// (*game)->mlx = mlx_init();
-	// (*game)->p_x = map->p_start_x;
-	// (*game)->p_y = map->p_start_y;
-	// if (!(*game)->mlx)
-	// 	free_and_exit(*mem_p, game, 1, "Failed to init mlx.\n");
 	(*game)->window = create_window( *mem_p, game, (*game)->mlx);
 	printf("before show images\n");
 	show_images(map, (*game));

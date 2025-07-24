@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/23 00:15:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 19:15:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
-#include "minilibx_opengl_20191021/mlx.h"
+// #include "minilibx_opengl_20191021/mlx.h"
+#include "minilibx-linux/mlx.h"
 
 t_pool	*init_mem_pool(size_t size)
 {
@@ -63,13 +64,16 @@ void	free_pool(t_pool *mem_p)
 
 void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
 {
-	// mlx_destroy_image()
-	free_pool(mem_p);
-	if (game && (*game)->map && (*game)->map->fd >= 0)
+	printf("after freeing pool\n");
+	if (game && *game && (*game)->map && (*game)->map->fd >= 0)
 	{
 		close((*game)->map->fd);
 		(*game)->map->fd = -1;
+		printf("after closing fd\n");
 	}
+	destroy_images(game);
+	printf("after destroying images\n");
+	free_pool(mem_p);
 	if (status == 1)
 	{
 		write(2, "Error\n", 6);
@@ -86,16 +90,20 @@ void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
 void	init_game(t_pool *mem_p, t_game **game, char *f_map)
 {
 	*game = alloc_mem(mem_p, sizeof(t_game));
-	printf("allocating game memory\n");
 	if (!(*game))
 		free_and_exit(mem_p, game, 1, "Failed to alloc mem for game.\n");
+	(*game)->mem_p = mem_p;
 	(*game)->mlx = mlx_init();
-	(*game)->p_x = (*game)->map->p_start_x;
-	(*game)->p_y = (*game)->map->p_start_y;
 	if (!(*game)->mlx)
 		free_and_exit(mem_p, game, 1, "Failed to init mlx.\n");
+	mlx_get_screen_size((*game)->mlx, &(*game)->win_x, &(*game)->win_y);
+	(*game)->win_x -= 100;
+	(*game)->win_y -= 100;
+	(*game)->c_count = 0;
+	(*game)->mp = f_map;
+	(*game)->n_mvmts = 0;
 	(*game)->map = alloc_mem(mem_p, sizeof(t_map));
 	if (!(*game)->map)
 		free_and_exit(mem_p, game, 1, "Map is not valid / invalid map.\n");
-	initialise_map_values((*game)->map, f_map, (*game)->map->fd , 0);
+	initialise_map_values(game, f_map);
 }

@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_loader_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 23:35:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/22 22:40:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/23 22:31:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
-#include "minilibx_opengl_20191021/mlx.h"
+// #include "minilibx_opengl_20191021/mlx.h"
+#include "minilibx-linux/mlx.h"
 
 void	show_background(t_map *map, t_game *game)
 {
@@ -24,6 +25,7 @@ void	show_background(t_map *map, t_game *game)
 	i = -1;
 	bg_edge = 32;
 	bg = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &bg_edge, &bg_edge);
+	game->bg_img = bg;
 	printf("create bg sprite\n");
 	while (i++ < map->h - 1)
 	{
@@ -44,6 +46,7 @@ void	show_walls(t_map *map, t_game *game)
 	i = -1;
 	wall_edge = 32;
 	wall = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", &wall_edge, &wall_edge);
+	game->w_img = wall;
 	printf("create wall sprite\n");
 	while (i++ < map->h - 1)
 	{
@@ -69,7 +72,9 @@ void	show_exit(t_map *map, t_game *game, int state)
 	if (state == 1)
 		exit = mlx_xpm_file_to_image(game->mlx, "assets/door.xpm", &exit_edge, &exit_edge);
 	else
-		exit = mlx_xpm_file_to_image(game->mlx, "assets/door-open.xpm", &exit_edge, &exit_edge);
+		exit = mlx_xpm_file_to_image(game->mlx, "assets/door_open.xpm", &exit_edge, &exit_edge);
+	game->e2_img = mlx_xpm_file_to_image(game->mlx, "assets/player_door_c.xpm", &exit_edge, &exit_edge);
+	game->e_img = exit;
 	printf("create exit sprite\n");
 	while (i++ < map->h - 1)
 	{
@@ -93,6 +98,7 @@ void	show_collectible(t_map *map, t_game *game)
 	i = -1;
 	c_edge = 32;
 	c = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm", &c_edge, &c_edge);
+	game->c_img = c;
 	printf("create collectible sprite\n");
 	while (i++ < map->h - 1)
 	{
