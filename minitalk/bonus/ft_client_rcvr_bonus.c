@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client_rcvr_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 22:22:33 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/15 13:25:34 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 18:51:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	process_other_signals(int s)
 
 void	process_cli_sigusr(int s)
 {
+	unsigned char	lettre;
+	
+	lettre = '\n';
 	if (s == SIGUSR1)
 	{
 		g_word_ack->sig_char <<= 1;
@@ -61,8 +64,11 @@ void	process_cli_sigusr(int s)
 	if (g_word_ack->b_count == 8)
 	{
 		write(1, &g_word_ack->sig_char, 1);
+		lettre = g_word_ack->sig_char;
 		g_word_ack->sig_char = 0;
 		g_word_ack->b_count = 0;
+		if (lettre == '\0')
+			exit(EXIT_SUCCESS);
 	}
 }
 
