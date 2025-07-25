@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:25:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 17:46:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,18 @@ typedef struct s_game {
 	t_pool	*mem_p;
 } t_game;
 
+typedef struct s_pos {
+	int	x;
+	int	y;
+} t_pos;
+
+typedef struct {
+	t_pos	q[10000];
+	int	front;
+	int	back;
+	int	**dir;
+} t_queue;
+
 void		get_map_edges(t_game **game, char *f_map);
 void		calculate_viewable_area(t_game **game);
 t_pool		*init_mem_pool(size_t size);
@@ -110,5 +122,7 @@ void		set_view_dimensions(t_game **game);
 int			handle_keypress(int keycode, void *game);
 void 		check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos);
 void		free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg);
+int 		path_check(char **grid, t_game **game, t_pool *mem_p);
+// int 		path_check(char **grid, int h, int w, int px, int py, int total_c);
 
 #endif

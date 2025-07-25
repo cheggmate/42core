@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 23:27:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/24 23:51:51 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 11:19:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	redraw_player(t_game *game)
 		if (game->c_count == game->map->c)
 		{
 			mlx_string_put(game->mlx, game->window, 10, 10, 0xFFFFFF,
-			"🎉 Congrats you won!!!🎉");
+			" Congrats you won!!!!!");
 		}
 	}
 	else

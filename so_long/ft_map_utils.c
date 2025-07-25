@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:11:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 18:00:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,7 @@ void	load_map(char *f_map, t_game **game)
 	close((*game)->map->fd);
 	print_map((*game)->map);			// remove before submission
 	set_view_dimensions(game);
+	if (!path_check((*game)->map->grid, game, (*game)->mem_p))
+		free_and_exit(mem_p, game, 1, "Error: Map is not solvable.");
 	render_map(&mem_p, game);
 }

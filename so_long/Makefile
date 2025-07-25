@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/24 10:24:43 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/25 12:50:52 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME		= so_long
 REQ_SRC		= ft_so_long.c ft_map_utils.c ft_mem_utils.c ft_map_utils2.c \
 				ft_display_utils.c ft_user_actions.c ft_player_utils.c \
 				ft_map_loader_utils.c ft_mem_utils2.c ft_display_utils2.c \
-				ft_asset_checks.c
+				ft_asset_checks.c ft_path_check.c
 HEADER		= so_long.h
 OBJ 		= $(REQ_SRC:.c=.o)
 
