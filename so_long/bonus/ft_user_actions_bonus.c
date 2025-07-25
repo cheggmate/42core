@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 00:00:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:42:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 00:57:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../minilibx-linux/mlx.h"
 #endif
 
-static void	print_mvmt(t_game **game)
+void	print_mvmt(t_game **game)
 {
 	char	*mvmt_str;
 	char	*msg;

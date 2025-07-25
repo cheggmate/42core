@@ -6,12 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:07:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 01:18:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 # define POOL_SIZE 1048576
 # define CHUNK_SIZE 64
 # define VIEWPORT_HEIGHT 6
@@ -78,6 +78,10 @@ typedef struct s_game
 	int		p_x;
 	int		p_y;
 	char	*mp;
+	void	*l1_img;
+	void	*l2_img;
+	void	*l3_img;
+	int		ani_val;
 	t_map	*map;
 	t_pool	*mem_p;
 }	t_game;
@@ -110,11 +114,13 @@ int			get_map_height(char	*f_map);
 int			check_asset_exist(char *f_name);
 void		check_asset_list(void);
 void		check_asset_list2(void);
+void		check_asset_ani(void);
 void		load_map(char *f_map, t_game **game);
 void		reload_map(t_game **game, int prev_x, int prev_y);
 void		show_images(t_game *game);
 void		show_background(t_game *game);
 void		show_collectible(t_game *game);
+void		show_animation(t_game *game);
 void		show_exit(t_game *game, int state);
 void		show_player(t_game *game);
 void		redraw_player(t_game *game);
@@ -126,6 +132,7 @@ void		set_view_dimensions(t_game **game);
 int			handle_keypress(int keycode, void *game);
 void		check_update_element_ctr(t_pool *mem_p, t_game **game,
 				char c, int *pos);
+void		print_mvmt(t_game **game);
 void		free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg);
 int			path_check(char **grid, t_game **game, t_pool *mem_p);
 

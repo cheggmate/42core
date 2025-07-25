@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 23:35:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:08:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 01:17:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,23 @@ void	show_collectible(t_game *game)
 	c = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm",
 			&c_edge, &c_edge);
 	game->c_img = c;
+}
+
+void	show_animation(t_game *game)
+{
+	void	*l1;
+	void	*l2;
+	void	*l3;
+	int		l_edge;
+
+	l_edge = 32;
+	l1 = mlx_xpm_file_to_image(game->mlx, "assets/lightning1.xpm",
+			&l_edge, &l_edge);
+	l2 = mlx_xpm_file_to_image(game->mlx, "assets/lightning2.xpm",
+			&l_edge, &l_edge);
+	l3 = mlx_xpm_file_to_image(game->mlx, "assets/lightning3.xpm",
+			&l_edge, &l_edge);
+	game->l1_img = l1;
+	game->l2_img = l2;
+	game->l3_img = l3;
 }

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:18:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 01:17:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	close_window(void *game)
 {
 	t_game	*game_tmp;
 
-	game_tmp  = (t_game *)game;
+	game_tmp = (t_game *)game;
 	if (game_tmp && game_tmp->mlx && game_tmp->window)
 	{
 		mlx_destroy_window(game_tmp->mlx, game_tmp->window);
@@ -52,11 +52,12 @@ void	show_images(t_game *game)
 	show_exit(game, 1);
 	show_collectible(game);
 	show_player(game);
+	show_animation(game);
 }
 
 int	handle_close(void *game_in)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)game_in;
 	close_window(game);

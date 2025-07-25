@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:11:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:13:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 00:20:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@
 #elif __linux__
 # include "../minilibx-linux/mlx.h"
 #endif
+
+static void	destroy_animations(t_game **game)
+{
+	if ((*game)->l1_img)
+		mlx_destroy_image((*game)->mlx, (*game)->l1_img);
+	if ((*game)->l2_img)
+		mlx_destroy_image((*game)->mlx, (*game)->l2_img);
+	if ((*game)->l3_img)
+		mlx_destroy_image((*game)->mlx, (*game)->l3_img);
+	(*game)->l1_img = NULL;
+	(*game)->l2_img = NULL;
+	(*game)->l3_img = NULL;
+}
 
 void	destroy_images(t_game **game)
 {
@@ -38,4 +51,5 @@ void	destroy_images(t_game **game)
 	(*game)->bg_img = NULL;
 	(*game)->e_img = NULL;
 	(*game)->p_img = NULL;
+	destroy_animations(game);
 }

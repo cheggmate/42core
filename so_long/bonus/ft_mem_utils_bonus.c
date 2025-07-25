@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:19:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 00:29:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	init_game(t_pool *mem_p, t_game **game, char *f_map)
 	(*game)->v_y = 0;
 	(*game)->view_w = 0;
 	(*game)->view_h = 0;
+	(*game)->ani_val = 0;
 	(*game)->map = alloc_mem(mem_p, sizeof(t_map));
 	if (!(*game)->map)
 		free_and_exit(mem_p, game, 1, "Map is not valid / invalid map.\n");

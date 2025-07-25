@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 10:22:26 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:09:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 00:12:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,25 @@
 #elif __linux__
 # include "../minilibx-linux/mlx.h"
 #endif
+
+void	check_asset_ani(void)
+{
+	if (check_asset_exist("assets/lightning1.xpm") == -1)
+	{
+		write(2, "Error\nLightning sprite not found.\n", 35);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/lightning2.xpm") == -1)
+	{
+		write(2, "Error\nLightning2 sprite not found.\n", 35);
+		exit(EXIT_FAILURE);
+	}
+	if (check_asset_exist("assets/lightning3.xpm") == -1)
+	{
+		write(2, "Error\nLightning3 sprite not found.\n", 35);
+		exit(EXIT_FAILURE);
+	}
+}
 
 void	check_asset_list2(void)
 {
@@ -33,16 +52,6 @@ void	check_asset_list2(void)
 	if (check_asset_exist("assets/enemy.xpm") == -1)
 	{
 		write(2, "Error\nEnemy sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/candlelight1.xpm") == -1)
-	{
-		write(2, "Error\nCandle1 sprite not found.\n", 31);
-		exit(EXIT_FAILURE);
-	}
-	if (check_asset_exist("assets/candlelight2.xpm") == -1)
-	{
-		write(2, "Error\nCandle2 sprite not found.\n", 31);
 		exit(EXIT_FAILURE);
 	}
 }
