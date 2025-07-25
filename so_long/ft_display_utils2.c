@@ -6,22 +6,20 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:57:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:53:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 22:36:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
 
 void	calculate_viewable_area(t_game **game)
 {
-	printf("(Calculated viewable area) p_x : %d, p_y : %d\n", (*game)->p_x , (*game)->p_y);
-	printf("(Calculated viewable area before) x_x : %d, x_y : %d\n", (*game)->v_x , (*game)->v_y);
 	if ((*game)->map->w > VIEWPORT_WIDTH)
 	{
 		(*game)->v_y = (*game)->p_y - VIEWPORT_WIDTH / 2;
@@ -37,75 +35,69 @@ void	calculate_viewable_area(t_game **game)
 		(*game)->v_x = (*game)->p_x - VIEWPORT_HEIGHT / 2;
 		if ((*game)->v_x < 0)
 			(*game)->v_x = 0;
-
 		if ((*game)->v_x + VIEWPORT_HEIGHT > (*game)->map->h)
 			(*game)->v_x = (*game)->map->h - VIEWPORT_HEIGHT;
 	}
 	else
 		(*game)->v_x = 0;
-	
-	printf("(Calculated viewable area after) x_x : %d, x_y : %d\n", (*game)->v_x , (*game)->v_y);
+}
+
+static void	put_relevant_image(t_game **game, int *ctr, int *mp, char tile)
+{
+	if (tile == '1')
+		mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->w_img,
+			SPRITE_SIZE * ctr[1], SPRITE_SIZE * ctr[0]);
+	if (tile == 'C')
+		mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->c_img,
+			SPRITE_SIZE * ctr[1], SPRITE_SIZE * ctr[0]);
+	if (tile == 'E' && (*game)->c_count == (*game)->map->c
+		&& mp[0] == (*game)->p_x && mp[1] == (*game)->p_y)
+		mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e2_img,
+			SPRITE_SIZE * ctr[1], SPRITE_SIZE * ctr[0]);
+	else if (tile == 'E')
+		mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e_img,
+			SPRITE_SIZE * ctr[1], SPRITE_SIZE * ctr[0]);
+	if (tile == '0')
+		mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->bg_img,
+			SPRITE_SIZE * ctr[1], SPRITE_SIZE * ctr[0]);
 }
 
 void	render_viewable_map(t_game **game)
 {
-	int		m_x;
-	int		m_y;
-	int		i;
-	int		j;
+	int		mp[2];
+	int		ctr[2];
 	char	tile;
 
-	i = 0;
-	printf("rendering viewable map\n");
-	while (i <  (*game)->view_h)
+	ctr[0] = 0;
+	while (ctr[0] < (*game)->view_h)
 	{
-		j = 0;
-		while (j < (*game)->view_w)
+		ctr[1] = 0;
+		while (ctr[1] < (*game)->view_w)
 		{
-			m_x = (*game)->v_x + i;
-			m_y = (*game)->v_y + j;
-			if (m_x >= 0 && m_x < (*game)->map->h && m_y >= 0 && m_y < (*game)->map->w)
+			mp[0] = (*game)->v_x + ctr[0];
+			mp[1] = (*game)->v_y + ctr[1];
+			if (mp[0] >= 0 && mp[0] < (*game)->map->h && mp[1] >= 0
+				&& mp[1] < (*game)->map->w)
 			{
-				tile = (*game)->map->grid[m_x][m_y];
-				if (tile == '1')
-					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->w_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
-				if (tile == 'C')
-					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->c_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
-				if (tile == 'E' && (*game)->c_count == (*game)->map->c && m_x == (*game)->p_x && m_y == (*game)->p_y)
-					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e2_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
-				else if (tile == 'E')
-					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->e_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
-				if (tile == '0')
-					mlx_put_image_to_window((*game)->mlx, (*game)->window, (*game)->bg_img, SPRITE_SIZE * j, SPRITE_SIZE * i);
+				tile = (*game)->map->grid[mp[0]][mp[1]];
+				put_relevant_image(game, ctr, mp, tile);
 			}
-			j++;
+			ctr[1]++;
 		}
-		i++;
-	}	
+		ctr[0]++;
+	}
 }
 
 void	reload_map(t_game **game, int prev_x, int prev_y)
 {
 	calculate_viewable_area(game);
-	printf("game p_x : %d, game p_y: %d\n", (*game)->p_x, (*game)->p_y);
 	if ((*game)->map->grid[prev_x][prev_y] == 'C')
 	{
 		(*game)->c_count += 1;
 		(*game)->map->grid[prev_x][prev_y] = '0';
 	}
 	render_viewable_map(game);
-	// redraw_tile(*game, prev_x, prev_y);
 	redraw_player(*game);
-}
-
-void	redraw_tile(t_game *game, int pos_x, int pos_y)
-{
-	if (game->map->grid[pos_x][pos_y] == 'C' || game->map->grid[pos_x][pos_y] == '0')
-		mlx_put_image_to_window(game->mlx, game->window, game->bg_img,
-		(pos_y - game->v_y) * SPRITE_SIZE, (pos_x - game->v_x) * SPRITE_SIZE);
-	else if (game->map->grid[pos_x][pos_y] == 'E')
-		mlx_put_image_to_window(game->mlx, game->window, game->e_img,
-			(pos_y - game->v_y) * SPRITE_SIZE, (pos_x - game->v_x) * SPRITE_SIZE);
 }
 
 void	set_view_dimensions(t_game **game)

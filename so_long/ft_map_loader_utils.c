@@ -6,16 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 23:35:45 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:28:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 22:40:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
 
 void	show_background(t_game *game)
@@ -24,7 +24,8 @@ void	show_background(t_game *game)
 	int		bg_edge;
 
 	bg_edge = 32;
-	bg = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &bg_edge, &bg_edge);
+	bg = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm",
+			&bg_edge, &bg_edge);
 	game->bg_img = bg;
 }
 
@@ -34,7 +35,8 @@ void	show_walls(t_game *game)
 	int		wall_edge;
 
 	wall_edge = 32;
-	wall = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", &wall_edge, &wall_edge);
+	wall = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm",
+			&wall_edge, &wall_edge);
 	game->w_img = wall;
 }
 
@@ -45,10 +47,13 @@ void	show_exit(t_game *game, int state)
 
 	exit_edge = 32;
 	if (state == 1)
-		exit = mlx_xpm_file_to_image(game->mlx, "assets/door.xpm", &exit_edge, &exit_edge);
+		exit = mlx_xpm_file_to_image(game->mlx, "assets/door.xpm",
+				&exit_edge, &exit_edge);
 	else
-		exit = mlx_xpm_file_to_image(game->mlx, "assets/door_open.xpm", &exit_edge, &exit_edge);
-	game->e2_img = mlx_xpm_file_to_image(game->mlx, "assets/player_door_c.xpm", &exit_edge, &exit_edge);
+		exit = mlx_xpm_file_to_image(game->mlx, "assets/door_open.xpm",
+				&exit_edge, &exit_edge);
+	game->e2_img = mlx_xpm_file_to_image(game->mlx, "assets/player_door_c.xpm",
+			&exit_edge, &exit_edge);
 	game->e_img = exit;
 }
 
@@ -58,6 +63,7 @@ void	show_collectible(t_game *game)
 	int		c_edge;
 
 	c_edge = 32;
-	c = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm", &c_edge, &c_edge);
+	c = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm",
+			&c_edge, &c_edge);
 	game->c_img = c;
 }

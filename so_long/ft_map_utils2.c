@@ -6,14 +6,14 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/24 09:05:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 22:52:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 
-void check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
+void	check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 {
 	if (c == 'C')
 		(*game)->map->c += 1;
@@ -35,7 +35,7 @@ void check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 
 void	print_map(t_map *map)
 {
-	int i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -64,16 +64,19 @@ void	get_map_edges(t_game **game, char *f_map)
 	if (!f_map)
 		return ;
 	fd = open(f_map, O_RDONLY);
-	while((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (*line == '\n')
-			break;
+			break ;
 		w = ft_strlen(line);
 		h++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	(*game)->map->h = h;
 	(*game)->map->w = w;
+	free(line);
 	close(fd);
 }
 

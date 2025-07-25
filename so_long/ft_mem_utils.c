@@ -6,18 +6,17 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:08:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 23:17:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
-
 
 t_pool	*init_mem_pool(size_t size)
 {
@@ -26,13 +25,13 @@ t_pool	*init_mem_pool(size_t size)
 	mem_p = ft_calloc(1, sizeof(t_pool));
 	if (!mem_p)
 	{
-		printf("error initialising mem_p\n");
+		ft_printf("Failed to initialise mem_p\n");
 		return (NULL);
 	}
 	mem_p->head = ft_calloc(size, sizeof(char));
 	if (!mem_p->head)
 	{
-		printf("error initialising mem_p->head\n");
+		ft_printf("Failed to initialise mem_p->head\n");
 		return (NULL);
 	}
 	mem_p->total = size;
@@ -47,16 +46,14 @@ void	*alloc_mem(t_pool *mem_p, size_t size)
 	sub_pool = NULL;
 	if (!mem_p || !mem_p->head)
 		return (NULL);
-		
 	if (mem_p->used + size > mem_p->total)
 	{
-		printf("mem overflow\n");
+		ft_printf("Mem overflow\n");
 		return (NULL);
 	}
-		
 	sub_pool = mem_p->head + mem_p->used;
 	mem_p->used += size;
-	return(sub_pool);
+	return (sub_pool);
 }
 
 void	free_pool(t_pool *mem_p)
@@ -68,15 +65,12 @@ void	free_pool(t_pool *mem_p)
 
 void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
 {
-	printf("after freeing pool\n");
 	if (game && *game && (*game)->map && (*game)->map->fd >= 0)
 	{
 		close((*game)->map->fd);
 		(*game)->map->fd = -1;
-		printf("after closing fd\n");
 	}
 	destroy_images(game);
-	printf("after destroying images\n");
 	free_pool(mem_p);
 	if (status == 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 18:00:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 22:47:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void	populate_row(t_pool *mem_p, t_game **game, int row, char *line)
 	while (*line)
 	{
 		if (((row == 0 || row == (*game)->map->h - 1) && *line != '1'
-			&& pos[1] != (*game)->map->w)
+				&& pos[1] != (*game)->map->w)
 			|| ((pos[1] == 0 || pos[1] == (*game)->map->w - 1) && *line != '1'))
 			free_and_exit(mem_p, game, 1, "Map not enclosed by walls.\n");
-		printf("*line is %c, pos[1] is %d\n", *line, pos[1]);
 		if (*line != '\n')
 			(*game)->map->grid[row][pos[1]] = *line;
 		else if (*line == '\n')
 		{
 			(*game)->map->grid[row][pos[1]] = '\0';
-			break;
+			break ;
 		}
 		check_update_element_ctr(mem_p, game, *line, pos);
 		pos[1]++;
@@ -52,19 +51,12 @@ static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-		{
-			printf("found an empty line at row %d\n", row);
 			break ;
-		}
 		len = ft_strlen(line) - 1;
-		printf("checking width\n");
-		printf("len = %zu\n", len);
-		printf("width = %d\n", (*game)->map->w);
 		if ((len != (size_t)(*game)->map->w && row < (*game)->map->h - 1)
 			|| (len != ((size_t)(*game)->map->w - 1)
 			&& row == (*game)->map->h - 1))
 			free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
-		printf("pass if check, populating rrow\n");
 		populate_row(mem_p, game, row, line);
 		free(line);
 		row++;
@@ -87,12 +79,14 @@ void	init_grid(t_pool *mem_p, char *f_map, t_game **game)
 
 	i = 0;
 	(*game)->map->fd = open(f_map, O_RDONLY);
-	(*game)->map->grid = alloc_mem(mem_p, sizeof(char *) * ((*game)->map->h + 1));
+	(*game)->map->grid = alloc_mem(mem_p,
+			sizeof(char *) * ((*game)->map->h + 1));
 	if (!(*game)->map->grid)
 		free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
 	while (i < (*game)->map->h)
 	{
-		(*game)->map->grid[i] = alloc_mem(mem_p, sizeof(char) * ((*game)->map->w + 1));
+		(*game)->map->grid[i] = alloc_mem(mem_p,
+				sizeof(char) * ((*game)->map->w + 1));
 		if (!((*game)->map->grid[i]))
 			free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
 		i++;
@@ -118,7 +112,7 @@ void	load_map(char *f_map, t_game **game)
 	if ((*game)->map->c == 0)
 		free_and_exit(mem_p, game, 1, "No collectibles found.\n");
 	close((*game)->map->fd);
-	print_map((*game)->map);			// remove before submission
+	print_map((*game)->map);
 	set_view_dimensions(game);
 	if (!path_check((*game)->map->grid, game, (*game)->mem_p))
 		free_and_exit(mem_p, game, 1, "Error: Map is not solvable.");

@@ -6,16 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 13:33:32 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 18:36:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 23:18:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft/libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
 
 static int	is_valid(int x, int y, t_game **game, int **checked)
@@ -24,7 +24,7 @@ static int	is_valid(int x, int y, t_game **game, int **checked)
 		&& (*game)->map->grid[x][y] != '1' && !checked[x][y]);
 }
 
-static void	queue_if_valid(t_pos *curr, t_queue *q, t_game **game, int **checked)
+static void	queue_if_valid(t_pos *curr, t_queue *q, t_game **game, int **chkd)
 {
 	int	i;
 	int	next_x;
@@ -37,14 +37,13 @@ static void	queue_if_valid(t_pos *curr, t_queue *q, t_game **game, int **checked
 	{
 		next_x = curr->x + q->dir[i][0];
 		next_y = curr->y + q->dir[i][1];
-		if (is_valid(next_x, next_y, game, checked))
+		if (is_valid(next_x, next_y, game, chkd))
 		{
-			checked[next_x][next_y] = 1;
+			chkd[next_x][next_y] = 1;
 			q->q[q->back++] = (t_pos){next_x, next_y};
 		}
 		i++;
 	}
-	
 }
 
 static void	init_vals(t_queue *q, int **checked, t_game **game, t_pool *mem_p)
@@ -68,7 +67,7 @@ static void	init_vals(t_queue *q, int **checked, t_game **game, t_pool *mem_p)
 	q->dir[3][1] = -1;
 	while (++i < (*game)->map->h)
 	{
-		checked[i]  = alloc_mem((*game)->mem_p, sizeof(int) * (*game)->map->w);
+		checked[i] = alloc_mem((*game)->mem_p, sizeof(int) * (*game)->map->w);
 		if (!checked[i])
 			free_and_exit(mem_p, game, 1, "Failed to allocate memory\n");
 	}
@@ -78,7 +77,7 @@ static void	init_vals(t_queue *q, int **checked, t_game **game, t_pool *mem_p)
 
 int	path_check(char **grid, t_game **game, t_pool *mem_p)
 {
-	t_queue *q;
+	t_queue	*q;
 	int		**checked;
 	int		c_num_found_e[2];
 	t_pos	curr;
@@ -95,12 +94,11 @@ int	path_check(char **grid, t_game **game, t_pool *mem_p)
 	while (q->front < q->back)
 	{
 		curr = q->q[q->front++];
-		printf("grid[%d][%d] = %c\n", curr.x, curr.y, grid[curr.x][curr.y]);
 		if (grid[curr.x][curr.y] == 'C')
 			c_num_found_e[0]++;
 		if (grid[curr.x][curr.y] == 'E')
 			c_num_found_e[1] = 1;
 		queue_if_valid(&curr, q, game, checked);
 	}
-	return(c_num_found_e[0] == (*game)->map->c && c_num_found_e[1]);
+	return (c_num_found_e[0] == (*game)->map->c && c_num_found_e[1]);
 }

@@ -6,28 +6,27 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 00:40:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 23:16:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
 
 int	close_window(void *game)
 {
 	t_game	*game_tmp;
 
-	game_tmp  = (t_game *)game;
-	printf("before destroying window\n");
+	game_tmp = (t_game *)game;
 	if (game_tmp && game_tmp->mlx && game_tmp->window)
 	{
 		mlx_destroy_window(game_tmp->mlx, game_tmp->window);
-		printf("freeing memory after destroying window\n");
+		ft_printf("freeing memory after destroying window\n");
 		game_tmp->window = NULL;
 	}
 	free_and_exit(game_tmp->mem_p, &game_tmp, 0, "Window closed.");
@@ -58,7 +57,7 @@ void	show_images(t_game *game)
 
 int	handle_close(void *game_in)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)game_in;
 	close_window(game);

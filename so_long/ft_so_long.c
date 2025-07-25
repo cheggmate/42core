@@ -6,18 +6,17 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/24 09:21:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/25 22:58:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "libft.h"
 #ifdef __APPLE__
-	#include "minilibx_opengl_20191021/mlx.h"
+# include "minilibx_opengl_20191021/mlx.h"
 #elif __linux__
-	#include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 #endif
-
 
 int	main(int argc, char **argv)
 {
@@ -28,32 +27,6 @@ int	main(int argc, char **argv)
 		return (write(2, "Error\nincorrect number of inputs!\n", 34), 1);
 	check_asset_list();
 	load_map(argv[1], &game);
-	// printf("map->w = %d\n", game->map->w);
-	// create a window - DONE
-	// load all required sprites - DONE
-	// create the different hooks
-	//	* key handler
-	//	* mouse handler
-	//	* close handler
-	//	* loop (game loop)
-	
-	// draw background
-	// draw walls
-	// draw collectibles
-	// draw person
-
-	// checks
-	// person in wall?
-	// new position in map?
-	
-
-	// when to unlock exit?
-
-	// other handlers:
-	// 	* replace collectible with background once collected
-	// 	* move player
-	// 	* collectible counter
-
 	mlx_loop(game->mlx);
 	return (0);
 }
