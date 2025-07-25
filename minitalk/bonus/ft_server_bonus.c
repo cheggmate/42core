@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_server_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:28:08 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/16 22:06:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 15:48:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ t_word	*g_word;
 
 static void	sig_action_handler(int s, siginfo_t *i, void *c)
 {
+	ucontext_t	*u_c;
 	pid_t		c_pid;
 
-	(void)c;
+	u_c = (ucontext_t *)c;
 	c_pid = i->si_pid;
 	if (s == SIGUSR1 || s == SIGUSR2)
 		process_sigusr(s, c_pid);

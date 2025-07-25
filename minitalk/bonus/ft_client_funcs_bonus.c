@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_client_funcs_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:05:07 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/16 22:04:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 14:04:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	send_null_terminator(pid_t s_pid)
 		i++;
 		usleep(400);
 	}
-	exit(EXIT_SUCCESS);
 }
 
 static void	send_cli_character(pid_t s_pid, char sig)

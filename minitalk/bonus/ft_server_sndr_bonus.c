@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_server_sndr_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 22:29:09 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/16 22:11:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/15 12:34:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ static void	send_server_character(pid_t c_pid, char sig)
 
 void	send_server_signal(pid_t c_pid, char *sig)
 {
+	int					i;
+	unsigned int		s_bit;
 	int					s_len;
 
 	s_len = ft_strlen(sig);
 	while (s_len--)
 	{
+		i = 7;
+		s_bit = *sig;
 		send_server_character(c_pid, *sig);
 		sig++;
 	}
