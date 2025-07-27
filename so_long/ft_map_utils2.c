@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 22:52:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:23:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 	}
 	else if (c == 'E')
 		(*game)->map->exit += 1;
+	else if (!(c == '1' || c == '0' || c == 'E' || c == 'P' || c == 'C'))
+		free_and_exit(mem_p, game, 1, "Invalid item found in map.\n");
 	if ((*game)->map->start > 1)
 		free_and_exit(mem_p, game, 1, "More than one start pos found.\n");
 	else if ((*game)->map->exit > 1)
@@ -77,6 +79,7 @@ void	get_map_edges(t_game **game, char *f_map)
 	(*game)->map->h = h;
 	(*game)->map->w = w;
 	free(line);
+	line = NULL;
 	close(fd);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_utils2_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 18:57:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:08:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:28:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,11 @@ void	reload_map(t_game **game, int prev_x, int prev_y)
 		(*game)->map->grid[prev_x][prev_y] = '0';
 	}
 	render_viewable_map(game);
+	render_enemy(game);
 	redraw_player(*game);
+	if ((*game)->lost == 1)
+		mlx_string_put((*game)->mlx, (*game)->window, 200, 10, 0xFFFFFF,
+			"You lost! try again.");
 }
 
 void	set_view_dimensions(t_game **game)

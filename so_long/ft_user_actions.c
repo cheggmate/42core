@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_user_actions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 00:00:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:15:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:25:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	handle_keypress(int keycode, void *game_in)
 	prev_y = game->p_y;
 	if (keycode == KEY_ESC)
 		close_window(game);
-	else if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S
-		|| keycode == KEY_D)
+	else if ((keycode == KEY_W || keycode == KEY_A || keycode == KEY_S
+			|| keycode == KEY_D) && game->won == 0)
 	{
 		count_movements(keycode, &game);
 		if (game->p_x != prev_x || game->p_y != prev_y)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 23:07:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 14:26:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct s_game
 	int		p_x;
 	int		p_y;
 	char	*mp;
+	int		won;
 	t_map	*map;
 	t_pool	*mem_p;
 }	t_game;
@@ -128,5 +129,6 @@ void		check_update_element_ctr(t_pool *mem_p, t_game **game,
 				char c, int *pos);
 void		free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg);
 int			path_check(char **grid, t_game **game, t_pool *mem_p);
+void		free_mlx(t_game **game);
 
 #endif

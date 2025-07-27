@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_user_actions_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 00:00:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 00:57:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:28:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 # include "../minilibx-linux/mlx.h"
 #endif
 
+static void	update_lost_game(t_game **game)
+{
+	(*game)->lost = 1;
+	mlx_string_put((*game)->mlx, (*game)->window, 10, 10, 0xFFFFFF,
+		"You lost! try again.");
+}
+
 void	print_mvmt(t_game **game)
 {
 	char	*mvmt_str;
@@ -28,6 +35,8 @@ void	print_mvmt(t_game **game)
 	mlx_string_put((*game)->mlx, (*game)->window, 10, 10, 0xFFFFFF, msg);
 	free(msg);
 	free(mvmt_str);
+	msg = NULL;
+	mvmt_str = NULL;
 }
 
 static void	count_movements(int keycode, t_game **game)
@@ -51,6 +60,8 @@ static void	count_movements(int keycode, t_game **game)
 		(*game)->p_x = x;
 		(*game)->p_y = y;
 		(*game)->n_mvmts += 1;
+		if (x == (*game)->enmy_x && y == (*game)->enmy_y)
+			update_lost_game(game);
 	}
 }
 
@@ -65,8 +76,8 @@ int	handle_keypress(int keycode, void *game_in)
 	prev_y = game->p_y;
 	if (keycode == KEY_ESC)
 		close_window(game);
-	else if (keycode == KEY_W || keycode == KEY_A || keycode == KEY_S
-		|| keycode == KEY_D)
+	else if ((keycode == KEY_W || keycode == KEY_A || keycode == KEY_S
+			|| keycode == KEY_D) && (game->lost == 0 && game->won == 0))
 	{
 		count_movements(keycode, &game);
 		if (game->p_x != prev_x || game->p_y != prev_y)
