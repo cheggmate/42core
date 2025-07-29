@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/28 00:44:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/30 00:08:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 // [number_of_times_each_philosopher_must_eat]
 //
 // breakdown:
-//  If a philosopher has not started eating within time_to_die milliseconds since the start of their last meal or the start of the
+// time_to_die (in milliseconds): If a philosopher has not started eating within time_to_die milliseconds since the start of their last meal or the start of the
 // simulation, they die.
 // time_to_eat (in milliseconds): The time it takes for a philosopher to eat. During that time, they will need to hold two forks.
 // time_to_sleep (in milliseconds): The time a philosopher will spend sleeping.
@@ -80,20 +80,64 @@ static int	copy_values_into_vars(int argc, char **argv, t_tab **tab)
 	if (num == -1 || check_num_limits(num) == -1)
 		return (-1);
 	(*tab)->p_total = num;
-	// continue with other values in the argv, insert into the respective var of the struct
+	num = is_num(argv[2]);
+	if (num == -1 || check_num_limits(num) == -1)
+		return (-1);
+	(*tab)->t_die = num;
+	num = is_num(argv[3]);
+	if (num == -1 || check_num_limits(num) == -1)
+		return (-1);
+	(*tab)->t_eat = num;
+	num = is_num(argv[4]);
+	if (num == -1 || check_num_limits(num) == -1)
+		return (-1);
+	(*tab)->t_slp = num;
+	if (argc == 6)
+	{
+		num = is_num(argv[5]);
+		if (num == -1 || check_num_limits(num) == -1)
+			return (-1);
+		(*tab)->eat_count = num;
+	}
+}
+
+int	keep_philos_alive(void *arg)
+{
+	t_phil *phil;
+
+	phil = (t_phil *)arg;
+	// eat
+	
+	// thread lock
+	// start process to mkae a philo pick up forks to eat
+	// unlock thread
+
+	// questions: should the thread locking be tied to the philo or the fork or both?
+	
 }
 
 int	main(int argc, char **argv)
 {
 	t_tab	*tab;
 	int		result;
+	// t_pool	*mem_p;
 
 	if (argc < 5 || argc > 6)
 		return (write(2, "Invalid no. of args!\n", 21), 1);
+	// mem_p = init_mem_pool(POOL_SIZE);
+	
 	if (!init_tab(&tab))
 		return (write(2, "Could not allocate memory!\n", 27), 1);
 	result = copy_values_into_vars(argc, argv, &tab);
 	if (result == -1)
+	{
+		free_everything(&tab);
 		return (1);
-	create_threads(); // also need a master function that kicks off operations for one thread.
+	}
+	create_thread(&tab);
+
+	// figure out when to destroy the thread and return result
+
+	if (result == -1)
+		return (1);
 }
