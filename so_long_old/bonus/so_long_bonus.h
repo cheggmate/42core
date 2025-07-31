@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 01:18:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 13:22:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_map
 	int		fd;
 	int		p_start_x;
 	int		p_start_y;
+	int		enmy_start_x;
+	int		enmy_start_y;
 	char	**grid;
 }	t_map;
 
@@ -67,6 +69,7 @@ typedef struct s_game
 	void	*c_img;
 	void	*w_img;
 	void	*bg_img;
+	void	*enmy_img;
 	void	*e_img;
 	void	*e2_img;
 	int		c_count;
@@ -77,11 +80,16 @@ typedef struct s_game
 	int		view_h;
 	int		p_x;
 	int		p_y;
+	int		enmy_x;
+	int		enmy_y;
+	int		lost;
+	int		won;
 	char	*mp;
 	void	*l1_img;
 	void	*l2_img;
 	void	*l3_img;
 	int		ani_val;
+	int		**dir;
 	t_map	*map;
 	t_pool	*mem_p;
 }	t_game;
@@ -123,6 +131,7 @@ void		show_collectible(t_game *game);
 void		show_animation(t_game *game);
 void		show_exit(t_game *game, int state);
 void		show_player(t_game *game);
+void		init_more_game_values(t_game **game);
 void		redraw_player(t_game *game);
 void		show_walls(t_game *game);
 void		print_map(t_map *map);
@@ -135,5 +144,10 @@ void		check_update_element_ctr(t_pool *mem_p, t_game **game,
 void		print_mvmt(t_game **game);
 void		free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg);
 int			path_check(char **grid, t_game **game, t_pool *mem_p);
+int			move_enemy(t_game **game);
+void		render_enemy(t_game **game);
+void		show_enemy(t_game *game);
+void		init_dir(t_game **game, t_pool *mem_p);
+void		free_mlx(t_game **game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 17:10:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/30 21:35:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ t_pool	*init_mem_pool(size_t size)
 	mem_p = ft_calloc(1, sizeof(t_pool));
 	if (!mem_p)
 	{
-		ft_printf("Failed to initialise mem_p\n");
+		ft_printf("Error\nFailed to initialise mem_p\n");
 		return (NULL);
 	}
 	mem_p->head = ft_calloc(size, sizeof(char));
 	if (!mem_p->head)
 	{
-		ft_printf("Failed to initialise mem_p->head\n");
+		ft_printf("Error\nFailed to initialise mem_p->head\n");
 		return (NULL);
 	}
 	mem_p->total = size;
@@ -48,7 +48,7 @@ void	*alloc_mem(t_pool *mem_p, size_t size)
 		return (NULL);
 	if (mem_p->used + size > mem_p->total)
 	{
-		ft_printf("Mem overflow\n");
+		ft_printf("Error\nMem overflow\n");
 		return (NULL);
 	}
 	sub_pool = mem_p->head + mem_p->used;

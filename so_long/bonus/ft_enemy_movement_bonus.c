@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_enemy_movement_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 17:43:03 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 17:28:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/31 22:25:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static void	update_enemy_position(t_game **game, int e_x, int e_y)
 {
 	(*game)->enmy_x = e_x;
 	(*game)->enmy_y = e_y;
+	if (e_x == (*game)->p_x && e_y == (*game)->p_y)
+		update_lost_game(game);
 }
 
 int	move_enemy(t_game **game)

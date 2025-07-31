@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_so_long_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 01:16:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:28:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	load_sprites(t_game **game, int scenario)
 	else
 		img = (*game)->l3_img;
 	mlx_put_image_to_window((*game)->mlx, (*game)->window, img, 85, 30);
-	mlx_put_image_to_window((*game)->mlx, (*game)->window, img, 250, 250);
+	mlx_put_image_to_window((*game)->mlx, (*game)->window, img, 250, 30);
 }
 
 int	change_ani(t_game **game)
@@ -45,8 +45,9 @@ int	change_ani(t_game **game)
 		return (0);
 	if ((*game)->ani_val > ((*game)->map->w * SPRITE_SIZE))
 		(*game)->ani_val = 1;
-	if ((*game)->ani_val % 30 == 0)
+	if ((*game)->ani_val % 600 == 0 && (*game)->lost == 0)
 	{
+		move_enemy(game);
 		reload(game);
 		load_sprites(game, 3);
 	}

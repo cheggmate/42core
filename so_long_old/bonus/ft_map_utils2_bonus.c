@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 22:52:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:27:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 #include "libft.h"
+
+static void	check_valid_start_end(t_pool *mem_p, t_game **game)
+{
+	if ((*game)->map->start > 1)
+		free_and_exit(mem_p, game, 1, "Too many start pos found.\n");
+	else if ((*game)->map->exit > 1)
+		free_and_exit(mem_p, game, 1, "Too many exits found.\n");
+}
 
 void	check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 {
@@ -27,10 +35,19 @@ void	check_update_element_ctr(t_pool *mem_p, t_game **game, char c, int *pos)
 	}
 	else if (c == 'E')
 		(*game)->map->exit += 1;
-	if ((*game)->map->start > 1)
-		free_and_exit(mem_p, game, 1, "More than one start pos found.\n");
-	else if ((*game)->map->exit > 1)
-		free_and_exit(mem_p, game, 1, "More than one exit found.\n");
+	else if (c == '0')
+	{
+		if ((*game)->map->enmy_start_y == 1 && (*game)->map->enmy_start_x == 1)
+		{
+			(*game)->map->enmy_start_y = pos[1];
+			(*game)->map->enmy_start_x = pos[0];
+			(*game)->enmy_x = pos[1];
+			(*game)->enmy_x = pos[0];
+		}
+	}
+	else if (!(c == '1' || c == '0' || c == 'E' || c == 'P' || c == 'C'))
+		free_and_exit(mem_p, game, 1, "Invalid item found in map.\n");
+	check_valid_start_end(mem_p, game);
 }
 
 void	print_map(t_map *map)
@@ -77,6 +94,7 @@ void	get_map_edges(t_game **game, char *f_map)
 	(*game)->map->h = h;
 	(*game)->map->w = w;
 	free(line);
+	line = NULL;
 	close(fd);
 }
 

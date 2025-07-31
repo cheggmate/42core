@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils2_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:11:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 17:28:19 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/31 22:27:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,13 @@ void	free_mlx(t_game **game)
 	if ((*game)->mlx && (*game)->window)
 	{
 		mlx_destroy_window((*game)->mlx, (*game)->window);
-		(*game)->mlx = NULL;
 		(*game)->window = NULL;
+	}
+	if ((*game)->mlx)
+	{
+		mlx_destroy_display((*game)->mlx);
+		free((*game)->mlx);
+		(*game)->mlx = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:42 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 17:28:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/30 18:42:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,18 @@ int	change_ani(t_game **game)
 int	main(int argc, char **argv)
 {
 	t_game	*game;
+	int		fd;
 
 	game = NULL;
 	if (argc != 2)
 		return (write(2, "Error\nincorrect number of inputs!\n", 34), 1);
 	check_asset_list();
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
+		close(fd);
+		return (write(2, "Error\nInvalid file\n", 19), 1);
+	}
 	load_map(argv[1], &game);
 	mlx_loop_hook(game->mlx, change_ani, &game);
 	mlx_loop(game->mlx);

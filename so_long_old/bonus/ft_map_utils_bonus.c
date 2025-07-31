@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/25 22:47:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 19:52:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 			free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
 		populate_row(mem_p, game, row, line);
 		free(line);
+		line = NULL;
 		row++;
 	}
 }
@@ -71,6 +72,10 @@ void	initialise_map_values(t_game **game, char *f_map)
 	(*game)->map->start = 0;
 	(*game)->map->p_start_x = 0;
 	(*game)->map->p_start_y = 0;
+	(*game)->map->enmy_start_x = 2;
+	(*game)->map->enmy_start_y = 2;
+	(*game)->enmy_x = 2;
+	(*game)->enmy_y = 2;
 }
 
 void	init_grid(t_pool *mem_p, char *f_map, t_game **game)
@@ -108,6 +113,8 @@ void	load_map(char *f_map, t_game **game)
 		free_and_exit(mem_p, game, 1, "Empty map file provided.\n");
 	line = get_next_line((*game)->map->fd);
 	populate_row(mem_p, game, 0, line);
+	free(line);
+	line = NULL;
 	populate_grid(game, mem_p, (*game)->map->fd);
 	if ((*game)->map->c == 0)
 		free_and_exit(mem_p, game, 1, "No collectibles found.\n");

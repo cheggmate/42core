@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 23:27:06 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 00:29:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:28:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	*alloc_mem(t_pool *mem_p, size_t size)
 void	free_pool(t_pool *mem_p)
 {
 	if (mem_p->head)
+	{
 		free(mem_p->head);
+		mem_p->head = NULL;
+	}
 	free(mem_p);
+	mem_p = NULL;
 }
 
 void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
@@ -71,6 +75,7 @@ void	free_and_exit(t_pool *mem_p, t_game **game, int status, char *msg)
 		(*game)->map->fd = -1;
 	}
 	destroy_images(game);
+	free_mlx(game);
 	free_pool(mem_p);
 	if (status == 1)
 	{
@@ -102,8 +107,14 @@ void	init_game(t_pool *mem_p, t_game **game, char *f_map)
 	(*game)->view_w = 0;
 	(*game)->view_h = 0;
 	(*game)->ani_val = 0;
+	(*game)->lost = 0;
+	(*game)->won = 0;
+	(*game)->enmy_x = 0;
+	(*game)->enmy_y = 0;
+	init_more_game_values(game);
 	(*game)->map = alloc_mem(mem_p, sizeof(t_map));
 	if (!(*game)->map)
 		free_and_exit(mem_p, game, 1, "Map is not valid / invalid map.\n");
 	initialise_map_values(game, f_map);
+	init_dir(game, mem_p);
 }

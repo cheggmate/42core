@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/25 23:12:34 by jotong           ###   ########.fr        #
+#    Updated: 2025/07/27 16:30:56 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,15 @@ NAME_BONUS		= so_long_bonus
 REQ_SRC_S_BONUS	= ft_so_long_bonus.c ft_map_utils_bonus.c ft_mem_utils_bonus.c ft_map_utils2_bonus.c \
 				ft_display_utils_bonus.c ft_user_actions_bonus.c ft_player_utils_bonus.c \
 				ft_map_loader_utils_bonus.c ft_mem_utils2_bonus.c ft_display_utils2_bonus.c \
-				ft_asset_checks_bonus.c ft_path_check_bonus.c
-HEADER_BONUS	= $(addprefix $(BONUS_FOLDER)/,so_long.bonus.h)
+				ft_asset_checks_bonus.c ft_path_check_bonus.c ft_enemy_movement_bonus.c
+HEADER_BONUS	= $(BONUS_FOLDER)/so_long_bonus.h
 OBJ_BONUS		= $(addprefix $(BONUS_FOLDER)/,$(REQ_SRC_S_BONUS:.c=.o))
 
 # Library folders
 LIBFT_FOLDER	= libft
 LIBFT			= ${LIBFT_FOLDER}/libft.a
-MINILIBX_FOLDER = minilibx_opengl_20191021
-# MINILIBX_FOLDER = minilibx-linux
+# MINILIBX_FOLDER = minilibx_opengl_20191021
+MINILIBX_FOLDER = minilibx-linux
 MINILIBX		= ${MINILIBX_FOLDER}/libmlx.a
 
 # Default target
@@ -44,8 +44,8 @@ all: $(LIBFT) $(MINILIBX) $(NAME)
 
 # Compile and archive .o files
 $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
-	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME)
-# 	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -o $(NAME)
+	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -lbsd -o $(NAME)
+#	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME)
 
 # Libft
 $(LIBFT):
@@ -53,7 +53,9 @@ $(LIBFT):
 
 # minilibx
 $(MINILIBX):
-	@$(MAKE) -C $(MINILIBX_FOLDER)
+	@echo "Building minilibx manually for linux.."
+	cd $(MINILIBX_FOLDER) && ./configure
+#	@$(MAKE) -C $(MINILIBX_FOLDER)
 
 # Compile .c to .o
 %.o : %.c
@@ -65,8 +67,8 @@ $(BONUS_FOLDER)/%.o : $(BONUS_FOLDER)/%.c
 
 # BONUS: Compile and archive .o files
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(MINILIBX)
-	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME_BONUS)
-# 	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+#	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME_BONUS)
 
 # Bonus rules
 bonus:

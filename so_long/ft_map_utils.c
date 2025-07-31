@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 17:19:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/30 22:31:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,15 @@ static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 		if (!line)
 			break ;
 		len = ft_strlen(line) - 1;
-		if ((len != (size_t)(*game)->map->w && row < (*game)->map->h - 1)
-			|| (len != ((size_t)(*game)->map->w - 1)
-			&& row == (*game)->map->h - 1))
+		// if ((len != (size_t)(*game)->map->w && row < (*game)->map->h - 1)
+		// 	|| (len != ((size_t)(*game)->map->w - 1)
+		// 	&& row == (*game)->map->h - 1))
+		// 	free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
+		if ((len != (size_t)(*game)->map->w && row <= (*game)->map->h - 1))
 			free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
 		populate_row(mem_p, game, row, line);
+		if (row == (*game)->map->h - 1 && (line[len - 1] != '\n'))
+			(*game)->map->grid[ (*game)->map->h - 1][len - 1] = '\0';
 		free(line);
 		line = NULL;
 		row++;

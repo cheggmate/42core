@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_display_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 22:42:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 01:17:19 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/27 17:28:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	show_images(t_game *game)
 	show_collectible(game);
 	show_player(game);
 	show_animation(game);
+	show_enemy(game);
 }
 
 int	handle_close(void *game_in)
@@ -68,6 +69,7 @@ void	render_map(t_pool **mem_p, t_game **game)
 {
 	(*game)->window = create_window(*mem_p, game, (*game)->mlx);
 	show_images((*game));
+	show_player((*game));
 	render_viewable_map(game);
 	mlx_key_hook((*game)->window, handle_keypress, *game);
 	mlx_hook((*game)->window, 17, 0, handle_close, *game);

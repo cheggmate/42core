@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:03:51 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 09:04:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/26 17:23:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,12 @@ static void	free_split(char **arr, int count)
 
 	i = 0;
 	while (i++ < count)
+	{
 		free(arr[i]);
+		arr[i] = NULL;
+	}
 	free(arr);
+	arr = NULL;
 }
 
 static char	*word_dup(const char *start, char c, char **result, int i)
