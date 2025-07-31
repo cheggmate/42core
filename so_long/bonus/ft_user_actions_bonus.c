@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_user_actions_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 00:00:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 17:28:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/31 22:49:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "../minilibx-linux/mlx.h"
 #endif
 
-static void	update_lost_game(t_game **game)
+void	update_lost_game(t_game **game)
 {
 	(*game)->lost = 1;
 	mlx_string_put((*game)->mlx, (*game)->window, 10, 10, 0xFFFFFF,

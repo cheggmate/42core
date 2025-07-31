@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 21:46:48 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 13:22:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/07/31 22:49:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ int			move_enemy(t_game **game);
 void		render_enemy(t_game **game);
 void		show_enemy(t_game *game);
 void		init_dir(t_game **game, t_pool *mem_p);
+void		update_lost_game(t_game **game);
 void		free_mlx(t_game **game);
 
 #endif
