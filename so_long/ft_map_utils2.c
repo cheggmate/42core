@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 23:14:39 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/27 18:58:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 21:38:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	get_map_edges(t_game **game, char *f_map)
 		return ;
 	fd = open(f_map, O_RDONLY);
 	line = get_next_line(fd);
-	while (line != NULL)
+	while (line != NULL && *line != '\n')
 	{
-		if (*line == '\n')
-			break ;
 		w = ft_strlen(line);
+		if (line[w - 1] != '\n')
+			w += 1;
 		h++;
 		free(line);
 		line = get_next_line(fd);

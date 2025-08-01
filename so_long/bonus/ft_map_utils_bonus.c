@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_map_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 23:06:18 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/26 19:52:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 21:43:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	populate_row(t_pool *mem_p, t_game **game, int row, char *line)
 	pos[1] = 0;
 	if (!((*game)->map->grid[row]))
 		free_and_exit(mem_p, game, 1, "Failed to alloc mem for grid.\n");
-	while (*line)
+	while (*line && *line != '\n')
 	{
-		if (((row == 0 || row == (*game)->map->h - 1) && *line != '1'
-				&& pos[1] != (*game)->map->w)
+		if (((row == 0 || row == (*game)->map->h -  1) && *line != '1'
+				&& pos[1] <= (*game)->map->w - 1)
 			|| ((pos[1] == 0 || pos[1] == (*game)->map->w - 1) && *line != '1'))
-			free_and_exit(mem_p, game, 1, "Map not enclosed by walls.\n");
+				free_and_exit(mem_p, game, 1, "Map not enclosed by walls.\n");	
 		if (*line != '\n')
 			(*game)->map->grid[row][pos[1]] = *line;
 		else if (*line == '\n')
@@ -52,20 +52,24 @@ static void	populate_grid(t_game **game, t_pool *mem_p, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		len = ft_strlen(line) - 1;
-		if ((len != (size_t)(*game)->map->w && row < (*game)->map->h - 1)
-			|| (len != ((size_t)(*game)->map->w - 1)
-			&& row == (*game)->map->h - 1))
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] != '\n')
+			len += 1;
+		if ((len != (size_t)(*game)->map->w && row <= (*game)->map->h - 1))
 			free_and_exit(mem_p, game, 1, "Map is not rectangular.\n");
 		populate_row(mem_p, game, row, line);
 		free(line);
 		line = NULL;
 		row++;
 	}
+	if ((*game)->map->w <= 4 || (*game)->map->h <= 4)
+		free_and_exit(mem_p, game, 1, "Map too small, impossible to win.\n");
 }
 
 void	initialise_map_values(t_game **game, char *f_map)
 {
+	if (!f_map)
+		return ;
 	get_map_edges(game, f_map);
 	(*game)->map->c = 0;
 	(*game)->map->exit = 0;
