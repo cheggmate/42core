@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 16:59:19 by jotong            #+#    #+#              #
-#    Updated: 2025/07/31 22:54:10 by jotong           ###   ########.fr        #
+#    Updated: 2025/08/01 21:49:07 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,8 @@ OBJ_BONUS		= $(addprefix $(BONUS_FOLDER)/,$(REQ_SRC_S_BONUS:.c=.o))
 # Library folders
 LIBFT_FOLDER	= libft
 LIBFT			= ${LIBFT_FOLDER}/libft.a
-MINILIBX_FOLDER = minilibx_opengl_20191021
-# MINILIBX_FOLDER = minilibx-linux
+# MINILIBX_FOLDER = minilibx_opengl_20191021
+MINILIBX_FOLDER = minilibx-linux
 MINILIBX		= ${MINILIBX_FOLDER}/libmlx.a
 
 # Default target
@@ -44,8 +44,8 @@ all: $(LIBFT) $(MINILIBX) $(NAME)
 
 # Compile and archive .o files
 $(NAME): $(OBJ) $(LIBFT) $(MINILIBX)
-	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME)
-# 	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -lbsd -o $(NAME)
+	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -lbsd -o $(NAME)
+# 	$(CC) $(OBJ) $(FLAG) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME)
 
 
 # Libft
@@ -55,8 +55,8 @@ $(LIBFT):
 # minilibx
 $(MINILIBX):
 	@echo "Building minilibx manually for linux.."
-	@$(MAKE) -C $(MINILIBX_FOLDER)
-# 	cd $(MINILIBX_FOLDER) && ./configure
+	cd $(MINILIBX_FOLDER) && ./configure
+# 	@$(MAKE) -C $(MINILIBX_FOLDER)
 
 # Compile .c to .o
 %.o : %.c
@@ -68,8 +68,8 @@ $(BONUS_FOLDER)/%.o : $(BONUS_FOLDER)/%.c
 
 # BONUS: Compile and archive .o files
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBFT) $(MINILIBX)
-	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME_BONUS)
-# 	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L${MINILIBX_FOLDER} -lmlx -lXext -lX11 -lm -lz -o $(NAME_BONUS)
+# 	$(CC) $(OBJ_BONUS) $(FLAG_BONUS) $(LIBFT) -L$(MINILIBX_FOLDER) -lmlx -framework OpenGL -framework Appkit -o $(NAME_BONUS)
 
 # Bonus rules
 bonus:

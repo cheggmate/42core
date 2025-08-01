@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/30 00:07:28 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 22:11:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	create_thread(t_tab **tab)
 	while (++i < num)
 	{
 		t_ptr = (*tab)->threads[num];
-		if (!t_ptr || !(*tab)->phils[num])
+		if (!t_ptr || !&(*tab)->phils[num])
 			pthread_create(&t_ptr, NULL, keep_philos_alive, &(*tab)->phils[i]);
 		else
 			return (-1);
@@ -51,7 +51,7 @@ int	close_threads(t_tab **tab)
 				pthread_detatch(t_ptr);
 				t_ptr = NULL;
 				if (i < (*tab)->p_total)
-					(*tab)->phils[i]->thread = NULL;
+					(*tab)->phils[i].thread = NULL;
 			}
 		}
 		return (0);
