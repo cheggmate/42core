@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/30 00:13:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 23:57:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stddef.h>
 # include <stdint.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 // typedef struct s_pool
 // {
@@ -38,11 +39,12 @@
 
 typedef struct s_phil
 {
-	pthread_t	*thread;
-	size_t		*state;
-	size_t		*action;
-	size_t		*t_since_eat;
-	t_tab		*tab;
+	pthread_t		*thread;
+	unsigned char	state;
+	long long		t_last_ate;
+	t_tab			*tb;
+	size_t			n;
+	size_t			eat_count;
 }	t_phil;
 
 typedef struct s_tab
@@ -60,17 +62,20 @@ typedef struct s_tab
 }	t_tab;
 
 // void	*alloc_mem(t_pool *mem_p, size_t size);
-int		check_is_num(char *str);
-int		check_num_limits(size_t num);
-int		close_threads(t_tab **tab);
-int		create_thread(t_tab **tab);
-void 	free_everything(t_tab **tab);
-// void	free_everything(t_pool *mem_p, t_tab **tab);
-// void	free_pool(t_pool *mem_p);
-void	*ft_calloc(size_t num, size_t size);
+int			check_is_num(char *str);
+int			check_num_limits(size_t num);
+int			close_threads(t_tab **tab);
+int			create_thread(t_tab **tab);
+void 		free_everything(t_tab **tab);
+// void		free_everything(t_pool *mem_p, t_tab **tab);
+// void		free_pool(t_pool *mem_p);
+long long	get_time(void);
+void		*ft_calloc(size_t num, size_t size);
 // int		ft_atoi(const char *str);
 // t_pool	*init_mem_pool(size_t size);
-int		init_tab(t_tab **tab);
-int		keep_philos_alive(t_tab **tab);
+int			init_tab(t_tab **tab);
+int			keep_philos_alive(t_tab **tab);
+int			pick_up_frks(t_phil *phil);
+int			put_down_frks(t_phil * phil);
 
 #endif PHILO_H

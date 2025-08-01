@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/27 19:18:22 by jotong            #+#    #+#              #
-#    Updated: 2025/08/01 22:14:14 by jotong           ###   ########.fr        #
+#    Updated: 2025/08/01 22:27:24 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@
 FLAG		= -Wall -Wextra -Werror
 NAME		= philo
 REQ_SRC		= ft_philo.c ft_mem_utils.c ft_thread_utils. ft_std_utils.c \
-				ft_init_utils.c ft_resource_mgmt.c ft_resource_mgmt.c
+				ft_init_utils.c ft_resource_mgmt.c ft_resource_mgmt.c \
+				ft_philo_actions.c
 
 HEADER		= philo.h
 OBJ 		= $(REQ_SRC:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/30 00:08:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 23:50:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ int	keep_philos_alive(void *arg)
 
 	phil = (t_phil *)arg;
 	// eat
-	
+	let_philo_eat(phil); // need to fix to check if he has died
+	let_philo_sleep(phil);
+	let_philo_think(phil);
 	// thread lock
 	// start process to mkae a philo pick up forks to eat
 	// unlock thread
@@ -126,7 +128,7 @@ int	main(int argc, char **argv)
 		return (write(2, "Invalid no. of args!\n", 21), 1);
 	// mem_p = init_mem_pool(POOL_SIZE);
 	
-	if (!init_tab(&tab))
+	if (!init_tab(tab))
 		return (write(2, "Could not allocate memory!\n", 27), 1);
 	result = copy_values_into_vars(argc, argv, &tab);
 	if (result == -1)
