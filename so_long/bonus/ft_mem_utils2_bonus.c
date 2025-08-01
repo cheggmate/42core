@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:11:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/31 23:02:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/01 21:44:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_mlx(t_game **game)
 	}
 	if ((*game)->mlx)
 	{
-		// mlx_destroy_display((*game)->mlx);
+		mlx_destroy_display((*game)->mlx);
 		free((*game)->mlx);
 		(*game)->mlx = NULL;
 	}
