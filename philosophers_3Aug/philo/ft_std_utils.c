@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/03 22:51:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 00:09:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,38 @@ int	check_num_limits(int num)
 // 	return (final_int * sign);
 // }
 
+void	*ft_memset(void *ptr, int value, size_t num)
+{
+	size_t			count;
+	unsigned char	*dest;
+
+	count = 0;
+	dest = (unsigned char *)ptr;
+	while (count < num)
+	{
+		dest[count] = value;
+		count++;
+	}
+	return (ptr);
+}
+
+
 void	print_safely(t_phil *phil)
 {
-	pthread_mutex_lock(phil->tb->print);
+	pthread_mutex_lock(&phil->tb->print);
 	if (phil)
 	{
 		if (phil->state == 'e')
-			printf("%lld %zu is eating\n", get_time(), phil->n);
+			printf("%lld %d is eating\n", get_time(), phil->n);
 		else if (phil->state == 's')
-			printf("%lld %zu is sleeping\n", get_time(), phil->n);
+			printf("%lld %d is sleeping\n", get_time(), phil->n);
 		else if (phil->state == 't')
-			printf("%lld %zu is thinking\n", get_time(), phil->n);
+			printf("%lld %d is thinking\n", get_time(), phil->n);
 		else if (phil->state == 'f')
-			printf("%lld %zu has taken a fork\n", get_time(), phil->n);
+			printf("%lld %d has taken a fork\n", get_time(), phil->n);
 		else if (phil->state == 'd')
-			printf("%lld %zu died\n", get_time(), phil->n);
+			printf("%lld %d died\n", get_time(), phil->n);
 	}
-	pthread_mutex_unlock(phil->tb->print);
+	pthread_mutex_unlock(&phil->tb->print);
 	return ;
 }

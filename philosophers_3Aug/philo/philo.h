@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/03 23:14:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 00:07:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdint.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <string.h>
 
 // typedef struct s_pool
 // {
@@ -37,21 +38,23 @@
 // 	size_t	f_state;
 // }	t_frk;
 
+typedef struct s_tab t_tab;
+
 typedef struct s_phil
 {
 	pthread_t		*thread;
 	unsigned char	state;
 	long long		t_last_ate;
 	t_tab			*tb;
-	size_t			n;
-	size_t			eat_count;
+	int				n;
+	int				eat_count;
 }	t_phil;
 
 typedef struct s_tab
 {
 	// t_frk		*forks;
 	pthread_mutex_t	*forks;
-	pthread_mutex_t	*print;
+	pthread_mutex_t	print;
 	t_phil			*phils;
 	pthread_t		*threads;
 	int				p_total;
@@ -60,23 +63,28 @@ typedef struct s_tab
 	long long		t_die;
 	int				eat_count;
 	int				stop;
-	pthread_mutex_t	*s_lock;
+	pthread_mutex_t	s_lock;
 }	t_tab;
 
 // void	*alloc_mem(t_pool *mem_p, size_t size);
 int			check_is_num(char *str);
-int			check_num_limits(size_t num);
-int			close_threads(t_tab **tab);
-int			create_thread(t_tab **tab);
-void 		free_everything(t_tab **tab);
+int			check_num_limits(int num);
+int			close_threads(t_tab *tab);
+int			create_thread(t_tab *tab);
+int			destroy_forks(t_tab *tab);
+int			destroy_other_mutexes(t_tab *tab);
+void 		free_everything(t_tab *tab);
 // void		free_everything(t_pool *mem_p, t_tab **tab);
 // void		free_pool(t_pool *mem_p);
+void		*ft_memset(void *ptr, int value, size_t num);
 long long	get_time(void);
 void		*ft_calloc(size_t num, size_t size);
 // int		ft_atoi(const char *str);
 // t_pool	*init_mem_pool(size_t size);
-int			init_tab(t_tab **tab);
-int			keep_philos_alive(t_tab **tab);
+int			init_tab(t_tab *tab);
+int			check_is_num(char *str);
+int			join_threads(t_tab *tab);
+void		*keep_philos_alive(void *arg);
 int			pick_up_frks(t_phil *phil);
 int			put_down_frks(t_phil * phil);
 void		print_safely(t_phil *phil);
@@ -85,5 +93,6 @@ int			let_philo_think(t_phil *phil);
 int			let_philo_sleep(t_phil *phil);
 int			let_philo_eat(t_phil *phil);
 int			lock_stop_mutex(t_tab *tab);
+int			unlock_stop_mutex(t_tab *tab);
 
-#endif PHILO_H
+#endif

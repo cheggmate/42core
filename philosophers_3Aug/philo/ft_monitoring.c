@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/03 23:44:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/04 23:18:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void	*monitoring(void *t)
 	}
 	else
 		usleep(800);
-	return ;
+	return NULL;
 }

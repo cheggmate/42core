@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/03 23:49:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 00:10:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,25 @@
 
 #include "philo.h"
 
-static int	var_checks(int argc, char **argv, t_tab **tab)
+static int	var_checks(int argc, char **argv)
 {
 	int	num;
 
-	num = is_num(argv[1]);
+	num = check_is_num(argv[1]);
 	if (num == -1 || check_num_limits(num) == -1)
 		return (-1);
-	num = is_num(argv[2]);
+	num = check_is_num(argv[2]);
 	if (num == -1 || check_num_limits(num) == -1)
 		return (-1);
-	num = is_num(argv[3]);
+	num = check_is_num(argv[3]);
 	if (num == -1 || check_num_limits(num) == -1)
 		return (-1);
-	num = is_num(argv[4]);
+	num = check_is_num(argv[4]);
 	if (num == -1 || check_num_limits(num) == -1)
 		return (-1);
 	if (argc == 6)
 	{
-		num = is_num(argv[5]);
+		num = check_is_num(argv[5]);
 		if (num == -1 || check_num_limits(num) == -1)
 			return (-1);
 	}
@@ -102,23 +102,23 @@ static int	copy_values_into_vars(int argc, char **argv, t_tab **tab)
 {
 	int	num;
 
-	num = is_num(argv[1]);
+	num = check_is_num(argv[1]);
 	(*tab)->p_total = num;
-	num = is_num(argv[2]);
+	num = check_is_num(argv[2]);
 	(*tab)->t_die = num;
-	num = is_num(argv[3]);
+	num = check_is_num(argv[3]);
 	(*tab)->t_eat = num;
-	num = is_num(argv[4]);
+	num = check_is_num(argv[4]);
 	(*tab)->t_slp = num;
 	if (argc == 6)
 	{
-		num = is_num(argv[5]);
+		num = check_is_num(argv[5]);
 		(*tab)->eat_count = num;
 	}
 	return (0);
 }
 
-int	keep_philos_alive(void *arg)
+void	*keep_philos_alive(void *arg)
 {
 	t_phil *phil;
 	int		result;
@@ -128,15 +128,15 @@ int	keep_philos_alive(void *arg)
 	{
 		result = let_philo_eat(phil); // need to fix to check if he has died
 		if (result == -1)
-			return (-1);
+			return NULL;
 		result = let_philo_sleep(phil);
 		if (result == -1)
-			return (-1);
+			return NULL;
 		result = let_philo_think(phil);
 		if (result == -1)
-			return (-1);
+			return NULL;
 	}
-	return ;
+	return NULL;
 }
 
 int	main(int argc, char **argv)
@@ -145,24 +145,32 @@ int	main(int argc, char **argv)
 	int		result;
 	// t_pool	*mem_p;
 
+	tab = NULL;
 	if (argc < 5 || argc > 6)
 		return (write(2, "Invalid no. of args!\n", 21), 1);
 	// mem_p = init_mem_pool(POOL_SIZE);
-	result = var_checks(argc, argv, &tab);
+	result = var_checks(argc, argv);
 	if (result == -1)
 		return (write(2, "Error\nInvalid inputs.\n", 22), 1);
-	if (!init_tab(tab))
+	printf("starting to init tab\n");
+	if (init_tab(tab) != 0)
 		return (write(2, "Could not allocate memory!\n", 27), 1);
+	printf("after init tab\n");
 	result = copy_values_into_vars(argc, argv, &tab);
+	printf("copied values into vars\n");
 	if (result == -1)
 	{
-		free_everything(&tab);
+		free_everything(tab);
 		return (1);
 	}
 	pthread_mutex_init(&tab->s_lock, NULL);
+	printf("initied mutexes\n");
 	lock_stop_mutex(tab);
-	create_thread(&tab);
+	printf("locked stop mutex\n");
+	create_thread(tab);
+	printf("created thread\n");
 	join_threads(tab);
+	printf("joined threads\n");
 	// figure out when to destroy the thread and return result
 	
 	if (result == -1)

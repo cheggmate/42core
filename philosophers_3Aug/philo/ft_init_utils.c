@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/03 23:12:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 00:01:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,24 @@ static int	init_phil(t_tab *tab)
 
 	i = -1;
 	// tab->phils = alloc_mem(sizeof(t_phil));
+	printf("starting to init phil\n");
 	tab->phils = ft_calloc(tab->p_total, sizeof(t_phil));
 	if (!tab->phils)
 	{
 		free_everything(tab);
 		return (-1);
 	}
+	printf("tab->phils is not null\n");
 	while (++i < tab->p_total)
 	{
 		tab->phils[i].eat_count = 0;
 		tab->phils[i].t_last_ate = get_time();
 		tab->phils[i].tb = tab;
 		tab->phils[i].state = 'z';
-		tab->phils[i].thread = tab->threads[i];
+		tab->phils[i].thread = &tab->threads[i];
 	}
+	tab->phils[i + 1].thread = &tab->threads[i + 1];
+	printf("done inititing phils\n");
 	return (0);
 }
 

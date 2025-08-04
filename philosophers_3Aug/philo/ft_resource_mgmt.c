@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resource_mgmt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/02 19:59:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/04 23:18:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ int	put_down_frks(t_phil * phil)
 		if (result == 0)
 			result = pthread_mutex_unlock(&phil->tb->forks[(n + 1) % n]);
 	}
+	return (0);
 }

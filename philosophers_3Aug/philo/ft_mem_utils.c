@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:07:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/07/29 23:43:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 00:05:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,26 @@
 // 	(*tab) = NULL;
 // }
 
-void free_everything(t_tab **tab)
+void free_everything(t_tab *tab)
 {
 	if (!tab)
 		return ;
-	if ((*tab)->forks)
+	if (tab->forks)
 	{
-		destroy_forks((*tab)->forks);
-		free((*tab)->forks);
+		destroy_forks(tab);
+		free(tab->forks);
 	}
-	if((*tab)->phils)
+	if(tab->phils)
 	{
 		close_threads(tab);
-		free((*tab)->phils);
+		free(tab->phils);
+		printf("freed tab->phils\n");
 	}
-	free((*tab)->threads);
-	free((*tab));
-	(*tab)->forks = NULL;
-	(*tab)->phils = NULL;
-	*tab = NULL;
+	destroy_other_mutexes(tab);
+	printf("destroyed other mutexes\n");
+	free(tab->threads);
+	free(tab);
+	tab->forks = NULL;
+	tab->phils = NULL;
+	tab = NULL;
 }
