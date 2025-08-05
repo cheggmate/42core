@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/05 00:09:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/05 23:46:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	check_is_num(char *str)
 
 	num = 0;
 	sign = 1;
+	printf("checkisnum on the str %s\n", str);
 	if (!str)
 		return (0);
 	if (*str == '+')
@@ -48,10 +49,13 @@ int	check_is_num(char *str)
 	}
 	while (*str)
 	{
+		printf("checking %c\n", *str);
 		if (*str == '+' || *str == '-' || !(*str >= '0' && *str <= '9'))
 			return (-1);
 		num *= 10;
+		printf("before adding to num\n");
 		num += *str - '0';
+		printf("after adding to num\n");
 		str++;
 	}
 	num *= sign;

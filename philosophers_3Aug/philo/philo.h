@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/05 00:07:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/06 00:17:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_tab
 int			check_is_num(char *str);
 int			check_num_limits(int num);
 int			close_threads(t_tab *tab);
-int			create_thread(t_tab *tab);
+int			create_threads(t_tab **tab);
 int			destroy_forks(t_tab *tab);
 int			destroy_other_mutexes(t_tab *tab);
 void 		free_everything(t_tab *tab);
@@ -81,7 +81,7 @@ long long	get_time(void);
 void		*ft_calloc(size_t num, size_t size);
 // int		ft_atoi(const char *str);
 // t_pool	*init_mem_pool(size_t size);
-int			init_tab(t_tab *tab);
+int			init_tab(t_tab **tab);
 int			check_is_num(char *str);
 int			join_threads(t_tab *tab);
 void		*keep_philos_alive(void *arg);

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/05 00:01:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/06 00:06:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,41 +57,39 @@
 // 	return (0);	
 // }
 
-static int	init_phil(t_tab *tab)
+static int	init_phil(t_tab **tab)
 {
 	int	i;
 
 	i = -1;
 	// tab->phils = alloc_mem(sizeof(t_phil));
-	printf("starting to init phil\n");
-	tab->phils = ft_calloc(tab->p_total, sizeof(t_phil));
-	if (!tab->phils)
+	(*tab)->phils = ft_calloc((*tab)->p_total, sizeof(t_phil));
+	if (!(*tab)->phils)
 	{
-		free_everything(tab);
+		free_everything((*tab));
 		return (-1);
 	}
-	printf("tab->phils is not null\n");
-	while (++i < tab->p_total)
+	while (++i < (*tab)->p_total)
 	{
-		tab->phils[i].eat_count = 0;
-		tab->phils[i].t_last_ate = get_time();
-		tab->phils[i].tb = tab;
-		tab->phils[i].state = 'z';
-		tab->phils[i].thread = &tab->threads[i];
+		(*tab)->phils[i].eat_count = 0;
+		(*tab)->phils[i].t_last_ate = get_time();
+		(*tab)->phils[i].tb = (*tab);
+		(*tab)->phils[i].state = 'z';
+		(*tab)->phils[i].thread = &(*tab)->threads[i];
 	}
-	tab->phils[i + 1].thread = &tab->threads[i + 1];
+	(*tab)->phils[i + 1].thread = &(*tab)->threads[i + 1];
 	printf("done inititing phils\n");
 	return (0);
 }
 
-int	init_tab(t_tab *tab)
+int	init_tab(t_tab **tab)
 {
 	// tab = alloc_mem(sizeof(t_tab));
-	tab = ft_calloc(1, sizeof(t_tab));
-	tab->threads = (pthread_t *)ft_calloc(tab->p_total + 1, sizeof(pthread_t)); // creating one extra thread for monitoring
-	if (!init_phil(tab) || !tab)
+	(*tab) = ft_calloc(1, sizeof(t_tab));
+	(*tab)->threads = (pthread_t *)ft_calloc((*tab)->p_total + 1, sizeof(pthread_t)); // creating one extra thread for monitoring
+	if (init_phil(tab) != 0 || !(*tab))
 	{
-		free_everything(tab);
+		free_everything((*tab));
 		return (-1);
 	}
 	return (0);

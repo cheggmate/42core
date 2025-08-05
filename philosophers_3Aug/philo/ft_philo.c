@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/05 00:10:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/06 00:17:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,18 +102,25 @@ static int	copy_values_into_vars(int argc, char **argv, t_tab **tab)
 {
 	int	num;
 
+	printf("getting arg1\n");
 	num = check_is_num(argv[1]);
+	printf("numarg1 = %d\n", num);
 	(*tab)->p_total = num;
+	printf("copied ptotal\n");
 	num = check_is_num(argv[2]);
 	(*tab)->t_die = num;
+	printf("copied t_die\n");
 	num = check_is_num(argv[3]);
 	(*tab)->t_eat = num;
+	printf("copied t_eat\n");
 	num = check_is_num(argv[4]);
 	(*tab)->t_slp = num;
+	printf("copied t_slp\n");
 	if (argc == 6)
 	{
 		num = check_is_num(argv[5]);
 		(*tab)->eat_count = num;
+		printf("copied eat_count\n");
 	}
 	return (0);
 }
@@ -153,7 +160,7 @@ int	main(int argc, char **argv)
 	if (result == -1)
 		return (write(2, "Error\nInvalid inputs.\n", 22), 1);
 	printf("starting to init tab\n");
-	if (init_tab(tab) != 0)
+	if (init_tab(&tab) != 0)
 		return (write(2, "Could not allocate memory!\n", 27), 1);
 	printf("after init tab\n");
 	result = copy_values_into_vars(argc, argv, &tab);
@@ -167,7 +174,7 @@ int	main(int argc, char **argv)
 	printf("initied mutexes\n");
 	lock_stop_mutex(tab);
 	printf("locked stop mutex\n");
-	create_thread(tab);
+	create_threads(&tab);
 	printf("created thread\n");
 	join_threads(tab);
 	printf("joined threads\n");
