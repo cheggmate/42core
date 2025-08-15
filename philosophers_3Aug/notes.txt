@@ -1,0 +1,143 @@
+thread affinity
+dead lock
+
+• A displayed state message should not overlap with another message.
+• A message announcing a philosopher’s death must be displayed within 10 ms of
+their actual death.
+
+
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+
+void *worker(void *arg) {
+    pthread_mutex_lock(&lock);
+    printf("Critical section\n");
+    pthread_mutex_unlock(&lock);
+    return NULL;
+}
+
+pthread_create
+Purpose: Creates a new thread and starts executing a function in parallel.
+prototype: int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+                   void *(*start_routine)(void *), void *arg);
+Parameters:
+thread: Output variable to store the thread ID.
+attr: Thread attributes (use NULL for defaults).
+start_routine: Function the thread runs.
+arg: Argument passed to the function.
+example use: 
+void *worker(void *arg) {
+    printf("Thread running\n");
+    return NULL;
+}
+
+pthread_t t;
+pthread_create(&t, NULL, worker, NULL);
+
+
+pthread_join:
+Purpose: Waits for a thread to finish execution.
+prototype: int pthread_join(pthread_t thread, void **retval);
+Parameters:
+thread: The thread ID to wait on.
+retval: Pointer to store the function's return value (can be NULL).
+example use:
+pthread_join(t, NULL);
+printf("Thread finished\n");
+
+
+phtread_exit:
+Purpose: Terminates the calling thread and optionally returns a value.
+Prototype: void pthread_exit(void *retval);
+Parameters: retval: Value to return to pthread_join.
+example use: 
+ void *worker(void *arg) {
+    printf("Exiting thread\n");
+    pthread_exit(NULL);
+}
+
+
+pthread_detach: 
+purpose: Marks a thread as detached, meaning its resources are freed automatically when it finishes. You cannot join a detached thread.
+prototype: int pthread_detach(pthread_t thread);
+example use: 
+pthread_detach(t);  // No need to call pthread_join on this thread
+
+
+pthread self: 
+Purpose: Returns the pthread_t ID of the current thread.
+pthread_t pthread_self(void);
+example use:
+void *worker(void *arg) {
+    printf("My thread ID: %lu\n", pthread_self());
+    return NULL;
+}
+
+
+efficiency comparison:
+✅ pthread_join
+Waits for an existing thread to finish.
+Lets you reuse the same pthread_t object.
+Efficient because the thread stack and kernel resources are freed immediately after join.
+Good when:
+You need the return value.
+You want to guarantee the thread has finished before continuing.
+You are reusing threads in a loop.
+🔹 Overhead: Very low. You create the thread once, join it, and reuse the same variable.
+
+✅ Detach + recreate
+pthread_detach marks the thread so it cleans up itself when done.
+If you destroy and recreate threads every time, the kernel has to:
+Allocate a new thread stack.
+Set up scheduling structures.
+Tear them down after exit.
+🔹 Overhead: Higher because creation/destruction of threads is expensive compared to just joining and reusing.
+
+
+Joining is almost always more efficient because:
+You avoid destroying and recreating threads.
+You can reuse existing structures and avoid kernel context-switch overhead.
+Detach + recreate is only better if:
+Threads run forever (no join needed).
+You don't care when they finish and want them to free resources automatically.
+
+
+=====
+picking forks
+=====
+
+The i-th philosopher uses:
+forks[i] as the left fork
+forks[(i+1) % N] as the right fork
+
+====
+way to return result if oen philo dies (maybe)
+have a worker thread poll the stop param on tab and exit once its done.
+===
+
+
+void *worker(void *arg)
+{
+    int *result = malloc(sizeof(int));
+    *result = 1;  // signal success
+    pthread_exit(result);
+}
+
+int main(void)
+{
+    pthread_t thread;
+    int *result;
+
+    pthread_create(&thread, NULL, worker, NULL);
+    pthread_join(thread, (void **)&result);
+
+    if (*result == 1)
+        printf("Worker signaled to exit program\n");
+
+    free(result);
+    return 0;
+}
+pthread_join waits for the thread to finish and collects its result.
+
+You can have N threads and join all of them; when they are done, you exit.
+
+===
