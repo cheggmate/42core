@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/14 13:21:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/16 22:50:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	init_phil(t_tab **tab)
 	}
 	while (++i < (*tab)->p_total)
 	{
-		(*tab)->phils[i].eat_count = 0;
+		(*tab)->phils[i].n_eat = (*tab)->eat_count;
 		(*tab)->phils[i].t_last_ate = get_time();
 		(*tab)->phils[i].tb = (*tab);
 		(*tab)->phils[i].n = i;
@@ -78,5 +78,6 @@ int	init_tab(t_tab **tab, int argc, char **argv)
 		free_everything((*tab));
 		return (-1);
 	}
+	bar_init(&(*tab)->start_blk, (*tab)->p_total + 1);
 	return (0);
 }

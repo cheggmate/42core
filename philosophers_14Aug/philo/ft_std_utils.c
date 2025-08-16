@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_std_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/06 15:57:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/16 22:01:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	check_is_num(char *str)
 	}
 	while (*str)
 	{
-		printf("checking %c\n", *str);
 		if (*str == '+' || *str == '-' || !(*str >= '0' && *str <= '9'))
 			return (-1);
 		num *= 10;
@@ -110,22 +109,21 @@ void	*ft_memset(void *ptr, int value, size_t num)
 	return (ptr);
 }
 
-
 void	print_safely(t_phil *phil)
 {
 	pthread_mutex_lock(&phil->tb->print);
 	if (phil)
 	{
 		if (phil->state == 'e')
-			printf("%lld %d is eating\n", get_time(), phil->n);
+			printf("%lld %d is eating\n", get_time() - phil->tb->t_start, phil->n);
 		else if (phil->state == 's')
-			printf("%lld %d is sleeping\n", get_time(), phil->n);
+			printf("%lld %d is sleeping\n", get_time() - phil->tb->t_start, phil->n);
 		else if (phil->state == 't')
-			printf("%lld %d is thinking\n", get_time(), phil->n);
+			printf("%lld %d is thinking\n", get_time() - phil->tb->t_start, phil->n);
 		else if (phil->state == 'f')
-			printf("%lld %d has taken a fork\n", get_time(), phil->n);
+			printf("%lld %d has taken a fork\n", get_time() - phil->tb->t_start, phil->n);
 		else if (phil->state == 'd')
-			printf("%lld %d died\n", get_time(), phil->n);
+			printf("%lld %d died\n", get_time() - phil->tb->t_start, phil->n);
 	}
 	pthread_mutex_unlock(&phil->tb->print);
 	return ;

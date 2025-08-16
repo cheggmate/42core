@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/14 22:39:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/16 23:49:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,17 +125,21 @@ void	*keep_philos_alive(void *arg)
 	int		result;
 
 	phil = (t_phil *)arg;
-	while (phil->tb->stop == 0)
+    bar_wait(&phil->tb->start_blk);
+	bar_wait(&phil->tb->start_blk);
+	while (phil->tb->stop == 0 && phil->n_eat > 0)
 	{
 		result = let_philo_eat(phil); // need to fix to check if he has died
 		if (result == -1)
 			return NULL;
 		result = let_philo_sleep(phil);
+		printf("phil finished sleeping\n");
 		if (result == -1)
 			return NULL;
 		result = let_philo_think(phil);
 		if (result == -1)
 			return NULL;
+		printf("stop flag is %d\n", phil->tb->stop);
 	}
 	return NULL;
 }
@@ -144,7 +148,6 @@ int	main(int argc, char **argv)
 {
 	t_tab	*tab;
 	int		result;
-	t_bar	start_block;
 
 	tab = NULL;
 	if (argc < 5 || argc > 6)
@@ -156,9 +159,10 @@ int	main(int argc, char **argv)
 		return (write(2, "Could not allocate memory!\n", 27), 1);
 	pthread_mutex_init(&tab->s_lock, NULL);
 	lock_stop_mutex(tab);
-	bar_init(&start_block, tab->p_total);
-	tab->start_blk = start_block;
 	create_threads(tab);
+	bar_wait(&tab->start_blk);
+	tab->t_start = get_time();
+	bar_wait(&tab->start_blk);
 	join_threads(tab);
 	if (result == -1)
 		return (1);

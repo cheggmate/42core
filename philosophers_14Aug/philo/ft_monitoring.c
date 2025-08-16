@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_monitoring.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/06 21:57:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/16 23:58:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	has_died_or_finished_eating(t_tab *tab)
 			philo_died(&tab->phils[i]);
 		if (tab->eat_count > 0)
 		{
-			if (tab->phils[i].eat_count > tab->eat_count)
+			if (tab->phils[i].n_eat > tab->eat_count)
 				p_meet_eat_count += 1;
 		}
 	}
@@ -43,11 +43,12 @@ void	*monitoring(void *t)
 	tab = (t_tab *)t;
 	if (has_died_or_finished_eating(tab))
 	{
+		printf("stop flag set\n");
 		lock_stop_mutex(tab);
 		tab->stop = 1;
 		unlock_stop_mutex(tab);
 	}
 	else
-		usleep(800);
+		usleep(800 * 1000);
 	return NULL;
 }

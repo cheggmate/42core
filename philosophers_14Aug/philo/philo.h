@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/14 22:36:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 00:01:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_bar {
 	pthread_mutex_t	mutex;
 	pthread_cond_t	cond;
 	int				count;
-	int				p_count;
+	int				total;
 }	t_bar;
 
 typedef struct s_tab t_tab;
@@ -40,7 +40,7 @@ typedef struct s_phil
 	long long		t_last_ate;
 	t_tab			*tb;
 	int				n;
-	int				eat_count;
+	int				n_eat;
 }	t_phil;
 
 typedef struct s_tab
@@ -51,6 +51,7 @@ typedef struct s_tab
 	pthread_t		*threads;
 	int				fork_inited;
 	int				p_total;
+	long long		t_start;
 	long long		t_eat;
 	long long		t_slp;
 	long long		t_die;
@@ -61,9 +62,12 @@ typedef struct s_tab
 
 }	t_tab;
 
+void		bar_wait(t_bar *s_block);
+void		bar_init(t_bar *s_block, int count);
 int			check_is_num(char *str);
 int			check_num_limits(int num);
 int			close_threads(t_tab *tab);
+int			copy_values_into_vars(int argc, char **argv, t_tab **tab);
 int			create_threads(t_tab *tab);
 int			destroy_forks(t_tab *tab);
 int			destroy_other_mutexes(t_tab *tab);
@@ -75,6 +79,7 @@ int			init_tab(t_tab **tab, int argc, char **argv);
 int			check_is_num(char *str);
 int			join_threads(t_tab *tab);
 void		*keep_philos_alive(void *arg);
+void		*monitoring(void *t);
 int			pick_up_frks(t_phil *phil);
 int			put_down_frks(t_phil * phil);
 void		print_safely(t_phil *phil);
@@ -84,8 +89,6 @@ int			let_philo_sleep(t_phil *phil);
 int			let_philo_eat(t_phil *phil);
 int			lock_stop_mutex(t_tab *tab);
 int			unlock_stop_mutex(t_tab *tab);
-int			copy_values_into_vars(int argc, char **argv, t_tab **tab);
-void		bar_wait(t_bar *s_block);
-void		bar_init(t_bar *s_block, int count);
+int			will_die_during_action(t_phil *phil, char action);
 
 #endif
