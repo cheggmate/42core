@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 00:01:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/18 00:17:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	create_threads(t_tab *tab)
 		if (result != 0)
 			return (-1);
 	}
-	result = pthread_create(&tab->threads[i], NULL, monitoring, &tab);
+	result = pthread_create(&tab->threads[num], NULL, monitoring, tab);
 		if (result != 0)
 			return (-1);
 	return (0);	
@@ -44,6 +44,7 @@ int	join_threads(t_tab *tab)
 	{
 		pthread_join(tab->threads[i], NULL);
 	}
+	pthread_join(tab->threads[tab->p_total], NULL);
 	return (0);
 }
 

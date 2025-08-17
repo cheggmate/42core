@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 14:55:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/18 00:20:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@ int	let_philo_eat(t_phil *phil)
 {
 	if (phil->tb->stop == 0 && phil->state != 'd')
 	{
-		pick_up_frks(phil);
+		if (pick_up_frks(phil) == -1)
+		{
+			put_down_frks(phil);
+			free_everything(phil->tb);
+			printf("kill phil\n");
+			philo_died(phil);	// check if this is the right implementation
+			return (-1);
+		}
 		phil->t_last_ate = get_time();
 		phil->state = 'e';
 		print_safely(phil);
@@ -57,11 +64,15 @@ int	let_philo_sleep(t_phil *phil)
 
 int	let_philo_think(t_phil *phil)
 {
+	long long	t_since_eat;
+
+	t_since_eat = get_time() - phil->t_last_ate;
 	if (phil->tb->stop == 0 && phil->state != 'd')
 	{
 		phil->state = 't';
 		print_safely(phil);
-		// TODO add check here to sleep for a short while if there is time, and they just ate, otherwise they might just eat again.
+		if (t_since_eat > phil->tb->t_eat + phil->tb->t_slp + 20)
+			sleep_safely(30);
 		return (0);
 	}
 	else
@@ -72,5 +83,6 @@ int	philo_died(t_phil *phil)
 {
 	phil->state = 'd';
 	print_safely(phil);
+	put_down_frks(phil);
 	return (0);
 }

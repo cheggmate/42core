@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 12:08:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 22:00:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_phil
 typedef struct s_tab
 {
 	pthread_mutex_t	*forks;
+	int				*f_owners;
 	pthread_mutex_t	print;
 	t_phil			*phils;
 	pthread_t		*threads;
