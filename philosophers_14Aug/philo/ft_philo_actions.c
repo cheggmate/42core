@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 12:10:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:42:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	let_philo_eat(t_phil *phil)
 {
-	if (phil->tb->stop == 0)
+	if (phil->tb->stop == 0 && phil->state != 'd')
 	{
 		pick_up_frks(phil);
 		phil->t_last_ate = get_time();
@@ -32,7 +32,7 @@ int	let_philo_eat(t_phil *phil)
 
 int	let_philo_sleep(t_phil *phil)
 {
-	if (phil->tb->stop == 0)
+	if (phil->tb->stop == 0 && phil->state != 'd')
 	{
 		phil->state = 's';
 		print_safely(phil);
@@ -57,7 +57,7 @@ int	let_philo_sleep(t_phil *phil)
 
 int	let_philo_think(t_phil *phil)
 {
-	if (phil->tb->stop == 0)
+	if (phil->tb->stop == 0 && phil->state != 'd')
 	{
 		phil->state = 't';
 		print_safely(phil);

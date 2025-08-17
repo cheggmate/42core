@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 11:56:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:49:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	*keep_philos_alive(void *arg)
 	phil = (t_phil *)arg;
     bar_wait(&phil->tb->start_blk);
 	bar_wait(&phil->tb->start_blk);
-	while (phil->tb->stop == 0 && phil->n_eat > 0)
+	while (phil->tb->stop == 0 && (phil->n_eat > 0 || phil->tb->eat_count == 0))
 	{
 		result = let_philo_eat(phil);
 		if (result == -1)

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 12:09:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:45:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static int	has_died_or_finished_eating(t_tab *tab)
 	{
 		if (tab->phils[i].state == 'd')
 			return (1);
-		else if (get_time() - tab->phils[i].t_last_ate > tab->t_eat)
+		else if (get_time() - tab->phils[i].t_last_ate > tab->t_die)
+		{
 			philo_died(&tab->phils[i]);
+			return (1);
+		}
 		if (tab->eat_count > 0)
 		{
 			if (tab->phils[i].n_eat > tab->eat_count)
