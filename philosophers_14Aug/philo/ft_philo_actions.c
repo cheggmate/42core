@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 12:42:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 14:55:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	let_philo_think(t_phil *phil)
 	{
 		phil->state = 't';
 		print_safely(phil);
+		// TODO add check here to sleep for a short while if there is time, and they just ate, otherwise they might just eat again.
 		return (0);
 	}
 	else
