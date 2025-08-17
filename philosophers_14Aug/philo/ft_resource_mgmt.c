@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/16 23:50:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:10:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	pick_up_frks(t_phil *phil)
 	}
 	else
 	{
-		usleep(2 * phil->tb->t_eat * 1000 - 1);
+		sleep_safely(2 * phil->tb->t_eat);
+		// usleep(2 * phil->tb->t_eat * 1000 - 1);
 		result = pthread_mutex_lock(&phil->tb->forks[fork_r]);
 		if (result == 0)
 		{

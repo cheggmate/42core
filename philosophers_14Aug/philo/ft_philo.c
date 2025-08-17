@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/16 23:49:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 11:56:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,19 +129,19 @@ void	*keep_philos_alive(void *arg)
 	bar_wait(&phil->tb->start_blk);
 	while (phil->tb->stop == 0 && phil->n_eat > 0)
 	{
-		result = let_philo_eat(phil); // need to fix to check if he has died
+		result = let_philo_eat(phil);
 		if (result == -1)
 			return NULL;
 		result = let_philo_sleep(phil);
-		printf("phil finished sleeping\n");
+		// printf("phil finished sleeping\n");
 		if (result == -1)
 			return NULL;
 		result = let_philo_think(phil);
 		if (result == -1)
 			return NULL;
-		printf("stop flag is %d\n", phil->tb->stop);
+		// printf("stop flag is %d\n", phil->tb->stop);
 	}
-	return NULL;
+	return (NULL);
 }
 
 int	main(int argc, char **argv)

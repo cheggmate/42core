@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/16 23:58:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:09:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*monitoring(void *t)
 		unlock_stop_mutex(tab);
 	}
 	else
-		usleep(800 * 1000);
+		sleep_safely(800);
+		// usleep(800 * 1000);
 	return NULL;
 }

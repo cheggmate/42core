@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/16 22:01:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 11:57:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	print_safely(t_phil *phil)
 			printf("%lld %d has taken a fork\n", get_time() - phil->tb->t_start, phil->n);
 		else if (phil->state == 'd')
 			printf("%lld %d died\n", get_time() - phil->tb->t_start, phil->n);
+		fflush(stdout);
 	}
 	pthread_mutex_unlock(&phil->tb->print);
 	return ;

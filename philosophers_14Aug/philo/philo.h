@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 00:01:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/17 12:08:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			let_philo_think(t_phil *phil);
 int			let_philo_sleep(t_phil *phil);
 int			let_philo_eat(t_phil *phil);
 int			lock_stop_mutex(t_tab *tab);
+void		sleep_safely(long long dur);
 int			unlock_stop_mutex(t_tab *tab);
 int			will_die_during_action(t_phil *phil, char action);
 
