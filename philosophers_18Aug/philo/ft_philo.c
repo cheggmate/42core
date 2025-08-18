@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 00:34:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 00:17:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	*keep_philos_alive(void *arg)
 		result = let_philo_think(phil);
 		if (result == -1)
 			break ;
-		// printf("stop flag is %d\n", phil->tb->stop);
 	}
 	return (NULL);
 }
@@ -166,4 +165,5 @@ int	main(int argc, char **argv)
 	join_threads(tab);
 	if (result == -1)
 		return (1);
+	return (0);
 }

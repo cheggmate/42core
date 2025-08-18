@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 23:20:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 14:49:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 00:29:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,5 @@ void	sleep_safely(long long dur)
 
 	start = get_time();
 	while(get_time() - start < dur)
-		usleep(100);
+		usleep(1000);
 }

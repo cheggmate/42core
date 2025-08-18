@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 00:30:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/18 23:51:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	pick_up_frks(t_phil *phil)
 				sleep_safely(phil->tb->t_die);
 				philo_died(phil);
 				put_down_frks(phil);
+				return (-1);
 			}
 			else
 			{

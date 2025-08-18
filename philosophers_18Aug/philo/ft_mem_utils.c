@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:07:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 22:21:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/18 23:52:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ void free_everything(t_tab *tab)
 	// tab->forks = NULL;
 	// tab->phils = NULL;
 	// tab = NULL;
+	return ;
 }

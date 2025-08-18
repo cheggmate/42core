@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 00:20:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 00:30:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ int	let_philo_eat(t_phil *phil)
 		if (pick_up_frks(phil) == -1)
 		{
 			put_down_frks(phil);
-			free_everything(phil->tb);
-			printf("kill phil\n");
 			philo_died(phil);	// check if this is the right implementation
+			// free_everything(phil->tb);
 			return (-1);
 		}
-		phil->t_last_ate = get_time();
-		phil->state = 'e';
-		print_safely(phil);
-		sleep_safely(phil->tb->t_eat);
-		// usleep(phil->tb->t_eat * 1000);
-		put_down_frks(phil);
-		phil->n_eat -= 1;
-		return (0);
+		else
+		{
+			phil->t_last_ate = get_time();
+			phil->state = 'e';
+			print_safely(phil);
+			sleep_safely(phil->tb->t_eat);
+			// usleep(phil->tb->t_eat * 1000);
+			put_down_frks(phil);
+			phil->n_eat -= 1;
+			return (0);
+		}
 	}
 	else
 		return (-1);
@@ -81,6 +83,8 @@ int	let_philo_think(t_phil *phil)
 
 int	philo_died(t_phil *phil)
 {
+	if (phil->state == 'd')
+		return (-1);
 	phil->state = 'd';
 	print_safely(phil);
 	put_down_frks(phil);
