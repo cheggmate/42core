@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resource_mgmt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 21:06:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 22:18:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,18 +132,6 @@ int	put_down_frks(t_phil * phil)
 			phil->tb->f_owners[i] = -1;
 		}
 	}
-	printf("philo %d has put down forks\n", phil->n);
-	// if (phil->n % 2 == 1)
-	// {
-	// 	result = pthread_mutex_unlock(&phil->tb->forks[fork_r]);
-	// 	if (result == 0)
-	// 		result = pthread_mutex_unlock(&phil->tb->forks[n]);
-	// }
-	// else
-	// {
-	// 	result = pthread_mutex_unlock(&phil->tb->forks[n]);
-	// 	if (result == 0)
-	// 		result = pthread_mutex_unlock(&phil->tb->forks[fork_r]);
-	// }
+	// printf("philo %d has put down forks\n", phil->n);
 	return (0);
 }

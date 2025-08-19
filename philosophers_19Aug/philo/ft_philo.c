@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 00:17:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 23:02:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,14 @@ void	*keep_philos_alive(void *arg)
 	while (phil->tb->stop == 0 && phil->state != 'd' && (phil->n_eat == 0 || phil->n_eat < phil->tb->eat_count))
 	{
 		result = let_philo_eat(phil);
-		if (result == -1)
+		if (result == -1 || phil->tb->stop == 1 || phil->state == 'd')
 			break ;
 		result = let_philo_sleep(phil);
 		// printf("phil finished sleeping\n");
-		if (result == -1)
+		if (result == -1 || phil->tb->stop == 1 || phil->state == 'd')
 			break ;
 		result = let_philo_think(phil);
-		if (result == -1)
+		if (result == -1 || phil->tb->stop == 1 || phil->state == 'd')
 			break ;
 	}
 	return (NULL);
@@ -161,8 +161,11 @@ int	main(int argc, char **argv)
 	create_threads(tab);
 	bar_wait(&tab->start_blk);
 	tab->t_start = get_time();
-	bar_wait(&tab->start_blk);
-	join_threads(tab);
+	// bar_wait(&tab->start_blk);
+	result = join_threads(tab);
+	printf("stop flag is %d\n", tab->stop);
+	unlock_stop_mutex(tab);
+	free_everything(tab);
 	if (result == -1)
 		return (1);
 	return (0);

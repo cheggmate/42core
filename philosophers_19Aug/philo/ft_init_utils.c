@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 00:11:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 23:19:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	init_phil(t_tab **tab)
 	}
 	while (++i < (*tab)->p_total)
 	{
-		(*tab)->phils[i].n_eat = (*tab)->eat_count;
+		(*tab)->phils[i].n_eat = 0;
 		(*tab)->phils[i].t_last_ate = get_time();
 		(*tab)->phils[i].tb = (*tab);
 		(*tab)->phils[i].n = i;
@@ -61,23 +61,8 @@ static int	init_phil(t_tab **tab)
 	return (0);
 }
 
-// static int	init_nested_tab(t_tab **tab)
-// {
-// 	int	result;
-
-// 	(*tab)->stop = 0;
-// 	result = init_forks(tab);
-// 	if (init_phil(tab) != 0 || result == -1)
-// 	{
-// 		free_everything((*tab));
-// 		return (-1);
-// 	}
-// }
-
 int	init_tab(t_tab **tab, int argc, char **argv)
 {
-	// int	result;
-
 	(*tab) = ft_calloc(1, sizeof(t_tab));
 	(*tab)->threads = (pthread_t *)ft_calloc((*tab)->p_total + 1, sizeof(pthread_t)); // creating one extra thread for monitoring
 	if (!(*tab))
@@ -90,14 +75,6 @@ int	init_tab(t_tab **tab, int argc, char **argv)
 		free_everything((*tab));
 		return (-1);
 	}
-	
-	// (*tab)->stop = 0;
-	// result = init_forks(tab);
-	// if (init_phil(tab) != 0 || result == -1)
-	// {
-	// 	free_everything((*tab));
-	// 	return (-1);
-	// }
 	bar_init(&(*tab)->start_blk, (*tab)->p_total + 1);
 	return (0);
 }

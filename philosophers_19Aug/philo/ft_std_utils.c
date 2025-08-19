@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_std_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/17 11:57:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 22:33:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	*ft_memset(void *ptr, int value, size_t num)
 void	print_safely(t_phil *phil)
 {
 	pthread_mutex_lock(&phil->tb->print);
-	if (phil)
+	if (phil && phil->tb->stop == 0)
 	{
 		if (phil->state == 'e')
 			printf("%lld %d is eating\n", get_time() - phil->tb->t_start, phil->n);
