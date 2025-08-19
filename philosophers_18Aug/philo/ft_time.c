@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 23:20:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 00:29:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 09:29:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int	will_die_during_action(t_phil *phil, char action)
 	int	p_count;
 
 	p_count = phil->tb->p_total;
-	if (action == 's')
-	{
-		if (get_time() - phil->t_last_ate + phil->tb->t_slp  >  (1 + (p_count == 3 && phil->n == 2)) * phil->tb->t_die)
-			return (1);
-		else
-			return (0);
-	}
+	if (action == 'e' && (get_time() - phil->t_last_ate + phil->tb->t_eat) > (phil->tb->t_die))
+		return (1);
+	else if (action == 's' && (get_time() - phil->t_last_ate + phil->tb->t_eat + phil->tb->t_slp  >  (1 + (p_count == 3 && phil->n == 2)) * phil->tb->t_die))
+		return (1);
+	else if (action == 't' && (get_time() - phil->t_last_ate + phil->tb->t_eat + phil->tb->t_slp  >  (1 + (p_count == 3 && phil->n == 2)) * phil->tb->t_die))
+		return (1);
 	return (0);
 }
 

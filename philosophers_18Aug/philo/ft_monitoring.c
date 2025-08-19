@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 00:18:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 09:19:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static int	has_died_or_finished_eating(t_tab *tab)
 	p_meet_eat_count = 0;
 	while (++i < tab->p_total)
 	{
+		printf("phil %d state = %d\n", tab->phils[i].n, tab->phils[i].state);
 		if (tab->phils[i].state == 'd')
 		{
 			printf("phil state is already d\n");
@@ -55,16 +56,19 @@ void	*monitoring(void *t)
 	tab = (t_tab *)t;
 	bar_wait(&tab->start_blk);
 	bar_wait(&tab->start_blk);
-	if (has_died_or_finished_eating(tab))
+	while(tab->stop == 0)
 	{
-		printf("stop flag set\n");
-		fflush(stdout);
-		lock_stop_mutex(tab);
-		tab->stop = 1;
-		unlock_stop_mutex(tab);
+		if (has_died_or_finished_eating(tab))
+		{
+			printf("stop flag set\n");
+			fflush(stdout);
+			lock_stop_mutex(tab);
+			tab->stop = 1;
+			unlock_stop_mutex(tab);
+		}
+		else
+			sleep_safely(800);
+			// usleep(800 * 1000);
 	}
-	else
-		sleep_safely(800);
-		// usleep(800 * 1000);
 	return NULL;
 }

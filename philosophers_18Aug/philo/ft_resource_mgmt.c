@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/18 23:51:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/19 21:06:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	pick_up_frks(t_phil *phil)
 
 int	put_down_frks(t_phil * phil)
 {
-	int	result;
+	// int	result;
 	int	n;
 	int	i;
 	// int fork_r;
@@ -122,15 +122,17 @@ int	put_down_frks(t_phil * phil)
 	// 	fork_r = n + 1;
 	// else
 	// 	fork_r = 0;
-	result = 0;
+	// result = 0;
 	n = phil->n;
-	while (++i < n)
+	while (++i < phil->tb->p_total)
 	{
 		if (phil->tb->f_owners[i] == n)
-			result = pthread_mutex_unlock(&phil->tb->forks[i]);
-		if (result == 0)
+		{
+			pthread_mutex_unlock(&phil->tb->forks[i]);
 			phil->tb->f_owners[i] = -1;
+		}
 	}
+	printf("philo %d has put down forks\n", phil->n);
 	// if (phil->n % 2 == 1)
 	// {
 	// 	result = pthread_mutex_unlock(&phil->tb->forks[fork_r]);
