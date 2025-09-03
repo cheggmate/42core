@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:39:19 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 22:33:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/28 18:14:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,32 +68,6 @@ int	check_num_limits(int num)
 		return (-1);
 }
 
-// int	ft_atoi(const char *str)
-// {
-// 	unsigned int	final_int;
-// 	int				sign;
-// 	unsigned char	*ptr;
-
-// 	ptr = (unsigned char *)str;
-// 	final_int = 0;
-// 	sign = 1;
-// 	while (*ptr == '\t' || *ptr == '\n' || *ptr == '\v'
-// 		|| *ptr == '\f' || *ptr == '\r' || *ptr == ' ')
-// 		ptr++;
-// 	if ((*ptr == '-' || *ptr == '+'))
-// 	{
-// 		if (*ptr == '-')
-// 			sign *= -1 ;
-// 		ptr++;
-// 	}
-// 	while (*ptr >= '0' && *ptr <= '9')
-// 	{
-// 		final_int = final_int * 10 + *ptr - '0';
-// 		ptr++;
-// 	}
-// 	return (final_int * sign);
-// }
-
 void	*ft_memset(void *ptr, int value, size_t num)
 {
 	size_t			count;
@@ -111,19 +85,25 @@ void	*ft_memset(void *ptr, int value, size_t num)
 
 void	print_safely(t_phil *phil)
 {
+	long long elapsed;
+	
 	pthread_mutex_lock(&phil->tb->print);
+	if (phil->tb->t_start > get_time())
+		elapsed = 0;
+	else
+		elapsed = get_time () - phil->tb->t_start;
 	if (phil && phil->tb->stop == 0)
 	{
 		if (phil->state == 'e')
-			printf("%lld %d is eating\n", get_time() - phil->tb->t_start, phil->n);
+			printf("%lld %d is eating\n", elapsed, phil->n);
 		else if (phil->state == 's')
-			printf("%lld %d is sleeping\n", get_time() - phil->tb->t_start, phil->n);
+			printf("%lld %d is sleeping\n", elapsed, phil->n);
 		else if (phil->state == 't')
-			printf("%lld %d is thinking\n", get_time() - phil->tb->t_start, phil->n);
+			printf("%lld %d is thinking\n", elapsed, phil->n);
 		else if (phil->state == 'f')
-			printf("%lld %d has taken a fork\n", get_time() - phil->tb->t_start, phil->n);
+			printf("%lld %d has taken a fork\n", elapsed, phil->n);
 		else if (phil->state == 'd')
-			printf("%lld %d died\n", get_time() - phil->tb->t_start, phil->n);
+			printf("%lld %d died\n", elapsed, phil->n);
 		fflush(stdout);
 	}
 	pthread_mutex_unlock(&phil->tb->print);

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/24 22:52:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/28 23:51:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,47 +122,38 @@ int	copy_values_into_vars(int argc, char **argv, t_tab **tab)
 void	*keep_philos_alive(void *arg)
 {
 	t_phil *phil;
-	int		result;
 
 	phil = (t_phil *)arg;
-	printf("Philo %d reached start barrier\n", phil->n);
-	printf("[T] about to bar_wait: tab=%p start_blk=%p trip=%d\n",
-       phil->tb, &phil->tb->start_blk, phil->tb->start_blk.count);
+	// printf("Philo %d reached start barrier\n", phil->n);
     bar_wait(&phil->tb->start_blk);
-	printf("Philo %d passed start barrier\n", phil->n);
-	// bar_wait(&phil->tb->start_blk);
+	// printf("Philo %d passed start barrier\n", phil->n);
 	fflush(stdout);
-	// usleep(100);
-	// pthread_mutex_lock(&phil->lock);
-	// pthread_mutex_lock(&phil->tb->s_lock);
-	while (check_stop_set(phil->tb) == 0 && check_phil_state(phil, 'd') == 1 && (phil->n_eat == 0 || phil->n_eat < phil->tb->eat_count))
+	while (check_stop_set(phil->tb) == 0 && check_phil_state(phil, 'd') == 0)
 	{
-		result = let_philo_eat(phil);
-		if (result == -1 || check_stop_set(phil->tb) == 1|| check_phil_state(phil, 'd') == 1)
-		{
-			// pthread_mutex_unlock(&phil->lock);
-			// pthread_mutex_unlock(&phil->tb->s_lock);
-			break ;
-		}
-		result = let_philo_sleep(phil);
-		// printf("phil finished sleeping\n");
-		pthread_mutex_lock(&phil->lock);
-		if (result == -1 || check_stop_set(phil->tb) == 1 || check_phil_state(phil, 'd') == 1)
-		{
-			pthread_mutex_unlock(&phil->lock);
-			pthread_mutex_unlock(&phil->tb->s_lock);
-			break ;
-		}
-		result = let_philo_think(phil);
-		pthread_mutex_lock(&phil->lock);
-		pthread_mutex_lock(&phil->tb->s_lock);
-		if (result == -1 || check_stop_set(phil->tb) == 1 || check_phil_state(phil, 'd') == 1)
-		{
-			pthread_mutex_unlock(&phil->lock);
-			pthread_mutex_unlock(&phil->tb->s_lock);
-			break ;
-		}
+		if (let_philo_eat(phil) == -1)
+			{
+				philo_died(phil);
+				break ;
+			}
+		if(!(get_phil_eat(phil) == 0 || get_phil_eat(phil) < phil->tb->eat_count
+			|| phil->tb->eat_count == 0))
+			{
+				philo_died(phil);
+				break;
+			}
+		if (let_philo_sleep(phil) == -1)
+			{
+				philo_died(phil);
+				break ;
+			}
+		if (let_philo_think(phil) == -1)
+			{
+				philo_died(phil);
+				break ;
+			}	
 	}
+	if (check_stop_set(phil->tb) == 1 && check_phil_state(phil, 'd') == 0)
+		philo_died(phil);
 	return (NULL);
 }
 
@@ -172,39 +163,23 @@ int	main(int argc, char **argv)
 	int		result;
 
 	tab = NULL;
-	printf("test1\n");
 	setvbuf(stdout, NULL, _IONBF, 0);
 	if (argc < 5 || argc > 6)
 		return (write(2, "Invalid no. of args!\n", 21), 1);
-	result = var_checks(argc, argv);
-	if (result == -1)
+	if (var_checks(argc, argv) == -1)
 		return (write(2, "Error\nInvalid inputs.\n", 22), 1);
-	printf("before init tab\n");
 	if (init_tab(&tab, argc, argv) != 0)
 		return (write(2, "Could not allocate memory!\n", 27), 1);
-	printf("before init thread \n");
 	pthread_mutex_init(&tab->s_lock, NULL);
-	printf("inited pthreads\n");
-	
 	result = create_threads(tab);
-	printf("done creating threads with result %d\n", result);
 	if (result != 0)
 	{
-		printf("failed to create all threads, returning\n");
 		free_tab_everything(tab);
 		return (1);
 	}
-	printf("done creating threads\n");
-	printf("[T] about to bar_wait: tab=%p start_blk=%p trip=%d\n",
-       tab, &tab->start_blk, tab->start_blk.count);
-	bar_wait(&tab->start_blk);
-	printf("main thread passed waiting barrier\n");
 	tab->t_start = get_time();
-	printf("set start time\n");
-	// bar_wait(&tab->start_blk);
+	bar_wait(&tab->start_blk);
 	result = join_threads(tab);
-	printf("stop flag is %d\n", tab->stop);
-	
 	free_tab_everything(tab);
 	if (result == -1)
 		return (1);

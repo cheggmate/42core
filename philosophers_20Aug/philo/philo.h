@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/24 23:27:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/28 19:16:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,12 @@ int			destroy_other_mutexes(t_tab *tab);
 void 		free_tab_everything(t_tab *tab);
 void		free_phil_everything(t_phil *phil);
 void		*ft_memset(void *ptr, int value, size_t num);
+int			get_phil_eat(t_phil *phil);
 long long	get_time(void);
 void		*ft_calloc(size_t num, size_t size);
 int			init_tab(t_tab **tab, int argc, char **argv);
 int			check_is_num(char *str);
+long long	get_time_since_ate(t_phil *phil);
 int			join_threads(t_tab *tab);
 void		*keep_philos_alive(void *arg);
 int			let_philo_think(t_phil *phil);
@@ -94,8 +96,9 @@ int			pick_up_frks(t_phil *phil);
 int			put_down_frks(t_phil * phil);
 void		print_safely(t_phil *phil);
 int			philo_died(t_phil *phil);
-int			set_phil_eat_time(t_phil *phil, long long new_time);
+int			set_phil_eat(t_phil *phil, long long new_time);
 int			set_phil_state(t_phil *phil, char new_state);
+int			set_stop_flag(t_tab *tab);
 void		sleep_safely(long long dur);
 int			will_die_during_action(t_phil *phil, char action);
 

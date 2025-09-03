@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 22:18:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/28 23:46:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	pick_up_frks(t_phil *phil)
 	int fork_r;
 
 	n = phil->n;
+	if (phil->tb->p_total % 2 == 1 && n == phil->tb->p_total - 1 && get_phil_eat(phil) == 0)	// odd number of philos and this is the last phil
+		sleep_safely(1);
 	if (n != phil->tb->p_total-1)
 		fork_r = n + 1;
 	else
@@ -26,6 +28,31 @@ int	pick_up_frks(t_phil *phil)
 	if (phil->state == 'd')
 		return (-1);
 	if (n % 2 == 1)
+	{
+		result = pthread_mutex_lock(&phil->tb->forks[fork_r]);
+		if (result == 0)
+		{
+			// long long	fork1 = get_time();
+			phil->tb->f_owners[fork_r] = n;
+			phil->state = 'f';
+			print_safely(phil);
+			result = pthread_mutex_lock(&phil->tb->forks[n]);
+			if (result == 0)
+			{
+				// printf("time elapsed between fork pickup = %lld\n", get_time() - fork1);
+				phil->tb->f_owners[n] = n;
+				print_safely(phil);
+			}
+			else
+				put_down_frks(phil);
+		}
+		else 													// remove before submitting
+		{
+			write(2, strerror(result), strlen(strerror(result)));
+			return (1);
+		}
+	}
+	else
 	{
 		result = pthread_mutex_lock(&phil->tb->forks[n]);
 		if (result == 0)
@@ -42,64 +69,6 @@ int	pick_up_frks(t_phil *phil)
 			else
 				put_down_frks(phil);
 		}
-		else 													// remove before submitting
-		{
-			write(2, strerror(result), strlen(strerror(result)));
-			return (1);
-		}
-	}
-	else if (phil->tb->p_total != 3)	// TODO: Update the case where p_total = 3 and n = 2( third philo, make him wait 2x)
-	{
-		result = pthread_mutex_lock(&phil->tb->forks[fork_r]);
-		if (result == 0)
-		{
-			phil->tb->f_owners[fork_r] = n;
-			phil->state = 'f';
-			print_safely(phil);
-			if (phil->tb->p_total == 1)
-			{
-				sleep_safely(phil->tb->t_die);
-				philo_died(phil);
-				put_down_frks(phil);
-				return (-1);
-			}
-			else
-			{
-				result = pthread_mutex_lock(&phil->tb->forks[n]);
-				if (result == 0)
-				{
-					phil->tb->f_owners[n] = n;
-					print_safely(phil);
-				}
-				else
-					put_down_frks(phil);
-			}
-		}
-		else													 // remove before submitting
-		{
-			write(2, strerror(result), strlen(strerror(result)));
-			return (1);
-		}
-	}
-	else
-	{
-		sleep_safely(2 * phil->tb->t_eat);
-		// usleep(2 * phil->tb->t_eat * 1000 - 1);
-		result = pthread_mutex_lock(&phil->tb->forks[fork_r]);
-		if (result == 0)
-		{
-			phil->tb->f_owners[fork_r] = n;
-			phil->state = 'f';
-			print_safely(phil);
-			result = pthread_mutex_lock(&phil->tb->forks[n]);
-			if (result == 0)
-			{
-				phil->tb->f_owners[n] = n;
-				print_safely(phil);
-			}
-			else
-				put_down_frks(phil);
-		}
 		else													 // remove before submitting
 		{
 			write(2, strerror(result), strlen(strerror(result)));
@@ -111,18 +80,10 @@ int	pick_up_frks(t_phil *phil)
 
 int	put_down_frks(t_phil * phil)
 {
-	// int	result;
 	int	n;
 	int	i;
-	// int fork_r;
 
 	i = -1;
-	n = phil->n;
-	// if (n != phil->tb->p_total-1)
-	// 	fork_r = n + 1;
-	// else
-	// 	fork_r = 0;
-	// result = 0;
 	n = phil->n;
 	while (++i < phil->tb->p_total)
 	{
@@ -132,6 +93,5 @@ int	put_down_frks(t_phil * phil)
 			phil->tb->f_owners[i] = -1;
 		}
 	}
-	// printf("philo %d has put down forks\n", phil->n);
 	return (0);
 }

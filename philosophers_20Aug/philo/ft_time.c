@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 23:20:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/19 09:29:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/08/28 22:58:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 int	will_die_during_action(t_phil *phil, char action)
 {
-	int	p_count;
-
-	p_count = phil->tb->p_total;
-	if (action == 'e' && (get_time() - phil->t_last_ate + phil->tb->t_eat) > (phil->tb->t_die))
+	// printf("get_time_since_ate(phil %d state %c) : %lld (t_die: %lld)\n", phil->n, phil->state, get_time_since_ate(phil), phil->tb->t_die);
+	if (action == 'e' && (get_time_since_ate(phil) + phil->tb->t_eat) >= (phil->tb->t_die))
 		return (1);
-	else if (action == 's' && (get_time() - phil->t_last_ate + phil->tb->t_eat + phil->tb->t_slp  >  (1 + (p_count == 3 && phil->n == 2)) * phil->tb->t_die))
+	else if (action == 's' && (get_time_since_ate(phil) + phil->tb->t_slp + phil->tb->t_eat >= phil->tb->t_die))
 		return (1);
-	else if (action == 't' && (get_time() - phil->t_last_ate + phil->tb->t_eat + phil->tb->t_slp  >  (1 + (p_count == 3 && phil->n == 2)) * phil->tb->t_die))
+	else if (action == 't' && (get_time_since_ate(phil) >= phil->tb->t_die))
 		return (1);
 	return (0);
 }
