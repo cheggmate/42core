@@ -6,26 +6,30 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 13:56:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/08/29 15:28:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/05 00:03:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**parse_command(char *arg)
+char	*parse_command(char *arg)
 {
-	char	**str;
+	char	*str;
+	int		i;
+	int		len;
 
-	str = ft_split(arg, ' ');
-	if (ft_strncmp(str[0], "wc", 2) == 0 && str[1][0] == '-'
-		&& (str[1][1] == 'l' || str[1][1] == 'w'))
-		return (str);
-	return (NULL);
+	i = -1;
+	len = ft_strlen(arg);
+	str = ft_calloc(len, sizeof(char));
+	if (!str)
+		return (NULL);
+	while (++i < len)
+		str[i] = arg[i];
+	return (str);
 }
 
-int	start_piping(char **argv)
+int	first_op(int *pipe_fd, char **argv)
 {
-	int 	pipe_fd[2];
 	int		pid1;
 	char	**environ;
 
@@ -50,20 +54,51 @@ int	start_piping(char **argv)
 		close(pipe_fd[1]);
 		
 		// Execute the first command
-		char **cmd1_args = parse_command(argv[2]);
+		char *cmd1_args = parse_command(argv[2]);
 		if (!cmd1_args)
 			return (-1);
-		execve(cmd1_args[0], cmd1_args, environ);
+		execve(&cmd1_args[0], &cmd1_args, environ);
 	}
+	return (0);
+}
+
+int	second_op(int *pipe_fd, int *out_fd, char **argv)
+{
+	int 	pid2;
+	char	**environ;
+
+	pid2 = fork();
+	if (pid2 == 0)
+	{
+		// perform second action
+	}
+	
+}
+
+int	start_piping(char **argv)
+{
+	int 	pipe_fd[2];
+	int		out_fd[2];
+	
+	if (first_op(pipe_fd, argv) == -1)
+		return (-1);
+	if (second_op(pipe_fd, out_fd, argv) == -1)
+		return (-1);
 	return (0);
 }
 
 int	arg_checks(char **argv) // this needs to be changed to support more commands
 {
-	if (ft_strncmp(argv[2], "wc -l", 5) != 0 || ft_strncmp(argv[3], "wc -w", 5) != 0)
+	if (ft_strncmp(argv[2], "wc -l", 5) != 0)
+	{
+		printf("error caught1\n");
 		return (-1);
-	if (ft_strncmp(argv[3], "wc - l", 5) != 0 || ft_strncmp(argv[3], "wc -w", 5) != 0)
-		return (-1);
+	}
+	// if (ft_strncmp(argv[3], "wc - l", 5) != 0 || ft_strncmp(argv[3], "wc -w", 5) != 0)
+	// {
+	// 	printf("error caught2\n");
+	// 	return (-1);
+	// }
 	return (0);
 }
 
