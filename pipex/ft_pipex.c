@@ -6,38 +6,60 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 13:56:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/05 00:03:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/07 23:57:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*parse_command(char *arg)
+char *find_in_path(char *cmd, char **envp)
 {
-	char	*str;
-	int		i;
-	int		len;
+    char *path_env = NULL;
+    char **paths;
+    char *full_path;
+    int i;
 
-	i = -1;
-	len = ft_strlen(arg);
-	str = ft_calloc(len, sizeof(char));
+    for (i = 0; envp[i]; i++) {
+        if (ft_strncmp(envp[i], "PATH=", 5) == 0) {
+            path_env = envp[i] + 5;
+            break;
+        }
+    }
+    if (!path_env)
+        return (NULL);
+
+    paths = ft_split(path_env, ':');
+    for (i = 0; paths[i]; i++) {
+        full_path = ft_strjoin(ft_strjoin(paths[i], "/"), cmd);
+        if (access(full_path, X_OK) == 0)
+            return (full_path); // found it!
+        free(full_path);
+    }
+    return (NULL);
+}
+
+char	**parse_command(char *arg)
+{
+	char	**str;
+
+	str = ft_split(arg, ' ');
 	if (!str)
 		return (NULL);
-	while (++i < len)
-		str[i] = arg[i];
 	return (str);
 }
 
-int	first_op(int *pipe_fd, char **argv)
+int	start_piping(char **argv, char **envp)
 {
-	int		pid1;
-	char	**environ;
+	int 	pipe_fd[2];
+	pid_t	pid1;
+	pid_t	pid2;
 
+	printf("start piping called\n");
 	if (pipe(pipe_fd) == -1)
 		return (-1);
 	pid1 = fork();
 	if (pid1 == 0)
-	{ // Child process 1
+	{
 		close(pipe_fd[0]); // Close read end, we won't use it
 		// Redirect stdin to read from the file
 		int input_fd = open(argv[1], O_RDONLY);
@@ -53,68 +75,53 @@ int	first_op(int *pipe_fd, char **argv)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		close(pipe_fd[1]);
 		
-		// Execute the first command
-		char *cmd1_args = parse_command(argv[2]);
-		if (!cmd1_args)
-			return (-1);
-		execve(&cmd1_args[0], &cmd1_args, environ);
+		char **cmd1_args = parse_command(argv[2]);
+		char *cmd_path1 = find_in_path(cmd1_args[0], envp);
+		execve(cmd_path1, cmd1_args, envp);
+		perror("execve");
+		exit(1);
 	}
-	return (0);
-}
-
-int	second_op(int *pipe_fd, int *out_fd, char **argv)
-{
-	int 	pid2;
-	char	**environ;
-
 	pid2 = fork();
 	if (pid2 == 0)
 	{
-		// perform second action
-	}
-	
-}
+		dup2(pipe_fd[0], STDIN_FILENO);
+		close(pipe_fd[0]);
+		close(pipe_fd[1]);
 
-int	start_piping(char **argv)
-{
-	int 	pipe_fd[2];
-	int		out_fd[2];
-	
-	if (first_op(pipe_fd, argv) == -1)
-		return (-1);
-	if (second_op(pipe_fd, out_fd, argv) == -1)
-		return (-1);
+		int output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (output_fd == -1)
+			return (-1);
+		
+		dup2(output_fd, STDOUT_FILENO);
+		close(output_fd);
+		
+		char	**cmd2_args = parse_command(argv[3]);
+		char *cmd_path2 = find_in_path(cmd2_args[0], envp);
+		execve(cmd_path2, cmd2_args, envp);
+		perror("execve");
+		exit(1);
+	}
+
+	close(pipe_fd[0]);
+	close(pipe_fd[1]);
+	waitpid(pid1, NULL, 0);
+	waitpid(pid2, NULL, 0);
 	return (0);
 }
 
-int	arg_checks(char **argv) // this needs to be changed to support more commands
-{
-	if (ft_strncmp(argv[2], "wc -l", 5) != 0)
-	{
-		printf("error caught1\n");
-		return (-1);
-	}
-	// if (ft_strncmp(argv[3], "wc - l", 5) != 0 || ft_strncmp(argv[3], "wc -w", 5) != 0)
-	// {
-	// 	printf("error caught2\n");
-	// 	return (-1);
-	// }
-	return (0);
-}
-
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	if (argc < 5)
 	{
 		printf("not enough arguments\n");
 		return (1);
 	}
-	if (arg_checks(argv) == -1)
-	{
-		printf("invalid arguments\n");
-		return (1);
-	}
-	if (start_piping(argv) == -1)
+	// if (arg_checks(argv) == -1)
+	// {
+	// 	printf("invalid arguments\n");
+	// 	return (1);
+	// }
+	if (start_piping(argv, envp) == -1)
 	{
 		printf("an error occurred\n");
 		return (1);

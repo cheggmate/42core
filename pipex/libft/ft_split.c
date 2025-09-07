@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:03:51 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/27 09:04:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/07 23:11:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**count_words_create_result(const char *s, char c, int *word_count)
 		s++;
 	}
 	*word_count = count;
-	result = malloc((*word_count + 1) * sizeof(char));
+	result = malloc((*word_count + 1) * sizeof(char *));
 	if (!result)
 		return (NULL);
 	result[*word_count] = NULL;
