@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_thread_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/14 15:35:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/14 23:51:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,11 @@ int	create_threads(t_tab *tab)
 	{
 		if (pthread_create(&tab->threads[i], NULL,
 				keep_philos_alive, &tab->phils[i]) != 0)
-			return (-1);
+			{
+				while (--i > 0)
+					pthread_detach(tab->threads[i]);
+				return (-1);
+			}
 	}
 	if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
 	{
