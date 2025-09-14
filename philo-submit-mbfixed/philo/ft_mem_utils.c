@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:07:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/14 23:28:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/15 00:25:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,26 @@ static void	free_all_arr(t_tab *tab)
 // 	return (1);
 // }
 
+static int	nobody_holding_forks(t_tab *tab)
+{
+	int	i;
+
+	i = -1;
+	while (++i < tab->p_total)
+	{
+		if (tab->f_owners[i] != -1)
+			return (0);
+	}
+	return (1);
+}
+
 void	free_tab_everything(t_tab *tab)
 {
 	if (!tab)
 		return ;
 	// while (!phils_have_not_died(tab))
 	// 	sleep_safely(100);
-	if (tab->forks)
+	if (tab->forks && nobody_holding_forks(tab))
 	{
 		destroy_forks(tab);
 		free(tab->forks);
@@ -49,7 +62,6 @@ void	free_tab_everything(t_tab *tab)
 		free(tab->phils);
 	destroy_other_mutexes(tab);
 	free_all_arr(tab);
-	return ;
 }
 
 void	free_phil_everything(t_phil *phil)

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 21:59:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/14 23:58:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/15 00:27:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,6 @@ static int	has_died_or_finished_eating(t_tab *tab)
 	return (0);
 }
 
-static int	phils_have_not_died(t_tab *tab)
-{
-	int	i;
-
-	i = -1;
-	while (++i < tab->p_total)
-	{
-		if (check_phil_state(&tab->phils[i], 'd') == 0)
-			return (0);
-	}
-	return (1);
-}
-
 void	*monitoring(void *t)
 {
 	t_tab	*tab;
@@ -81,12 +68,10 @@ void	*monitoring(void *t)
 		if (stopped)
 		{
 			set_stop_flag(tab);
-			return (NULL);
+			break ;
 		}
 		else
 			sleep_safely(10);
 	}
-	while (phils_have_not_died(tab) == 0)
-		sleep_safely(100);
 	return (NULL);
 }
