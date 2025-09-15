@@ -115,13 +115,11 @@ int	is_special_case(char *str)
 
 	}
 	return (0);
-
-
 }
 
 int	main(int argc, char **argv)
 {
-	char 	*str;
+	// char 	*str;
 	int 	s_len;
 	char	*cleaned;
 
@@ -129,38 +127,35 @@ int	main(int argc, char **argv)
 	{
 		return (0);
 	}
+	s_len = strlen(argv[1]);
+	if (s_len == 0)
+	{
+		write(1, "\"\"\n", 3);
+		return (0);
+	}
+	else if (is_special_case(argv[1]) == 1 || is_special_case(argv[1]) == 2)
+	{
+		write (1, "\"\"\n", 3);
+		return (0);
+	}
+	else if (is_special_case(argv[1]) == 3)
+	{
+		write(1, "\"", 1);
+		write(1, argv[1], s_len);
+		write(1, "\"\n", 2);
+	} 
 	else
 	{
-		s_len = strlen(argv[1]);
-		if (s_len == 0)
-		{
-			write(1, "\"\"\n", 3);
-			return (0);
-		}
-		else if (is_special_case(argv[1]) == 1 || is_special_case(argv[1]) == 2)
-		{
-			write (1, "\"\"\n", 3);
-			return (0);
-		}
-		else if (is_special_case(argv[1]) == 3)
-		{
-			write(1, "\"", 1);
-			write(1, argv[1], s_len);
-			write(1, "\"\n", 2);
-		}
-		else
-		{
-			cleaned = malloc((s_len + 1));
-			if (!cleaned)
-				return(0);
-			int i;
-			i = -1;
-			while (++i < s_len)
-				cleaned[i] = argv[1][i];
-			// printf("cleaned = %s\n", cleaned);
-			solve(cleaned);
-			// free(cleaned);
-			return (0);
-		}
+		cleaned = malloc((s_len + 1));
+		if (!cleaned)
+			return(0);
+		int i;
+		i = -1;
+		while (++i < s_len)
+			cleaned[i] = argv[1][i];
+		// printf("cleaned = %s\n", cleaned);
+		solve(cleaned);
+		// free(cleaned);
+		return (0);
 	}
 }
