@@ -6,11 +6,26 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 13:56:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/14 21:54:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/19 00:11:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void free_split(char **arr)
+{
+    int i;
+
+    if (!arr)
+        return;
+    i = 0;
+    while (arr[i])
+    {
+        free(arr[i]);
+        i++;
+    }
+    free(arr);
+}
 
 char *find_in_path(char *cmd, char **envp)
 {
@@ -30,11 +45,17 @@ char *find_in_path(char *cmd, char **envp)
 
     paths = ft_split(path_env, ':');
     for (i = 0; paths[i]; i++) {
-        full_path = ft_strjoin(ft_strjoin(paths[i], "/"), cmd);
+		char *tmp = ft_strjoin(paths[i], "/");
+		full_path = ft_strjoin(tmp, cmd);
+		free(tmp);
         if (access(full_path, X_OK) == 0)
-            return (full_path); // found it!
+		{
+			free_split(paths);
+			return (full_path); // found it!
+		}
         free(full_path);
     }
+	free_split(paths);
     return (NULL);
 }
 
@@ -56,8 +77,16 @@ int	start_piping(char **argv, char **envp)
 
 	printf("start piping called\n");
 	if (pipe(pipe_fd) == -1)
-		return (-1);
+	{
+		perror("pipe");
+		exit(EXIT_FAILURE);
+	}
 	pid1 = fork();
+	if (pid1 < 0)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
 	if (pid1 == 0)
 	{
 		close(pipe_fd[0]); // Close read end, we won't use it
@@ -65,8 +94,8 @@ int	start_piping(char **argv, char **envp)
 		int input_fd = open(argv[1], O_RDONLY);
 		if (input_fd == -1)
 		{
-			printf("bad file, aborting\n");
-			return (-1);
+			perror(argv[1]);
+			exit(EXIT_FAILURE);
 		}
 		dup2(input_fd, STDIN_FILENO); // Now stdin comes from the file
 		close(input_fd);
@@ -77,11 +106,21 @@ int	start_piping(char **argv, char **envp)
 		
 		char **cmd1_args = parse_command(argv[2]);
 		char *cmd_path1 = find_in_path(cmd1_args[0], envp);
+		if (!cmd_path1) {
+			fprintf(stderr, "command not found: %s\n", cmd1_args[0]);
+			exit(127);
+		}
 		execve(cmd_path1, cmd1_args, envp);
 		perror("execve");
+		free_split(cmd1_args);
 		exit(1);
 	}
 	pid2 = fork();
+	if (pid2 < 0)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
 	if (pid2 == 0)
 	{
 		dup2(pipe_fd[0], STDIN_FILENO);
@@ -90,15 +129,21 @@ int	start_piping(char **argv, char **envp)
 
 		int output_fd = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (output_fd == -1)
-			return (-1);
+			exit(EXIT_FAILURE);
 		
 		dup2(output_fd, STDOUT_FILENO);
 		close(output_fd);
 		
 		char	**cmd2_args = parse_command(argv[3]);
 		char *cmd_path2 = find_in_path(cmd2_args[0], envp);
+		if (!cmd_path2) {
+			fprintf(stderr, "command not found: %s\n", cmd2_args[0]);
+			exit(127);
+		}
+
 		execve(cmd_path2, cmd2_args, envp);
 		perror("execve");
+		free_split(cmd2_args);
 		exit(1);
 	}
 
