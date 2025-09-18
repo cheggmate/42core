@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_mem_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:07:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/17 20:38:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 22:34:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	free_tab_everything(t_tab *tab)
 	if (tab->phils)
 	{
 		while (++i < tab->p_total)
+		{
+			free_phil_everything(&tab->phils[i]);
 			free(tab->phils[i].lock);
+		}
 		free(tab->phils);
 		tab->phils = NULL;
 	}
