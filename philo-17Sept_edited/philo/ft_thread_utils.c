@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/18 22:23:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 22:14:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ int	create_threads(t_tab *tab)
 	int			num;
 	int			i;
 
+	i = -1;
 	if (!tab)
 		return (-1);
 	num = tab->p_total;
-	i = -1;
-	// if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
-	// {
-	// 	while (--i > 0)
-	// 		pthread_detach(tab->threads[i]);
-	// 	return (-1);
-	// }
+	if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
+	{
+		while (--i > 0)
+			pthread_detach(tab->threads[i]);
+		return (-1);
+	}
 	while (++i < num)
 	{
 		if (pthread_create(&tab->threads[i], NULL,
@@ -40,12 +40,12 @@ int	create_threads(t_tab *tab)
 				return (-1);
 			}
 	}
-	if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
-	{
-		while (--i > 0)
-			pthread_detach(tab->threads[i]);
-		return (-1);
-	}
+	// if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
+	// {
+	// 	while (--i > 0)
+	// 		pthread_detach(tab->threads[i]);
+	// 	return (-1);
+	// }
 	return (0);
 }
 
