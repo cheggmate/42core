@@ -1,66 +1,64 @@
 #include "gnl_replace.h"
 
-int		chk_str(char *chk, char *replace, int s_len)
-{
-	int i;
-	int	c_len;
+int chk_str(char *chk, char *replace, int s_len) {
+    int i;
+    int c_len = strlen(chk);
 
-	i = -1;
-	c_len = strlen(chk);
-	if (c_len < s_len)
-		return (1);
-	while (++i < s_len)
-	{
-		if (chk[i] != replace[i])
-			return (chk[i] - replace[i]);
-	}
-	return (0);
+    if (c_len < s_len)
+        return 1;
+
+    for (i = 0; i < s_len; i++) {
+        if (chk[i] != replace[i])
+            return chk[i] - replace[i];
+    }
+    return 0;
 }
 
-void	get_next_line(int fd, char *x)
-{
-	static char s[9999999] = {'\0'};
-	static int i = 0;
+void get_next_line(int fd, char *x) {
+    static char s[9999999] = {'\0'};
+    int j;
+    int k = 0;
+    int r;
+    int x_len = strlen(x);
 
-	int j; 
-	int	k;
-	int r;
-	char	*out;
+    if (fd < 0 || BUFFER_SIZE <= 0)
+        return;
 
-	j = 1;
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return ;
-	k = 0;
-	while (j > 0)
-	{
-		j = read(fd, s + k, BUFFER_SIZE);
-		if (j == -1 || j == 0)
-			break ;
-		k += j;
-	}
-	s[k] = '\0';
-	r = -1;
-	while (++r < k)
-	{
-		if (s[r] && s[r] == x[0] && chk_str(&s[r], x, strlen(x)) == 0)
-		{
-			int a;
-			a = -1;
-			while (++a < strlen(x))
-			{
-				s[r+a] = '*';
-			}
-		}
-	}
-	write(1, &s[0], k);
+    while (1) {
+        j = read(fd, s + k, BUFFER_SIZE);
+        if (j <= 0)
+            break;
 
+        k += j;
+        s[k] = '\0';
+
+        // Find the first newline in the buffer
+        char *newline_pos = strchr(s, '\n');
+        if (newline_pos) {
+            int line_len = newline_pos - s;  // Length of the line before the newline
+            for (r = 0; r < line_len - x_len + 1; r++) {
+                // Try to match the pattern 'x' in the line
+                if (s[r] == x[0] && chk_str(&s[r], x, x_len) == 0) {
+                    // Replace matched part with asterisks
+                    for (int a = 0; a < x_len; a++) {
+                        s[r + a] = '*';
+                    }
+                }
+            }
+
+            // Print the modified line
+            write(1, s, line_len);
+			write(1, "\n", 1);
+            // Shift the rest of the string to remove the processed line
+            memmove(s, s + line_len + 1, k - line_len - 1);
+            k -= (line_len + 1);  // Update the buffer size after the shift
+        }
+    }
 }
 
-int	main(int argc, char **argv)
-{
-	if (argc != 2)
-		return (1);
-	get_next_line(0, argv[1]);
-	return (0);
-	
+int main(int argc, char **argv) {
+    if (argc != 2)
+        return 1;
+    get_next_line(0, argv[1]);
+    return 0;
 }
