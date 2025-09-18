@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/18 23:09:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 23:10:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	join_threads(t_tab *tab)
 	fprintf(stderr, "result: %d\n", result);
 	if (result != 0)
 		return (-1);
-	while (tab->eat_count != 0 && ++i < tab->p_total)
+	while (++i < tab->p_total)
 	{
 		result = pthread_join(tab->threads[i], NULL);
 		fprintf(stderr, "result (philo): %d\n", result);
