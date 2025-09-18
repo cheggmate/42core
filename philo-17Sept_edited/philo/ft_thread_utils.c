@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_thread_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/17 20:05:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 22:07:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ int	join_threads(t_tab *tab)
 	int	i;
 
 	i = -1;
+	pthread_join(tab->threads[tab->p_total], NULL);
 	while (tab->eat_count != 0 && ++i < tab->p_total)
 		pthread_join(tab->threads[i], NULL);
-	pthread_join(tab->threads[tab->p_total], NULL);
+	
 	return (0);
 }
 
