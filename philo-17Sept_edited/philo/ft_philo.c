@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_philo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:35:46 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/17 19:37:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 23:24:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ int	main(int argc, char **argv)
 	}
 	set_start_time(tab);
 	result = join_threads(tab);
-	// fprintf(stderr, "xxxx\n");
 	free_tab_everything(tab);
 	if (result == -1)
 		return (1);
