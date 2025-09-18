@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:07:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/18 22:37:34 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/18 22:50:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ static void	free_all_arr(t_tab *tab)
 	if (tab)
 		free(tab);
 }
-
 
 void	free_tab_everything(t_tab *tab)
 {
@@ -50,5 +49,4 @@ void	free_tab_everything(t_tab *tab)
 void	free_phil_everything(t_phil *phil)
 {
 	pthread_mutex_destroy(phil->lock);
-	fprintf(stderr, "mutex destroyed for %d", phil->n);
 }
