@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:32:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/13 22:32:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/20 00:33:08 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 
 typedef enum	e_token_type
 {
-	T_WORD,
-	T_PIPE,
-	T_REDIR_IN,
-	T_REDIR_OUT,
-	T_REDIR_APPEND,
-	T_HEREDOC
+	T_WORD,				// Command or arg
+	T_PIPE,				// |
+	T_REDIR_IN,			// <
+	T_REDIR_OUT,		// >
+	T_REDIR_APPEND,		// >>
+	T_HEREDOC			// <<
 }	t_token_type;
 
 typedef struct s_token
@@ -32,7 +32,15 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-t_token	*tokenize_input(const char *input);
-void	free_tokens(t_token *tokens);
+t_token			*tokenize_input(const char *input);
+t_token_type	get_op_type(const char *s, size_t *i);
+void			free_tokens(t_token *tokens);
+char			*extract_word(const char *s, size_t *i);
+t_token 		*lex_input(const char *s);
+
+t_token			*token_new(t_token_type type, const char *value);
+void			add_token_back(t_token **lst, t_token *new);
+void			token_free(t_token *tok);
+void			token_free_all(t_token **lst);
 
 #endif

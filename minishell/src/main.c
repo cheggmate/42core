@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/13 22:39:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/20 00:46:57 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static void	sigquit_handler(int sig)
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
-	char	*line;
+	t_token	*tokens;
 	pid_t	pid;
 	int		status;
+	char	*line;
 
 	(void)argc;
 	(void)argv;
@@ -46,18 +47,18 @@ int	main(int argc, char **argv, char **envp)
 			printf("exit\n");
 			break ;
 		}
-		if (*line)
-			add_history(line);
+		history_add(line);
 
 		// TODO: split args
-		char	**args = simple_split(line);
+		tokens = lex_input(line);
 
 		pid = fork();
 		if (pid == 0)
 		{
-			execve(args[0], args, envp);
+			execve(argv[0], argv, envp);
 			perror("execve");
-			exit(1);
+			token_free_all(tokens);
+			exit(1);			// check if should exit or return value
 		}
 		else if (pid > 0)
 		{
@@ -66,7 +67,7 @@ int	main(int argc, char **argv, char **envp)
 		else
 			perror("fork");
 		free(line);
-		//TODO: Free args
+		token_free_all(tokens);
 	}
 	return (0);
 }

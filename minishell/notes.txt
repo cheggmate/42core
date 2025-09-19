@@ -1,0 +1,57 @@
+Ah, great question 👀
+
+Short answer: **not really — but they’re related**.
+
+---
+
+### 🔹 Pipex bonus
+
+* Goal: **implement multiple pipes** (`./pipex infile cmd1 cmd2 ... cmdN outfile`).
+* You don’t parse complicated input — the commands are already separated in `argv`.
+* The logic is mainly about:
+
+  * Handling **n pipes** in a loop.
+  * Redirecting input/output correctly.
+  * Waiting for multiple children.
+
+So pipex bonus is mostly **plumbing** (pipes + forks + dup2 in loops).
+
+---
+
+### 🔹 Minishell lexer
+
+* Goal: **parse a raw shell input string** like:
+
+  ```
+  cat infile | grep "foo bar" | wc -l > outfile
+  ```
+* You don’t get commands split into `argv` for free.
+* The lexer’s job is to:
+
+  * Split by tokens (`|`, `<`, `>`, `>>`, words, quoted strings).
+  * Preserve grouping (`"foo bar"` stays one argument).
+  * Hand those tokens to the parser, which then builds a structure you later execute.
+
+So minishell’s lexer is **about understanding and splitting the input text into meaningful tokens**.
+
+---
+
+### 🔹 The connection
+
+* The **execution engine of minishell** (after parsing) is very much like **pipex bonus**:
+
+  * Loop through commands connected by pipes.
+  * Set up `dup2` redirections.
+  * Use `execve` to run each command.
+* But before you can even get there, minishell needs the **lexer + parser** to *figure out* what the commands and operators are.
+
+---
+
+✅ So you can think of it this way:
+
+* **Pipex bonus** teaches you the execution engine for multiple pipes.
+* **Minishell lexer** teaches you how to break down a raw command line into the `argv` and redirection structure that the execution engine can consume.
+
+---
+
+Would you like me to sketch out how **the output of a lexer in minishell** (a list of tokens like `["cat", "infile", "|", "grep", "foo bar", "|", "wc", "-l", ">", "outfile"]`) maps directly into the **loop structure you already wrote in pipex bonus**? That might make the connection crystal clear.
