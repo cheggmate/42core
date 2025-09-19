@@ -55,3 +55,23 @@ So minishell’s lexer is **about understanding and splitting the input text int
 ---
 
 Would you like me to sketch out how **the output of a lexer in minishell** (a list of tokens like `["cat", "infile", "|", "grep", "foo bar", "|", "wc", "-l", ">", "outfile"]`) maps directly into the **loop structure you already wrote in pipex bonus**? That might make the connection crystal clear.
+
+
+
+-----------------
+
+✅ Notes
+
+Only call add_history for non-empty lines.
+
+write_history() automatically writes all history entries, not just the last one.
+
+For a portable path, use something like:
+
+char *home = getenv("HOME");
+char history_file[512];
+snprintf(history_file, sizeof(history_file), "%s/.minishell_history", home);
+write_history(history_file);
+
+
+This avoids hardcoding /home/username.
