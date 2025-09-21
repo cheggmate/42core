@@ -75,3 +75,55 @@ write_history(history_file);
 
 
 This avoids hardcoding /home/username.
+
+
+===================
+example usage of parsing
+
+void print_ast(t_ast *node, int depth)
+{
+    if (!node) return;
+    for (int i = 0; i < depth; i++) printf("  ");
+
+    switch (node->type)
+    {
+        case NODE_COMMAND:
+            printf("COMMAND:");
+            for (int i = 0; node->argv && node->argv[i]; i++)
+                printf(" %s", node->argv[i]);
+            printf("\n");
+            break;
+        case NODE_PIPE:
+            printf("PIPE\n");
+            break;
+        case NODE_REDIR_OUT:
+            printf("REDIR_OUT -> %s\n", node->filename);
+            break;
+        default:
+            printf("NODE %d\n", node->type);
+    }
+    print_ast(node->left, depth+1);
+    print_ast(node->right, depth+1);
+}
+
+
+
+char *getenv_value(char **env, const char *key)
+{
+    int i;
+    size_t len;
+
+    if (!env || !key)
+        return NULL;
+
+    len = strlen(key);
+    i = 0;
+    while (env[i])
+    {
+        if (strncmp(env[i], key, len) == 0 && env[i][len] == '=')
+            return env[i] + len + 1; // skip "KEY="
+        i++;
+    }
+    return NULL;
+}
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/13 23:51:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/22 00:04:18 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-# include "parser.h"
-# include "executor.h"
-# include "lexer.h"
-# include "builtins.h"
+// # include "parser.h"
+// # include "executor.h"
+// # include "lexer.h"
+// # include "builtins.h"
+// # include "history.h"
 
 # define PROMPT	"minishell$"
 # define BUFFER_SIZE 1024
@@ -38,6 +39,50 @@ typedef struct s_shell
 	int		exit_code;
 	int		running;
 }	t_shell;
+
+typedef struct s_env		// TODO: figure out if this is needed
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
+typedef	enum	e_node_type
+{
+	N_CMD,
+	N_PIPE,
+	N_REDIR_IN,
+	N_REDIR_OUT,
+	N_REDIR_APPEND,
+	N_HEREDOC
+}	t_node_type;
+
+typedef enum	e_token_type
+{
+	T_WORD,				// Command or arg
+	T_PIPE,				// |
+	T_REDIR_IN,			// <
+	T_REDIR_OUT,		// >
+	T_REDIR_APPEND,		// >>
+	T_HEREDOC			// <<
+}	t_token_type;
+
+typedef struct s_token
+{
+	char			*value;
+	t_token_type	type;
+	struct s_token	*next;
+}	t_token;
+
+typedef struct	s_ast // abstract syntax tree
+{
+	t_node_type		type;
+	char			**argv;		// for commands
+	char			*filename;	// for redirections
+	struct s_ast	*left;		// left side of a pipe
+	struct s_ast	*right;		// right side of a pipe
+}	t_ast;
+
 
 void	start_shell(t_shell *shell);
 

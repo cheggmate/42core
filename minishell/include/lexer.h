@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:32:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/20 00:33:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/21 23:48:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,8 @@
 
 # include "minishell.h"
 
-typedef enum	e_token_type
-{
-	T_WORD,				// Command or arg
-	T_PIPE,				// |
-	T_REDIR_IN,			// <
-	T_REDIR_OUT,		// >
-	T_REDIR_APPEND,		// >>
-	T_HEREDOC			// <<
-}	t_token_type;
-
-typedef struct s_token
-{
-	char			*value;
-	t_token_type	type;
-	struct s_token	*next;
-}	t_token;
+typedef enum e_token_type	t_token_type;
+typedef struct s_token		t_token;
 
 t_token			*tokenize_input(const char *input);
 t_token_type	get_op_type(const char *s, size_t *i);
