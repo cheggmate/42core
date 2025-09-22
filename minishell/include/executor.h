@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:33:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:32:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/23 00:22:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 # define EXECUTOR_H
 
 # include "minishell.h"
-
 # include <errno.h>
+# include <fcntl.h>
 
 int	builtin_cd(char **av, t_env **env);
 int	execute_ast(t_ast *root, t_shell *shell);
+int	apply_redirections(t_ast *ast);
+int	redirect_input(t_ast *ast);
+int	redirect_output(t_ast *ast);
+int	redirect_append(t_ast *ast);
+int	redirect_heredoc(const char *limiter);
 
 #endif

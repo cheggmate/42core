@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/22 00:04:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/22 23:07:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ typedef struct	s_ast // abstract syntax tree
 	struct s_ast	*right;		// right side of a pipe
 }	t_ast;
 
-
 void	start_shell(t_shell *shell);
+void	set_signals(void);
+void	sigint_handler(int sig);
+void	sigquit_handler(int sig);
+
 
 #endif

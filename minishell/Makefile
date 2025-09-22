@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/13 23:50:21 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/22 23:08:10 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 FLAG		= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INC) -g
 NAME		= minishell
-REQ_SRC		= $(SRC_DIR)/main.c
+REQ_SRC		= $(SRC_DIR)/main.c, $(SRC_DIR)/signals.c
 HEADER		= minishell.h
 OBJ 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(REQ_SRC))
 

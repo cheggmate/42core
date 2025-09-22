@@ -127,3 +127,69 @@ char *getenv_value(char **env, const char *key)
     return NULL;
 }
 
+
+          ┌─────────────────────┐
+          │  Parsed Command(s)  │
+          │ (from parser/AST)   │
+          └─────────┬──────────┘
+                    │
+                    ▼
+          ┌─────────────────────┐
+          │   executor.c        │
+          │  execute_pipeline   │
+          └─────────┬──────────┘
+                    │
+                    ▼
+          ┌─────────────────────┐
+          │ execute_command(cmd)│
+          └─────────┬──────────┘
+                    │
+        ┌───────────┴───────────┐
+        │                       │
+        ▼                       ▼
+┌───────────────┐        ┌───────────────┐
+│ Built-in cmd? │ Yes →   │ External cmd? │
+└───────┬───────┘        └───────┬───────┘
+        │                        │
+        ▼                        ▼
+Execute directly           fork() → child
+(no fork)                  │
+                            ▼
+                     ┌───────────────┐
+                     │ redirections.c│
+                     │ apply_redirs()│
+                     └───────────────┘
+                            │
+                            ▼
+                      dup2 / open files
+                            │
+                            ▼
+                     execve(cmd, args, env)
+                            │
+                            ▼
+                   parent waits for child
+                            │
+                            ▼
+                      restore fds (if needed)
+                            │
+                            ▼
+                   return status to shell
+
+
+
+=====
+heredoc redirect explanation
+
+pipe(pipe_fd) creates a pipe:
+
+pipe_fd[0] → read end
+
+pipe_fd[1] → write end
+
+We read lines from the user using getline().
+
+Each line is written into the pipe until the limiter is matched.
+
+After finishing, the write end is closed, and the read end is redirected to stdin with dup2.
+
+Any command executed after this reads from the heredoc input as if it were stdin.
