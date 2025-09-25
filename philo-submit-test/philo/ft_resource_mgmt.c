@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 23:43:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:51:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 			if (pthread_mutex_lock(&phil->tb->forks[fork_r]) == 0)
 			{
 				phil->tb->f_owners[fork_r] = n;
-				print_safely(phil);
 				return (0);
 			}
 			put_down_frks(phil, 1);
@@ -51,7 +50,6 @@ static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 		sleep_safely(phil->tb->t_die);
 		fprintf(stderr, "0 put down fork\n");
 		put_down_frks(phil, 1);
-		print_safely(phil);
 		return (-1);
 	}
 	return (0);
@@ -140,8 +138,10 @@ int	put_down_frks(t_phil *phil, int f_picked)
 	}
 	else
 	{
+		fprintf(stderr, "put down forkkk\n");
 		phil->tb->f_owners[f_philo[0]] = -1;
-		pthread_mutex_unlock(&phil->tb->forks[f_philo[0]]);
+		int result = pthread_mutex_unlock(&phil->tb->forks[f_philo[0]]);
+		fprintf(stderr, "result = %d\n", result);
 	}
 	return (0);
 }
