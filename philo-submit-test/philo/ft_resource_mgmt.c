@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 23:40:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:43:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 				return (0);
 			}
 			put_down_frks(phil, 1);
+			print_safely(phil);
 			return (-1);
 		}
 		sleep_safely(phil->tb->t_die);
 		fprintf(stderr, "0 put down fork\n");
 		put_down_frks(phil, 1);
+		print_safely(phil);
 		return (-1);
 	}
 	return (0);
