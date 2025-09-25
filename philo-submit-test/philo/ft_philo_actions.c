@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/18 22:01:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 22:07:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	let_philo_eat(t_phil *phil)
 		print_safely(phil);
 		if (will_die_during_action(phil, 'e'))
 		{
-			sleep_safely(phil->tb->t_die);
+			sleep_safely(get_t(phil->tb, 'd'));
 			put_down_frks(phil);
 			philo_died(phil);
 			return (-1);
 		}
-		sleep_safely(phil->tb->t_eat);
+		sleep_safely(get_t(phil->tb, 'e'));
 		put_down_frks(phil);
 		return (0);
 	}
@@ -54,7 +54,7 @@ int	let_philo_sleep(t_phil *phil)
 		}
 		else
 		{
-			sleep_safely(phil->tb->t_slp);
+			sleep_safely(get_t(phil->tb, 's'));
 			return (1);
 		}
 	}
@@ -71,7 +71,7 @@ int	let_philo_think(t_phil *phil)
 		print_safely(phil);
 		if (will_die_during_action(phil, 't'))
 		{
-			sleep_safely(phil->tb->t_die - get_time_since_ate(phil));
+			sleep_safely(get_t(phil->tb, 'd') - get_time_since_ate(phil));
 			philo_died(phil);
 			return (-1);
 		}
