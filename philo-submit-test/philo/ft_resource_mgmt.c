@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 23:29:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:40:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	put_down_frks(t_phil *phil, int f_picked)
 	// i = -1;
 	f_philo[0] = phil->n;
 	calc_fork_r(phil, &f_philo[1], phil->n);
+	fprintf(stderr, "f_picked = %d\n", f_picked);
 	if (f_picked == 0)
 		return (0);
 	// if (phil->n != phil->tb->p_total - 1)
