@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 22:13:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 22:14:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	init_forks(t_tab **tab)
 	int	i;
 
 	i = -1;
-	(*tab)->forks = ft_calloc(get_ptotal(tab), sizeof(pthread_mutex_t));
-	(*tab)->f_owners = ft_calloc(get_ptotal(tab), sizeof(int));
+	(*tab)->forks = ft_calloc(get_ptotal(*tab), sizeof(pthread_mutex_t));
+	(*tab)->f_owners = ft_calloc(get_ptotal(*tab), sizeof(int));
 	if (!(*tab)->forks || !(*tab)->f_owners)
 	{
 		free((*tab)->forks);
