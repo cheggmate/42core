@@ -20,6 +20,7 @@ void get_next_line(int fd, char *x) {
     int k = 0;
     int r;
     int x_len = strlen(x);
+
     if (fd < 0 || BUFFER_SIZE <= 0)
         return;
 
@@ -31,11 +32,13 @@ void get_next_line(int fd, char *x) {
         k += j;
         s[k] = '\0';
 
-        char *newline_pos = strchr(s, '\n');    // Find the first newline in the buffer
+        // Find the first newline in the buffer
+        char *newline_pos = strchr(s, '\n');
         if (newline_pos) {
             int line_len = newline_pos - s;  // Length of the line before the newline
             for (r = 0; r < line_len - x_len + 1; r++) {
-                if (s[r] == x[0] && chk_str(&s[r], x, x_len) == 0) {    // Try to match the pattern 'x' in the line
+                // Try to match the pattern 'x' in the line
+                if (s[r] == x[0] && chk_str(&s[r], x, x_len) == 0) {
                     // Replace matched part with asterisks
                     for (int a = 0; a < x_len; a++) {
                         s[r + a] = '*';
@@ -43,9 +46,11 @@ void get_next_line(int fd, char *x) {
                 }
             }
 
-            write(1, s, line_len);   // Print the modified line
+            // Print the modified line
+            write(1, s, line_len);
 			write(1, "\n", 1);
-            memmove(s, s + line_len + 1, k - line_len - 1); // Shift the rest of the string to remove the processed line
+            // Shift the rest of the string to remove the processed line
+            memmove(s, s + line_len + 1, k - line_len - 1);
             k -= (line_len + 1);  // Update the buffer size after the shift
         }
     }
