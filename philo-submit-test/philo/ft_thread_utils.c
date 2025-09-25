@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_thread_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:50:38 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 22:09:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/24 21:41:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	create_threads(t_tab *tab)
 	i = -1;
 	if (!tab)
 		return (-1);
-	num = get_ptotal(tab);
+	num = tab->p_total;
 	if (pthread_create(&tab->threads[num], NULL, monitoring, tab) != 0)
 	{
 		pthread_detach(tab->threads[num]);
@@ -45,10 +45,10 @@ int	join_threads(t_tab *tab)
 	int	result;
 
 	i = -1;
-	result = pthread_join(tab->threads[get_ptotal(tab)], NULL);
+	result = pthread_join(tab->threads[tab->p_total], NULL);
 	if (result != 0)
 		return (-1);
-	while (++i < get_ptotal(tab))
+	while (++i < tab->p_total)
 	{
 		result = pthread_join(tab->threads[i], NULL);
 		if (result != 0)

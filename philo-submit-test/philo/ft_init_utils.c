@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:55:34 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 22:13:24 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/17 20:14:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static int	init_forks(t_tab **tab)
 	int	i;
 
 	i = -1;
-	(*tab)->forks = ft_calloc(get_ptotal(tab), sizeof(pthread_mutex_t));
-	(*tab)->f_owners = ft_calloc(get_ptotal(tab), sizeof(int));
+	(*tab)->forks = ft_calloc((*tab)->p_total, sizeof(pthread_mutex_t));
+	(*tab)->f_owners = ft_calloc((*tab)->p_total, sizeof(int));
 	if (!(*tab)->forks || !(*tab)->f_owners)
 	{
 		free((*tab)->forks);
@@ -83,7 +83,6 @@ int	init_tab(t_tab **tab, int argc, char **argv)
 	(*tab)->threads = (pthread_t *)ft_calloc((*tab)->p_total + 1,
 			sizeof(pthread_t));
 	pthread_mutex_init(&(*tab)->start, NULL);
-	pthread_mutex_init(&(*tab)->t_lock, NULL);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 22:00:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/17 19:50:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_tab
 	int				*f_owners;
 	pthread_mutex_t	print;
 	t_phil			*phils;
-	pthread_mutex_t	t_lock;
 	pthread_t		*threads;
 	int				fork_inited;
 	int				p_total;
@@ -93,8 +92,5 @@ void		set_start_time(t_tab *tab);
 int			set_stop_flag(t_tab *tab);
 void		sleep_safely(long long dur);
 int			will_die_during_action(t_phil *phil, char action);
-long long	get_t(t_tab *tab, char action);
-int			get_ptotal(t_tab *tab);
-int			get_eat_count(t_tab *tab);
 
 #endif

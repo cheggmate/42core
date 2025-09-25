@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/27 19:18:22 by jotong            #+#    #+#              #
-#    Updated: 2025/09/25 21:26:57 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/17 20:40:00 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME			= philo
 REQ_SRC			= ft_philo.c ft_mem_utils.c ft_thread_utils.c ft_std_utils.c \
 				ft_init_utils.c ft_resource_mgmt.c ft_philo_actions.c  \
 				ft_monitoring.c ft_thread_destroy_utils.c ft_time.c \
-				ft_check_utils.c ft_state_set_utils.c ft_get_times.c
+				ft_check_utils.c ft_state_set_utils.c
 HEADER			= philo.h
 OBJ 			= $(REQ_SRC:.c=.o)
 
