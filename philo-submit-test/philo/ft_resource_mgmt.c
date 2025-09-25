@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 23:25:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:29:45 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,26 @@ static int	pick_forks_odd(t_phil *phil, int fork_r, int n)
 
 static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 {
-	fprintf(stderr, "entered pick forks even\n");
 	if (pthread_mutex_lock(&phil->tb->forks[n]) == 0)
 	{
 		phil->tb->f_owners[n] = n;
 		set_phil_state(phil, 'f');
 		print_safely(phil);
-		if (phil->tb->p_total != 1
-			&& pthread_mutex_lock(&phil->tb->forks[fork_r]) == 0)
+		if (phil->tb->p_total != 1)
 		{
-			phil->tb->f_owners[fork_r] = n;
-			print_safely(phil);
-		}
-		else
-			put_down_frks(phil, 1);
-		if (phil->tb->p_total == 1)
-		{
-			sleep_safely(phil->tb->t_die);
-			fprintf(stderr, "0 put down fork\n");
+			if (pthread_mutex_lock(&phil->tb->forks[fork_r]) == 0)
+			{
+				phil->tb->f_owners[fork_r] = n;
+				print_safely(phil);
+				return (0);
+			}
 			put_down_frks(phil, 1);
 			return (-1);
 		}
+		sleep_safely(phil->tb->t_die);
+		fprintf(stderr, "0 put down fork\n");
+		put_down_frks(phil, 1);
+		return (-1);
 	}
 	return (0);
 }
