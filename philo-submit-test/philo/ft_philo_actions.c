@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 22:27:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/25 23:55:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:58:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	let_philo_eat(t_phil *phil)
 		if (pick_up_frks(phil) == -1)
 		{
 			// put_down_frks(phil);
-			fprintf(stderr, "0 case\n");
 			philo_died(phil);
 			return (-1);
 		}
