@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/26 00:08:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/26 00:14:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 			return (-1);
 		}
 		sleep_safely(phil->tb->t_die);
-		fprintf(stderr, "0 put down fork\n");
 		put_down_frks(phil, 1);
 		return (-1);
 	}
@@ -70,28 +69,20 @@ int	pick_up_frks(t_phil *phil)
 {
 	int	n;
 	int	fork_r;
-	int	result;
 
 	n = phil->n;
-	result = 0;
 	calc_fork_r(phil, &fork_r, n);
 	if (check_phil_state(phil, 'd') == 1)
 		return (-1);
 	if (n % 2 == 1)
 	{
-		result = pick_forks_odd(phil, fork_r, n);
-		if (result == -1)
-			return (result);
+		if (pick_forks_odd(phil, fork_r, n) == -1)
+			return (-1);
 	}
 	else
 	{
-		result = pick_forks_even(phil, fork_r, n);
-		fprintf(stderr, "after pick frks even, reuslt = %d\n", result);
-		if (result == -1)
-		{
-			// put_down_frks(phil, 1);
-			return (result);
-		}
+		if (pick_forks_even(phil, fork_r, n) == -1)
+			return (-1);
 	}
 	return (0);
 }
@@ -104,7 +95,6 @@ int	put_down_frks(t_phil *phil, int f_picked)
 	// i = -1;
 	f_philo[0] = phil->n;
 	calc_fork_r(phil, &f_philo[1], phil->n);
-	fprintf(stderr, "f_picked = %d\n", f_picked);
 	if (f_picked == 0)
 		return (0);
 	// if (phil->n != phil->tb->p_total - 1)
@@ -139,10 +129,8 @@ int	put_down_frks(t_phil *phil, int f_picked)
 	}
 	else
 	{
-		fprintf(stderr, "put down forkkk\n");
 		phil->tb->f_owners[f_philo[0]] = -1;
 		int result = pthread_mutex_unlock(&phil->tb->forks[f_philo[0]]);
-		fprintf(stderr, "result = %d\n", result);
 	}
 	return (0);
 }
