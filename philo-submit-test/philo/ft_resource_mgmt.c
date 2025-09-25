@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_resource_mgmt.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/24 11:15:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:15:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	pick_forks_odd(t_phil *phil, int fork_r, int n)
 		print_safely(phil);
 	}
 	else
-		put_down_frks(phil);
+		put_down_frks(phil, 1);
 	return (0);
 }
 
@@ -43,11 +43,11 @@ static int	pick_forks_even(t_phil *phil, int fork_r, int n)
 			print_safely(phil);
 		}
 		else
-			put_down_frks(phil);
+			put_down_frks(phil, 1);
 		if (n == 0 && phil->tb->p_total == 1)
 		{
 			sleep_safely(phil->tb->t_die);
-			put_down_frks(phil);
+			put_down_frks(phil, 1);
 			return (-1);
 		}
 	}
@@ -87,31 +87,57 @@ int	pick_up_frks(t_phil *phil)
 		result = pick_forks_even(phil, fork_r, n);
 		if (result == -1)
 		{
-			put_down_frks(phil);
+			put_down_frks(phil, 1);
 			return (result);
 		}
 	}
 	return (0);
 }
 
-int	put_down_frks(t_phil *phil)
+int	put_down_frks(t_phil *phil, int f_picked)
 {
 	int	f_philo[2];
-	int	i;
+	// int	i;
 
-	i = -1;
+	// i = -1;
 	f_philo[0] = phil->n;
-	if (phil->n != phil->tb->p_total - 1)
-		f_philo[1] = phil->n + 1;
-	else
-		f_philo[1] = 0;
-	while (++i < 2)
+	calc_fork_r(phil, &f_philo[1], phil->n);
+	if (f_picked == 0)
+		return (0);
+	// if (phil->n != phil->tb->p_total - 1)
+	// 	f_philo[1] = phil->n + 1;
+	// else
+	// 	f_philo[1] = 0;
+	// while (++i < 2)
+	// {
+	// 	if (phil->tb->f_owners[f_philo[i]] == phil->n)
+	// 	{
+	// 		phil->tb->f_owners[f_philo[i]] = -1;
+	// 		pthread_mutex_unlock(&phil->tb->forks[f_philo[i]]);
+	// 	}
+	// }
+	if (f_picked == 2)
 	{
-		if (phil->tb->f_owners[f_philo[i]] == phil->n)
+		if (phil->n % 2 == 1)
 		{
-			phil->tb->f_owners[f_philo[i]] = -1;
-			pthread_mutex_unlock(&phil->tb->forks[f_philo[i]]);
+			phil->tb->f_owners[f_philo[0]] = -1;
+			pthread_mutex_unlock(&phil->tb->forks[f_philo[0]]);
 		}
+		else
+		{
+			phil->tb->f_owners[f_philo[1]] = -1;
+			pthread_mutex_unlock(&phil->tb->forks[f_philo[1]]);
+		}
+	}
+	if (phil->n % 2 == 1)
+	{
+		phil->tb->f_owners[f_philo[1]] = -1;
+		pthread_mutex_unlock(&phil->tb->forks[f_philo[1]]);
+	}
+	else
+	{
+		phil->tb->f_owners[f_philo[0]] = -1;
+		pthread_mutex_unlock(&phil->tb->forks[f_philo[0]]);
 	}
 	return (0);
 }

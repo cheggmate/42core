@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 20:09:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/17 19:50:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/25 23:04:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int			let_philo_sleep(t_phil *phil);
 int			let_philo_eat(t_phil *phil);
 void		*monitoring(void *t);
 int			pick_up_frks(t_phil *phil);
-int			put_down_frks(t_phil *phil);
+int			put_down_frks(t_phil *phil, int f_picked);
 void		print_safely(t_phil *phil);
 int			philo_died(t_phil *phil);
 int			set_phil_eat(t_phil *phil, long long new_time);
