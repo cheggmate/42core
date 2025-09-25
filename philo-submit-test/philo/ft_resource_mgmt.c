@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:53:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/26 00:02:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/26 00:08:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ int	pick_up_frks(t_phil *phil)
 	else
 	{
 		result = pick_forks_even(phil, fork_r, n);
-		fprintf(stderr, "after pick frks even\n");
+		fprintf(stderr, "after pick frks even, reuslt = %d\n", result);
 		if (result == -1)
 		{
-			put_down_frks(phil, 1);
+			// put_down_frks(phil, 1);
 			return (result);
 		}
 	}
