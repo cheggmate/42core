@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 23:10:37 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 23:13:52 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ REQ_SRC			:= $(SRC_DIR)/main.c $(SRC_DIR)/signals.c $(PARSER_FILES) \
 HEADER			= minishell.h
 # OBJ 			= $(REQ_SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 OBJ				= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(REQ_SRC))
+
+$(info OBJ = $(OBJ))
 
 # BONUS folders
 BONUS_FOLDER	= bonus
