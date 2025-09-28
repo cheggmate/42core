@@ -6,9 +6,11 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 23:10:37 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 23:12:48 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+$(info OBJ = $(OBJ))
 
 INC				= -Iinclude
 SRC_DIR			= src
