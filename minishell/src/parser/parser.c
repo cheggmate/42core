@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:15:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 22:31:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:38:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_ast	*parse_redirection(t_token **cur, t_ast *ast)
 		n_type = N_REDIR_APPEND;
 	else
 		n_type = N_HEREDOC;
-	redir = new_ast_node(n_type);
+	redir = new_ast(n_type);
 	*cur = (*cur)->next;	// skip operator
 	if (*cur && (*cur)->type == T_WORD)
 	{
@@ -86,7 +86,7 @@ t_ast *parse_pipeline(t_token **cur)
 	{
 		*cur = (*cur)->next;	// skip '|'
 		pipe_node = new_ast_node(N_PIPE);
-		pipe_node->right = parse_token(cur);
+		pipe_node->right = parse_token(*cur);
 		pipe_node->left = left;
 		left = pipe_node;
 	}
