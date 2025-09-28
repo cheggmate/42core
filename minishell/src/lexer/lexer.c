@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:32:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:40:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
+#include "libft.h"
 
 int	is_space(char c)
 {
