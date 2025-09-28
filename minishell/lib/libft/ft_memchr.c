@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 19:40:08 by jotong            #+#    #+#             */
-/*   Updated: 2025/05/23 15:12:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 21:01:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,15 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	count = 0;
 	target = (unsigned char)c;
 	ptr = (const unsigned char *)s;
-	if (n < 0)
-		return (NULL);
-	else
+	while (count < n)
 	{
-		while (count < n)
+		if (*ptr == target)
+			return ((void *)ptr);
+		else
 		{
-			if (*ptr == target)
-				return ((void *)ptr);
-			else
-			{
-				count++;
-				ptr++;
-			}
+			count++;
+			ptr++;
 		}
-		return (NULL);
 	}
+	return (NULL);
 }
