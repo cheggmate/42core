@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 22:09:28 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 22:57:45 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,4 +91,4 @@ fclean: clean
 re: fclean all
 
 # Used to declare targets that are not actual files but command names
-.PHONY: all clean fclean re1
+.PHONY: all clean fclean re
