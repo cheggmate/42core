@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 21:43:04 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 22:09:28 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ REQ_SRC			:= $(SRC_DIR)/main.c $(SRC_DIR)/signals.c $(PARSER_FILES) \
 					$(LEXER_FILES) $(HISTORY_FILES) $(EXECUTOR_FILES) \
 					$(BUILTINS_FILES)
 HEADER			= minishell.h
-OBJ 			= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(REQ_SRC))
+OBJ 			= $(REQ_SRC: $(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # BONUS folders
 BONUS_FOLDER	= bonus
@@ -59,11 +59,9 @@ $(NAME): $(OBJ) $(LIBFT)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
-
 # Compile .c to .o
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(FLAG) -c $< -o $@
 
 # Compile .c to .o
