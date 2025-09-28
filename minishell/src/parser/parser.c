@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:15:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 23:38:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:39:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ t_ast *parse_pipeline(t_token **cur)
 	t_ast	*left;
 	t_ast	*pipe_node;
 
-	left = parse_token(cur);
+	left = parse_token(*cur);
 	while (*cur && (*cur)->type == T_PIPE)
 	{
 		*cur = (*cur)->next;	// skip '|'
-		pipe_node = new_ast_node(N_PIPE);
+		pipe_node = new_ast(N_PIPE);
 		pipe_node->right = parse_token(*cur);
 		pipe_node->left = left;
 		left = pipe_node;
