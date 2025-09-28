@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 16:29:26 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:32:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 21:58:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "libft.h"
 
 t_ast	*new_ast(t_node_type type)
 {
