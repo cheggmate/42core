@@ -6,14 +6,14 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 23:52:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:56:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "libft.h"
 
-char ft_strndup(char *src, size_t num)
+char *ft_strndup(const char *src, size_t num)
 {
 	size_t		len;
 	char		*dup;
