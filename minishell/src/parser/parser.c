@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:15:22 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:32:51 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 22:31:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "libft.h"
 
 t_ast	*parse_token(t_token *tokens)
 {
@@ -26,21 +27,21 @@ t_ast	*parse_token(t_token *tokens)
 	{
 		if (tokens->type == T_WORD)
 		{
-			curr = new_ast(T_WORD);
+			curr = new_ast(N_CMD);
 			curr->argv = realloc(curr->argv, sizeof(char *) * (argc + 2));
 			curr->argv[argc++] = ft_strdup(tokens->value);
 			curr->argv[argc] = NULL;
 		}
 		else if (tokens->type == T_REDIR_OUT)
 		{
-			curr = new_ast(T_REDIR_OUT);
+			curr = new_ast(N_REDIR_OUT);
 			tokens = tokens->next;
 			if(tokens && tokens->type == T_WORD)
 				curr->filename = ft_strdup(tokens->value);
 		}
 		else if (tokens->type == T_PIPE)
 		{
-			curr->right = new_ast(T_PIPE);
+			curr->right = new_ast(N_PIPE);
 			curr = curr->right;
 			argc = 0;
 		}
