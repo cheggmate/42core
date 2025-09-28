@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 23:25:02 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 23:25:35 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,7 +82,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Clean OBJ files
 clean:
-	@rm -f $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean 
 # @rm -f $(OBJ) $(OBJ_BONUS)
 
