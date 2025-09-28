@@ -6,11 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/22 23:30:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 16:56:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "lexer.h"
+#include "history.h"
 
 static int	handle_pid_err(int pid, char **argv, char **envp, t_token *tokens)
 {
@@ -18,7 +20,7 @@ static int	handle_pid_err(int pid, char **argv, char **envp, t_token *tokens)
 	{
 		execve(argv[0], argv, envp);
 		perror("execve");
-		token_free_all(tokens);
+		token_free_all(&tokens);
 		return (-1);
 	}
 	else if (pid < 0)
@@ -64,9 +66,9 @@ int	main(int argc, char **argv, char **envp)
 		if (handle_pid_err(pid, argv, envp, tokens) == -1)
 			exit(1);
 		if (pid > 0)
-			waitpid(pid, status, 0);
+			waitpid(pid, &status, 0);
 		free(line);
-		token_free_all(tokens);
+		token_free_all(&tokens);
 	}
 	return (0);
 }

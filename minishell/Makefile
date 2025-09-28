@@ -6,18 +6,34 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/22 23:08:10 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 16:59:33 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-INC			= -Iinclude
-SRC_DIR		= src
-OBJ_DIR		= obj
-FLAG		= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INC) -g
-NAME		= minishell
-REQ_SRC		= $(SRC_DIR)/main.c, $(SRC_DIR)/signals.c
-HEADER		= minishell.h
-OBJ 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(REQ_SRC))
+INC				= -Iinclude
+SRC_DIR			= src
+PARSER_DIR		= parser
+HISTORY_DIR		= history
+EXECUTOR_DIR	= executor
+LEXER_DIR		= lexer
+BUILTINS_DIR	= builtins
+
+OBJ_DIR			= obj
+FLAG			= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INC) -g
+NAME			= minishell
+
+PARSER_FILES	= $(SRC_DIR)/$(PARSER_DIR)/parser_utils.c $(SRC_DIR)/$(PARSER_DIR)/parser.c
+LEXER_FILES		= $(SRC_DIR)/$(LEXER_DIR)/lexer.c $(SRC_DIR)/$(LEXER_DIR)/tokenizer.c
+BUILTINS_FILES	= $(SRC_DIR)/$(BUILTINS_DIR)/cd.c $(SRC_DIR)/$(BUILTINS_DIR)/echo.c \
+					$(SRC_DIR)/$(BUILTINS_DIR)/env.c
+HISTORY_FILES	= $(SRC_DIR)/$(HISTORY_DIR)/history.c
+EXECUTOR_FILES	= $(SRC_DIR)/$(EXECUTOR_DIR)/executor.c \
+					$(SRC_DIR)/$(EXECUTOR_DIR)/redirections.c
+REQ_SRC			:= $(SRC_DIR)/main.c $(SRC_DIR)/signals.c $(PARSER_FILES) \
+					$(LEXER_FILES) $(HISTORY_FILES) $(EXECUTOR_FILES) \
+					$(BUILTINS_FILES)
+HEADER			= minishell.h
+OBJ 			= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(REQ_SRC))
 
 # BONUS folders
 BONUS_FOLDER	= bonus
@@ -37,7 +53,7 @@ all: $(LIBFT) $(NAME)
 
 # Compile and archive .o files
 $(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(OBJ) $(FLAG) $(LIBFT) -o $(NAME)
+	$(CC) $(OBJ) $(FLAG) $(LIBFT) -lreadline -o $(NAME)
 
 # Libft
 $(LIBFT):
@@ -74,4 +90,4 @@ fclean: clean
 re: fclean all
 
 # Used to declare targets that are not actual files but command names
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re1
