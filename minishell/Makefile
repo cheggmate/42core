@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 23:20:32 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 23:21:48 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 # Compile .c to .o
-$(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(FLAG) -c $< -o $@
 
@@ -82,7 +82,7 @@ $(OBJ_DIR)/%.o:$(SRC_DIR)/%.c
 
 # Clean OBJ files
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean 
 # @rm -f $(OBJ) $(OBJ_BONUS)
 
