@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 21:09:42 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 21:43:04 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ HISTORY_DIR		= history
 EXECUTOR_DIR	= executor
 LEXER_DIR		= lexer
 BUILTINS_DIR	= builtins
+
+# Library folders
+LIBFT_DIR		= lib/libft
+LIBFT			= ${LIBFT_DIR}/libft.a
 
 OBJ_DIR			= obj
 FLAG			= -Wall -Wextra -Werror -I$(LIBFT_DIR) $(INC) -g
@@ -43,10 +47,6 @@ BONUS_FOLDER	= bonus
 # REQ_SRC_S_BONUS	= 
 # HEADER_BONUS	= $(BONUS_FOLDER)/minishell.h
 # OBJ_BONUS		= $(addprefix $(BONUS_FOLDER)/,$(REQ_SRC_S_BONUS:.c=.o))
-
-# Library folders
-LIBFT_DIR		= lib/libft
-LIBFT			= ${LIBFT_FOLDER}/libft.a
 
 # Default target
 all: $(LIBFT) $(NAME)
