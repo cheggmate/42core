@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/11 23:09:18 by jotong            #+#    #+#              #
-#    Updated: 2025/09/28 16:59:33 by jotong           ###   ########.fr        #
+#    Updated: 2025/09/28 21:09:42 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,11 @@ $(NAME): $(OBJ) $(LIBFT)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
 # Compile .c to .o
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@$(CC) $(FLAG) -c $< -o $@
 
 # Compile .c to .o
