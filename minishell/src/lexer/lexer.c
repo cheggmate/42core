@@ -6,12 +6,30 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 23:41:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:52:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "libft.h"
+
+char ft_strndup(char *src, size_t num)
+{
+	size_t		len;
+	char		*dup;
+
+	len = ft_strlen(src) + 1;
+	if (num < len - 1)
+		len = num + 1;
+	dup = (char *)malloc(len + 1);
+	if (!dup)
+		return (NULL);
+	else
+	{
+		ft_memcpy(dup, src, len);
+		return (dup);
+	}
+}
 
 int	is_space(char c)
 {
@@ -77,7 +95,7 @@ t_token *lex_input(const char *s)
 		}
 		if (s[i] == '|' || s[i] == '<' || s[i] == '>')
 		{
-			t = get_operator_type(s, &i);
+			t = get_op_type(s, &i);
 			add_token_back(&tokens, token_new(t, NULL));
 		}
 		else

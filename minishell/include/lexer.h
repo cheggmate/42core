@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:32:58 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:48:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/28 23:52:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef enum e_token_type	t_token_type;
 typedef struct s_token		t_token;
 
+char 			ft_strndup(char *src, size_t num);
 t_token			*tokenize_input(const char *input);
 t_token_type	get_op_type(const char *s, size_t *i);
 void			free_tokens(t_token *tokens);
