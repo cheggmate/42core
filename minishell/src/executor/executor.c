@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/23 00:05:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/29 23:48:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "libft.h"
 
 // focus on functions that run commands, deciding how to execute them, and calling
 // the right low level functions. 
@@ -20,6 +21,41 @@
 // call redirections handling functions before executing the command
 // Wait for child processes and manage exit statuses
 // Optionally, handle signals like SIGINT and SIGQUIT in the executor context
+
+static int is_builtin(t_ast *ast)
+{
+	if (!ast || !ast->argv || !ast->argv[0])
+		return (0);
+	if (ft_strncmp(ast->argv[0], "cd", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "echo", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "env", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "exit", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "export", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "unset", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	if (ft_strncmp(ast->argv[0], "pwd", ft_strlen(ast->argv[0])) == 0)
+		return (1);
+	return (0);
+}
+
+static void	wait_for_all_children(void)
+{
+	pid_t	pid;
+	int		status;
+	
+	while ((pid = wait(&status)) > 0)
+	{
+		if (WIFEXITED(status))
+			printf("Child %d exited with status %d\n", pid, WEXITSTATUS(status));
+		else if (WIFSIGNALED(status))
+			printf("Child %d was killed by signal %d\n", pid, WTERMSIG(status));
+	}
+}
 
 int	execute_ast(t_ast *root, t_shell *shell)
 {
@@ -48,11 +84,11 @@ int	execute_ast(t_ast *root, t_shell *shell)
 				dup2(pipe_fd[1], STDOUT_FILENO);
 				close(pipe_fd[1]);
 			}
-			apply_redirect(ast);	// handle redirections
+			apply_redirections(ast);	// handle redirections
 			if (is_buildin(ast))
 				execute_builtin(ast);
 			else
-				execve(cmd->path, ast->argv, shell->env); // path should be in the first arg, args = second arg, g_env = third arg
+				execve(shell->env, ast->argv, shell->env); // path should be in the first arg, args = second arg, g_env = third arg
 			perror("execve"); // if execve fails
 			exit(1);
 		}
