@@ -198,3 +198,7 @@ Any command executed after this reads from the heredoc input as if it were stdin
 
 28 September: 
 Executor errors, check in utm
+
+
+29 September:
+ft_unset, ft_export, read up.

@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 00:15:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 00:17:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "executor.h"
+#include "builtins.h"
 #include "libft.h"
 
 // focus on functions that run commands, deciding how to execute them, and calling
