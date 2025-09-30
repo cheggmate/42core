@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/23 00:22:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 22:32:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ int	redirect_heredoc(const char *limiter)
 	printf("heredoc> ");
 	while (getline(&line, &len, stdin) != -1)
 	{
-		if (line[strlen(line) - 1] == '\n')	// remove newline
-			line[strlen(line) - 1] == '\0';
+		len = strlen(line);
+		if (len > 0 && line[len - 1] == '\n')	// remove newline
+			line[len - 1] = '\0';
 		if (strcmp(line, limiter) == 0)	// stop if delimiter is reached
 			break ;
-		write(pipe_fd[1], line, strlen(line));
-		write(pipe_fd[1], "\n", -1);
+		write(pipe_fd[1], line, len);
+		write(pipe_fd[1], "\n", 1);
 		printf("heredoc> ");
 	}
 	free(line);
@@ -99,7 +100,7 @@ int	apply_redirections(t_ast *ast)
 		else if (ast->type == N_REDIR_APPEND)
 			redirect_append(ast);
 		else if (ast->type == N_HEREDOC)
-			redirect_heredoc(ast);
+			redirect_heredoc(ast->filename);
 		ast = ast->right;
 	}
 	return (0);
