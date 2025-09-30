@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 22:34:16 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 20:51:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 22:03:42 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ int	ft_unset(char **av, t_shell *shell);
 int	ft_export(char **av, t_shell *shell);
 
 int	try_builtin(char **argv, t_shell **shell);
-int	builtin_cd(char **av, t_env **env);
+int	builtin_cd(char **av, char **env);
 
 #endif

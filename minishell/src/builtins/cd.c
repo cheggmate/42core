@@ -6,14 +6,14 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/23 00:23:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 21:58:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
 
-int	builtin_cd(char **av, t_env **env)
+int	builtin_cd(char **av, char **env) //int	builtin_cd(char **av, t_env **env)
 {
 	char	*path;
 	char 	c[4096];	// current working directory

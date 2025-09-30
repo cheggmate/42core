@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 20:55:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 21:59:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	execute_builtin(t_ast *ast, t_shell *shell)
 	cmd = ast->argv[0];
 	arg_len = ft_strlen(cmd);
 	if (ft_strncmp(cmd, "cd", arg_len) == 0)
-		return (builtin_cd(ast->argv, shell));
+		return (builtin_cd(ast->argv, *shell->env));
 	else if (ft_strncmp(cmd, "echo", arg_len) == 0)
 		return (ft_echo(ast->argv, shell));
 	else if (ft_strncmp(cmd, "env", arg_len) == 0)

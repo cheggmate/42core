@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/22 23:07:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 21:54:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_shell
 	int		running;
 }	t_shell;
 
-typedef struct s_env		// TODO: figure out if this is needed
-{
-	char			*key;
-	char			*value;
-	struct s_env	*next;
-}	t_env;
+// typedef struct s_env		// TODO: figure out if this is needed
+// {
+// 	char			*key;
+// 	char			*value;
+// 	struct s_env	*next;
+// }	t_env;
 
 typedef	enum	e_node_type
 {
@@ -83,7 +83,7 @@ typedef struct	s_ast // abstract syntax tree
 	struct s_ast	*right;		// right side of a pipe
 }	t_ast;
 
-void	start_shell(t_shell *shell);
+// void	start_shell(t_shell *shell);
 void	set_signals(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
