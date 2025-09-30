@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:10:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:35:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,48 @@
 #include "lexer.h"
 #include "history.h"
 #include "libft.h"
+
+int	setenv_value(char **envp, const char *key, const char *value)
+{
+	int		i;
+	int		j;
+	size_t	key_len;
+	char	*new_var;
+	char	**new_env;
+
+	key_len = ft_strlen(key);
+	new_var = malloc(key_len + ft_strlen(value) + 2); // KEY=VALUE + '\0'
+	j = -1;
+	if (!new_var)
+		return (1);
+	ft_strlcpy(new_var, key, key_len + ft_strlen(value) + 2);
+	new_var[key_len] = '=';
+	ft_strlcpy(new_var + key_len + 1, value, ft_strlen(value) + 1);
+	i = 0;
+	while ((*envp)[i])
+	{
+		if (ft_strncmp((*envp)[i], key, key_len) == 0 && (*envp)[i][key_len] == '=')
+		{
+			free((*envp)[i]);
+			(*envp)[i] = new_var;
+			return (0);
+		}
+		i++;
+	}
+	new_env = malloc(sizeof(char *) * (i + 2));
+	if (!new_env)
+	{
+		free(new_var);
+		return (1);
+	}
+	while (++j < i)
+		new_env[j] = (*envp)[j];
+	new_env[i] = new_var;
+	new_env[i + 1] = NULL;
+	free(*envp);
+	*envp = new_env;
+	return (0);
+}
 
 char	*getenv_value(char **env, const char *key)
 {
