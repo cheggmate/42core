@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:22:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:38:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	builtin_cd(char **av, char **env) //int	builtin_cd(char **av, t_env **env)
 		fprintf(stderr, "cd: path not set\n");
 		return (1);
 	}
-	prev_pwd = getenv_value(*env, "PWD");
+	prev_pwd = getenv_value(env, "PWD");
 	if (chdir(path) != 0)
 	{
 		perror("cd");
@@ -45,8 +45,8 @@ int	builtin_cd(char **av, char **env) //int	builtin_cd(char **av, t_env **env)
 	}
 	if (getcwd(c, sizeof(c)))
 	{
-		setenv_value(env, "OLDPWD", prev_pwd);
-		setenv_value(env, "PWD", c);
+		setenv_value(&env, "OLDPWD", prev_pwd);
+		setenv_value(&env, "PWD", c);
 	}
 	return (0);
 }
