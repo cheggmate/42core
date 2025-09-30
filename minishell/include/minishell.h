@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:35:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:37:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	set_signals(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 char	*getenv_value(char **env, const char *key);
-int		setenv_value(char **envp, const char *key, const char *value);
+int		setenv_value(char ***envp, const char *key, const char *value);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:35:22 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:37:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "history.h"
 #include "libft.h"
 
-int	setenv_value(char **envp, const char *key, const char *value)
+int	setenv_value(char ***envp, const char *key, const char *value)
 {
 	int		i;
 	int		j;
