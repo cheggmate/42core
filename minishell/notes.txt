@@ -202,3 +202,4 @@ Executor errors, check in utm
 
 29 September:
 ft_unset, ft_export, read up.
+figure out when to use shell and when to use env.

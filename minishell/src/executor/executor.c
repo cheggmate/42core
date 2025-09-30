@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 00:17:28 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 20:55:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,20 +61,26 @@ static void	wait_for_all_children(void)
 int	execute_builtin(t_ast *ast, t_shell *shell)
 {
 	char	*cmd;
+	int		arg_len;
 
 	if (!ast || !ast->argv || !ast->argv[0])
 		return (1);
 	cmd = ast->argv[0];
-	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
+	arg_len = ft_strlen(cmd);
+	if (ft_strncmp(cmd, "cd", arg_len) == 0)
 		return (builtin_cd(ast->argv, shell));
-	else if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd, "echo", arg_len) == 0)
 		return (ft_echo(ast->argv, shell));
-	else if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd, "env", arg_len) == 0)
 		return (ft_env(ast->argv, shell));
-	else if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd, "pwd", arg_len) == 0)
 		return (ft_pwd(ast->argv, shell));
-	else if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
+	else if (ft_strncmp(cmd, "exit", arg_len) == 0)
 		return (ft_exit(ast->argv, shell));
+	else if (ft_strncmp(cmd, "export", arg_len) == 0)
+		return (ft_export(ast->argv, shell));
+	else if (ft_strncmp(cmd, "unset", arg_len) == 0)
+		return(ft_unset(ast->argv, shell));
 	return (1);
 }
 
@@ -107,7 +113,7 @@ int	execute_ast(t_ast *root, t_shell *shell)
 			}
 			apply_redirections(ast);	// handle redirections
 			if (is_builtin(ast))
-				execute_builtin(ast);
+				execute_builtin(ast, shell);
 			else
 				execve(*shell->env, ast->argv, shell->env); // path should be in the first arg, args = second arg, g_env = third arg
 			perror("execve"); // if execve fails
