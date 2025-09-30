@@ -6,13 +6,14 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 22:56:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:08:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
 #include "history.h"
+#include "libft.h"
 
 char	*getenv_value(char **env, const char *key)
 {
