@@ -6,13 +6,31 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 16:56:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 22:56:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
 #include "history.h"
+
+char	*getenv_value(char **env, const char *key)
+{
+	int		i;
+	size_t	len;
+
+	if (!env || !key)
+		return (NULL);
+	len = strlen(key);
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], key, len) == 0 && env[i][len] == '=')
+			return(env[i] + len + 1); // skip "KEY="
+		i++;
+	}
+	return (NULL);
+}
 
 static int	handle_pid_err(int pid, char **argv, char **envp, t_token *tokens)
 {
