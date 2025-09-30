@@ -6,12 +6,13 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 21:58:52 by jotong           ###   ########.fr       */
+/*   Updated: 2025/09/30 22:34:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "builtins.h"
+#include "libft.h"
 
 int	builtin_cd(char **av, char **env) //int	builtin_cd(char **av, t_env **env)
 {
