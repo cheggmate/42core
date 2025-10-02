@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 23:57:57 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:01:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ t_token *lex_input(const char *s, size_t s_len)
 			word = extract_till_next_inv_comma(s, &i);
 			add_token_back(&tokens, token_new(T_WORD, word));
 			free(word);
+			i++;
+			continue;
 		}
 		if (is_space((unsigned char)s[i]))
 		{
