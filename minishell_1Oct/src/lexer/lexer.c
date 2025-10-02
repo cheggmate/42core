@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 21:52:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 21:54:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*extract_word(const char *s, size_t *i)
 	while (s[*i] && !is_space((unsigned char)s[*i]) && s[*i] != '|'
 		&& s[*i] != '<' && s[*i] != '>')
 		(*i)++;
-	return (ft_strndup(s + start, *i - start));
+	return (ft_strndup(s + start, *i - start - 1));
 }
 
 static void	print_tokens(t_token *token)
@@ -82,7 +82,7 @@ static void	print_tokens(t_token *token)
 	printf("starting to parse tokens\n");
 	while (token)
 	{
-		printf("token value = %s\n", token->value);
+		printf("token value = %s (len = %ld)\n", token->value), ft_strlen(token->value);
 		printf("token type: %d\n", token->type);
 		if (token->next)
 			printf("address of next token: %p\n", token->next);
