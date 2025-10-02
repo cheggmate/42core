@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 23:52:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 23:53:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*extract_word(const char *s, size_t *i)
 	return (ft_strndup(s + start, *i - start));
 }
 
-char	*extract_till_next_inv_comma(char *s, size_t *i)
+char	*extract_till_next_inv_comma(const char *s, size_t *i)
 {
 	size_t			start;
 	unsigned char	inv_comma;
