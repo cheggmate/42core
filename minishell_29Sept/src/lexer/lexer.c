@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 23:56:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 22:05:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char *ft_strndup(const char *src, size_t num)
 	size_t		len;
 	char		*dup;
 
-	len = ft_strlen(src) + 1;
+	len = ft_strlen(src);
 	if (num < len - 1)
 		len = num + 1;
 	dup = (char *)malloc(len + 1);
@@ -27,6 +27,7 @@ char *ft_strndup(const char *src, size_t num)
 	else
 	{
 		ft_memcpy(dup, src, len);
+		dup[len] = '\0';
 		return (dup);
 	}
 }
