@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 23:10:30 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 23:52:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,25 @@ t_token_type	get_op_type(const char *s, size_t *i)
 
 char	*extract_word(const char *s, size_t *i)
 {
-	size_t	start = *i;
+	size_t	start;
 
+	start = *i;
 	while (s[*i] && !is_space((unsigned char)s[*i]) && s[*i] != '|'
 		&& s[*i] != '<' && s[*i] != '>')
 		(*i)++;
 	return (ft_strndup(s + start, *i - start));
+}
+
+char	*extract_till_next_inv_comma(char *s, size_t *i)
+{
+	size_t			start;
+	unsigned char	inv_comma;
+
+	start = *i;
+	inv_comma = s[*i];
+	while (s[*i] && s[*i] != inv_comma)
+		(*i)++;
+	return (ft_strndup(s + start + 1, *i - start - 1));
 }
 
 static void	print_tokens(t_token *token)
@@ -107,6 +120,12 @@ t_token *lex_input(const char *s, size_t s_len)
 	tokens = NULL;
 	while (s[i] && i < s_len)
 	{
+		if (s[i] == '"' || s[i] == '\'')
+		{
+			word = extract_till_next_inv_comma(s, &i);
+			add_token_back(&tokens, token_new(T_WORD, word));
+			free(word);
+		}
 		if (is_space((unsigned char)s[i]))
 		{
 			i++;
