@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 21:42:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 21:48:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,12 @@ t_token *lex_input(const char *s, size_t s_len)
 		}
 		else
 		{
+			printf("extracting word\n");
+			printf("i(before): %d\n", i);
 			word = extract_word(&s[i], &i);
 			// printf("word = %s\n", word);
 			add_token_back(&tokens, token_new(T_WORD, word));
+			printf("i(after): %d\n", i);
 			// i += ft_strlen(word);
 			free(word);
 		}
