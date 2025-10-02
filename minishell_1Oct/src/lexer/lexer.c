@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 22:04:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 22:36:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char *ft_strndup(const char *src, size_t num)
 	char		*dup;
 
 	len = ft_strlen(src);
-	if (num < len - 1)
-		len = num + 1;
+	if (len > num)
+		len = num;
 	dup = (char *)malloc(len + 1);
 	if (!dup)
 		return (NULL);
