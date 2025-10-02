@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:38:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:40:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ t_token *lex_input(const char *s, size_t s_len)
 		{
 			t = get_op_type(&s[i], &i);
 			add_token_back(&tokens, token_new(t, NULL));
+			continue ;
 			// i += 1;
 		}
 		else
