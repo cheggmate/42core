@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:50:31 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:56:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ char	*extract_till_next_inv_comma(const char *s, size_t *i)
 	unsigned char	inv_comma;
 
 	inv_comma = s[*i];
-	// if (inv_comma == '(')
-	// 	inv_comma = ')';
 	(*i)++;
 	start = *i;
 	while (s[*i] && s[*i] != inv_comma)
@@ -137,7 +135,7 @@ t_token *lex_input(const char *s)
 		if (is_space((unsigned char)s[i]))
 		{
 			i++;
-			continue ;
+			// continue ;
 		}
 		else if (s[i] == '"' || s[i] == '\'')
 		{
@@ -146,13 +144,13 @@ t_token *lex_input(const char *s)
 			free(word);
 			if (s[i] == '"' || s[i] == '\'')
 				i++;
-			continue;
+			// continue;
 		}
 		else if (s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '(' || s[i] == ')')
 		{
 			t = get_op_type(&s[i], &i);
 			add_token_back(&tokens, token_new(t, NULL));
-			continue ;
+			// continue ;
 			// i += 1;
 		}
 		else
