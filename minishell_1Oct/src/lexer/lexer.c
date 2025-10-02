@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/02 21:54:49 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/02 21:55:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static void	print_tokens(t_token *token)
 	printf("starting to parse tokens\n");
 	while (token)
 	{
-		printf("token value = %s (len = %ld)\n", token->value), ft_strlen(token->value);
+		printf("token value = %s (len = %zu)\n", token->value), ft_strlen(token->value);
 		printf("token type: %d\n", token->type);
 		if (token->next)
 			printf("address of next token: %p\n", token->next);
