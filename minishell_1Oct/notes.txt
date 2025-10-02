@@ -296,3 +296,6 @@ jotong@c2r4s3 ~ % echo '"$arg"'"'$arg'" //test case of expanding the $ within ' 
 jotong@c2r4s3 ~ % 
 
 ==================================================
+
+2 Oct : lexer goes into infinite loop on ')'
+
