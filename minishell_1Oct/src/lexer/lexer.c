@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:46:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:50:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ t_token *lex_input(const char *s)
 			i++;
 			continue ;
 		}
-		if (s[i] == '"' || s[i] == '\'')
+		else if (s[i] == '"' || s[i] == '\'')
 		{
 			word = extract_till_next_inv_comma(s, &i);
 			add_token_back(&tokens, token_new(T_WORD, word));
@@ -147,16 +147,19 @@ t_token *lex_input(const char *s)
 				i++;
 			continue;
 		}
-		if (s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '(' || s[i] == ')')
+		else if (s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '(' || s[i] == ')')
 		{
 			t = get_op_type(&s[i], &i);
 			add_token_back(&tokens, token_new(t, NULL));
 			continue ;
 			// i += 1;
 		}
-		word = extract_word(s, &i);
-		add_token_back(&tokens, token_new(T_WORD, word));
-		free(word);
+		else
+		{
+			word = extract_word(s, &i);
+			add_token_back(&tokens, token_new(T_WORD, word));
+			free(word);
+		}
 	}
 	print_tokens(tokens);	// TODO: remove this later
 	return (tokens);
