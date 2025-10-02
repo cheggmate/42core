@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/01 18:16:47 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:47:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 		history_add(line);
-		tokens = lex_input(line, ft_strlen(line));
+		tokens = lex_input(line);
 		pid = fork();
 		if (handle_pid_err(pid, argv, envp, tokens) == -1)
 			exit(1);

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:45:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:46:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ static void	print_tokens(t_token *token)
 	printf("done parsing and printing tokens\n");
 }
 
-t_token *lex_input(const char *s, size_t s_len)
+t_token *lex_input(const char *s)
 {
 	size_t			i;
 	t_token			*tokens;
