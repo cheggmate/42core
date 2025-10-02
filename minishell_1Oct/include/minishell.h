@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/01 12:35:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:28:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,9 @@ typedef enum	e_token_type
 	T_REDIR_IN,			// <
 	T_REDIR_OUT,		// >
 	T_REDIR_APPEND,		// >>
-	T_HEREDOC			// <<
+	T_HEREDOC,			// <<
+	T_OPEN_BRACKET,		// (
+	T_CLOSE_BRACKET		// )
 }	t_token_type;
 
 typedef struct s_token

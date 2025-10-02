@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:20:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 00:29:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,16 @@ t_token_type	get_op_type(const char *s, size_t *i)
 		(*i)++;
 		return (T_REDIR_OUT);
 	}
+	else if (s[*i] == '(')
+	{
+		(*i)++;
+		return (T_OPEN_BRACKET);
+	}
+	else if (s[*i] == ')')
+	{
+		(*i)++;
+		return (T_CLOSE_BRACKET);
+	}
 	return (T_WORD);
 }
 
@@ -85,8 +95,8 @@ char	*extract_till_next_inv_comma(const char *s, size_t *i)
 	unsigned char	inv_comma;
 
 	inv_comma = s[*i];
-	if (inv_comma == '(')
-		inv_comma = ')';
+	// if (inv_comma == '(')
+	// 	inv_comma = ')';
 	(*i)++;
 	start = *i;
 	while (s[*i] && s[*i] != inv_comma)
@@ -123,7 +133,7 @@ t_token *lex_input(const char *s, size_t s_len)
 	tokens = NULL;
 	while (s[i] && i < s_len)
 	{
-		if (s[i] == '"' || s[i] == '\'' || s[i] == '(')
+		if (s[i] == '"' || s[i] == '\'')
 		{
 			word = extract_till_next_inv_comma(s, &i);
 			add_token_back(&tokens, token_new(T_WORD, word));
@@ -136,7 +146,7 @@ t_token *lex_input(const char *s, size_t s_len)
 			i++;
 			continue ;
 		}
-		if (s[i] == '|' || s[i] == '<' || s[i] == '>')
+		if (s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '(' || s[i] == ')')
 		{
 			t = get_op_type(&s[i], &i);
 			add_token_back(&tokens, token_new(t, NULL));
