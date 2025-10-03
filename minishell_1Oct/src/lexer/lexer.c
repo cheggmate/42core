@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:56:38 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 23:07:36 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_token_type	get_op_type(const char *s, size_t *i)
 	}
 	else if (s[*i] == ')')
 	{
+		printf("detected close bracket \n");
 		(*i)++;
 		return (T_CLOSE_BRACKET);
 	}
@@ -133,10 +134,7 @@ t_token *lex_input(const char *s)
 	{
 		printf("looking at %c\n", s[i]);
 		if (is_space((unsigned char)s[i]))
-		{
 			i++;
-			// continue ;
-		}
 		else if (s[i] == '"' || s[i] == '\'')
 		{
 			word = extract_till_next_inv_comma(s, &i);
@@ -144,7 +142,6 @@ t_token *lex_input(const char *s)
 			free(word);
 			if (s[i] == '"' || s[i] == '\'')
 				i++;
-			// continue;
 		}
 		else if (s[i] == '|' || s[i] == '<' || s[i] == '>' || s[i] == '(' || s[i] == ')')
 		{
