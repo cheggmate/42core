@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 23:07:36 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/03 23:11:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ t_token *lex_input(const char *s)
 	while (s[i])
 	{
 		printf("looking at %c\n", s[i]);
+		if (s[i] == ')')	// TODO: Remove later
+			break ;
 		if (is_space((unsigned char)s[i]))
 			i++;
 		else if (s[i] == '"' || s[i] == '\'')
