@@ -299,3 +299,8 @@ jotong@c2r4s3 ~ %
 
 2 Oct : lexer goes into infinite loop on ')'
 
+
+3 Oct: 
+Resolved The infinite loop for ), but need to check for all test cases
+can you clear / free envp?
+check whether cleanup_shell works (ctrl + D when shell is running)
