@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/08 00:25:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:27:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char 
 	if (is_builtin(a))
 	{
 		execute_builtin(a, shell);
+		printf("after executing builtins\n");
 		return ;
 	}
 	printf("past execute builtin\n");
