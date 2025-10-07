@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/08 00:13:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:14:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char 
 	if (handle_pid_err(pid, argv, envp, tokens) == -1)
 		exit(1);	// Todo: need to update 
 	printf("handle pid error did not return -1\n");
+	printf("pid = %d\n", pid);
 	if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
