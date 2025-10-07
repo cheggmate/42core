@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/07 23:42:04 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:48:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,11 @@ int	main(int argc, char **argv, char **envp)
 		tokens = lex_input(line);
 		pid = fork();
 		if (handle_pid_err(pid, argv, envp, tokens) == -1)
-			exit(1);
+			exit(1);	// Todo: need to update 
+		printf("handle pid error did not return -1\n");
 		if (pid > 0)
 			waitpid(pid, &status, 0);
+		printf("pid more than 0\n");
 		free(line);
 		execute_commands(tokens, &shell);
 		token_free_all(&tokens);
