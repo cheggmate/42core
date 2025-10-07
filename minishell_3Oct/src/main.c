@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/08 00:18:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:22:38 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "executor.h"
 #include "history.h"
+#include "builtins.h"
 #include "libft.h"
 
 int	setenv_value(char ***envp, const char *key, const char *value)
@@ -114,6 +115,10 @@ static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char 
 	
 	printf("execute commands called \n");
 	a = parse_token(tokens);
+	if (is_builtin(a))
+		execute_builtin(a, shell);
+
+	
 	pid = fork();
 	if (handle_pid_err(pid, argv, envp, tokens) == -1)
 		exit(1);	// Todo: need to update 

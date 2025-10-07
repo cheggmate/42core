@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/08 00:12:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:23:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // Wait for child processes and manage exit statuses
 // Optionally, handle signals like SIGINT and SIGQUIT in the executor context
 
-static int is_builtin(t_ast *ast)
+int is_builtin(t_ast *ast)
 {
 	int	av_len;
 	
