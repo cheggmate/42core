@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/01 09:09:26 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:39:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	execute_ast(t_ast *root, t_shell *shell)
 	int		pipe_fd[2];
 	pid_t	pid;
 	
+	printf("execute ast called\n");
 	prev_fd = -1;	// for pipe chaining
 	ast = root;
 	while (ast)

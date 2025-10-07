@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/03 00:47:13 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/07 23:39:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ static void	execute_commands(t_token *tokens, t_shell *shell)
 {
 	t_ast	*a;
 	
+	printf("execute commands called \n");
 	a = parse_token(tokens);
 	execute_ast(a, shell);
 	return ;
