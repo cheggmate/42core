@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/07 23:48:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:13:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,24 @@ static void	init_vars_signals(t_shell *shell, char **envp, int argc,
 	set_signals();
 }
 
-static void	execute_commands(t_token *tokens, t_shell *shell)
+static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv)
 {
 	t_ast	*a;
+	pid_t	pid;
+	int		status;
 	
 	printf("execute commands called \n");
 	a = parse_token(tokens);
-	execute_ast(a, shell);
+	pid = fork();
+	if (handle_pid_err(pid, argv, envp, tokens) == -1)
+		exit(1);	// Todo: need to update 
+	printf("handle pid error did not return -1\n");
+	if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		printf("pid more than 0\n");
+		execute_ast(a, shell);
+	}	
 	return ;
 }
 
@@ -120,16 +131,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	t_token	*tokens;
-	pid_t	pid;
-	int		status;
 	char	*line;
 
-	// __environ;
 	init_vars_signals(&shell, envp, argc, argv);
 	while(1)
 	{
 		line = readline("MS$ ");
-		// printf("line read: %s\n", line);
 		if (!line)					// ctrl-D (EOF)
 		{
 			printf("exit\n");		// remove this to save lines?
@@ -137,15 +144,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		history_add(line);
 		tokens = lex_input(line);
-		pid = fork();
-		if (handle_pid_err(pid, argv, envp, tokens) == -1)
-			exit(1);	// Todo: need to update 
-		printf("handle pid error did not return -1\n");
-		if (pid > 0)
-			waitpid(pid, &status, 0);
-		printf("pid more than 0\n");
+		execute_commands(tokens, &shell, envp, argv);
 		free(line);
-		execute_commands(tokens, &shell);
 		token_free_all(&tokens);
 	}
 	return (0);

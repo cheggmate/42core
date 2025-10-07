@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:21:47 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/07 23:39:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/08 00:12:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	execute_builtin(t_ast *ast, t_shell *shell)
 		return (ft_export(ast->argv, shell));
 	else if (ft_strncmp(cmd, "unset", arg_len) == 0)
 		return(ft_unset(ast->argv, shell));
-	return (1);
+	return (-100);
 }
 
 int	execute_ast(t_ast *root, t_shell *shell)
