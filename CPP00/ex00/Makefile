@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/10 00:55:08 by jotong            #+#    #+#              #
-#    Updated: 2025/10/10 01:11:42 by jotong           ###   ########.fr        #
+#    Updated: 2025/10/12 16:19:09 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,17 @@
 CXX = c++
 
 # Compiler flags
-CXXFLAGS= -std=c++17 -Wall -Wextra -Werror
+CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
 TARGET = megaphone
 
 # Source files
-SRC = megaphone.cpp
+SRC = MegaPhone.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	#$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Default rule
 all : $(TARGET)
@@ -33,4 +33,11 @@ $(TARGET) : $(OBJ)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
 
 clean :
-	rm -f $(OBJ) $(TARGET)
+	@rm -f $(TARGET)
+
+fclean : clean
+	@rm -f $(TARGET)
+
+re : fclean all
+
+.PHONY: all clean fclean re
