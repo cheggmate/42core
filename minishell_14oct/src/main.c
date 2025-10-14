@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/08 00:27:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/14 20:38:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,26 +107,21 @@ static void	init_vars_signals(t_shell *shell, char **envp, int argc,
 	set_signals();
 }
 
-static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv)
+void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv)
 {
 	t_ast	*a;
 	pid_t	pid;
 	int		status;
 	
-	printf("execute commands called \n");
 	a = parse_token(tokens);
 	if (is_builtin(a))
 	{
 		execute_builtin(a, shell);
-		printf("after executing builtins\n");
 		return ;
 	}
-	printf("past execute builtin\n");
 	pid = fork();
 	if (handle_pid_err(pid, argv, envp, tokens) == -1)
 		exit(1);	// Todo: need to update 
-	printf("handle pid error did not return -1\n");
-	printf("pid = %d\n", pid);
 	if (pid == 0)
 	{
 		execute_ast(a, shell);
@@ -135,7 +130,7 @@ static void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char 
 	else if (pid > 0)
 	{
 		waitpid(pid, &status, 0);
-		printf("pid more than 0\n");
+		// printf("pid more than 0\n");
 	}
 	return ;
 }
@@ -157,7 +152,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		history_add(line);
 		tokens = lex_input(line);
-		execute_commands(tokens, &shell, envp, argv);
+		print_tokens(tokens);
+		execute_commands(tokens, &shell, envp, argv);  // TODO: need to add this back later.
 		free(line);
 		token_free_all(&tokens);
 	}
