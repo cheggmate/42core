@@ -6,13 +6,16 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 21:15:24 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:37:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/13 23:56:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "lexer.h"
+#include "parser.h"
+#include "executor.h"
 #include "history.h"
+#include "builtins.h"
 #include "libft.h"
 
 int	setenv_value(char ***envp, const char *key, const char *value)
@@ -104,18 +107,44 @@ static void	init_vars_signals(t_shell *shell, char **envp, int argc,
 	set_signals();
 }
 
+void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv)
+{
+	t_ast	*a;
+	pid_t	pid;
+	int		status;
+	
+	a = parse_token(tokens);
+	if (is_builtin(a))
+	{
+		execute_builtin(a, shell);
+		return ;
+	}
+	pid = fork();
+	if (handle_pid_err(pid, argv, envp, tokens) == -1)
+		exit(1);	// Todo: need to update 
+	if (pid == 0)
+	{
+		execute_ast(a, shell);
+		exit(shell->exit_code);	//TODO might need to properly terminate and free 
+	}
+	else if (pid > 0)
+	{
+		waitpid(pid, &status, 0);
+		// printf("pid more than 0\n");
+	}
+	return ;
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell	shell;
 	t_token	*tokens;
-	pid_t	pid;
-	int		status;
 	char	*line;
 
 	init_vars_signals(&shell, envp, argc, argv);
 	while(1)
 	{
-		line = readline("minishell$ ");
+		line = readline("MS$ ");
 		if (!line)					// ctrl-D (EOF)
 		{
 			printf("exit\n");		// remove this to save lines?
@@ -123,11 +152,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		history_add(line);
 		tokens = lex_input(line);
-		pid = fork();
-		if (handle_pid_err(pid, argv, envp, tokens) == -1)
-			exit(1);
-		if (pid > 0)
-			waitpid(pid, &status, 0);
+		print_tokens(tokens);
+		// execute_commands(tokens, &shell, envp, argv);  // TODO: need to add this back later.
 		free(line);
 		token_free_all(&tokens);
 	}

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/30 23:37:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/13 20:03:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 // # include "builtins.h"
 // # include "history.h"
 
-# define PROMPT	"minishell$"
+# define PROMPT	"MS$"
 # define BUFFER_SIZE 1024
 
 typedef struct s_shell
@@ -64,7 +64,12 @@ typedef enum	e_token_type
 	T_REDIR_IN,			// <
 	T_REDIR_OUT,		// >
 	T_REDIR_APPEND,		// >>
-	T_HEREDOC			// <<
+	T_HEREDOC,			// <<
+	T_OPEN_BRACKET,		// (
+	T_CLOSE_BRACKET,	// )
+	T_AND,
+	T_OR,
+	T_SPACE
 }	t_token_type;
 
 typedef struct s_token
@@ -84,6 +89,8 @@ typedef struct	s_ast // abstract syntax tree
 }	t_ast;
 
 // void	start_shell(t_shell *shell);
+void	cleanup_shell(t_shell *shell);
+void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv);
 void	set_signals(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);

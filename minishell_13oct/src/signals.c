@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/21 16:29:26 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 21:58:31 by jotong           ###   ########.fr       */
+/*   Created: 2025/09/22 22:52:55 by jotong            #+#    #+#             */
+/*   Updated: 2025/10/13 20:09:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "libft.h"
+#include "minishell.h"
+// #include <readline/readline.h>
 
-t_ast	*new_ast(t_node_type type)
+void	sigint_handler(int sig)
 {
-	t_ast *ast;
-
-	ast = ft_calloc(1, sizeof(t_ast));
-	ast->type = type;
-	return (ast);
+	(void)sig;
+	write(1, "\n", 1);
+	// rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-void	free_ast(t_ast *root)
+void	sigquit_handler(int sig)
 {
-	t_ast	*curr;
-	t_ast	*next;
+	(void)sig;
+	// write(1, "\b\b \b\b", 6);
+}
 
-	curr = root;
-	next = curr->right;
-	
-	while (curr)
-	{
-		free(curr->argv);
-		free(curr);
-		curr = next;
-	}
-	root = NULL;
+void	set_signals(void)
+{
+	signal(SIGINT, sigint_handler);		// ctrl-C
+	signal(SIGQUIT, sigquit_handler);	// ctrl-"\"
 }

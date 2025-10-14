@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   shell_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/22 22:52:55 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 17:01:36 by jotong           ###   ########.fr       */
+/*   Created: 2025/10/04 00:15:14 by jotong            #+#    #+#             */
+/*   Updated: 2025/10/04 00:26:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-// #include <readline/readline.h>
 
-void	sigint_handler(int sig)
+void cleanup_shell(t_shell *shell)
 {
-	(void)sig;
-	write(1, "\nminishell$ ", 12);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-}
+	int	i;
 
-void	sigquit_handler(int sig)
-{
-	(void)sig;
-	// write(1, "\b\b \b\b", 6);
-}
-
-void	set_signals(void)
-{
-	signal(SIGINT, sigint_handler);		// ctrl-C
-	signal(SIGQUIT, sigquit_handler);	// ctrl-"\"
+	i = 0;
+	while (shell->env[i])
+	{
+		free(shell->env[i]);
+		i++;
+	}
+	free(shell->env);
+	return ;
 }
