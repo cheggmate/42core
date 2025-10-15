@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:18:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/12 23:57:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/16 00:30:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,37 +20,28 @@
 class Contact
 {
 	private :
-		std::string FirstName;
-		std::string LastName;
-		std::string	NickName;
-		int			PhoneNumber;
-		std::string	DarkestSecret;
-		int			CountContacts;
-		int			CreatedOrder;
+		int			Index = 0;
+		std::string FirstName = "";
+		std::string LastName = "";
+		std::string	NickName = "";
+		int			PhoneNumber = -1;
+		std::string	DarkestSecret = "";
+		int			CountContacts = 0;
+		// int			CreatedOrder;
 	
 	public :
 		//void	getBalance(int	index);
-		void	addContact(const std::string& f, const std::string& l,\
-			const std::string& n, const int& p,\
-			const std::string& d, const int& o)
-		{
-			FirstName = f;
-			LastName = l;
-			NickName = n;
-			PhoneNumber = p;
-			DarkestSecret = d;
-			CreatedOrder = o;
-		};
 		std::string getContactInfo() const {
-			return "First name       : " + FirstName + "\n"
+			return "Index			 : " + std::to_string(PhoneNumber) + "\n"
+				 + "First name       : " + FirstName + "\n"
 				 + "Last name        : " + LastName + "\n"
 				 + "Nickname         : " + NickName + "\n"
 				 + "Phone number     : " + std::to_string(PhoneNumber) + "\n"
 				 + "Darkest secret   : " + DarkestSecret + "\n";
 		};
-		int	getCreatedOrder() const {
-			return CreatedOrder;
-		};
+		// int	getCreatedOrder() const {
+		// 	return CreatedOrder;
+		// };
 		std::string getFirstName() const {
 			return FirstName;
 		}
@@ -87,7 +78,20 @@ class PhoneBook
 
 		// getting properties of a contact
 		std::string getContact(int index);
-
+		void	addContact(void);
+		// void	addContact(void)
+		// {
+			
+		// 	const std::string& f, const std::string& l,\
+		// 	const std::string& n, const int& p,\
+		// 	const std::string& d, const int& o
+		// 	FirstName = f;
+		// 	LastName = l;
+		// 	NickName = n;
+		// 	PhoneNumber = p;
+		// 	DarkestSecret = d;
+		// 	CreatedOrder = o;
+		// };
 		// manipulating contacts in the phonebook
 		// int	addContact(Contact) // TODO: This is not implemented
 };

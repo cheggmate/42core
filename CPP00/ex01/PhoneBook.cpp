@@ -6,24 +6,26 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/12 23:55:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/16 00:25:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-int	command_add()
+int	PhoneBook::addContact(void)
 {
-	std::string	first_name = "";
-	std::string	last_name = "";
-	std::string	nickname = "";
-	std::string darkest_secret = "";
-	int			phone_number = -1;
+	Contact new_contact;
+	
+	// std::string	first_name = "";
+	// std::string	last_name = "";
+	// std::string	nickname = "";
+	// std::string darkest_secret = "";
+	// int			phone_number = -1;
 
 	while (first_name == "")
 	{
 		std::cout << "First name: " << std::endl;
-		std::getline(std::cin, first_name);
+		std::getline(std::cin, new_contact.first_name);
 		std::cout << "First name cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -34,7 +36,7 @@ int	command_add()
 	while (last_name == "")
 	{
 		std::cout << "Last name: " << std::endl;
-		std::getline(std::cin, last_name);
+		std::getline(std::cin, new_contact.last_name);
 		std::cout << "Last name cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -45,7 +47,7 @@ int	command_add()
 	while (nickname == "")
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, nickname);
+		std::getline(std::cin, new_contact.nickname);
 		std::cout << "Nickname cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -53,10 +55,10 @@ int	command_add()
 			return -1;
 		}
 	}
-	while (phone_number == -1)
+	while (phone_number < 0)
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::cin >> phone_number;
+		std::cin >> new_contact.phone_number;
 		std::cout << "Phone Number cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -67,7 +69,7 @@ int	command_add()
 	while (nickname == "")
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, nickname);
+		std::getline(std::cin, new_contact.nickname);
 		std::cout << "Nickname cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -78,7 +80,7 @@ int	command_add()
 	while (darkest_secret == "")
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, darkest_secret);
+		std::getline(std::cin, new_contact.darkest_secret);
 		std::cout << "Darkest secret cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -86,8 +88,17 @@ int	command_add()
 			return -1;
 		}
 	}
-	// add contact (and replace if count exceeds 8)
 	
+	// TODO: add function to:
+	// check count of contacts
+	// if count exceeds 8
+	// get earliest contact and replace.
+	
+	
+	if (insert_contact(first_name, last_name, nickname, phone_number, darkest_secret) == -1)
+	{
+		std::cout << "An error occurred." << std::endl;
+	}
 	return 0;
 }
 
