@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:18:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/16 00:30:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:44:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,28 @@ class Contact
 		int			PhoneNumber = -1;
 		std::string	DarkestSecret = "";
 		int			CountContacts = 0;
-		// int			CreatedOrder;
+		int			CreatedOrder;	// order in which this contact is created
 	
 	public :
+		Contact();
 		//void	getBalance(int	index);
 		std::string getContactInfo() const {
-			return "Index			 : " + std::to_string(PhoneNumber) + "\n"
+			return "Index			 : " + std::to_string(Index) + "\n"
 				 + "First name       : " + FirstName + "\n"
 				 + "Last name        : " + LastName + "\n"
 				 + "Nickname         : " + NickName + "\n"
 				 + "Phone number     : " + std::to_string(PhoneNumber) + "\n"
 				 + "Darkest secret   : " + DarkestSecret + "\n";
 		};
-		// int	getCreatedOrder() const {
-		// 	return CreatedOrder;
-		// };
+		void	setFirstName(const std::string& input);
+		void	setLastName(const std::string& input);
+		void	setNickname(const std::string& input);
+		void	setPhoneNumber(const int& input);
+		void	setDarkestSecret(const std::string& input);
+		int	getCreatedOrder() const {
+			return CreatedOrder;
+		};
+	
 		std::string getFirstName() const {
 			return FirstName;
 		}
@@ -50,50 +57,32 @@ class Contact
 class PhoneBook
 {
 	private:
-		int		CountContacts;
-		int		LastCreatedOrder;
+		// int		CountContacts;
 		Contact ContactList[8];
 		int		CurrentCreatedOrder;
+		int		NextIndex = 0;
 
 	public:
 		// getting properties of the phonebook
-		int	getContactCount()
+		// int	getContactCount()
+		// {
+		// 	return CountContacts;
+		// };
+		int	getNextIndex()
 		{
-			return CountContacts;
-		};
-		int	findOldestContact()
-		{
-			int	index;
-
-			index = 1;
-			LastCreatedOrder = ContactList[0].getCreatedOrder();
-			while (index < 8)
-			{
-				CurrentCreatedOrder = ContactList[index].getCreatedOrder();
-				if (CurrentCreatedOrder < LastCreatedOrder)
-					LastCreatedOrder = CurrentCreatedOrder;
-			}
-			return LastCreatedOrder;
-		};
+			return NextIndex;
+		}
+		int	findOldestContact();
 
 		// getting properties of a contact
 		std::string getContact(int index);
-		void	addContact(void);
-		// void	addContact(void)
-		// {
-			
-		// 	const std::string& f, const std::string& l,\
-		// 	const std::string& n, const int& p,\
-		// 	const std::string& d, const int& o
-		// 	FirstName = f;
-		// 	LastName = l;
-		// 	NickName = n;
-		// 	PhoneNumber = p;
-		// 	DarkestSecret = d;
-		// 	CreatedOrder = o;
+		// void	increaseContactCount(){
+		// 	int	currentContactCount = getContactCount();
+		// 	currentContactCount += 1;
+		// 	const int& currentContactCount;
 		// };
-		// manipulating contacts in the phonebook
-		// int	addContact(Contact) // TODO: This is not implemented
+		void	addContact(void);
+		void	replaceContactAtIndex(int index, Contact new_contact);
 };
 
 #endif

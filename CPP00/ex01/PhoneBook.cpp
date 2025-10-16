@@ -1,105 +1,120 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/16 00:25:34 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/16 23:51:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-int	PhoneBook::addContact(void)
+int	PhoneBook::findOldestContact()
 {
-	Contact new_contact;
-	
-	// std::string	first_name = "";
-	// std::string	last_name = "";
-	// std::string	nickname = "";
-	// std::string darkest_secret = "";
-	// int			phone_number = -1;
+	int	Index;
+	int	LastCreatedOrder;
+	int	CurrentCreatedOrder;
+	int	OldestIndex = 0;
+
+	Index = 1;
+	LastCreatedOrder = ContactList[0].getCreatedOrder();
+	while (Index < 8)
+	{
+		CurrentCreatedOrder = ContactList[Index].getCreatedOrder();
+		if (CurrentCreatedOrder < LastCreatedOrder)
+		{
+			LastCreatedOrder = CurrentCreatedOrder;
+			OldestIndex = Index;
+		}
+		Index++;
+	}
+	return OldestIndex;
+};
+
+void	PhoneBook::replaceContactAtIndex(int index, Contact new_contact)
+{
+	this->ContactList[index] = new_contact;
+	return ;
+}
+
+void	PhoneBook::addContact(void)
+{
+	Contact 	new_contact;
+	std::string	first_name = "";
+	std::string	last_name = "";
+	std::string	nickname = "";
+	std::string darkest_secret = "";
+	int			phone_number = -1;
+	int			index = 0;
+	int			next_index;
 
 	while (first_name == "")
 	{
 		std::cout << "First name: " << std::endl;
-		std::getline(std::cin, new_contact.first_name);
+		std::getline(std::cin, first_name);
 		std::cout << "First name cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
+			return ;
 		}
+		new_contact.setFirstName(first_name);
 	}
 	while (last_name == "")
 	{
 		std::cout << "Last name: " << std::endl;
-		std::getline(std::cin, new_contact.last_name);
+		std::getline(std::cin, last_name);
 		std::cout << "Last name cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
+			return ;
 		}
+		new_contact.setLastName(last_name);
 	}
 	while (nickname == "")
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, new_contact.nickname);
+		std::getline(std::cin, nickname);
 		std::cout << "Nickname cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
+			return ;
 		}
+		new_contact.setNickname(nickname);
 	}
 	while (phone_number < 0)
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::cin >> new_contact.phone_number;
+		std::cin >> phone_number;
 		std::cout << "Phone Number cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
+			return ;
 		}
-	}
-	while (nickname == "")
-	{
-		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, new_contact.nickname);
-		std::cout << "Nickname cannot be empty." << std::endl;
-		if (std::cin.eof())
-		{
-			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
-		}
+		new_contact.setPhoneNumber(phone_number);
 	}
 	while (darkest_secret == "")
 	{
 		std::cout << "Nickname: " << std::endl;
-		std::getline(std::cin, new_contact.darkest_secret);
+		std::getline(std::cin, darkest_secret);
 		std::cout << "Darkest secret cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
-			return -1;
+			return ;
 		}
+		new_contact.setDarkestSecret(darkest_secret);
 	}
-	
-	// TODO: add function to:
-	// check count of contacts
-	// if count exceeds 8
-	// get earliest contact and replace.
-	
-	
-	if (insert_contact(first_name, last_name, nickname, phone_number, darkest_secret) == -1)
-	{
-		std::cout << "An error occurred." << std::endl;
-	}
-	return 0;
+	next_index = this->getNextIndex();
+	this->ContactList[next_index] = new_contact; // Todo: check if this works
+	// Todo: need to increment the next_index in the PhoneBook
+	return ;
 }
 
 std::string PhoneBook::getContact(int i)
@@ -149,8 +164,7 @@ int	main() {
 	}
 	else if (command == "ADD")
 	{
-		if (command_add() == -1)
-			return 1;
+		pb.addContact();
 		return 0;
 	}
 	else if (command == "SEARCH")
