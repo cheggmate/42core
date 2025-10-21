@@ -6,11 +6,11 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/13 23:56:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/20 19:46:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 #include "libft.h"
 
 char *ft_strndup(const char *src, size_t num)

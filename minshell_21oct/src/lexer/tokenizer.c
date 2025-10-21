@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 23:59:23 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/28 23:57:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/15 14:57:13 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "minishell.h"
 #include "libft.h"
 
 t_token	*token_new(t_token_type type, const char *value)

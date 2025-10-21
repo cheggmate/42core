@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/13 20:03:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/21 23:41:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include <limits.h>
-
-// # include "parser.h"
-// # include "executor.h"
-// # include "lexer.h"
-// # include "builtins.h"
-// # include "history.h"
+# include <fcntl.h>
 
 # define PROMPT	"MS$"
 # define BUFFER_SIZE 1024
@@ -39,13 +34,6 @@ typedef struct s_shell
 	int		exit_code;
 	int		running;
 }	t_shell;
-
-// typedef struct s_env		// TODO: figure out if this is needed
-// {
-// 	char			*key;
-// 	char			*value;
-// 	struct s_env	*next;
-// }	t_env;
 
 typedef	enum	e_node_type
 {
@@ -90,11 +78,69 @@ typedef struct	s_ast // abstract syntax tree
 
 // void	start_shell(t_shell *shell);
 void	cleanup_shell(t_shell *shell);
-void	execute_commands(t_token *tokens, t_shell *shell, char **envp, char **argv);
 void	set_signals(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 char	*getenv_value(char **env, const char *key);
 int		setenv_value(char ***envp, const char *key, const char *value);
+
+// lexer module
+char 			*ft_strndup(const char *src, size_t num);
+t_token			*tokenize_input(const char *input);
+t_token_type	get_op_type(const char *s, size_t *i);
+void			free_tokens(t_token *tokens);
+char			*extract_word(const char *s, size_t *i);
+t_token 		*lex_input(const char *s);
+
+t_token			*token_new(t_token_type type, const char *value);
+void			add_token_back(t_token **lst, t_token *new);
+void			token_free(t_token *tok);
+void			token_free_all(t_token **lst);
+void			print_tokens(t_token *token);
+
+int	try_builtin(char **argv, t_shell **shell);
+int	builtin_cd(char **av, char **env);
+
+// history module
+# define HISTORY_FILE "~/.minishell_history"
+
+void	history_init(void);
+void	history_add(const char *line);
+
+//executor module
+int		is_builtin(t_ast *ast);
+int		builtin_cd(char **av, char **env);
+int		execute_ast(t_ast *curr, t_shell *shell);
+int		execute_builtin(t_ast *ast, t_shell *shell);
+int		execute_cmd(t_ast *curr, t_shell *shell);
+int		execute_pipe(t_ast *curr, t_shell *shell);
+int		execute_redir(t_ast *curr, t_shell *shell);
+int		apply_redirections(t_ast *ast);
+int		redirect_input(t_ast *ast);
+int		redirect_output(t_ast *ast);
+int		redirect_append(t_ast *ast);
+int		redirect_heredoc(const char *limiter);
+int		apply_redirection_to_curr_fd(t_ast *curr);
+char	*find_full_path(char **env, char *av);
+
+// builtins module
+int	ft_echo(char **av, t_shell *shell);
+int	ft_cd(char **av, t_shell *shell);
+int	ft_pwd(char **av, t_shell *shell);
+int	ft_env(char **av, t_shell *shell);
+int	ft_exit(char **av, t_shell *shell);
+int	ft_unset(char **av, t_shell *shell);
+int	ft_export(char **av, t_shell *shell);
+int	add_update_env_vars(t_shell *shell, char *av);
+
+int		try_builtin(char **argv, t_shell **shell);
+void	print_ast(t_ast *node, int level);
+
+
+// parser module
+t_ast	*new_ast(t_node_type type);
+t_ast	*parse_token(t_token *tokens);
+void	free_ast(t_ast *root);
+t_ast	*parse_pipeline(t_token **curr);
 
 #endif

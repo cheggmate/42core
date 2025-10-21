@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   history.c                                          :+:      :+:    :+:   */
+/*   builtin-utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/20 00:41:27 by jotong            #+#    #+#             */
-/*   Updated: 2025/09/21 23:32:27 by jotong           ###   ########.fr       */
+/*   Created: 2025/10/21 23:07:01 by jotong            #+#    #+#             */
+/*   Updated: 2025/10/21 23:46:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "history.h"
+#include "minishell.h"
+#include "libft.h"
 
-void	history_init(void)
+int	add_update_env_vars(t_shell *shell, char *av)
 {
-	read_history(HISTORY_FILE);
+	char	*val;
+	char	*key;
+	int		i;
+	int		status;
+	
+	i = 0;
+	status = 0;
+	while (av[i] && av[i] != '=')
+		i++;
+	key = ft_strndup(av, i);
+	val = ft_strdup(&av[i + 1]);
+	if (setenv_value(&shell->env, key, val) != 0)
+		status = 1;
+	free(key);
+	free(val);
+	return (status);
 }
-
-void	history_add(const char *line)
-{
-	if (*line)
-		add_history(line);
-}
-
-// void	history_save(void)
-// {
-// 	write_history(HISTORY_FILE);
-// }
