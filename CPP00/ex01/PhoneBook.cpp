@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/16 23:51:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/25 01:09:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,21 @@
 
 int	PhoneBook::findOldestContact()
 {
-	int	Index;
-	int	LastCreatedOrder;
-	int	CurrentCreatedOrder;
-	int	OldestIndex = 0;
+	int	oldestOrder;
+	int	oldestIndex;
 
-	Index = 1;
-	LastCreatedOrder = ContactList[0].getCreatedOrder();
-	while (Index < 8)
+	oldestIndex = 0;
+	oldestOrder = ContactList[0].getCreatedOrder();
+	for (int i = 1; i < MAX_CONTACTS; ++i)
 	{
-		CurrentCreatedOrder = ContactList[Index].getCreatedOrder();
-		if (CurrentCreatedOrder < LastCreatedOrder)
+		int currentOrder = ContactList[i].getCreatedOrder();
+		if (currentOrder < oldestOrder)
 		{
-			LastCreatedOrder = CurrentCreatedOrder;
-			OldestIndex = Index;
+			oldestOrder = currentOrder;
+			oldestIndex = i;
 		}
-		Index++;
 	}
-	return OldestIndex;
+	return oldestIndex;
 };
 
 void	PhoneBook::replaceContactAtIndex(int index, Contact new_contact)
@@ -47,8 +44,7 @@ void	PhoneBook::addContact(void)
 	std::string	last_name = "";
 	std::string	nickname = "";
 	std::string darkest_secret = "";
-	int			phone_number = -1;
-	int			index = 0;
+	std::string	phone_number = "";
 	int			next_index;
 
 	while (first_name == "")
@@ -89,8 +85,8 @@ void	PhoneBook::addContact(void)
 	}
 	while (phone_number < 0)
 	{
-		std::cout << "Nickname: " << std::endl;
-		std::cin >> phone_number;
+		std::cout << "Phone Number: " << std::endl;
+		std::getline(std::cin, phone_number);
 		std::cout << "Phone Number cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
@@ -101,7 +97,7 @@ void	PhoneBook::addContact(void)
 	}
 	while (darkest_secret == "")
 	{
-		std::cout << "Nickname: " << std::endl;
+		std::cout << "Darkest Secret: " << std::endl;
 		std::getline(std::cin, darkest_secret);
 		std::cout << "Darkest secret cannot be empty." << std::endl;
 		if (std::cin.eof())
@@ -119,7 +115,7 @@ void	PhoneBook::addContact(void)
 
 std::string PhoneBook::getContact(int i)
 {
-	if (i < 0 && i > 7)
+	if (i < 0 || i > 7)
 	{
 		std::cout << "Invalid index, out of range." << std::endl;
 		return "";
@@ -133,9 +129,10 @@ std::string PhoneBook::getContact(int i)
 }
 int	searchCommand(PhoneBook pb)
 {
-	int			curr = pb.getContactCount();
+	int			curr;
 	// std::string	contactInfo
 	
+	curr = pb.getNextIndex();
 	if (curr == 0)
 		{
 			std::cout << "No contacts in the phonebook." << std::endl;

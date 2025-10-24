@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:18:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/16 23:44:44 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/25 01:06:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,39 @@
 # include <string>
 # include <cctype>
 
+# ifndef MAX_CONTACTS
+#  define MAX_CONTACTS 8
+# endif
+
 class Contact
 {
 	private :
-		int			Index = 0;
-		std::string FirstName = "";
-		std::string LastName = "";
-		std::string	NickName = "";
-		int			PhoneNumber = -1;
-		std::string	DarkestSecret = "";
-		int			CountContacts = 0;
+		int			Index; // = 0; // TODO: check if its necessary to init these
+		std::string FirstName; // = "";
+		std::string LastName; //= "";
+		std::string	NickName; // = "";
+		std::string	PhoneNumber; // = -1;
+		std::string	DarkestSecret; // = "";
+		int			CountContacts; // = 0; // TODO: check if this field is needed
 		int			CreatedOrder;	// order in which this contact is created
 	
 	public :
-		Contact();
+		Contact() :
+			FirstName(""),
+			LastName(""),
+			NickName(""),
+			PhoneNumber(""),
+			DarkestSecret(""),
+			CreatedOrder(0)
+		{}
+		
 		//void	getBalance(int	index);
 		std::string getContactInfo() const {
 			return "Index			 : " + std::to_string(Index) + "\n"
 				 + "First name       : " + FirstName + "\n"
 				 + "Last name        : " + LastName + "\n"
 				 + "Nickname         : " + NickName + "\n"
-				 + "Phone number     : " + std::to_string(PhoneNumber) + "\n"
+				 + "Phone number     : " + PhoneNumber + "\n"
 				 + "Darkest secret   : " + DarkestSecret + "\n";
 		};
 		void	setFirstName(const std::string& input);
@@ -48,6 +60,9 @@ class Contact
 		int	getCreatedOrder() const {
 			return CreatedOrder;
 		};
+		void	setCreatedOrder(int order) {
+			CreatedOrder = order;
+		}
 	
 		std::string getFirstName() const {
 			return FirstName;
@@ -60,9 +75,13 @@ class PhoneBook
 		// int		CountContacts;
 		Contact ContactList[8];
 		int		CurrentCreatedOrder;
-		int		NextIndex = 0;
+		int		NextIndex; // = 0;
 
 	public:
+		PhoneBook() :
+			CurrentCreatedOrder(0),
+			NextIndex(0)
+		{}
 		// getting properties of the phonebook
 		// int	getContactCount()
 		// {
@@ -83,6 +102,7 @@ class PhoneBook
 		// };
 		void	addContact(void);
 		void	replaceContactAtIndex(int index, Contact new_contact);
+		void	displayContacts() const;
 };
 
 #endif
