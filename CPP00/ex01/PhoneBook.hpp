@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:18:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/26 17:31:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/26 22:41:07 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ class PhoneBook
 		{
 			return NextIndex;
 		}
-		int	getCreatedOrder()
+		int	getCreatedOrder() const
 		{
 			return CurrentCreatedOrder;
 		}
@@ -152,7 +152,7 @@ class PhoneBook
 			CurrentCreatedOrder++;
 			return ;
 		}
-		void	displayContacts()
+		void	displayContacts() const
 		{
 			int i;
 			int	n_contacts;
@@ -177,7 +177,7 @@ class PhoneBook
 			}
 			return ;
 		}
-		void	displayFullContact(int index)
+		void	displayFullContact(int index) const
 		{
 			std::cout << this->ContactList[index].getContactInfo(1, index);
 			return ;

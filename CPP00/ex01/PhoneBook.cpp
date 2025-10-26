@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/26 17:33:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/26 23:36:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,27 @@ int	PhoneBook::findOldestContact()
 	}
 	return oldestIndex;
 };
+
+int	is_valid_phone_number(std::string phone_number)
+{
+	int	p_len;
+	int	start_i;
+
+	start_i = 0;
+	p_len = phone_number.length();
+	if (p_len == 0)
+		return 0;
+	if (phone_number[0] == '-')
+		return 0;
+	if (phone_number[0] == '+')
+		start_i = 1;
+	for (int i = start_i; i < p_len; i++)
+	{
+		if (!std::isdigit(phone_number[i]) && phone_number[i] != '-')
+			return 0;
+	}
+	return (1);
+}
 
 void	PhoneBook::addContact(void)
 {
@@ -86,7 +107,7 @@ void	PhoneBook::addContact(void)
 			std::cout << "Nickname cannot be empty." << std::endl;
 		}
 	}
-	while (phone_number == "")
+	while (phone_number.empty() || is_valid_phone_number(phone_number) == 0)
 	{
 		std::cout << "Phone Number: " << std::endl;
 		std::getline(std::cin, phone_number);
@@ -99,6 +120,10 @@ void	PhoneBook::addContact(void)
 		if (phone_number.empty())
 		{
 			std::cout << "Phone Number cannot be empty." << std::endl;
+		}
+		else if (is_valid_phone_number(phone_number) == 0)
+		{
+			std::cout << "Phone Number contains unallowed characters. Please provide a valid number." << std::endl;
 		}
 	}
 	while (darkest_secret == "")
@@ -141,13 +166,13 @@ std::string PhoneBook::getContact(int i)
 	}
 	return ContactList[i].getContactInfo(1, i);
 }
-int	searchCommand(PhoneBook pb)
+int	searchCommand(const PhoneBook *pb)
 {
 	int			curr;
 	int			c_index;
 	int			populated_entries;
 	
-	curr = pb.getCreatedOrder();
+	curr = pb->getCreatedOrder();
 	c_index = -1;
 	if (curr == 0)
 	{
@@ -155,22 +180,37 @@ int	searchCommand(PhoneBook pb)
 		return 0;
 	}
 	else
-		pb.displayContacts();
+		pb->displayContacts();
+	
 	std::cin.clear();
-	std::cout << "Provide the index of contact of interest: " << std::endl;
-	std::cin >> c_index;
+	std::cout << "\nProvide the index of contact of interest: " << std::endl;
+
+	// Handling non-numeric input
+	if (!(std::cin >> c_index))
+	{
+		std::cout << "Invalid input (non-numeric). Exiting.." << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return 1;
+	}
+	
 	if (std::cin.eof())
 	{
 		std::cout << "EOF Detected. Exiting.." << std::endl;
 		return 1;
 	}
+	if (std::cin.peek() == '\n')
+	{
+		std::cin.ignore(1, '\n');
+	}
 	populated_entries = curr > 8 ? 7 : curr - 1;
 	if (c_index < 0 || c_index > populated_entries)
 	{
 		std::cout << "Invalid index provided. Exiting back to menu.." << std::endl;
+		std::cin.clear();
 		return 1;
 	}
-	pb.displayFullContact(c_index);
+	pb->displayFullContact(c_index);
 	return 0;
 }
 
@@ -196,7 +236,7 @@ int	main() {
 		}
 		else if (command == "SEARCH" || command == "search")
 		{
-			if (searchCommand(pb) == -1)
+			if (searchCommand(&pb) == -1)
 			{
 				std::cout << "An error occurred. Aborting.." << std::endl;
 				
