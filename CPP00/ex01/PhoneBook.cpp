@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/16 23:51:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/26 23:36:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,42 @@
 
 int	PhoneBook::findOldestContact()
 {
-	int	Index;
-	int	LastCreatedOrder;
-	int	CurrentCreatedOrder;
-	int	OldestIndex = 0;
+	int	oldestOrder;
+	int	oldestIndex;
 
-	Index = 1;
-	LastCreatedOrder = ContactList[0].getCreatedOrder();
-	while (Index < 8)
+	oldestIndex = 0;
+	oldestOrder = ContactList[0].getCreatedOrder();
+	for (int i = 1; i < MAX_CONTACTS; ++i)
 	{
-		CurrentCreatedOrder = ContactList[Index].getCreatedOrder();
-		if (CurrentCreatedOrder < LastCreatedOrder)
+		int currentOrder = ContactList[i].getCreatedOrder();
+		if (currentOrder < oldestOrder)
 		{
-			LastCreatedOrder = CurrentCreatedOrder;
-			OldestIndex = Index;
+			oldestOrder = currentOrder;
+			oldestIndex = i;
 		}
-		Index++;
 	}
-	return OldestIndex;
+	return oldestIndex;
 };
 
-void	PhoneBook::replaceContactAtIndex(int index, Contact new_contact)
+int	is_valid_phone_number(std::string phone_number)
 {
-	this->ContactList[index] = new_contact;
-	return ;
+	int	p_len;
+	int	start_i;
+
+	start_i = 0;
+	p_len = phone_number.length();
+	if (p_len == 0)
+		return 0;
+	if (phone_number[0] == '-')
+		return 0;
+	if (phone_number[0] == '+')
+		start_i = 1;
+	for (int i = start_i; i < p_len; i++)
+	{
+		if (!std::isdigit(phone_number[i]) && phone_number[i] != '-')
+			return 0;
+	}
+	return (1);
 }
 
 void	PhoneBook::addContact(void)
@@ -47,79 +59,102 @@ void	PhoneBook::addContact(void)
 	std::string	last_name = "";
 	std::string	nickname = "";
 	std::string darkest_secret = "";
-	int			phone_number = -1;
-	int			index = 0;
+	std::string	phone_number = "";
 	int			next_index;
+	int			added_order;
 
 	while (first_name == "")
 	{
 		std::cout << "First name: " << std::endl;
 		std::getline(std::cin, first_name);
-		std::cout << "First name cannot be empty." << std::endl;
+		
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
 			return ;
 		}
-		new_contact.setFirstName(first_name);
+		if (first_name.empty())
+		{
+			std::cout << "First name cannot be empty." << std::endl;
+		}
 	}
 	while (last_name == "")
 	{
 		std::cout << "Last name: " << std::endl;
 		std::getline(std::cin, last_name);
-		std::cout << "Last name cannot be empty." << std::endl;
+		
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
 			return ;
 		}
-		new_contact.setLastName(last_name);
+		if (last_name.empty())
+		{
+			std::cout << "Last name cannot be empty." << std::endl;
+		}
 	}
 	while (nickname == "")
 	{
 		std::cout << "Nickname: " << std::endl;
 		std::getline(std::cin, nickname);
-		std::cout << "Nickname cannot be empty." << std::endl;
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
 			return ;
 		}
-		new_contact.setNickname(nickname);
+		if (nickname.empty())
+		{
+			std::cout << "Nickname cannot be empty." << std::endl;
+		}
 	}
-	while (phone_number < 0)
+	while (phone_number.empty() || is_valid_phone_number(phone_number) == 0)
 	{
-		std::cout << "Nickname: " << std::endl;
-		std::cin >> phone_number;
-		std::cout << "Phone Number cannot be empty." << std::endl;
+		std::cout << "Phone Number: " << std::endl;
+		std::getline(std::cin, phone_number);
+		
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
 			return ;
 		}
-		new_contact.setPhoneNumber(phone_number);
+		if (phone_number.empty())
+		{
+			std::cout << "Phone Number cannot be empty." << std::endl;
+		}
+		else if (is_valid_phone_number(phone_number) == 0)
+		{
+			std::cout << "Phone Number contains unallowed characters. Please provide a valid number." << std::endl;
+		}
 	}
 	while (darkest_secret == "")
 	{
-		std::cout << "Nickname: " << std::endl;
+		std::cout << "Darkest Secret: " << std::endl;
 		std::getline(std::cin, darkest_secret);
-		std::cout << "Darkest secret cannot be empty." << std::endl;
+		
 		if (std::cin.eof())
 		{
 			std::cout << "Detected EOF, exiting." << std::endl;
 			return ;
 		}
-		new_contact.setDarkestSecret(darkest_secret);
+		if (darkest_secret.empty())
+		{
+			std::cout << "Darkest secret cannot be empty." << std::endl;
+		}
 	}
 	next_index = this->getNextIndex();
+	added_order = this->getCreatedOrder();
+	new_contact.addDetails(first_name, last_name, nickname, darkest_secret,
+					phone_number, added_order + 1);
 	this->ContactList[next_index] = new_contact; // Todo: check if this works
-	// Todo: need to increment the next_index in the PhoneBook
+	std::cout << "added contact at position " << next_index <<  std::endl;
+	this->increaseCurrentCreatedOrder();
+	this->increaseNextIndex();
 	return ;
 }
 
 std::string PhoneBook::getContact(int i)
 {
-	if (i < 0 && i > 7)
+	if (i < 0 || i > 7)
 	{
 		std::cout << "Invalid index, out of range." << std::endl;
 		return "";
@@ -129,24 +164,53 @@ std::string PhoneBook::getContact(int i)
 		std::cout << "Empty contact." << std::endl;
 		return "";
 	}
-	return ContactList[i].getContactInfo();
+	return ContactList[i].getContactInfo(1, i);
 }
-int	searchCommand(PhoneBook pb)
+int	searchCommand(const PhoneBook *pb)
 {
-	int			curr = pb.getContactCount();
-	// std::string	contactInfo
+	int			curr;
+	int			c_index;
+	int			populated_entries;
 	
+	curr = pb->getCreatedOrder();
+	c_index = -1;
 	if (curr == 0)
-		{
-			std::cout << "No contacts in the phonebook." << std::endl;
-			return 0;
-		}
-		std::cout << "Contacts: " << std::endl;
-	while (curr < 0)
 	{
-		std::cout << pb.getContact(curr) << std::endl;
-		curr--;
+		std::cout << "No contacts in the phonebook." << std::endl;
+		return 0;
 	}
+	else
+		pb->displayContacts();
+	
+	std::cin.clear();
+	std::cout << "\nProvide the index of contact of interest: " << std::endl;
+
+	// Handling non-numeric input
+	if (!(std::cin >> c_index))
+	{
+		std::cout << "Invalid input (non-numeric). Exiting.." << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		return 1;
+	}
+	
+	if (std::cin.eof())
+	{
+		std::cout << "EOF Detected. Exiting.." << std::endl;
+		return 1;
+	}
+	if (std::cin.peek() == '\n')
+	{
+		std::cin.ignore(1, '\n');
+	}
+	populated_entries = curr > 8 ? 7 : curr - 1;
+	if (c_index < 0 || c_index > populated_entries)
+	{
+		std::cout << "Invalid index provided. Exiting back to menu.." << std::endl;
+		std::cin.clear();
+		return 1;
+	}
+	pb->displayFullContact(c_index);
 	return 0;
 }
 
@@ -155,31 +219,36 @@ int	main() {
 	PhoneBook pb;
 
 	std::cout << "Welcome!" << std::endl;
-	std::cout << "Available commands: ADD | SEARCH | EXIT to begin" << std::endl;
-	std::getline(std::cin, command);
-	if (command == "EXIT")
-	{
-		std::cout << "Goodbye!" << std::endl;
-		return 0;
-	}
-	else if (command == "ADD")
-	{
-		pb.addContact();
-		return 0;
-	}
-	else if (command == "SEARCH")
-	{
-		if (searchCommand(pb) == -1)
+	
+	do {
+		std::cout << "Available commands: ADD | SEARCH | EXIT to begin" << std::endl;
+		std::cin.clear();
+		std::getline(std::cin, command);
+		if (command == "EXIT" || command == "exit")
 		{
-			std::cout << "An error occurred. Aborting.." << std::endl;
-			return 1;
+			std::cout << "Goodbye!" << std::endl;
+			break ;
 		}
-		return 0;
-	}
-	else
-	{
-		std::cout << "Unknown command." << std::endl;
-		return 1;
-	}
+		else if (command == "ADD" || command == "add")
+		{
+			pb.addContact();
+			continue ;
+		}
+		else if (command == "SEARCH" || command == "search")
+		{
+			if (searchCommand(&pb) == -1)
+			{
+				std::cout << "An error occurred. Aborting.." << std::endl;
+				
+			}
+			continue ;
+		}
+		else
+		{
+			// std::cout << "Unknown command." << std::endl;
+			continue ;
+		}
+	} while (command != "EXIT" || command != "exit");
+	
 	return 0;
 }
