@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 16:18:02 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/26 22:41:07 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/26 23:43:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ std::string i_to_s(int i)
 class Contact
 {
 	private :
-		std::string FirstName; // = "";
-		std::string LastName; //= "";
-		std::string	NickName; // = "";
-		std::string	PhoneNumber; // = -1;
-		std::string	DarkestSecret; // = "";
-		int			CreatedOrder;	// order in which this contact is created
+		std::string FirstName;
+		std::string LastName;
+		std::string	NickName;
+		std::string	PhoneNumber;
+		std::string	DarkestSecret;
+		int			CreatedOrder;
 	
 	public :
 		Contact() :
