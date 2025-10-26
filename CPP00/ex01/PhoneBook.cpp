@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/26 00:55:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/26 17:33:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,6 @@ int	PhoneBook::findOldestContact()
 	}
 	return oldestIndex;
 };
-
-void	PhoneBook::displayContacts()
-{
-	int i;
-	int total;
-
-	i = 0;
-	total = this->getCreatedOrder();
-	while (i < 8 && i < total)
-	{
-		std::cout << this->ContactList[i].getContactInfo() << '\n';
-		i++;
-	}
-	return ;
-}
-// void	PhoneBook::replaceContactAtIndex(int index, Contact new_contact)
-// {
-// 	this->ContactList[index] = new_contact;
-// 	return ;
-// }
 
 void	PhoneBook::addContact(void)
 {
@@ -76,7 +56,6 @@ void	PhoneBook::addContact(void)
 		{
 			std::cout << "First name cannot be empty." << std::endl;
 		}
-		// new_contact.setFirstName(first_name);
 	}
 	while (last_name == "")
 	{
@@ -92,7 +71,6 @@ void	PhoneBook::addContact(void)
 		{
 			std::cout << "Last name cannot be empty." << std::endl;
 		}
-		// new_contact.setLastName(last_name);
 	}
 	while (nickname == "")
 	{
@@ -107,7 +85,6 @@ void	PhoneBook::addContact(void)
 		{
 			std::cout << "Nickname cannot be empty." << std::endl;
 		}
-		// new_contact.setNickname(nickname);
 	}
 	while (phone_number == "")
 	{
@@ -123,7 +100,6 @@ void	PhoneBook::addContact(void)
 		{
 			std::cout << "Phone Number cannot be empty." << std::endl;
 		}
-		// new_contact.setPhoneNumber(phone_number);
 	}
 	while (darkest_secret == "")
 	{
@@ -139,11 +115,9 @@ void	PhoneBook::addContact(void)
 		{
 			std::cout << "Darkest secret cannot be empty." << std::endl;
 		}
-		// new_contact.setDarkestSecret(darkest_secret);
 	}
 	next_index = this->getNextIndex();
 	added_order = this->getCreatedOrder();
-	// Todo: need to increment the next_index in the PhoneBook
 	new_contact.addDetails(first_name, last_name, nickname, darkest_secret,
 					phone_number, added_order + 1);
 	this->ContactList[next_index] = new_contact; // Todo: check if this works
@@ -165,25 +139,38 @@ std::string PhoneBook::getContact(int i)
 		std::cout << "Empty contact." << std::endl;
 		return "";
 	}
-	return ContactList[i].getContactInfo();
+	return ContactList[i].getContactInfo(1, i);
 }
 int	searchCommand(PhoneBook pb)
 {
 	int			curr;
-	// std::string	contactInfo
+	int			c_index;
+	int			populated_entries;
 	
-	curr = pb.getNextIndex();
+	curr = pb.getCreatedOrder();
+	c_index = -1;
 	if (curr == 0)
-		{
-			std::cout << "No contacts in the phonebook." << std::endl;
-			return 0;
-		}
-		std::cout << "Contacts: " << std::endl;
-	while (curr < 0)
 	{
-		std::cout << pb.getContact(curr) << std::endl;
-		curr--;
+		std::cout << "No contacts in the phonebook." << std::endl;
+		return 0;
 	}
+	else
+		pb.displayContacts();
+	std::cin.clear();
+	std::cout << "Provide the index of contact of interest: " << std::endl;
+	std::cin >> c_index;
+	if (std::cin.eof())
+	{
+		std::cout << "EOF Detected. Exiting.." << std::endl;
+		return 1;
+	}
+	populated_entries = curr > 8 ? 7 : curr - 1;
+	if (c_index < 0 || c_index > populated_entries)
+	{
+		std::cout << "Invalid index provided. Exiting back to menu.." << std::endl;
+		return 1;
+	}
+	pb.displayFullContact(c_index);
 	return 0;
 }
 
@@ -195,35 +182,33 @@ int	main() {
 	
 	do {
 		std::cout << "Available commands: ADD | SEARCH | EXIT to begin" << std::endl;
+		std::cin.clear();
 		std::getline(std::cin, command);
-		if (command == "EXIT")
+		if (command == "EXIT" || command == "exit")
 		{
 			std::cout << "Goodbye!" << std::endl;
-			continue ;
+			break ;
 		}
-		else if (command == "ADD")
+		else if (command == "ADD" || command == "add")
 		{
 			pb.addContact();
 			continue ;
 		}
-		else if (command == "SEARCH")
+		else if (command == "SEARCH" || command == "search")
 		{
 			if (searchCommand(pb) == -1)
 			{
 				std::cout << "An error occurred. Aborting.." << std::endl;
-				continue ;
+				
 			}
-			else
-			{
-				pb.displayContacts();
-			}
+			continue ;
 		}
 		else
 		{
-			std::cout << "Unknown command." << std::endl;
+			// std::cout << "Unknown command." << std::endl;
 			continue ;
 		}
-	} while (command != "EXIT");
+	} while (command != "EXIT" || command != "exit");
 	
 	return 0;
 }
