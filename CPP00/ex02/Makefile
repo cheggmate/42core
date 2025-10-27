@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/26 23:57:35 by jotong            #+#    #+#              #
-#    Updated: 2025/10/26 23:58:42 by jotong           ###   ########.fr        #
+#    Updated: 2025/10/28 00:01:35 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 TARGET = account
 
 # Source files
-SRC = Account.cpp
+SRC = Account.cpp tests.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
