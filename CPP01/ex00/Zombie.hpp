@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:27:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/29 20:53:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/30 23:37:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
 # include <iostream>
 # include <string>
@@ -38,3 +41,5 @@ class Zombie
 
 Zombie* newZombie (std::string name);
 void randomChump(std::string name);
+
+#endif
