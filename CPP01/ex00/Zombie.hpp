@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:27:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/30 23:37:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/10/31 21:32:09 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ class Zombie
 	public:
 		Zombie() :
 			name("")
-		{}
+		{};
 		void announce (void)
 		{
 			std::cout << this->name << ": BraiiiiiiinnnzzzZ..." << std::endl;
