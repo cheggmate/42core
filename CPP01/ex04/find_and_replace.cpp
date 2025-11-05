@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 23:02:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/02 23:52:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/05 18:17:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,3 @@ void	find_and_replace(std::string file_in, std::string to_find, std::string to_r
 	ofs.close();
 	return ;
 }
-

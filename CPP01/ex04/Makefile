@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/02 22:23:16 by jotong            #+#    #+#              #
-#    Updated: 2025/11/02 23:02:11 by jotong           ###   ########.fr        #
+#    Updated: 2025/11/05 22:17:23 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 TARGET = sed_is_for_losers
 
 # Source files
-SRC = main.cpp tests.cpp find_and_replace.cpp
+SRC = main.cpp find_and_replace.cpp checks.cpp tests.cpp 
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
