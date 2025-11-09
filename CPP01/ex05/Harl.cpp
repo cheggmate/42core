@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 23:03:04 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/09 00:10:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/09 20:32:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void Harl::complain(std::string level)
 	{
 		if (level == levels[i])
 		{
-			std::cout << "detected a match." << std::endl;
+			// std::cout << "detected a match." << std::endl;
 			(this->*functions[i])();
 			found = true;
 			break ;
@@ -48,7 +48,7 @@ void Harl::complain(std::string level)
 	};
 	if (!found)
 	{
-		std::cout << "Unknown level.\n"
+		std::cout << "Unknown input: "
 			<< "The provided level does not match the supported levels."
 			<< std::endl;
 	}
