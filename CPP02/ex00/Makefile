@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 22:38:14 by jotong            #+#    #+#              #
-#    Updated: 2025/11/11 22:38:16 by jotong           ###   ########.fr        #
+#    Updated: 2025/11/13 23:24:11 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,10 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = harlFilter
+TARGET = Fixed
 
 # Source files
-SRC = main.cpp Harl.cpp
+SRC = main.cpp Fixed.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
