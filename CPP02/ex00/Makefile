@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 22:38:14 by jotong            #+#    #+#              #
-#    Updated: 2025/11/13 23:24:11 by jotong           ###   ########.fr        #
+#    Updated: 2025/11/21 00:19:35 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = Fixed
+TARGET = a.out
 
 # Source files
 SRC = main.cpp Fixed.cpp
