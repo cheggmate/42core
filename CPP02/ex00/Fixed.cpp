@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 23:57:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/14 00:35:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/20 22:11:54 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ void	Fixed::setRawBits (int const raw)
 	this->_raw_bits = raw;
 	return ;
 }
-
