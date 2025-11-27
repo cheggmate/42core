@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/28 00:20:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/28 00:35:15 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void parse_and_echo_substrs(char **s, t_shell *shell)
 
     while (substr[j])
     {
+		printf("substr j = %s\n", substr[j]);
 		expanded = handle_dollars_tilde(substr[j], shell);
+		printf("expanded after handling tilde = %s\n", expanded);
         expanded = handle_asterisk(substr[j]); // get wildcard expansion
         // TODO: add handle_dollars_tilde here if needed
 
