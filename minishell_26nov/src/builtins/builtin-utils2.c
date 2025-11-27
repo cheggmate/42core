@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:26:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/28 00:25:41 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/28 00:26:30 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ static size_t	expand_variable(char *chunk, size_t k, char **s_final, t_shell *sh
     }
     
     // If invalid char follows '$', print '$' literally
-    *s_final = ft_strjoin_and_free(*s_final, "$", 1);
+    *s_final = ft_strjoin_and_free(s_final, "$", 1);
     return (k); // Return index *at* the character following '$'
 }
 
