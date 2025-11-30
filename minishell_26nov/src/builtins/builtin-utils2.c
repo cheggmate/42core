@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:26:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 21:02:17 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/30 22:38:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ char	*handle_dollars_tilde(char *chunk, t_shell *shell)
         if (chunk[k] == '$')
         {
             k = expand_variable(chunk, k, &s_final, shell);
+            printf("final before joining with the rest of the string: %s\n", s_final);
             continue;
         }
-        printf("final before joining with the rest of the string: %s\n", s_final);
+        
         s_final = ft_strjoin_char_and_free(&s_final, chunk[k], 1);
-         printf("final after joining with the rest of the string: %s\n", s_final);
+        printf("final after joining with the rest of the string: %s\n", s_final);
         k++;
     }
     if (!s_final)
