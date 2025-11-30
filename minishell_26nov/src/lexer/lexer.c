@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/19 22:10:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 16:20:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/30 16:22:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	parse_quotes(char **word, char *s, t_token **tokens, size_t *i)
 	if (*word)
 		*word = ft_strjoin_and_free(word, extract_till_next_inv_comma(s, i, &q), 0);
 	else
-		*word = extract_till_next_inv_comma(s, i);
+		*word = extract_till_next_inv_comma(s, i, &q);
 	if (!(s[*i] == '\0' || s[*i] == ' '))
 		return (1);
 	add_token_back(tokens, token_new(T_WORD, *word, q));
