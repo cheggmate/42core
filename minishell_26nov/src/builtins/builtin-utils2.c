@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:26:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 20:31:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/30 20:42:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,6 @@ void	free_substr(char **substr)
 	free(substr);
 	substr = NULL;
 }
-
-// int	handle_dollars_tilde(char *substr, t_shell *shell, size_t *k, char **s_final)
-// {
-// 	char	*val;
-
-// 	if (substr[*k] == '~' && substr[*k + 1] == '\0')
-// 	{
-// 		*s_final = ft_strjoin_and_free(s_final, getenv_value(shell->envp, "HOME"), 1); // printf("%s", getenv_value(shell->envp, "HOME"));
-// 		return (1);
-// 	}
-// 	if (substr[*k] != '$')
-// 		return (0);
-// 	if (!substr[*k + 1])
-// 		*s_final = ft_strjoin_and_free(s_final, "$", 1); //  printf("$");
-// 	else
-// 	{
-// 		val = getenv_value(shell->envp, &substr[*k + 1]);
-// 		if (val != NULL)
-// 		{
-// 			*s_final = ft_strjoin_and_free(s_final, val, 1); // printf("%s", val);
-// 			return (1);
-// 		}
-// 	}
-// 	return (1);
-// }
-
-#include "minishell.h"
-#include "libft.h"
 
 static size_t	expand_variable(char *chunk, size_t k, char **s_final, t_shell *shell)
 {
