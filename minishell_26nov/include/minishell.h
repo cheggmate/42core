@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 16:19:01 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/30 16:26:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int				check_invalid_pipes(char *s);
 int				is_space(char c);
 t_token_type	handle_space(const char *s, size_t *i);
 char			*ft_strjoin_and_free(char **new_s, char *substr, int to_free);
-
 char 			*ft_strndup(const char *src, size_t num);
 t_token			*tokenize_input(const char *input);
 t_token_type	get_op_type(const char *s, size_t *i);

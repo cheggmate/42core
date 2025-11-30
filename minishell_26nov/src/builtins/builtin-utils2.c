@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:26:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/28 00:54:58 by jotong           ###   ########.fr       */
+/*   Updated: 2025/11/30 20:20:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static size_t	expand_variable(char *chunk, size_t k, char **s_final, t_shell *sh
     k++;
     if (chunk[k] == '?')
     {
-        val = ft_itoa(shell->exit_code);
+        val = ft_itoa(shell->last_exit_status);
         *s_final = ft_strjoin_and_free(s_final, val, 1);
         return (free(val), k + 1); // Return index after '?'
     }
