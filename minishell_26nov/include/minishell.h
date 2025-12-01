@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 16:26:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/01 23:23:48 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_token
 {
 	char			*value;
 	t_token_type	type;
-	int				single_quotes;
 	struct s_token	*next;
 }	t_token;
 
@@ -110,7 +109,7 @@ void			free_tokens(t_token *tokens);
 char			*extract_word(const char *s, size_t *i);
 t_token 		*lex_input(const char *s);
 int				check_syntax(char *s);
-t_token			*token_new(t_token_type type, const char *value, int s_quotes);
+t_token			*token_new(t_token_type type, const char *value);
 void			add_token_back(t_token **lst, t_token *new);
 void			token_free(t_token *tok);
 void			token_free_all(t_token **lst);
