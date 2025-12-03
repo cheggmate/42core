@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:51:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:55:49 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,33 +76,48 @@ static char	*get_home_dir(char **env)
 /*                           WILDCARD EXPANSION                               */
 /* ************************************************************************** */
 
-// FIXED match_pattern logic
-int	match_pattern(char *str, char *pattern)
+int match_pattern(char *str, char *pattern)
 {
-    // R1: Termination Condition
+    // R1: Termination
     if (!*pattern)
         return (!*str);
-
-    // R2: Bash Dotfile Rule (CRITICAL FIX)
-    // If the file starts with a dot AND the pattern does NOT start with a dot, 
-    // it's a non-match UNLESS the pattern is just '*'.
-    if (*str == '.')
+    
+    // R2: Dotfile and Simple Character Matching
+    // Check if both strings start with a dot, OR if neither starts with a dot.
+    if (*str != *pattern && *pattern != '?')
     {
-        // This blocks matching .gitignore when the pattern is just '*'
-        if (*pattern != '.')
+        // If the pattern starts with a literal char (or '?') AND it doesn't match
+        // the current char in str, then fail, unless pattern is '*'.
+        if (*pattern != '*')
+            return (0);
+    }
+
+    // R2.1: CRITICAL Dotfile Enforcement (Must fail if pattern requires a dot but string doesn't)
+    if (*pattern == '.') 
+    {
+        // If pattern starts with '.' but str does not, fail.
+        if (*str != '.')
             return (0); 
+    } 
+    else if (*str == '.')
+    {
+        // If str starts with '.' but pattern does not, fail (unless pattern is '*').
+        if (*pattern != '*')
+            return (0);
     }
     
     // R3: Wildcard '*'
     if (*pattern == '*')
     {
-        // ... (rest of the recursive '*' logic) ...
         while (*pattern == '*')
             pattern++;
         if (!*pattern)
             return (1);
+        
         while (*str)
         {
+            // IMPORTANT: Recursively call match_pattern with the rest of the pattern (pattern)
+            // against the rest of the string (str).
             if (match_pattern(str, pattern))
                 return (1);
             str++;
