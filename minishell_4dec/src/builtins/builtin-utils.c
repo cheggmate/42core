@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 23:07:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 22:57:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:10:23 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char *handle_asterisk(char *substr)
         }
     }
     closedir(dir);
+    printf("resultttt: %s\n", result);
     if (!result) // no match
         return (substr); // return ft_strdup(substr);
     return (result);
