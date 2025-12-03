@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:45:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:46:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,22 +117,41 @@ static int	match_pattern(char *str, char *pattern)
     return (0);
 }
 
-// CRITICAL FIX: Ensure '.' and '..' are skipped by the loop entirely
-// unless the pattern is EXACTLY them.
-
-while (entry && count < 1023)
+static char **get_matching_files(char *pattern)
 {
-    // Skip '.' and '..' unless the pattern is explicitly targeting them
-    if ((ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0) &&
-        (ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0 && pattern[0] != '.'))
-    {
-        entry = readdir(dir);
-        continue;
-    }
+    DIR             *dir;
+    struct dirent   *entry;
+    char            **matches;
+    int             count;
 
-    if (match_pattern(entry->d_name, pattern))
-        matches[count++] = ft_strdup(entry->d_name);
+    dir = opendir(".");
+    if (!dir)
+        return (NULL);
+    matches = malloc(sizeof(char *) * 1024);
+    count = 0;
     entry = readdir(dir);
+    while (entry && count < 1023)
+	{
+		// Skip '.' and '..' unless the pattern is explicitly targeting them
+		if ((ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0) &&
+			(ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0 && pattern[0] != '.'))
+		{
+			entry = readdir(dir);
+			continue;
+		}
+
+		if (match_pattern(entry->d_name, pattern))
+			matches[count++] = ft_strdup(entry->d_name);
+		entry = readdir(dir);
+	}
+    matches[count] = NULL;
+    closedir(dir);
+    if (count == 0)
+    {
+        free(matches);
+        return (NULL);
+    }
+    return (matches);
 }
 
 static char	*join_matches(char **matches)
