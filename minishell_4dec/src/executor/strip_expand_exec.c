@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:43:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:45:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,87 +76,63 @@ static char	*get_home_dir(char **env)
 /*                           WILDCARD EXPANSION                               */
 /* ************************************************************************** */
 
-static int  match_pattern(char *str, char *pattern)
+// FIXED match_pattern logic
+static int	match_pattern(char *str, char *pattern)
 {
     // R1: Termination Condition
     if (!*pattern)
         return (!*str);
 
-    // R2: Bash Dotfile Rule Enforcement (NEW/FIXED LOGIC)
-    // If str starts with '.'
+    // R2: Bash Dotfile Rule (CRITICAL FIX)
+    // If the file starts with a dot AND the pattern does NOT start with a dot, 
+    // it's a non-match UNLESS the pattern is just '*'.
     if (*str == '.')
     {
-        // ... and pattern does NOT start with '.', failure unless pattern is '*'
-        // Note: The first character of 'str' is checked here.
-        if (*pattern != '.' && *pattern != '*') 
-            return (0);
+        // This blocks matching .gitignore when the pattern is just '*'
+        if (*pattern != '.')
+            return (0); 
     }
     
     // R3: Wildcard '*'
     if (*pattern == '*')
     {
+        // ... (rest of the recursive '*' logic) ...
         while (*pattern == '*')
             pattern++;
-        
         if (!*pattern)
             return (1);
-        
         while (*str)
         {
             if (match_pattern(str, pattern))
                 return (1);
             str++;
         }
-        
-        return (0); // No more string to consume
+        return (0); 
     }
     
     // R4: Single Character Match ('?' or Literal Match)
     if (*str && (*str == *pattern || *pattern == '?'))
         return (match_pattern(str + 1, pattern + 1));
     
-    // R5: No Match
     return (0);
 }
 
-static char **get_matching_files(char *pattern)
-{
-    DIR             *dir;
-    struct dirent   *entry;
-    char            **matches;
-    int             count;
+// CRITICAL FIX: Ensure '.' and '..' are skipped by the loop entirely
+// unless the pattern is EXACTLY them.
 
-    dir = opendir(".");
-    if (!dir)
-        return (NULL);
-    matches = malloc(sizeof(char *) * 1024);
-    count = 0;
-    entry = readdir(dir);
-    while (entry && count < 1023)
+while (entry && count < 1023)
+{
+    // Skip '.' and '..' unless the pattern is explicitly targeting them
+    if ((ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0) &&
+        (ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0 && pattern[0] != '.'))
     {
-        // CRITICAL: Explicitly skip '.' and '..'
-        if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
-        {
-            // Allow matching only if the pattern is exactly "." or ".."
-            if (ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0)
-            {
-                entry = readdir(dir);
-                continue;
-            }
-        }
-        
-        if (match_pattern(entry->d_name, pattern))
-            matches[count++] = ft_strdup(entry->d_name);
         entry = readdir(dir);
+        continue;
     }
-    matches[count] = NULL;
-    closedir(dir);
-    if (count == 0)
-    {
-        free(matches);
-        return (NULL);
-    }
-    return (matches);
+
+    if (match_pattern(entry->d_name, pattern))
+        matches[count++] = ft_strdup(entry->d_name);
+    entry = readdir(dir);
 }
 
 static char	*join_matches(char **matches)
