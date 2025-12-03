@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 23:07:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 22:56:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 22:57:55 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ char *handle_asterisk(char *substr)
         return ft_strdup(substr);
     while ((entry = readdir(dir)))
     {
+        if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
+        {
+            if (ft_strcmp(substr, ".") != 0 && ft_strcmp(substr, ".." != 0))
+                continue;
+        }
         if (wildcard_match(substr, entry->d_name))
         {
             if (count > 0)
@@ -37,11 +42,6 @@ char *handle_asterisk(char *substr)
                 char *tmp = result;
                 result = ft_strjoin(result, " ");
                 free(tmp);
-            }
-			if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
-            {
-                if (ft_strcmp(substr, ".") != 0 && ft_strcmp(substr, ".." != 0))
-                    continue;
             }
             char *tmp = result;
             result = ft_strjoin(result, entry->d_name);
@@ -52,6 +52,6 @@ char *handle_asterisk(char *substr)
     closedir(dir);
     if (!result) // no match
         return (substr); // return ft_strdup(substr);
-    return result;
+    return (result);
 }
 
