@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 23:07:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/30 23:43:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 22:50:26 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ char *handle_asterisk(char *substr)
                 result = ft_strjoin(result, " ");
                 free(tmp);
             }
-			if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
+			if (substr[0] != '.' && ft_strcmp(entry->d_name, ".") == 0)
 				continue;
+            if (substr[1] != '.' && ft_strcmp(entry->d_name, "..") == 0)
+                continue;
             char *tmp = result;
             result = ft_strjoin(result, entry->d_name);
             free(tmp);
