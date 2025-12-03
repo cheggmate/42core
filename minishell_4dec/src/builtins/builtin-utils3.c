@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:34:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/27 23:21:53 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:49:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,26 +124,44 @@ static int	match_last(char *str, char **chunks, int n, int end_star)
 	return (0);
 }
 
-int	wildcard_match(char *pattern, char *str)
-{
-	char	**chunks;
-	int		n;
-	int		pos;
-	int		start_star;
-	int		end_star;
+// int	wildcard_match(char *pattern, char *str)
+// {
+// 	char	**chunks;
+// 	int		n;
+// 	int		pos;
+// 	int		start_star;
+// 	int		end_star;
 
-	start_star = (pattern[0] == '*');
-	end_star = (pattern[ft_strlen(pattern) - 1] == '*');
-	chunks = split_chunks(pattern, &n);
-	if (!chunks)
-		return (0);
-	pos = 0;
-	if (match_first(str, chunks, &pos, start_star))
-		return (free_tab(chunks), 0);
-	if (match_middle(str, chunks, n, &pos))
-		return (free_tab(chunks), 0);
-	if (match_last(str, chunks, n, end_star))
-		return (free_tab(chunks), 0);
-	free_tab(chunks);
-	return (1);
+// 	start_star = (pattern[0] == '*');
+// 	end_star = (pattern[ft_strlen(pattern) - 1] == '*');
+// 	chunks = split_chunks(pattern, &n);
+// 	if (!chunks)
+// 		return (0);
+// 	pos = 0;
+// 	if (match_first(str, chunks, &pos, start_star))
+// 		return (free_tab(chunks), 0);
+// 	if (match_middle(str, chunks, n, &pos))
+// 		return (free_tab(chunks), 0);
+// 	if (match_last(str, chunks, n, end_star))
+// 		return (free_tab(chunks), 0);
+// 	free_tab(chunks);
+// 	return (1);
+// }
+
+int wildcard_match(char *pattern, char *str)
+{
+    // 1. Initial Quick Check (for performance/security)
+    if (!pattern || !str)
+        return (0);
+
+    // 2. ENFORCE BASH DOTFILE RULE (if file starts with '.', pattern must too)
+    if (str[0] == '.' && pattern[0] != '.')
+    {
+        // Exception: unless the pattern is exactly "*"
+        if (ft_strcmp(pattern, "*") != 0) 
+            return (0);
+    }
+    
+    // 3. Execute the robust recursive matching
+    return (match_pattern(str, pattern));
 }
