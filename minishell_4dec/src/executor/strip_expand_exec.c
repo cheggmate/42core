@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:28:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:43:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,31 +76,31 @@ static char	*get_home_dir(char **env)
 /*                           WILDCARD EXPANSION                               */
 /* ************************************************************************** */
 
-static int	match_pattern(char *str, char *pattern)
+static int  match_pattern(char *str, char *pattern)
 {
     // R1: Termination Condition
     if (!*pattern)
         return (!*str);
 
-    // R2: Bash Dotfile Rule
-    // If str starts with '.' but pattern doesn't start with '.' (and pattern is not empty)
-    // AND if pattern is not the magic '*' (which is handled next), return 0 (no match).
-    if (*str == '.' && *pattern != '.' && *pattern != '*')
-        return (0);
-
+    // R2: Bash Dotfile Rule Enforcement (NEW/FIXED LOGIC)
+    // If str starts with '.'
+    if (*str == '.')
+    {
+        // ... and pattern does NOT start with '.', failure unless pattern is '*'
+        // Note: The first character of 'str' is checked here.
+        if (*pattern != '.' && *pattern != '*') 
+            return (0);
+    }
+    
     // R3: Wildcard '*'
     if (*pattern == '*')
     {
-        // Skip consecutive asterisks in the pattern for efficiency
         while (*pattern == '*')
             pattern++;
         
-        // If '*' is the last character, it matches anything remaining in 'str'
         if (!*pattern)
             return (1);
         
-        // Try to match the rest of the pattern (pattern + 1) starting at the current
-        // position in 'str'. If it fails, advance 'str' and try again (consume more characters with '*').
         while (*str)
         {
             if (match_pattern(str, pattern))
@@ -108,8 +108,7 @@ static int	match_pattern(char *str, char *pattern)
             str++;
         }
         
-        // Final attempt: If the rest of the pattern is empty, the match is successful
-        return (0);
+        return (0); // No more string to consume
     }
     
     // R4: Single Character Match ('?' or Literal Match)
@@ -120,35 +119,44 @@ static int	match_pattern(char *str, char *pattern)
     return (0);
 }
 
-static char	**get_matching_files(char *pattern)
+static char **get_matching_files(char *pattern)
 {
-	DIR				*dir;
-	struct dirent	*entry;
-	char			**matches;
-	int				count;
+    DIR             *dir;
+    struct dirent   *entry;
+    char            **matches;
+    int             count;
 
-	dir = opendir(".");
-	if (!dir)
-		return (NULL);
-	matches = malloc(sizeof(char *) * 1024);
-	count = 0;
-	entry = readdir(dir);
-	while (entry && count < 1023)
-	{
-		// if (entry->d_name[0] != '.' && match_pattern(entry->d_name, pattern))
-		// 	matches[count++] = ft_strdup(entry->d_name);
-		if (match_pattern(entry->d_name, pattern))
-			matches[count++] = ft_strdup(entry->d_name);
-		entry = readdir(dir);
-	}
-	matches[count] = NULL;
-	closedir(dir);
-	if (count == 0)
-	{
-		free(matches);
-		return (NULL);
-	}
-	return (matches);
+    dir = opendir(".");
+    if (!dir)
+        return (NULL);
+    matches = malloc(sizeof(char *) * 1024);
+    count = 0;
+    entry = readdir(dir);
+    while (entry && count < 1023)
+    {
+        // CRITICAL: Explicitly skip '.' and '..'
+        if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
+        {
+            // Allow matching only if the pattern is exactly "." or ".."
+            if (ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0)
+            {
+                entry = readdir(dir);
+                continue;
+            }
+        }
+        
+        if (match_pattern(entry->d_name, pattern))
+            matches[count++] = ft_strdup(entry->d_name);
+        entry = readdir(dir);
+    }
+    matches[count] = NULL;
+    closedir(dir);
+    if (count == 0)
+    {
+        free(matches);
+        return (NULL);
+    }
+    return (matches);
 }
 
 static char	*join_matches(char **matches)
@@ -394,11 +402,11 @@ static int	copy_with_expansion(char *s, char *out, char **env)
 		{
 			if (!expand_variable(&s, &out, &i, env))
 				return (0);
-			if (*s == '*')
-			{
-				if (!expand_wildcard(&s, &out, &i))
-					return (0);
-			}
+			// if (*s == '*')
+			// {
+			// 	if (!expand_wildcard(&s, &out, &i))
+			// 		return (0);
+			// }
 		}
 		else if (*s == '*' && !state.in_single && !state.in_double)
 		{
