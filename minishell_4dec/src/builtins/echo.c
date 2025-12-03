@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 18:23:30 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/04 00:05:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void parse_and_echo_substrs(char **s, t_shell *shell)
     while (substr[j])
     {
 		expanded = handle_dollars_tilde(substr[j], shell);
-        expanded = handle_asterisk(expanded);
+        // expanded = handle_asterisk(expanded);
         if (s_final)
         {
             char *tmp = s_final;
@@ -90,7 +90,7 @@ int	ft_echo(char **av, t_shell *shell)
 			return (1); // malloc failure
 
 		// expand $VAR, ~, and wildcard patterns in-place
-		// parse_and_echo_substrs(&expanded, shell);
+		parse_and_echo_substrs(&expanded, shell);
 
 		// append to output string
 		if (output)
