@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:34:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 23:49:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:50:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,37 +28,37 @@ static void	free_tab(char **tab)
 	free(tab);
 }
 
-static char	**split_chunks(char *str, int *count)
-{
-	char	**res;
-	int		i;
-	int		j;
-	int		c;
+// static char	**split_chunks(char *str, int *count)
+// {
+// 	char	**res;
+// 	int		i;
+// 	int		j;
+// 	int		c;
 
-	res = malloc(sizeof(char *) * (ft_strlen(str) + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	c = 0;
-	while (str[i])
-	{
-		while (str[i] == '*')
-			i++;
-		if (!str[i])
-			break ;
-		j = i;
-		while (str[j] && str[j] != '*')
-			j++;
-		res[c] = ft_strndup(str + i, j - i);
-		if (!res[c])
-			return (free_tab(res), NULL);
-		c++;
-		i = j;
-	}
-	res[c] = NULL;
-	*count = c;
-	return (res);
-}
+// 	res = malloc(sizeof(char *) * (ft_strlen(str) + 1));
+// 	if (!res)
+// 		return (NULL);
+// 	i = 0;
+// 	c = 0;
+// 	while (str[i])
+// 	{
+// 		while (str[i] == '*')
+// 			i++;
+// 		if (!str[i])
+// 			break ;
+// 		j = i;
+// 		while (str[j] && str[j] != '*')
+// 			j++;
+// 		res[c] = ft_strndup(str + i, j - i);
+// 		if (!res[c])
+// 			return (free_tab(res), NULL);
+// 		c++;
+// 		i = j;
+// 	}
+// 	res[c] = NULL;
+// 	*count = c;
+// 	return (res);
+// }
 
 static int	find_chunk(char *str, char *chunk, int pos)
 {
@@ -76,53 +76,53 @@ static int	find_chunk(char *str, char *chunk, int pos)
 	return (-1);
 }
 
-static int	match_first(char *str, char **chunks, int *pos, int start_star)
-{
-	size_t	len;
+// static int	match_first(char *str, char **chunks, int *pos, int start_star)
+// {
+// 	size_t	len;
 
-	if (start_star || !chunks[0])
-		return (0);
-	len = ft_strlen(chunks[0]);
-	if (ft_strncmp(str, chunks[0], len) != 0)
-		return (1);
-	*pos = len;
-	return (0);
-}
+// 	if (start_star || !chunks[0])
+// 		return (0);
+// 	len = ft_strlen(chunks[0]);
+// 	if (ft_strncmp(str, chunks[0], len) != 0)
+// 		return (1);
+// 	*pos = len;
+// 	return (0);
+// }
 
-static int	match_middle(char *str, char **chunks, int n, int *pos)
-{
-	int 	i;
-	int		newpos;
+// static int	match_middle(char *str, char **chunks, int n, int *pos)
+// {
+// 	int 	i;
+// 	int		newpos;
 
-	i = 1;
-	while (i < n - 1)
-	{
-		newpos = find_chunk(str, chunks[i], *pos);
-		if (newpos < 0)
-			return (1);
-		*pos = newpos;
-		i++;
-	}
-	return (0);
-}
+// 	i = 1;
+// 	while (i < n - 1)
+// 	{
+// 		newpos = find_chunk(str, chunks[i], *pos);
+// 		if (newpos < 0)
+// 			return (1);
+// 		*pos = newpos;
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
-static int	match_last(char *str, char **chunks, int n, int end_star)
-{
-	char	*last;
-	size_t	l;
-	size_t	sl;
+// static int	match_last(char *str, char **chunks, int n, int end_star)
+// {
+// 	char	*last;
+// 	size_t	l;
+// 	size_t	sl;
 
-	if (end_star || n == 0)
-		return (0);
-	last = chunks[n - 1];
-	l = ft_strlen(last);
-	sl = ft_strlen(str);
-	if (sl < l)
-		return (1);
-	if (ft_strcmp(str + sl - l, last) != 0)
-		return (1);
-	return (0);
-}
+// 	if (end_star || n == 0)
+// 		return (0);
+// 	last = chunks[n - 1];
+// 	l = ft_strlen(last);
+// 	sl = ft_strlen(str);
+// 	if (sl < l)
+// 		return (1);
+// 	if (ft_strcmp(str + sl - l, last) != 0)
+// 		return (1);
+// 	return (0);
+// }
 
 // int	wildcard_match(char *pattern, char *str)
 // {
