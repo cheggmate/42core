@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 18:17:23 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/03 23:51:41 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ int	execute_logical(t_ast *node, t_shell *shell);
 int	setup_redirections(t_ast *node, t_shell *shell);
 
 char	*expand_and_replace(char **s, t_shell *shell);
+int		match_pattern(char *str, char *pattern);
 
 // builtins module
 void	free_substr (char **substr);

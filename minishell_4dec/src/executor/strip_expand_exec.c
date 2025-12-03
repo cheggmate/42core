@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:46:20 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:51:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static char	*get_home_dir(char **env)
 /* ************************************************************************** */
 
 // FIXED match_pattern logic
-static int	match_pattern(char *str, char *pattern)
+int	match_pattern(char *str, char *pattern)
 {
     // R1: Termination Condition
     if (!*pattern)

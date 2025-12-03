@@ -6,27 +6,27 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/26 16:34:29 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 23:50:28 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:52:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-static void	free_tab(char **tab)
-{
-	int	i;
+// static void	free_tab(char **tab)
+// {
+// 	int	i;
 
-	if (!tab)
-		return ;
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
+// 	if (!tab)
+// 		return ;
+// 	i = 0;
+// 	while (tab[i])
+// 	{
+// 		free(tab[i]);
+// 		i++;
+// 	}
+// 	free(tab);
+// }
 
 // static char	**split_chunks(char *str, int *count)
 // {
@@ -60,21 +60,21 @@ static void	free_tab(char **tab)
 // 	return (res);
 // }
 
-static int	find_chunk(char *str, char *chunk, int pos)
-{
-	size_t	len;
-	int		i;
+// static int	find_chunk(char *str, char *chunk, int pos)
+// {
+// 	size_t	len;
+// 	int		i;
 
-	len = ft_strlen(chunk);
-	i = pos;
-	while (str[i])
-	{
-		if (ft_strncmp(str + i, chunk, len) == 0)
-			return (i + len);
-		i++;
-	}
-	return (-1);
-}
+// 	len = ft_strlen(chunk);
+// 	i = pos;
+// 	while (str[i])
+// 	{
+// 		if (ft_strncmp(str + i, chunk, len) == 0)
+// 			return (i + len);
+// 		i++;
+// 	}
+// 	return (-1);
+// }
 
 // static int	match_first(char *str, char **chunks, int *pos, int start_star)
 // {
