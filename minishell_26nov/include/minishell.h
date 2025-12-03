@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/01 23:23:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 11:20:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void			token_free_all(t_token **lst);
 void			print_tokens(t_token *token);
 void			print_token_stream_colored(t_token *tokens);
 char			*extract_till_next_inv_comma(const char *s, size_t *i, int *q);
+char			*skip_till_next_inv_comma(const char *s, size_t *i, int *q);
 
 // history module
 # define HISTORY_FILE "~/.minishell_history"
