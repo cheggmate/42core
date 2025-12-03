@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strip_expand_exec.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 19:02:35 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/03 23:22:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ static int	match_pattern(char *str, char *pattern)
 {
 	if (!*pattern)
 		return (!*str);
+	if (*str == '.' && *pattern != '.' && *pattern != '*')
+        return (0);
 	if (*pattern == '*')
 	{
 		while (*str)
@@ -90,6 +92,14 @@ static int	match_pattern(char *str, char *pattern)
 		}
 		return (match_pattern(str, pattern + 1));
 	}
+	// if (*pattern == '.')
+	// {
+	// 	if (ft_strcmp(pattern, ".") == 0 || ft_strcmp(pattern, "..") == 0)
+    //     {
+    //         if (ft_strcmp(str, ".") != 0 && ft_strcmp(str, ".." != 0))
+    //             continue;
+    //     }
+	// }
 	if (*str && (*str == *pattern || *pattern == '?'))
 		return (match_pattern(str + 1, pattern + 1));
 	return (0);
