@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 23:07:01 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/03 23:10:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:26:16 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char *handle_asterisk(char *substr)
     {
         if (ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0)
         {
-            if (ft_strcmp(substr, ".") != 0 && ft_strcmp(substr, ".." != 0))
+            if (ft_strcmp(substr, ".") != 0 && ft_strcmp(substr, "..") != 0)
                 continue;
         }
         if (wildcard_match(substr, entry->d_name))
