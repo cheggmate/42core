@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:25:03 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:28:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,9 @@ static char	**get_matching_files(char *pattern)
 	entry = readdir(dir);
 	while (entry && count < 1023)
 	{
-		if (entry->d_name[0] != '.' && match_pattern(entry->d_name, pattern))
+		// if (entry->d_name[0] != '.' && match_pattern(entry->d_name, pattern))
+		// 	matches[count++] = ft_strdup(entry->d_name);
+		if (match_pattern(entry->d_name, pattern))
 			matches[count++] = ft_strdup(entry->d_name);
 		entry = readdir(dir);
 	}
