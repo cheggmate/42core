@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/03 23:22:06 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/03 23:25:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,31 +78,46 @@ static char	*get_home_dir(char **env)
 
 static int	match_pattern(char *str, char *pattern)
 {
-	if (!*pattern)
-		return (!*str);
-	if (*str == '.' && *pattern != '.' && *pattern != '*')
+    // R1: Termination Condition
+    if (!*pattern)
+        return (!*str);
+
+    // R2: Bash Dotfile Rule
+    // If str starts with '.' but pattern doesn't start with '.' (and pattern is not empty)
+    // AND if pattern is not the magic '*' (which is handled next), return 0 (no match).
+    if (*str == '.' && *pattern != '.' && *pattern != '*')
         return (0);
-	if (*pattern == '*')
-	{
-		while (*str)
-		{
-			if (match_pattern(str, pattern + 1))
-				return (1);
-			str++;
-		}
-		return (match_pattern(str, pattern + 1));
-	}
-	// if (*pattern == '.')
-	// {
-	// 	if (ft_strcmp(pattern, ".") == 0 || ft_strcmp(pattern, "..") == 0)
-    //     {
-    //         if (ft_strcmp(str, ".") != 0 && ft_strcmp(str, ".." != 0))
-    //             continue;
-    //     }
-	// }
-	if (*str && (*str == *pattern || *pattern == '?'))
-		return (match_pattern(str + 1, pattern + 1));
-	return (0);
+
+    // R3: Wildcard '*'
+    if (*pattern == '*')
+    {
+        // Skip consecutive asterisks in the pattern for efficiency
+        while (*pattern == '*')
+            pattern++;
+        
+        // If '*' is the last character, it matches anything remaining in 'str'
+        if (!*pattern)
+            return (1);
+        
+        // Try to match the rest of the pattern (pattern + 1) starting at the current
+        // position in 'str'. If it fails, advance 'str' and try again (consume more characters with '*').
+        while (*str)
+        {
+            if (match_pattern(str, pattern))
+                return (1);
+            str++;
+        }
+        
+        // Final attempt: If the rest of the pattern is empty, the match is successful
+        return (0);
+    }
+    
+    // R4: Single Character Match ('?' or Literal Match)
+    if (*str && (*str == *pattern || *pattern == '?'))
+        return (match_pattern(str + 1, pattern + 1));
+    
+    // R5: No Match
+    return (0);
 }
 
 static char	**get_matching_files(char *pattern)
