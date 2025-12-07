@@ -5,11 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/07 16:07:44 by jotong           ###   ########.fr       */
+/*   Created: 2025/12/07 16:08:40 by jotong            #+#    #+#             */
+/*   Updated: 2025/12/07 16:08:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 #include <dirent.h>
 #include "libft.h"
 
