@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/07 15:01:50 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/07 15:31:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -450,13 +450,12 @@ char	*expand_and_replace(char **s, t_shell *shell)
 	out = malloc(len + 1);
 	if (!out)
 		return (NULL);
-
 	if (!copy_with_expansion(original, out, shell->envp))
 	{
 		free(out);
 		return (NULL);
 	}
-
+	
 	free(original);  // Free the original
 	*s = out;        // Update caller's pointer
 	return (out);

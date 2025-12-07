@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/04 00:07:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/07 15:44:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,12 @@ int	ft_echo(char **av, t_shell *shell)
 			output = ft_strjoin(output, expanded);
 			free(tmp);
 		}
-		else
+		else if (expanded)
 		{
 			output = ft_strdup(expanded);
 		}
+		else
+			output = NULL;
 
 		free(expanded);
 		i++;
