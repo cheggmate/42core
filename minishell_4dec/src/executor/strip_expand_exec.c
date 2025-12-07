@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   strip_expand_exec.c                                :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/07 16:19:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/07 16:19:15 by jotong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include <dirent.h>
 #include "libft.h"
@@ -338,29 +326,6 @@ static int	expand_tilde(char **s, char **out, int *i, char **env)
 	return (1);
 }
 
-static void	copy_without_outer_quotes(char *value, char *out, int *i)
-{
-	size_t	len;
-	int		start;
-	int		end;
-
-	len = ft_strlen(value);
-	start = 0;
-	end = len;
-
-	// Check if value is wrapped in matching quotes
-	if (len >= 2 && ((value[0] == '"' && value[len - 1] == '"') ||
-		(value[0] == '\'' && value[len - 1] == '\'')))
-	{
-		start = 1;
-		end = len - 1;
-	}
-
-	// Copy without outer quotes
-	while (start < end)
-		out[(*i)++] = value[start++];
-}
-
 static int	expand_variable(char **s, char **out, int *i, char **env)
 {
 	size_t	var_len;
@@ -371,121 +336,7 @@ static int	expand_variable(char **s, char **out, int *i, char **env)
 	var_len = get_var_len(*s, 0);
 	if (var_len == 0)
 	{
-		(*out)[(*i)++] = '
-
-static int	expand_wildcard(char **s, char **out, int *i)
-{
-	char	*pattern_start;
-	char	*pattern_end;
-	char	*pattern;
-	char	**matches;
-	char	*joined;
-
-	pattern_start = *s;
-	while (**s && **s != ' ' && **s != '\t' && **s != '"' && **s != '\'')
-		(*s)++;
-	pattern_end = *s;
-	
-	// Check if pattern actually contains wildcards
-	if (!contains_wildcard(pattern_start, pattern_end))
-	{
-		// No wildcards, just copy literally
-		while (pattern_start < pattern_end)
-			(*out)[(*i)++] = *pattern_start++;
-		return (1);
-	}
-	
-	pattern = ft_substr(pattern_start, 0, pattern_end - pattern_start);
-	matches = get_matching_files(pattern);
-	if (!matches)
-	{
-		ft_strlcpy(*out + *i, pattern, ft_strlen(pattern) + 1);
-		*i += ft_strlen(pattern);
-		free(pattern);
-		return (1);
-	}
-	joined = join_matches(matches);
-	ft_strlcpy(*out + *i, joined, ft_strlen(joined) + 1);
-	*i += ft_strlen(joined);
-	free(pattern);
-	free(joined);
-	free_matches(matches);
-	return (1);
-}
-
-static int	copy_with_expansion(char *s, char *out, char **env)
-{
-	int				i;
-	t_quote_state	state;
-	char			*start;
-
-	i = 0;
-	start = s;
-	init_quote_state(&state);
-	while (*s)
-	{
-		// Only strip quotes if they're actual delimiters, not literals
-		if (*s == '\'' && !state.in_double)
-		{
-			state.in_single = !state.in_single;
-			s++;  // Skip the quote (it's a delimiter)
-		}
-		else if (*s == '"' && !state.in_single)
-		{
-			state.in_double = !state.in_double;
-			s++;  // Skip the quote (it's a delimiter)
-		}
-		else if (*s == '~' && !state.in_single && !state.in_double
-			&& (s == start || *(s - 1) == ' '))
-		{
-			if (!expand_tilde(&s, &out, &i, env))
-				return (0);
-		}
-		else if (*s == '$' && !state.in_single && *(s + 1))
-		{
-			if (!expand_variable(&s, &out, &i, env))
-				return (0);
-		}
-		else if (*s == '*' && !state.in_single && !state.in_double)
-		{
-			if (!expand_wildcard(&s, &out, &i))
-				return (0);
-		}
-		else
-		{
-			// Copy everything else (including quotes that are literals)
-			out[i++] = *s++;
-		}
-	}
-	out[i] = '\0';
-	return (1);
-}
-
-char	*expand_and_replace(char **s, t_shell *shell)
-{
-	char	*out;
-	size_t	len;
-	char	*original;
-
-	if (!s || !*s)
-		return (NULL);
-
-	original = *s;
-	len = calculate_expanded_len(original, shell->envp);
-	out = malloc(len + 1);
-	if (!out)
-		return (NULL);
-	if (!copy_with_expansion(original, out, shell->envp))
-	{
-		free(out);
-		return (NULL);
-	}
-	
-	free(original);  // Free the original
-	*s = out;        // Update caller's pointer
-	return (out);
-}
-;
+		(*out)[(*i)++] = '$';
 		return (1);
 	}
 	var_name = ft_substr(*s, 0, var_len);
@@ -494,7 +345,8 @@ char	*expand_and_replace(char **s, t_shell *shell)
 	var_value = get_env_value(var_name, env);
 	if (var_value != NULL)
 	{
-		copy_without_outer_quotes(var_value, *out, i);
+		ft_strlcpy(*out + *i, var_value, ft_strlen(var_value) + 1);
+		*i += ft_strlen(var_value);
 	}
 	free(var_name);
 	*s += var_len;
