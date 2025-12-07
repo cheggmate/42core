@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   strip_expand_exec.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 16:32:15 by jotong            #+#    #+#             */
+/*   Updated: 2025/12/07 16:32:15 by jotong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include <dirent.h>
 #include "libft.h"
@@ -112,6 +124,23 @@ int match_pattern(char *str, char *pattern)
     return (0);
 }
 
+static int	should_skip_dotdir(char *name, char *pattern)
+{
+	// Never skip if pattern explicitly is "." or ".."
+	if (ft_strcmp(pattern, ".") == 0 || ft_strcmp(pattern, "..") == 0)
+		return (0);
+	
+	// Never skip if pattern starts with '.' (like .* or .git*)
+	if (pattern[0] == '.')
+		return (0);
+	
+	// Skip '.' and '..' for patterns that don't start with dot
+	if (ft_strcmp(name, ".") == 0 || ft_strcmp(name, "..") == 0)
+		return (1);
+	
+	return (0);
+}
+
 static char **get_matching_files(char *pattern)
 {
     DIR             *dir;
@@ -127,9 +156,7 @@ static char **get_matching_files(char *pattern)
     entry = readdir(dir);
     while (entry && count < 1023)
 	{
-		// Skip '.' and '..' unless the pattern is explicitly targeting them
-		if ((ft_strcmp(entry->d_name, ".") == 0 || ft_strcmp(entry->d_name, "..") == 0) &&
-			(ft_strcmp(pattern, ".") != 0 && ft_strcmp(pattern, "..") != 0 && pattern[0] != '.'))
+		if (should_skip_dotdir(entry->d_name, pattern))
 		{
 			entry = readdir(dir);
 			continue;
