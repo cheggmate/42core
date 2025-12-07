@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 14:32:06 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/07 13:17:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/07 15:01:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,10 @@ static size_t	calc_var_len(char *s, char **env)
 	if (var_len == 0)
 		return (1);
 	var_name = ft_substr(s, 0, var_len);
+	if (!var_name)
+		return (0);
 	var_value = get_env_value(var_name, env);
+	
 	result = var_value ? ft_strlen(var_value) : 0;
 	free(var_name);
 	return (result);
