@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:58:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:59:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static char	*manipulate_echo_arg(char **av, int i, char *output)
 	return (output);
 }
 
-static char	add_newline(char *output)
+static char	*add_newline(char *output)
 {
 	char	*tmp;
 
