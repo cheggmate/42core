@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:01:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:01:39 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int	ft_echo(char **av, t_shell *shell)
 	char	*output; // the final concatenated output
 
 	(void)shell;
+	printf("entered ft_echo\n");
 	i = 1;
 	n_flag = 0;
 	output = NULL;
