@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 17:16:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/12 20:17:40 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/14 15:57:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static int	extract_fd(const char *s, size_t *i)
 
 t_token_type	get_op_type(const char *s, size_t *i)
 {
-	int	fd;
+	// int	fd;
 
-	fd = extract_fd(s, i);
+	// fd = extract_fd(s, i);
 	if (s[*i] == '<')
 	{
 		if (s[*i + 1] == '<')
