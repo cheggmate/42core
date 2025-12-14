@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:01:39 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:02:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,20 @@ static char	*add_newline(char *output)
 	return (output);
 }
 
-static int	check_invalid_chars(char **av)
-{
-	int	i;
+// static int	check_invalid_chars(char **av)
+// {
+// 	int	i;
 	
-	i = 0;
-	while (av[i])
-	{
-		printf("(check_invalid_chars) comparing %s\n", av[i]);
-		if (ft_strcmp(av[i], "&&&") == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}
+// 	i = 0;
+// 	while (av[i])
+// 	{
+// 		printf("(check_invalid_chars) comparing %s\n", av[i]);
+// 		if (ft_strcmp(av[i], "&&&") == 0)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 int	ft_echo(char **av, t_shell *shell)
 {
@@ -126,7 +126,6 @@ int	ft_echo(char **av, t_shell *shell)
 	char	*output; // the final concatenated output
 
 	(void)shell;
-	printf("entered ft_echo\n");
 	i = 1;
 	n_flag = 0;
 	output = NULL;
@@ -135,11 +134,11 @@ int	ft_echo(char **av, t_shell *shell)
 		n_flag = 1;
 		i++;
 	}
-	if (check_invalid_chars(av))
-	{
-		printf("echo: invalid characters in arguments\n");
-		return (1);
-	}
+	// if (check_invalid_chars(av))
+	// {
+	// 	printf("echo: invalid characters in arguments\n");
+	// 	return (1);
+	// }
 	output = manipulate_echo_arg(av, i, output);
 	if (!output)
 		output = ft_strdup("");
