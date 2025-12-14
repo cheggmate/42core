@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:45:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:46:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void parse_and_echo_substrs(char **s, t_shell *shell)
     *s = s_final;
 }
 
-char	manipulate_echo_arg(char *av, int i, t_shell *shell, char *output)
+static char	*manipulate_echo_arg(char **av, int i, t_shell *shell, char *output)
 {
 	char	*expanded;
 
@@ -98,6 +98,7 @@ int	ft_echo(char **av, t_shell *shell)
 	int		i;
 	int		n_flag;
 	char	*output; // the final concatenated output
+	char	*tmp;
 
 	(void)shell;
 	i = 1;
