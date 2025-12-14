@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 13:23:41 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:12:32 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:14:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@
 // 	return (1);
 // }
 
-static int	syntax_err(char *msg)
-{
-	printf("%s\n", msg);
-	return (0);
-}
+// static int	syntax_err(char *msg)
+// {
+// 	printf("%s\n", msg);
+// 	return (1);
+// }
 
 int	check_syntax(char *s)
 {
@@ -71,7 +71,7 @@ int	check_syntax(char *s)
 	if (check_has_equals(s) == 0)
 		return (0);
 	if (check_commas_closed(s) == 0)
-		return (syntax_err("Unclosed inv commas.\n"), 1);
+		return (printf("Unclosed inv commas.\n"), 1);
 	return (0);
 }
 
