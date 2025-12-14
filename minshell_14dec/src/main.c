@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:21:19 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:22:24 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ t_shell	*init_shell(char **envp)
 	set_signals();
 	return (shell);
 }
-
 
 int	main(int argc, char **argv, char **envp)
 {

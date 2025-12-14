@@ -61,6 +61,7 @@ need to stop parsing for variable (and create a new token) when i stop seeing al
 
 
 cd " " should return an error
+[14 dec: this was already handled.]
 
 echo a&&echo b should print:
 a
