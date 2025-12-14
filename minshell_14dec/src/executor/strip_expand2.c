@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 15:39:48 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 16:18:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,26 +328,26 @@
 // 				|| e->state.in_double), (*s)++, 1);
 // }
 
-// static char	*expand_strip(char *s, t_shell *shell, char **map_out)
-// {
-// 	t_exp	e;
-// 	size_t	len;
+static char	*expand_strip(char *s, t_shell *shell, char **map_out)
+{
+	t_exp	e;
+	size_t	len;
 
-// 	len = calc_len(s, shell);
-// 	e.out = malloc(len + 1);
-// 	e.map = malloc(len + 1);
-// 	if (!e.out || !e.map)
-// 		return (free(e.out), free(e.map), NULL);
-// 	e.i = 0;
-// 	init_quote_state(&e.state);
-// 	while (*s)
-// 		if (!process_char(&s, &e, shell))
-// 			return (free(e.out), free(e.map), NULL);
-// 	e.out[e.i] = '\0';
-// 	e.map[e.i] = '\0';
-// 	*map_out = e.map;
-// 	return (e.out);
-// }
+	len = calc_len(s, shell);
+	e.out = malloc(len + 1);
+	e.map = malloc(len + 1);
+	if (!e.out || !e.map)
+		return (free(e.out), free(e.map), NULL);
+	e.i = 0;
+	init_quote_state(&e.state);
+	while (*s)
+		if (!process_char(&s, &e, shell))
+			return (free(e.out), free(e.map), NULL);
+	e.out[e.i] = '\0';
+	e.map[e.i] = '\0';
+	*map_out = e.map;
+	return (e.out);
+}
 
 // /* ************************************************************************** */
 // /*                      STEP 3: WILDCARD EXPANSION                            */
@@ -477,29 +477,29 @@
 // 	*i = end;
 // }
 
-// static char	*expand_wild(char *s, char *map)
-// {
-// 	char	*result;
-// 	size_t	len;
-// 	int		i;
-// 	int		j;
+static char	*expand_wild(char *s, char *map)
+{
+	char	*result;
+	size_t	len;
+	int		i;
+	int		j;
 
-// 	len = calc_wild_len(s, map);
-// 	result = malloc(len + 1);
-// 	if (!result)
-// 		return (NULL);
-// 	i = 0;
-// 	j = 0;
-// 	while (s[i])
-// 	{
-// 		if (is_space(s[i]))
-// 			result[j++] = s[i++];
-// 		else
-// 			copy_word(s, map, &i, &result, &j);
-// 	}
-// 	result[j] = '\0';
-// 	return (result);
-// }
+	len = calc_wild_len(s, map);
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		if (is_space(s[i]))
+			result[j++] = s[i++];
+		else
+			copy_word(s, map, &i, &result, &j);
+	}
+	result[j] = '\0';
+	return (result);
+}
 
 // /* ************************************************************************** */
 // /*                           MAIN ENTRY POINT                                 */
