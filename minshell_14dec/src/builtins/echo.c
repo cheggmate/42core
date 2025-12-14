@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:59:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:59:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static char	*add_newline(char *output)
 	tmp = output;
 	output = ft_strjoin(output, "\n");
 	free(tmp);
-	
+	return (output);
 }
 
 int	ft_echo(char **av, t_shell *shell)
