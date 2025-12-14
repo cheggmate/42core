@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:49:37 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:58:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,55 +94,37 @@ static char	*manipulate_echo_arg(char **av, int i, char *output)
 	return (output);
 }
 
+static char	add_newline(char *output)
+{
+	char	*tmp;
+
+	tmp = output;
+	output = ft_strjoin(output, "\n");
+	free(tmp);
+	
+}
+
 int	ft_echo(char **av, t_shell *shell)
 {
 	int		i;
 	int		n_flag;
 	char	*output; // the final concatenated output
-	char 	*tmp;
 
 	(void)shell;
 	i = 1;
 	n_flag = 0;
 	output = NULL;
-	tmp = NULL;
 	while (av[i] && av[i][0] == '-' && is_flag_n(av[i]))
 	{
 		n_flag = 1;
 		i++;
 	}
-	// while (av[i])
-	// {
-	// 	char *expanded = ft_strdup(av[i]);
-	// 	if (!expanded)
-	// 		return (1);
-	// 	if (output)
-	// 	{
-	// 		char *tmp = output;
-	// 		output = ft_strjoin(output, " ");
-	// 		free(tmp);
-	// 		tmp = output;
-	// 		output = ft_strjoin(output, expanded);
-	// 		free(tmp);
-	// 	}
-	// 	else if (expanded)
-	// 		output = ft_strdup(expanded);
-	// 	else
-	// 		output = NULL;
-	// 	free(expanded);
-	// 	i++;
-	// }
 	output = manipulate_echo_arg(av, i, output);
 	if (!output)
 		output = ft_strdup("");
 	if (!n_flag)
-	{
-		tmp = output;
-		output = ft_strjoin(output, "\n");
-		free(tmp);
-	}
+		output = add_newline(output);
 	write(1, output, ft_strlen(output));
-	free(output);
-	return (0);
+	return (free(output), 0);
 }
 
