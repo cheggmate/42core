@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:20:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:21:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!tokens)
 		{
 			free(line);
-			break;
+			continue ;
 		}
 		print_token_stream_colored(tokens);
 		ast = parse(tokens, shell);
