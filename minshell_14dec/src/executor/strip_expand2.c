@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 16:23:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 17:25:29 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,10 @@ static char	**get_matches(char *pattern)
 	entry = readdir(dir);
 	while (entry)
 	{
-		if (ft_strcmp(entry->d_name, ".") != 0
-			&& ft_strcmp(entry->d_name, "..") != 0
-			&& !(entry->d_name[0] == '.' && pattern[0] != '.')
-			&& match_pattern(entry->d_name, pattern))
+		if (ft_strcmp(entry->d_name, ".") != 0 \
+			&& ft_strcmp(entry->d_name, "..") != 0 \
+			&& !(entry->d_name[0] == '.' && pattern[0] != '.') \
+			&& match_pattern(entry->d_name, pattern)) \
 			add_match(matches, &count, entry->d_name);
 		entry = readdir(dir);
 	}

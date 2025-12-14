@@ -9,6 +9,7 @@ exit
 bash: exit: abc: numeric argument required
 SET EXIT CODE]
 
+ 
 [print error of
 jotong@c2r4s2 ~/minishell % | cat
 zsh: parse error near `|']
