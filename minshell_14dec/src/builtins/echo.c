@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:48:21 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:49:37 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void parse_and_echo_substrs(char **s, t_shell *shell)
     *s = s_final;
 }
 
-static char	*manipulate_echo_arg(char **av, int i, t_shell *shell, char *output)
+static char	*manipulate_echo_arg(char **av, int i, char *output)
 {
 	char	*expanded;
 	char	*tmp;
@@ -77,7 +77,7 @@ static char	*manipulate_echo_arg(char **av, int i, t_shell *shell, char *output)
 			return (NULL);
 		if (output)
 		{
-			char *tmp = output;
+			tmp = output;
 			output = ft_strjoin(output, " ");
 			free(tmp);
 			tmp = output;
@@ -132,7 +132,7 @@ int	ft_echo(char **av, t_shell *shell)
 	// 	free(expanded);
 	// 	i++;
 	// }
-	output = manipulate_echo_arg(av, i, shell, output);
+	output = manipulate_echo_arg(av, i, output);
 	if (!output)
 		output = ft_strdup("");
 	if (!n_flag)
