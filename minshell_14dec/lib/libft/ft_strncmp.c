@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:12:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 21:57:23 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 21:58:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	c1 = (unsigned char *) s1;
 	c2 = (unsigned char *) s2;
 	i = 0;
-	while ((*c1 == *c2 && *c1 != '\0' && *c2 != '\0') && i < n)
+	while ((*c1 == *c2 && *c1 != '\0' && *c2 != '\0') && i < n -1)
 	{
 		c1++;
 		c2++;
