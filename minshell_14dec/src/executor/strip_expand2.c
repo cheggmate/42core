@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 16:19:14 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 16:21:53 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 // /*                           UTILITY FUNCTIONS                                */
 // /* ************************************************************************** */
 
-// static void	init_quote_state(t_quote_state *state)
-// {
-// 	state->in_single = 0;
-// 	state->in_double = 0;
-// 	state->flag = 0;
-// }
+static void	init_quote_state(t_quote_state *state)
+{
+	state->in_single = 0;
+	state->in_double = 0;
+	state->flag = 0;
+}
 
 // static size_t	get_var_len(char *s)
 // {
@@ -223,37 +223,37 @@
 // 		state->in_double = !state->in_double;
 // }
 
-// static size_t	calc_len(char *s, t_shell *shell)
-// {
-// 	size_t			len;
-// 	t_quote_state	state;
+static size_t	calc_len(char *s, t_shell *shell)
+{
+	size_t			len;
+	t_quote_state	state;
 
-// 	len = 0;
-// 	init_quote_state(&state);
-// 	while (*s)
-// 	{
-// 		if (*s == '\'' || *s == '"')
-// 			update_quotes(*s++, &state);
-// 		else if (*s == '~' && !state.in_single && !state.in_double
-// 			&& (*(s - 1) == ' '))
-// 		{
-// 			len += ft_strlen(get_home_dir(shell));
-// 			s++;
-// 		}
-// 		else if (*s == '$' && !state.in_single && *(s + 1))
-// 		{
-// 			s++;
-// 			len += calc_var_len(s, shell);
-// 			s += get_var_len(s);
-// 		}
-// 		else
-// 		{
-// 			len++;
-// 			s++;
-// 		}
-// 	}
-// 	return (len);
-// }
+	len = 0;
+	init_quote_state(&state);
+	while (*s)
+	{
+		if (*s == '\'' || *s == '"')
+			update_quotes(*s++, &state);
+		else if (*s == '~' && !state.in_single && !state.in_double
+			&& (*(s - 1) == ' '))
+		{
+			len += ft_strlen(get_home_dir(shell));
+			s++;
+		}
+		else if (*s == '$' && !state.in_single && *(s + 1))
+		{
+			s++;
+			len += calc_var_len(s, shell);
+			s += get_var_len(s);
+		}
+		else
+		{
+			len++;
+			s++;
+		}
+	}
+	return (len);
+}
 
 // /* ************************************************************************** */
 // /*                      STEP 2: EXPAND AND STRIP QUOTES                       */
@@ -313,20 +313,20 @@ typedef struct s_exp
 // 	return (1);
 // }
 
-// static int	process_char(char **s, t_exp *e, t_shell *shell)
-// {
-// 	if (**s == '\'' && !e->state.in_double)
-// 		return (e->state.in_single = !e->state.in_single, (*s)++, 1);
-// 	else if (**s == '"' && !e->state.in_single)
-// 		return (e->state.in_double = !e->state.in_double, (*s)++, 1);
-// 	else if (**s == '~' && !e->state.in_single && !e->state.in_double)
-// 		return (exp_tilde(s, e, shell));
-// 	else if (**s == '$' && !e->state.in_single && *(*s + 1))
-// 		return (exp_var(s, e, shell));
-// 	else
-// 		return (e->out[e->i] = **s, e->map[e->i++] = (e->state.in_single
-// 				|| e->state.in_double), (*s)++, 1);
-// }
+static int	process_char(char **s, t_exp *e, t_shell *shell)
+{
+	if (**s == '\'' && !e->state.in_double)
+		return (e->state.in_single = !e->state.in_single, (*s)++, 1);
+	else if (**s == '"' && !e->state.in_single)
+		return (e->state.in_double = !e->state.in_double, (*s)++, 1);
+	else if (**s == '~' && !e->state.in_single && !e->state.in_double)
+		return (exp_tilde(s, e, shell));
+	else if (**s == '$' && !e->state.in_single && *(*s + 1))
+		return (exp_var(s, e, shell));
+	else
+		return (e->out[e->i] = **s, e->map[e->i++] = (e->state.in_single
+				|| e->state.in_double), (*s)++, 1);
+}
 
 static char	*expand_strip(char *s, t_shell *shell, char **map_out)
 {
@@ -414,68 +414,68 @@ static char	*expand_strip(char *s, t_shell *shell, char **map_out)
 // 	return (result);
 // }
 
-// static size_t	calc_wild_len(char *s, char *map)
-// {
-// 	int		i;
-// 	int		start;
-// 	int		end;
-// 	char	*pat;
-// 	char	*exp;
-// 	size_t	len;
+static size_t	calc_wild_len(char *s, char *map)
+{
+	int		i;
+	int		start;
+	int		end;
+	char	*pat;
+	char	*exp;
+	size_t	len;
 
-// 	i = 0;
-// 	len = 0;
-// 	while (s[i])
-// 	{
-// 		if (is_space(s[i]))
-// 			len++, i++;
-// 		else
-// 		{
-// 			start = i;
-// 			end = word_end(s, i);
-// 			if (has_wildcard(s, map, start, end))
-// 			{
-// 				pat = ft_substr(s, start, end - start);
-// 				exp = expand_pattern(pat);
-// 				len += ft_strlen(exp);
-// 				free(pat);
-// 				free(exp);
-// 			}
-// 			else
-// 				len += end - start;
-// 			i = end;
-// 		}
-// 	}
-// 	return (len);
-// }
+	i = 0;
+	len = 0;
+	while (s[i])
+	{
+		if (is_space(s[i]))
+			len++, i++;
+		else
+		{
+			start = i;
+			end = word_end(s, i);
+			if (has_wildcard(s, map, start, end))
+			{
+				pat = ft_substr(s, start, end - start);
+				exp = expand_pattern(pat);
+				len += ft_strlen(exp);
+				free(pat);
+				free(exp);
+			}
+			else
+				len += end - start;
+			i = end;
+		}
+	}
+	return (len);
+}
 
-// static void	copy_word(char *s, char *map, int *i, char **result, int *j)
-// {
-// 	int		start;
-// 	int		end;
-// 	char	*pat;
-// 	char	*exp;
-// 	int		k;
+static void	copy_word(char *s, char *map, int *i, char **result, int *j)
+{
+	int		start;
+	int		end;
+	char	*pat;
+	char	*exp;
+	int		k;
 
-// 	start = *i;
-// 	end = word_end(s, *i);
-// 	if (has_wildcard(s, map, start, end))
-// 	{
-// 		pat = ft_substr(s, start, end - start);
-// 		exp = expand_pattern(pat);
-// 		k = 0;
-// 		while (exp[k])
-// 			(*result)[(*j)++] = exp[k++];
-// 		free(pat);
-// 		free(exp);
-// 	}
-// 	else
-// 	{
-// 		while (*i < end)
-// 			(*result)[(*j)++] = s[(*i)++];
-// 	}
-// 	*i = end;
-// }
+	start = *i;
+	end = word_end(s, *i);
+	if (has_wildcard(s, map, start, end))
+	{
+		pat = ft_substr(s, start, end - start);
+		exp = expand_pattern(pat);
+		k = 0;
+		while (exp[k])
+			(*result)[(*j)++] = exp[k++];
+		free(pat);
+		free(exp);
+	}
+	else
+	{
+		while (*i < end)
+			(*result)[(*j)++] = s[(*i)++];
+	}
+	*i = end;
+}
 
 static char	*expand_wild(char *s, char *map)
 {
@@ -537,29 +537,29 @@ static char	*expand_wild(char *s, char *map)
 /* ************************************************************************** */
 
 // Add this helper function to count words for allocation
-static int	count_split_words(char *s, char *map)
-{
-	int	count;
-	int	in_word;
-	int	i;
+// static int	count_split_words(char *s, char *map)
+// {
+// 	int	count;
+// 	int	in_word;
+// 	int	i;
 
-	count = 0;
-	in_word = 0;
-	i = 0;
-	while (s[i])
-	{
-		// If we hit a space AND it's not quoted (map[i] == 0), we're between words
-		if (is_space(s[i]) && map[i] == 0)
-			in_word = 0;
-		else if (!in_word)
-		{
-			in_word = 1;
-			count++;
-		}
-		i++;
-	}
-	return (count);
-}
+// 	count = 0;
+// 	in_word = 0;
+// 	i = 0;
+// 	while (s[i])
+// 	{
+// 		// If we hit a space AND it's not quoted (map[i] == 0), we're between words
+// 		if (is_space(s[i]) && map[i] == 0)
+// 			in_word = 0;
+// 		else if (!in_word)
+// 		{
+// 			in_word = 1;
+// 			count++;
+// 		}
+// 		i++;
+// 	}
+// 	return (count);
+// }
 
 // Calculate length needed for split result (with separators between words)
 static size_t	calc_split_len(char *s, char *map)
