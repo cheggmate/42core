@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 16:18:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 16:19:14 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,13 +259,13 @@
 // /*                      STEP 2: EXPAND AND STRIP QUOTES                       */
 // /* ************************************************************************** */
 
-// typedef struct s_exp
-// {
-// 	char			*out;
-// 	char			*map;
-// 	int				i;
-// 	t_quote_state	state;
-// }	t_exp;
+typedef struct s_exp
+{
+	char			*out;
+	char			*map;
+	int				i;
+	t_quote_state	state;
+}	t_exp;
 
 // static int	exp_tilde(char **s, t_exp *e, t_shell *shell)
 // {
