@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/12 20:38:25 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/14 21:49:58 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ char 	*handle_asterisk(char *substr);
 int 	add_update_env_vars(t_shell *shell, const char *av);
 // int 	handle_dollars_tilde(char *substr, t_shell *shell, size_t *k, char **s_final);
 char	*handle_dollars_tilde(char *chunk, t_shell *shell);
-void 	parse_and_echo_substrs(char **s, t_shell *shell);
+// void 	parse_and_echo_substrs(char **s, t_shell *shell);
 int		validate_identifiers(char **av);
 int		ft_echo(char **av, t_shell *shell);
 int		builtin_cd(char **av, t_shell *shell);
