@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 21:59:25 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:01:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ static int	check_invalid_chars(char **av)
 	i = 0;
 	while (av[i])
 	{
+		printf("(check_invalid_chars) comparing %s\n", av[i]);
 		if (ft_strcmp(av[i], "&&&") == 0)
 			return (1);
 		i++;
