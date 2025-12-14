@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 20:46:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 20:48:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ void parse_and_echo_substrs(char **s, t_shell *shell)
 static char	*manipulate_echo_arg(char **av, int i, t_shell *shell, char *output)
 {
 	char	*expanded;
+	char	*tmp;
 
 	while (av[i])
 	{
 		expanded = ft_strdup(av[i]);
 		if (!expanded)
-			return (1);
+			return (NULL);
 		if (output)
 		{
 			char *tmp = output;
@@ -98,12 +99,13 @@ int	ft_echo(char **av, t_shell *shell)
 	int		i;
 	int		n_flag;
 	char	*output; // the final concatenated output
-	char	*tmp;
+	char 	*tmp;
 
 	(void)shell;
 	i = 1;
 	n_flag = 0;
 	output = NULL;
+	tmp = NULL;
 	while (av[i] && av[i][0] == '-' && is_flag_n(av[i]))
 	{
 		n_flag = 1;
@@ -135,7 +137,7 @@ int	ft_echo(char **av, t_shell *shell)
 		output = ft_strdup("");
 	if (!n_flag)
 	{
-		char *tmp = output;
+		tmp = output;
 		output = ft_strjoin(output, "\n");
 		free(tmp);
 	}
