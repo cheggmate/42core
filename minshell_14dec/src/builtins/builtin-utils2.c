@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 10:26:20 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 22:54:18 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 22:56:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	add_update_env_vars(t_shell *shell, const char *av)
 		i++;
 	key = ft_strndup(av, i);
 	if (var_check(key) != 0)
+	{
 		status = 1;
+		printf("export: `%s': not a valid identifier\n", key);
+	}
 	if (status == 0)
 	{
 		val = ft_strdup(&av[i + 1]);
