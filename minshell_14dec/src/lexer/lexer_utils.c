@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 17:16:53 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/14 15:57:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/14 15:59:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,24 @@ char	*extract_till_next_inv_comma(const char *s, size_t *i)
 	return (ft_strndup(s + start, *i - start - 1));
 }
 
-static int	extract_fd(const char *s, size_t *i)
-{
-	size_t	start;
-	int		fd;
+// static int	extract_fd(const char *s, size_t *i)
+// {
+// 	size_t	start;
+// 	int		fd;
 
-	start = *i;
-	while (ft_isdigit(s[*i]))
-		(*i)++;
-	if (*i == start)
-		return (-1);
-	if (s[*i] != '<' && s[*i] != '>')
-	{
-		*i = start;
-		return (-1);
-	}
-	fd = ft_atoi(s + start);
-	return (fd);
-}
+// 	start = *i;
+// 	while (ft_isdigit(s[*i]))
+// 		(*i)++;
+// 	if (*i == start)
+// 		return (-1);
+// 	if (s[*i] != '<' && s[*i] != '>')
+// 	{
+// 		*i = start;
+// 		return (-1);
+// 	}
+// 	fd = ft_atoi(s + start);
+// 	return (fd);
+// }
 
 t_token_type	get_op_type(const char *s, size_t *i)
 {
