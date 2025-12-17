@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/17 22:49:02 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/17 22:49:46 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static int	update_pwd_vars(t_shell *shell, char *prev_pwd)
 int	builtin_cd(char **av, t_shell *shell)
 {
 	char	*path;
-	char	c[4096];
 	char	*prev_pwd;
 
 	handle_path(av[1], shell, &path);
