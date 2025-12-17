@@ -1,7 +1,7 @@
 make wildcard look for UNcasesensitive.
 handle echo $? in parser to expand to last command
 export 1VAR=test (cant take number before)
-export doesnt take trailing UNDERSCORE
+export doesnt take trailing UNDERSCORE (tested in bash in mac, this seems to be accepted.)
 
 [exit case to print
 jotong@c2r4s2:~/minishell$ exit abc
