@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/17 22:49:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/17 23:05:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	update_pwd_vars(t_shell *shell, char *prev_pwd)
 
 	if (!getcwd(cwd, sizeof(cwd)))
 	{
-		// printf("error retrieving directory\n");
+		printf("cd: error retrieving directory\n");
 		if (prev_pwd)
 			setenv_value(&(shell->envp), "OLDPWD", prev_pwd);
 		setenv_value(&(shell->envp), "PWD", cwd);
