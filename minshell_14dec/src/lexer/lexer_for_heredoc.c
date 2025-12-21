@@ -6,11 +6,12 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 23:44:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/22 00:11:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/22 00:12:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "libft.h"
 
 static char *append_exit_status(char *expanded, t_shell *shell)
 {
