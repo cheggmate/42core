@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 23:44:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/22 00:07:55 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/22 00:11:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ static char *append_exit_status(char *expanded, t_shell *shell)
     new_str = ft_strjoin(expanded, status_str);
     free(expanded);
     free(status_str);
+    return (new_str);
+}
+
+static char *append_char(char *expanded, char c)
+{
+    char    buf[2];
+    char    *new_str;
+
+    buf[0] = c;
+    buf[1] = '\0';
+    new_str = ft_strjoin(expanded, buf);
+    free(expanded);
     return (new_str);
 }
 
@@ -49,18 +61,6 @@ static char *append_env_var(char *expanded, char **line, int *i, t_shell *shell)
     free(expanded);
     free(var_name);
     *i += len;
-    return (new_str);
-}
-
-static char *append_char(char *expanded, char c)
-{
-    char    buf[2];
-    char    *new_str;
-
-    buf[0] = c;
-    buf[1] = '\0';
-    new_str = ft_strjoin(expanded, buf);
-    free(expanded);
     return (new_str);
 }
 
