@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 23:44:30 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/22 00:12:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/22 00:13:31 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char *append_env_var(char *expanded, char **line, int *i, t_shell *shell)
     if (len == 0)
         return (append_char(expanded, '$'));
     var_name = ft_substr(*line, *i, len);
-    var_value = get_env_value(var_name, shell);
+    var_value = getenv_value(shell, var_name);
     if (var_value)
         new_str = ft_strjoin(expanded, var_value);
     else
