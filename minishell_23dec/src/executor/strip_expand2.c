@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:22:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:40:40 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,6 @@ static char	**get_matches_in_dir(char *dname, char *pattern)
 	char			**matches;
 	int				count;
 
-	printf("found some directory\n");
 	dir = opendir(dname);
 	if (!dir)
 		return (NULL);
