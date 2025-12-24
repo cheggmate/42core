@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:48:42 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 01:12:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -659,7 +659,7 @@ char	*expand_and_replace(char **s, t_shell *shell)
 	free(map);
 	if (!step3)
 		return (NULL);
-	// free(*s);
+	free(*s);
 	*s = step3;
 	return (step3);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_cmd_redirect_new.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 16:54:39 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/23 19:28:43 by ksng             ###   ########.fr       */
+/*   Updated: 2025/12/25 01:13:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_ast *parser_word(t_parser *p)
 	i = 0;
 	while (i < word_count)
 	{
-		node->argv[i] = ft_strdup(p->current->value);
+		node->argv[i] = p->current->value; // node->argv[i] = ft_strdup(p->current->value);
+		p->current->value = NULL;
 		if (!node->argv[i])
 			return (free_ast(node), NULL);
 		advance(p);
