@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:15:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/23 17:39:11 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/24 23:12:17 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void cleanup_shell(t_shell *shell)
         }
         free(shell->envp);
     }
+	if (shell)
+		free(shell);
 }
 
 char	*getenv_value(char **env, const char *key)
