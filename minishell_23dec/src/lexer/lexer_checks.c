@@ -19,7 +19,7 @@ static int	check_valid_redirs(char *s)
 	size_t	i;
 
 	s_len = ft_strlen(s);
-	i = s_len;
+	i = s_len - 1;
 	while(i > 0)
 	{
 		printf("s[i] = %c\n", s[i]);
