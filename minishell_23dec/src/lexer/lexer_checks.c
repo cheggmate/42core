@@ -22,15 +22,10 @@ static int	check_valid_redirs(char *s)
 	i = s_len - 1;
 	while(i > 0)
 	{
-		printf("s[i] = %c\n", s[i]);
 		if (s[i] == ' ')
 			i--;
 		else if (s[i] == '>' || s[i] == '<')
-		{
-			printf("found a < or >, returning 0\n");
 			return (0);
-		}
-			// return (0);
 		else
 			return (1);
 		i--;
@@ -39,22 +34,16 @@ static int	check_valid_redirs(char *s)
 }
 int	check_syntax(char *s)
 {
-	printf("check syntax\n");
 	if (!s || !*s || (ft_strlen(s) == 1 && *s == ' '))
 		return (0);
-	printf("first check passed\n");
 	if (check_has_equals(s) == 0)
 		return (0);
-	printf("second check passed\n");
 	if (check_commas_closed(s) == 0)
 		return (printf("Unclosed inv commas.\n"), 0);
-	printf("third check passed\n");
 	if (check_valid_ampersand(s) == 0)
 		return (printf("Syntax error near unexpected token '&'\n"),0);
-	printf("fourth check passed\n");
 	if (check_valid_redirs(s) == 0)
 		return (printf("Syntax error near unexpected token 'newline'\n"), 0);
-	printf("all checks passed\n");
 	return (1);
 }
 
