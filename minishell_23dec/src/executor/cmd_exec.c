@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 19:18:50 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/25 00:30:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:33:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ static int execute_external(t_ast *ast, t_shell *shell)
 		{
 			ft_putstr_fd(ast->argv[0], 2);
 			ft_putstr_fd(": command not found\n", 2);
-			cleanup(shell);
+			cleanup_shell(shell);
 			exit(127);
 		}
 		
