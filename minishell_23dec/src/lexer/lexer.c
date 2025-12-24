@@ -40,7 +40,7 @@ static int	parse_quotes(char **wrd, char *s, t_token **tokens, size_t *i)
 	if (s[*i] != '"' && s[*i] != '\'')
 		return (0);
 	if (*wrd)
-		*wrd = ft_strjoin_and_free(wrd, extract_word_with_inv_commas(s, i), 0);
+		*wrd = ft_strjoin_and_free(wrd, extract_word_with_inv_commas(s, i), 3);
 	else
 		*wrd = extract_word_with_inv_commas(s, i);
 	if (!(s[*i] == '\0' || s[*i] == ' '))
@@ -55,7 +55,7 @@ static int	parse_word(char **word, char *s, t_token **tokens, size_t *i)
 {
 	if (s[*i] == '\0')
 		return (0);
-	*word = ft_strjoin_and_free(word, extract_word(s, i), 0);
+	*word = ft_strjoin_and_free(word, extract_word(s, i), 3);
 	if (s[*i] == ' ' || s[*i] == '\0' || s[*i] == '<' || s[*i] == '>'
 		|| s[*i] == '(' || s[*i] == ')' || s[*i] == '&' || s[*i] == '|')
 	{
