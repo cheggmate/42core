@@ -33,6 +33,7 @@ static int	check_valid_redirs(char *s)
 			// return (0);
 		else
 			return (1);
+		i--;
 	}
 	return (1);
 }
