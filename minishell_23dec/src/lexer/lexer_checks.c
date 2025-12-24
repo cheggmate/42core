@@ -40,12 +40,16 @@ int	check_syntax(char *s)
 	printf("check syntax\n");
 	if (!s || !*s || (ft_strlen(s) == 1 && *s == ' '))
 		return (0);
+	printf("first check passed\n");
 	if (check_has_equals(s) == 0)
 		return (0);
+	printf("second check passed\n");
 	if (check_commas_closed(s) == 0)
 		return (printf("Unclosed inv commas.\n"), 0);
+	printf("third check passed\n");
 	if (check_valid_ampersand(s) == 0)
 		return (printf("Syntax error near unexpected token '&'\n"),0);
+	printf("fourth check passed\n");
 	if (check_valid_redirs(s) == 0)
 		return (printf("Syntax error near unexpected token 'newline'\n"), 0);
 	return (1);
