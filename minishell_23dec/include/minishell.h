@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:05:12 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:27:06 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define BUFFER_SIZE 1024
 
 typedef struct s_token	t_token;
+typedef struct	s_ast 	t_ast;
 
 typedef struct s_shell
 {
@@ -40,6 +41,7 @@ typedef struct s_shell
     int     stdout_backup;
 	int		running;
 	t_token	*tokens;
+	t_ast	*ast;
 }	t_shell;
 
 typedef	enum	e_node_type

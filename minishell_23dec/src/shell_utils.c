@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:15:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:03:05 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:28:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void cleanup_shell(t_shell *shell)
 	{
 		token_free_all(&shell->tokens);
 		shell->tokens = NULL;
+	}
+	if (shell->ast)
+	{
+		free_ast(shell->ast);
+		shell->ast = NULL;
 	}
 	if (shell)
 		free(shell);
