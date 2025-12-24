@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 23:17:56 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:00:29 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:05:12 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 # define PROMPT	"MS$"
 # define BUFFER_SIZE 1024
+
+typedef struct s_token	t_token;
 
 typedef struct s_shell
 {
