@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/24 23:36:59 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:03:32 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_shell	*init_shell(char **envp)
 	shell->stdin_backup = -1;
 	shell->stdout_backup = -1;
 	shell->running = 1;
+	shell->tokens = NULL;
 	set_signals();
 	return (shell);
 }
@@ -87,6 +88,7 @@ int	main(int argc, char **argv, char **envp)
 			free(line);
 			continue ;
 		}
+		shell->tokens = tokens;
 		// print_token_stream_colored(tokens);
 		ast = parse(tokens, shell);
 		// print_ast(ast);
@@ -94,6 +96,7 @@ int	main(int argc, char **argv, char **envp)
 			execute_ast(ast, shell);
 		free_ast(ast); // call all these in another function (norm)
 		token_free_all(&tokens); // call all these in another function (norm)
+		shell->tokens = NULL;
 		free(line); // call all these in another function (norm)
 	}
 	final_exit_status = shell->last_exit_status;

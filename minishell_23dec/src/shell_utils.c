@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 00:15:14 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/24 23:37:40 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:03:05 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void cleanup_shell(t_shell *shell)
         free(shell->envp);
 		shell->envp = NULL;
     }
+	if (shell->tokens)
+	{
+		token_free_all(&shell->tokens);
+		shell->tokens = NULL;
+	}
 	if (shell)
 		free(shell);
 }
