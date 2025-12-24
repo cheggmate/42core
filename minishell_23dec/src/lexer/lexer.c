@@ -87,6 +87,11 @@ static void	lex_step(const char *s, size_t *i, t_token **tokens, char **word)
 	else if (s[*i] == '|' || s[*i] == '<' || s[*i] == '>'
 		|| s[*i] == '(' || s[*i] == ')' || s[*i] == '&')
 	{
+		if (*word)
+		{
+			add_token_back(tokens, token_new(T_WORD, *word, -1));
+			free(*word);
+		}
 		add_token_back(tokens, token_new(get_op_type(s, i), NULL, -1));
 		*word = NULL;
 	}
