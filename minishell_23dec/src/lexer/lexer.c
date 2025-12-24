@@ -109,6 +109,7 @@ t_token	*lex_input(const char *s)
 		lex_step(s, &i, &tokens, &word);
 	if (word)
 	{
+		add_token_back(&tokens, token_new(T_WORD, word, -1));
 		free(word);
 		word = NULL;
 	}
