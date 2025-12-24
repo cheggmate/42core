@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/23 22:12:54 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/24 21:34:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		// print_token_stream_colored(tokens);
 		ast = parse(tokens, shell);
-		print_ast(ast);
+		// print_ast(ast);
 		if (ast)
 			execute_ast(ast, shell);
 		free_ast(ast); // call all these in another function (norm)
