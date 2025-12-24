@@ -13,19 +13,23 @@
 #include "minishell.h"
 #include "libft.h"
 
-static int	check_valid_redirs(char *c)
+static int	check_valid_redirs(char *s)
 {
-	int		c_len;
+	int		s_len;
 	size_t	i;
 
-	c_len = ft_strlen(c);
-	i = c_len;
+	s_len = ft_strlen(s);
+	i = s_len;
 	while(i > 0)
 	{
-		if (c[i] == ' ')
+		if (s[i] == ' ')
 			i--;
-		else if (c[i] == '>' || c[i] == '<')
+		else if (s[i] == '>' || s[i] == '<')
+		{
+			printf("found a < or >, returning 0\n");
 			return (0);
+		}
+			// return (0);
 		else
 			return (1);
 	}
@@ -54,8 +58,13 @@ int	check_has_equals(char *s)
 		substr = ft_split(s, s[0]);
 	else
 		substr = ft_split(s, ' ');
-	if (!substr || !(substr[0]))
+	if (!substr)
 		return (0);
+	if (!(substr[0]))
+	{
+		free(substr);
+		return (0);
+	}
 	if (ft_strnstr(substr[0], "=", ft_strlen(substr[0])) != NULL)
 	{
 		printf("command \'%s\' not found.\n", substr[0]);
