@@ -47,7 +47,7 @@ static int	parse_quotes(char **wrd, char *s, t_token **tokens, size_t *i)
 		return (1);
 	add_token_back(tokens, token_new(T_WORD, *wrd, -1));
 	// free(*wrd);
-	*wrd = NULL;
+	// *wrd = NULL;
 	return (1);
 }
 
@@ -61,8 +61,8 @@ static int	parse_word(char **word, char *s, t_token **tokens, size_t *i)
 	{
 		add_token_back(tokens, token_new(T_WORD, *word, -1));
 	}
-	// free(*word);
-	*word = NULL;
+	// free(*word); // these were previously in the above bracket, just below add_token_back
+	// *word = NULL;
 	return (1);
 }
 
