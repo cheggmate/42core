@@ -68,6 +68,6 @@ int	check_has_equals(char *s)
 		free_array(substr);
 		return (0);
 	}
-	ffree_array(substr);
+	free_array(substr);
 	return (1);
 }
