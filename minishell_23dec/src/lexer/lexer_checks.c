@@ -13,57 +13,24 @@
 #include "minishell.h"
 #include "libft.h"
 
-// static int	check_brackets_closed(char *s)
-// {
-// 	int	i;
-// 	int	brackets;
+static int	check_valid_redirs(char *c)
+{
+	int		c_len;
+	size_t	i;
 
-// 	i = 0;
-// 	brackets = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == '(')
-// 			brackets++;
-// 		else if (s[i] == ')')
-// 			brackets--;
-// 		i++;
-// 	}
-// 	if (brackets != 0)
-// 		return (0);
-// 	return (1);
-// }
-
-// static int	check_empty_brackets(char *s)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == '"')
-// 			while (s[i] && s[i] != '"')
-// 				i++;
-// 		else if (s[i] == '\'')
-// 			while (s[i] && s[i] != '\'')
-// 				i++;
-// 		else if (s[i] == '(')
-// 		{
-// 			while (s[i] && s[i] == ' ')
-// 				i++;
-// 			if (s[i] == ')')
-// 				return (0);
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
-// static int	syntax_err(char *msg)
-// {
-// 	printf("%s\n", msg);
-// 	return (1);
-// }
-
+	c_len = ft_strlen(c);
+	i = c_len;
+	while(i > 0)
+	{
+		if (c[i] == ' ')
+			i--;
+		else if (c[i] == '>' || c[i] == '<')
+			return (0);
+		else
+			return (1);
+	}
+	return (1);
+}
 int	check_syntax(char *s)
 {
 	if (!s || !*s || (ft_strlen(s) == 1 && *s == ' '))
@@ -74,6 +41,8 @@ int	check_syntax(char *s)
 		return (printf("Unclosed inv commas.\n"), 0);
 	if (check_valid_ampersand(s) == 0)
 		return (printf("Syntax error near unexpected token '&'\n"),0);
+	if (check_valid_redirs(s) == 0)
+		return (printf("Syntax error near unexpected token 'newline'\n"), 0);
 	return (1);
 }
 
@@ -88,6 +57,11 @@ int	check_has_equals(char *s)
 	if (!substr || !(substr[0]))
 		return (0);
 	if (ft_strnstr(substr[0], "=", ft_strlen(substr[0])) != NULL)
-		return (printf("command \'%s\' not found.\n", substr[0]), 0);
+	{
+		printf("command \'%s\' not found.\n", substr[0]);
+		free(substr);
+		return (0);
+	}
+	free(substr);
 	return (1);
 }
