@@ -37,6 +37,7 @@ static int	check_valid_redirs(char *s)
 }
 int	check_syntax(char *s)
 {
+	printf("check syntax\n");
 	if (!s || !*s || (ft_strlen(s) == 1 && *s == ' '))
 		return (0);
 	if (check_has_equals(s) == 0)
