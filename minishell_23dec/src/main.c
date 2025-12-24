@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/25 00:50:45 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 01:00:22 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		}
 		shell->tokens = tokens;
-		print_token_stream_colored(tokens);
+		// print_token_stream_colored(tokens);
 		ast = parse(tokens, shell);
-		print_ast(ast);
+		// print_ast(ast);
 		if (ast)
 			execute_ast(ast, shell);
 		free_ast(ast); // call all these in another function (norm)
