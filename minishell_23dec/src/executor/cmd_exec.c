@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 19:18:50 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/23 22:54:46 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/25 00:21:43 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ static int execute_external(t_ast *ast, t_shell *shell)
 
 int execute_cmd(t_ast *node, t_shell *shell)
 {
-	int status;
-	int i;
+	int 	status;
+	int 	i;
 
 	i = 0;
 	
