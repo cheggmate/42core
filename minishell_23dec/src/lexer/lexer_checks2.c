@@ -99,4 +99,3 @@ int	check_valid_ampersand(char *s)
 	}
 	return (1);
 }
-

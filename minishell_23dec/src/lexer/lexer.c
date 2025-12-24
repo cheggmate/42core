@@ -60,9 +60,10 @@ static int	parse_word(char **word, char *s, t_token **tokens, size_t *i)
 		|| s[*i] == '(' || s[*i] == ')' || s[*i] == '&' || s[*i] == '|')
 	{
 		add_token_back(tokens, token_new(T_WORD, *word, -1));
-		free(*word);
-		*word = NULL;
+		
 	}
+	free(*word);
+	*word = NULL;
 	return (1);
 }
 
