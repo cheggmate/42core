@@ -20,8 +20,9 @@ static int	check_valid_redirs(char *s)
 
 	s_len = ft_strlen(s);
 	i = s_len;
-	while(i > 0)
+	while(i >= 0)
 	{
+		printf("s[i] = %c\n", s[i]);
 		if (s[i] == ' ')
 			i--;
 		else if (s[i] == '>' || s[i] == '<')
