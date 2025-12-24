@@ -52,6 +52,7 @@ int	check_syntax(char *s)
 	printf("fourth check passed\n");
 	if (check_valid_redirs(s) == 0)
 		return (printf("Syntax error near unexpected token 'newline'\n"), 0);
+	printf("all checks passed\n");
 	return (1);
 }
 
