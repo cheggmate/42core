@@ -59,15 +59,15 @@ int	check_has_equals(char *s)
 		return (0);
 	if (!(substr[0]))
 	{
-		free(substr);
+		free_array(substr);
 		return (0);
 	}
 	if (ft_strnstr(substr[0], "=", ft_strlen(substr[0])) != NULL)
 	{
 		printf("command \'%s\' not found.\n", substr[0]);
-		free(substr);
+		free_array(substr);
 		return (0);
 	}
-	free(substr);
+	ffree_array(substr);
 	return (1);
 }
