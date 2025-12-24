@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/24 21:34:10 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/24 23:36:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 	t_token	*tokens;
 	char	*line;
 	t_ast	*ast;
+	int		final_exit_status;
 
 	(void)argc;
 	(void)argv;
@@ -95,7 +96,8 @@ int	main(int argc, char **argv, char **envp)
 		token_free_all(&tokens); // call all these in another function (norm)
 		free(line); // call all these in another function (norm)
 	}
+	final_exit_status = shell->last_exit_status;
 	rl_clear_history();
 	cleanup_shell(shell);
-	return (shell->last_exit_status);
+	return (final_exit_status);
 }
