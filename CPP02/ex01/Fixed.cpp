@@ -1,49 +1,66 @@
 #include "Fixed.hpp"
 
-Fixed::Fixed(const Fixed& other) // Creates a new object by copying the internal state (the raw bits) from an existing Fixed object.
+Fixed::Fixed(const Fixed& other)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->setRawBits(other.getRawBits());
 }
-Fixed& Fixed::operator=(const Fixed& other) //	Assigns the internal state of an existing Fixed object to another existing Fixed object (e.g., a = b;).
+
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this != &other)
 	{
-		int	other_bits;
-
 		std::cout << "Copy assignment operator called" << std::endl;
-		other_bits = other.getRawBits();
-		this->_raw_bits = other_bits;
+		this->_raw_bits = other.getRawBits();
 	}
 	return *this;
-};
+}
 
-Fixed:: ~Fixed()
+Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
 }
 
-int	Fixed::toInt (void) const
+// Int to fixed-point : Shift left by _f_bits to multiply by 2^8
+Fixed::Fixed(const int input)
 {
-
+	std::cout << "Int constructor called" << std::endl;
+	this->_raw_bits = input << _f_bits;
 }
 
-Fixed::Fixed (const int input)
+// Float to fixed-point : Multiply by 2^8 and round
+Fixed::Fixed(const float input)
 {
-	this->_raw_bits = input; // TODO: map this to the  corresponding fixed val
-}
-Fixed::Fixed (const float input)
-{
-	this->_raw_bits = input; // Todo:  map this to the corresponding fixed value
+	std::cout << "Float constructor called" << std::endl;
+	this->_raw_bits = roundf(input * (1 << _f_bits));
 }
 
-int Fixed::getRawBits (void) const
+// Fixed-point to int: Shift right by _f_bits to divide by 2^8
+int Fixed::toInt(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
+	return this->_raw_bits >> _f_bits;
+}
+
+// Convert fixed-point to float
+// Divide by 2^8
+float Fixed::toFloat(void) const
+{
+	return (float)this->_raw_bits / (1 << _f_bits);
+}
+
+int Fixed::getRawBits(void) const
+{
 	return this->_raw_bits;
 }
-void	Fixed::setRawBits (int const raw)
+
+void Fixed::setRawBits(int const raw)
 {
 	this->_raw_bits = raw;
-	return ;
+}
+
+// Overload << operator
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
+{
+	out << fixed.toFloat();
+	return out;
 }
