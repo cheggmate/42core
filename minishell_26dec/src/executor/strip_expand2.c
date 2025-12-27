@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strip_expand2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/26 18:38:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 13:33:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static size_t	get_var_len(char *s)
 
 	len = 0;
 	if (s[len] == '?')
+		return (1);
+	if (s[len] >= '0' && s[len] <= '9')
 		return (1);
 	while (s[len] && (ft_isalnum(s[len]) || s[len] == '_'))
 		len++;
