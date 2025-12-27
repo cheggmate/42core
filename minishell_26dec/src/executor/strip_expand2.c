@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 16:22:43 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 16:24:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,7 @@ static size_t	calc_var_len_helper(char *s, t_shell *shell, int *need_free)
 	if (!name)
 		return (0);
 	value = get_env_value(name, shell);
-	if (len == 1 && name[0] == '?')
+	if (len == 1 && (name[0] == '?' || name[0] == '0'))
 		*need_free = 1;
 	else
 		*need_free = 0;
@@ -267,7 +267,7 @@ static size_t	calc_var_len_helper(char *s, t_shell *shell, int *need_free)
 	if (!value)
 		return (0);
 	len = ft_strlen(value);
-	if (*need_free || ft_strcmp(name, "0") == 0)
+	if (*need_free)
 		free(value);
 	return (len);
 }
