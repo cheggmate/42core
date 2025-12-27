@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 14:27:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 14:40:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,7 +357,7 @@ static int	exp_var(char **s, t_exp *e, t_shell *shell)
 	need_free = (len == 1 && name[0] == '?');
 	free(name);
 	j = 0;
-	if (value)
+	if (value && *value)
 	{
 		while (value[j])
 		{
