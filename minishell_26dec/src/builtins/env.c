@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 16:05:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 16:05:34 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	ft_exit(char **av, t_shell *shell)
 	if (av[1])
 	{
 		exit_code = ft_atoi(av[1]);
-		shell->last_exit_status = av[1];
+		shell->last_exit_status = exit_code;
 	}
 	else
 		exit_code = 0;
