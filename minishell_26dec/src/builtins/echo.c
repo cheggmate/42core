@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 15:23:56 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 15:47:27 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static char	*manipulate_echo_arg(char **av, int i, char *output, t_shell *shell)
 			else
 				output = ft_strdup(expanded);
 		}
-		
-		free(expanded);
+
+		// free(expanded);
 		i++;
 	}
 	return (output);
