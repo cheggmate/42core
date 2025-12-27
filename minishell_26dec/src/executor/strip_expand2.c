@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 16:24:00 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 16:33:19 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -364,7 +364,7 @@ static int	exp_var(char **s, t_exp *e, t_shell *shell)
 		}
 	}
 	
-	if (len == 1 && *name == '?')
+	if (len == 1 && (*name == '?' || *name == '0'))
 		free(value);
 	free(name);
 	*s += len;
