@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 15:47:27 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 15:48:59 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,35 +24,6 @@ static int	is_flag_n(char *arg)
 		i++;
 	return (arg[i] == '\0');
 }
-
-// static char	*manipulate_echo_arg(char **av, int i, char *output)
-// {
-// 	char	*expanded;
-// 	char	*tmp;
-
-// 	while (av[i])
-// 	{
-// 		expanded = ft_strdup(av[i]);
-// 		if (!expanded)
-// 			return (NULL);
-// 		if (output)
-// 		{
-// 			tmp = output;
-// 			output = ft_strjoin(output, " ");
-// 			free(tmp);
-// 			tmp = output;
-// 			output = ft_strjoin(output, expanded);
-// 			free(tmp);
-// 		}
-// 		else if (expanded)
-// 			output = ft_strdup(expanded);
-// 		else
-// 			output = NULL;
-// 		free(expanded);
-// 		i++;
-// 	}
-// 	return (output);
-// }
 
 static char	*manipulate_echo_arg(char **av, int i, char *output, t_shell *shell)
 {
@@ -80,8 +51,6 @@ static char	*manipulate_echo_arg(char **av, int i, char *output, t_shell *shell)
 			else
 				output = ft_strdup(expanded);
 		}
-
-		// free(expanded);
 		i++;
 	}
 	return (output);

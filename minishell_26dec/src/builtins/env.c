@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/26 18:01:09 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 16:03:52 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,14 @@ int	ft_exit(char **av, t_shell *shell)
 		return (1);
 	}
 	printf("exit\n");
-	cleanup_shell(shell);
 	if (av[1])
+	{
 		exit_code = ft_atoi(av[1]);
+		shell->last_exit_status = ft_strdup(av[1]);
+	}
 	else
 		exit_code = 0;
+	cleanup_shell(shell);
 	exit(exit_code);
 }
 
