@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 14:27:08 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 14:27:56 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static size_t	get_var_len(char *s)
 	size_t	len;
 
 	len = 0;
-	if (s[len] == '?' || s[len] >= '0' && s[len] <= '9')
+	if (s[len] == '?' || (s[len] >= '0' && s[len] <= '9'))
 		return (1);
 	// else if (s[len] == '0')
 	// 	return (10);
