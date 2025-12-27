@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 13:48:16 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 13:49:11 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static char **dup_envp(t_shell *shell, char **envp)
 	duped[i] = ft_strdup("0=minishell");
 	if (!duped[i])
 		return (cleanup_dup_envp(shell, i));
+	i++;
 	duped[i] = NULL;
 	return (duped);
 }
