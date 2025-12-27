@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 13:33:33 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 14:13:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ static size_t	get_var_len(char *s)
 	len = 0;
 	if (s[len] == '?')
 		return (1);
-	if (s[len] >= '0' && s[len] <= '9')
+	if (s[len] >= '1' && s[len] <= '9')
 		return (1);
+	else if (s[len] == '0')
+		return (10);
 	while (s[len] && (ft_isalnum(s[len]) || s[len] == '_'))
 		len++;
 	return (len);
@@ -50,6 +52,8 @@ static char	*get_env_value(char *var_name, t_shell *shell)
 	len = ft_strlen(var_name);
 	if (len == 1 && *var_name == '?')
 		return (ft_itoa(shell->last_exit_status));
+	if (len == 1 && *var_name == '0')
+		return (ft_strdup("minishell"));
 	i = 0;
 	while (shell->envp[i])
 	{

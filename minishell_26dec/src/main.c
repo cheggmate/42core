@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 14:53:35 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 13:50:15 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 13:52:03 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static char **dup_envp(t_shell *shell, char **envp)
 	count = 0;
 	while (envp[count])
 		count++;
-	// count++;
 	duped = malloc(sizeof(char *) * (count + 1));
 	if (!duped)
 		return (NULL);
@@ -34,10 +33,6 @@ static char **dup_envp(t_shell *shell, char **envp)
 			return (cleanup_dup_envp(shell, i));
 		i++;
 	}
-	// duped[i] = ft_strdup("0=minishell");
-	// if (!duped[i])
-	// 	return (cleanup_dup_envp(shell, i));
-	// i++;
 	duped[i] = NULL;
 	return (duped);
 }
