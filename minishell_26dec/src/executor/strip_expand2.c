@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/07 16:38:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/12/27 14:40:35 by jotong           ###   ########.fr       */
+/*   Updated: 2025/12/27 15:14:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,7 +343,7 @@ static int	exp_var(char **s, t_exp *e, t_shell *shell)
 	char	*value;
 	size_t	len;
 	size_t	j;
-	int		need_free;
+	// int		need_free;
 
 	(*s)++;
 	len = get_var_len(*s);
@@ -354,8 +354,8 @@ static int	exp_var(char **s, t_exp *e, t_shell *shell)
 	if (!name)
 		return (0);
 	value = get_env_value(name, shell);
-	need_free = (len == 1 && name[0] == '?');
-	free(name);
+	// need_free = (len == 1 && name[0] == '?');
+	// free(name);
 	j = 0;
 	if (value && *value)
 	{
@@ -364,9 +364,11 @@ static int	exp_var(char **s, t_exp *e, t_shell *shell)
 			e->out[e->i] = value[j++];
 			e->map[e->i++] = e->state.in_double;
 		}
-		if (need_free)
-			free(value);
+		// if (need_free)
+		// 	free(value);
 	}
+	if (len == 1 && *name == '?')
+		free(value);
 	*s += len;
 	return (1);
 }
