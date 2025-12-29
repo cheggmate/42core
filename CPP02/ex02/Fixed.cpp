@@ -5,7 +5,6 @@ Fixed::Fixed(const Fixed& other)
     this->setRawBits(other.getRawBits());
 }
 
-
 // Int to fixed-point : Shift left by _f_bits to multiply by 2^8
 Fixed::Fixed(const int input)
 {
@@ -29,8 +28,7 @@ int Fixed::toInt(void) const
     return this->_raw_bits >> _f_bits;
 }
 
-// Convert fixed-point to float
-// Divide by 2^8
+// Convert fixed-point to float: Divide by 2^8
 float Fixed::toFloat(void) const
 {
     return (float)this->_raw_bits / (1 << _f_bits);
@@ -50,7 +48,7 @@ Fixed Fixed::operator+(const Fixed& other) const
 {
 	Fixed result;
 	long long temp = (long long)this->_raw_bits + (long long)other._raw_bits;
-	result._raw_bits = temp; //(temp >> _f_bits);
+	result._raw_bits = temp;
 	return result;
 }
 
@@ -58,7 +56,7 @@ Fixed Fixed::operator-(const Fixed& other) const
 {
 	Fixed result;
 	long long temp = (long long)this->_raw_bits - (long long)other._raw_bits;
-	result._raw_bits = temp; // (temp >> _f_bits);
+	result._raw_bits = temp;
 	return result;
 }
 
