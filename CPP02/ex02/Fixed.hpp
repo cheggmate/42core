@@ -21,13 +21,30 @@ class Fixed
 		Fixed(const Fixed& other);
 		
 		Fixed& operator=(const Fixed& other);
+		Fixed operator*(const Fixed& other) const;
 		~Fixed();
 		
 		int		toInt(void) const;
 		float	toFloat(void) const;
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
-
+		
+		static const Fixed& max(const Fixed& a, const Fixed& b) {
+			return (a.getRawBits() > b.getRawBits()) ? a : b;
+		}
+		static Fixed& max(Fixed& a, Fixed& b) {
+			return (a.getRawBits() > b.getRawBits()) ? a : b;
+		}
+		static const Fixed& min(const Fixed& a, const Fixed& b) {
+			return (a.getRawBits() < b.getRawBits()) ? a : b;
+		}
+		static Fixed& min(Fixed& a, Fixed& b) {
+			return (a.getRawBits() < b.getRawBits()) ? a : b;
+		}	
+		Fixed& operator++(); // Prefix ++a
+		Fixed operator++(int); // Postfix a++
+		
 };
 
+std::ostream & operator<<(std::ostream & o, Fixed const & i);
 #endif
