@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/11 22:38:14 by jotong            #+#    #+#              #
-#    Updated: 2025/12/29 23:36:03 by jotong           ###   ########.fr        #
+#    Updated: 2025/12/30 00:00:11 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 CXX = c++
 
 # Compiler flags
-CXXFLAGS= -std=c++98 -Wall -Wextra -Werror -v
+CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
 TARGET = a.out

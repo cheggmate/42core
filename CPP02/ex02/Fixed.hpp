@@ -12,16 +12,22 @@ class Fixed
 		int					_raw_bits;
 		static const int	_f_bits = 8;
 	public:
-		Fixed() : _raw_bits(0)
-		{
-			std::cout << "Default constructor called" << std::endl;
-		}
+		Fixed() : _raw_bits(0) {}
 		Fixed(const int input);
 		Fixed(const float input);
 		Fixed(const Fixed& other);
 		
 		Fixed& operator=(const Fixed& other);
+		Fixed operator+(const Fixed& other) const;
+		Fixed operator-(const Fixed& other) const;
 		Fixed operator*(const Fixed& other) const;
+		Fixed operator/(const Fixed& other) const;
+		bool operator>(const Fixed& other) const;
+		bool operator<(const Fixed& other) const;
+		bool operator>=(const Fixed& other) const;
+		bool operator<=(const Fixed& other) const;
+		bool operator==(const Fixed& other) const;
+		bool operator!=(const Fixed& other) const;
 		~Fixed();
 		
 		int		toInt(void) const;
@@ -43,7 +49,9 @@ class Fixed
 		}	
 		Fixed& operator++(); // Prefix ++a
 		Fixed operator++(int); // Postfix a++
-		
+		Fixed& operator--(); // Prefix --a
+		Fixed operator--(int); // Postfix a--
+
 };
 
 std::ostream & operator<<(std::ostream & o, Fixed const & i);
