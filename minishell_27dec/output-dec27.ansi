@@ -1,0 +1,3949 @@
+[0;36m╔════════════════════════════════════════╗[0m
+[0;36m║        MINISHELL TEST SUITE           ║[0m
+[0;36m╚════════════════════════════════════════╝[0m
+[0;35mValgrind ENABLED (logs in ./valgrind_logs)[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         ECHO TESTS                     [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #1: echo simple[0m
+[0;34mCommand:[0m echo hello
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_1.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #2: echo multiple args[0m
+[0;34mCommand:[0m echo hello world test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_2.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world test
+[1;33mActual stdout:[0m
+hello world test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #3: echo with -n flag[0m
+[0;34mCommand:[0m echo -n hello
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_3.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello[1;33mActual stdout:[0m
+helloMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #4: echo with multiple -n[0m
+[0;34mCommand:[0m echo -n -n -n hello
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_4.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello[1;33mActual stdout:[0m
+helloMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #5: echo -n with spaces[0m
+[0;34mCommand:[0m echo -n hello world
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_5.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world[1;33mActual stdout:[0m
+hello worldMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #6: echo empty string[0m
+[0;34mCommand:[0m echo
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_6.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #7: echo just spaces[0m
+[0;34mCommand:[0m echo '   '
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_7.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+   
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #8: echo with tabs[0m
+[0;34mCommand:[0m echo -e 'hello	world'
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_8.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello	world
+[1;33mActual stdout:[0m
+-e hello\tworld
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         QUOTE TESTS                    [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #9: single quotes basic[0m
+[0;34mCommand:[0m echo 'hello world'
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_9.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #10: double quotes basic[0m
+[0;34mCommand:[0m echo "hello world"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_10.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #11: single quotes protect dollar[0m
+[0;34mCommand:[0m echo '$TESTVAR'
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_11.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+$TESTVAR
+[1;33mActual stdout:[0m
+value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #12: double quotes expand dollar[0m
+[0;34mCommand:[0m echo "$TESTVAR"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_12.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+value
+[1;33mActual stdout:[0m
+value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #13: mixed quotes[0m
+[0;34mCommand:[0m echo 'hello' "world"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_13.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #14: quotes in middle[0m
+[0;34mCommand:[0m echo hel'lo'wor"ld"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_14.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+helloworld
+[1;33mActual stdout:[0m
+helloworld
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_14.log
+[1;33m==== HEAP SUMMARY ====[0m
+==8942== HEAP SUMMARY:
+==8942==     in use at exit: 232,807 bytes in 235 blocks
+==8942==   total heap usage: 553 allocs, 318 frees, 261,130 bytes allocated
+==8942== 
+==8942== Searching for pointers to 235 not-freed blocks
+==8942== Checked 258,552 bytes
+==8942== 
+==8942== 8 bytes in 1 blocks are definitely lost in loss record 5 of 75
+==8942==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==8942==    by 0x113873: ft_strjoin (in /home/jotong/42core/minishell_26dec/minishell)
+==8942==    by 0x10C02F: ft_strjoin_and_free (lexer.c:30)
+[1;33m==== LEAK SUMMARY ====[0m
+==8942== LEAK SUMMARY:
+==8942==    definitely lost: 8 bytes in 1 blocks
+==8942==    indirectly lost: 0 bytes in 0 blocks
+==8942==      possibly lost: 0 bytes in 0 blocks
+==8942==    still reachable: 0 bytes in 0 blocks
+==8942==         suppressed: 232,799 bytes in 234 blocks
+==8942== 
+==8942== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--8942-- 
+--8942-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--8942-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==8942==    still reachable: 0 bytes in 0 blocks
+==8942==         suppressed: 232,799 bytes in 234 blocks
+==8942== 
+==8942== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--8942-- 
+--8942-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--8942-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==8942== 
+==8942== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #15: empty quotes[0m
+[0;34mCommand:[0m echo '' ""
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_15.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+ 
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #16: nested quote style[0m
+[0;34mCommand:[0m echo "it's working"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_16.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+it's working
+[1;33mActual stdout:[0m
+its working
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #17: dollar in single quotes[0m
+[0;34mCommand:[0m echo '$HOME $USER $?'
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_17.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+$HOME $USER $?
+[1;33mActual stdout:[0m
+/home/jotong jotong 0
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #18: dollar in double quotes[0m
+[0;34mCommand:[0m echo "$HOME $TESTVAR"
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_18.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+/home/jotong value
+[1;33mActual stdout:[0m
+/home/jotong value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #19: multiple dollar signs[0m
+[0;34mCommand:[0m echo $TESTVAR$TESTVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_19.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+valuevalue
+[1;33mActual stdout:[0m
+valuevalue
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         VARIABLE EXPANSION             [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #20: simple variable[0m
+[0;34mCommand:[0m echo $TESTVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_20.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+value
+[1;33mActual stdout:[0m
+value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #21: nonexistent variable[0m
+[0;34mCommand:[0m echo $NONEXISTENT
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_21.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #22: empty variable[0m
+[0;34mCommand:[0m echo $EMPTY_VAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_22.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #23: multiple variables[0m
+[0;34mCommand:[0m echo $TESTVAR $HOME $PATH
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_23.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+value /home/jotong /home/jotong/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jotong/.local/bin:/home/jotong/.local/bin
+[1;33mActual stdout:[0m
+value /home/jotong /home/jotong/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jotong/.local/bin:/home/jotong/.local/bin
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #24: variable at start[0m
+[0;34mCommand:[0m echo $TESTVAR world
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_24.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+value world
+[1;33mActual stdout:[0m
+value world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #25: variable at end[0m
+[0;34mCommand:[0m echo hello $TESTVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_25.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello value
+[1;33mActual stdout:[0m
+hello value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #26: exit status basic[0m
+[0;34mCommand:[0m ls file.txt && echo $?
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_26.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+ls: cannot access 'file.txt': No such file or directory
+[1;33mActual stderr:[0m
+ls: cannot access 'file.txt': No such file or directory
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #27: exit status multiple[0m
+[0;34mCommand:[0m echo $? $? $?
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_27.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+0 0 0
+[1;33mActual stdout:[0m
+0 0 0
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #28: dollar without var[0m
+[0;34mCommand:[0m echo $
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_28.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+$
+[1;33mActual stdout:[0m
+$
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #29: dollar with number[0m
+[0;34mCommand:[0m echo $0 $1 $123
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_29.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+bash 23
+[1;33mActual stdout:[0m
+minishell 23
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_29.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9172== HEAP SUMMARY:
+==9172==     in use at exit: 232,819 bytes in 236 blocks
+==9172==   total heap usage: 583 allocs, 347 frees, 261,282 bytes allocated
+==9172== 
+==9172== Searching for pointers to 236 not-freed blocks
+==9172== Checked 258,552 bytes
+==9172== 
+==9172== 10 bytes in 1 blocks are definitely lost in loss record 6 of 76
+==9172==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9172==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9172==    by 0x10F0F3: get_env_value (strip_expand2.c:54)
+[1;33m==== LEAK SUMMARY ====[0m
+==9172== LEAK SUMMARY:
+==9172==    definitely lost: 20 bytes in 2 blocks
+==9172==    indirectly lost: 0 bytes in 0 blocks
+==9172==      possibly lost: 0 bytes in 0 blocks
+==9172==    still reachable: 0 bytes in 0 blocks
+==9172==         suppressed: 232,799 bytes in 234 blocks
+==9172== 
+==9172== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--9172-- 
+--9172-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9172-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9172==    still reachable: 0 bytes in 0 blocks
+==9172==         suppressed: 232,799 bytes in 234 blocks
+==9172== 
+==9172== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--9172-- 
+--9172-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9172-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9172== 
+==9172== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #30: multi word variable[0m
+[0;34mCommand:[0m echo $MULTI_WORD
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_30.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         WILDCARD TESTS                 [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #31: wildcard all txt[0m
+[0;34mCommand:[0m echo *.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_31.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a.txt b.txt test1.txt test2.txt test3.txt
+[1;33mActual stdout:[0m
+test3.txt b.txt test2.txt a.txt test1.txt
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #32: wildcard with prefix[0m
+[0;34mCommand:[0m echo test*.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_32.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test1.txt test2.txt test3.txt
+[1;33mActual stdout:[0m
+test3.txt test2.txt test1.txt
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #33: wildcard in middle[0m
+[0;34mCommand:[0m echo t*t
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_33.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test1.txt test2.txt test3.txt
+[1;33mActual stdout:[0m
+test3.txt test2.txt test1.txt
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #34: wildcard no match[0m
+[0;34mCommand:[0m echo *.nonexistent
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_34.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+*.nonexistent
+[1;33mActual stdout:[0m
+*.nonexistent
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #35: multiple wildcards[0m
+[0;34mCommand:[0m echo *.txt *.sh
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_35.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a.txt b.txt test1.txt test2.txt test3.txt clean_logs.sh minishell-tester-26dec.sh minishell-tester-old.sh minishell-tester.sh remake_minishell_valgrind_logs.sh
+[1;33mActual stdout:[0m
+test3.txt b.txt test2.txt a.txt test1.txt minishell-tester-26dec.sh clean_logs.sh remake_minishell_valgrind_logs.sh minishell-tester.sh minishell-tester-old.sh
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #36: wildcard with command[0m
+[0;34mCommand:[0m ls *.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_36.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+a.txt
+b.txt
+test1.txt
+test2.txt
+test3.txt
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+ls: cannot access '*.txt': No such file or directory
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         REDIRECTION TESTS              [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #37: output redirect[0m
+[0;34mCommand:[0m echo hello > out.txt && cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_37.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #38: input redirect[0m
+[0;34mCommand:[0m cat < file.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_38.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 1
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: line 1: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+file.txt: No such file or directory
+[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #39: append redirect[0m
+[0;34mCommand:[0m echo first > out.txt && echo second >> out.txt && cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_39.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+first
+second
+[1;33mActual stdout:[0m
+first
+second
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #40: stderr redirect[0m
+[0;34mCommand:[0m ls nonexistent 2> err.txt && cat err.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_40.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #41: redirect both[0m
+[0;34mCommand:[0m ls file.txt nonexistent > out.txt 2> err.txt && cat out.txt && cat err.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_41.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #42: redirect to /dev/null[0m
+[0;34mCommand:[0m echo hidden > /dev/null && echo visible
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_42.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+visible
+[1;33mActual stdout:[0m
+visible
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #43: redirect input and output[0m
+[0;34mCommand:[0m cat < file.txt > out.txt && cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_43.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 1
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: line 1: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+file.txt: No such file or directory
+[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         MULTIPLE FILE REDIRECTIONS    [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #44: multiple output redirects[0m
+[0;34mCommand:[0m echo test > out1.txt > out2.txt > out3.txt && cat out3.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_44.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test
+[1;33mActual stdout:[0m
+test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #45: multiple input redirects[0m
+[0;34mCommand:[0m cat < file.txt < in.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_45.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 1
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: line 1: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+file.txt: No such file or directory
+[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #46: chained redirects[0m
+[0;34mCommand:[0m echo data > temp1.txt && cat < temp1.txt > temp2.txt && cat temp2.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_46.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+data
+[1;33mActual stdout:[0m
+data
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #47: redirect overwrite[0m
+[0;34mCommand:[0m echo first > out.txt && echo second > out.txt && cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_47.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+second
+[1;33mActual stdout:[0m
+second
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #48: mixed redirect types[0m
+[0;34mCommand:[0m ls file.txt > out.txt 2> err.txt >> out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_48.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #49: complex multi-redirect[0m
+[0;34mCommand:[0m echo a > f1.txt && echo b > f2.txt && cat f1.txt f2.txt > f3.txt && cat f3.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_49.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+[1;33mActual stdout:[0m
+a
+b
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         HEREDOC TESTS                  [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #50: basic heredoc[0m
+[0;34mCommand:[0m cat << EOF
+hello
+world
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_50.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+hello
+world
+[1;33mActual stdout:[0m
+> hello
+> world
+> EOF
+hello
+world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_50.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9512== HEAP SUMMARY:
+==9512==     in use at exit: 232,803 bytes in 235 blocks
+==9512==   total heap usage: 575 allocs, 340 frees, 261,343 bytes allocated
+==9512== 
+==9512== Searching for pointers to 235 not-freed blocks
+==9512== Checked 258,544 bytes
+==9512== 
+==9512== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9512==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9512==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9512==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9512== LEAK SUMMARY:
+==9512==    definitely lost: 4 bytes in 1 blocks
+==9512==    indirectly lost: 0 bytes in 0 blocks
+==9512==      possibly lost: 0 bytes in 0 blocks
+==9512==    still reachable: 0 bytes in 0 blocks
+==9512==         suppressed: 232,799 bytes in 234 blocks
+==9512== 
+==9512== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9512-- 
+--9512-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9512-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9512==    still reachable: 0 bytes in 0 blocks
+==9512==         suppressed: 232,799 bytes in 234 blocks
+==9512== 
+==9512== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9512-- 
+--9512-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9512-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9512== 
+==9512== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #51: heredoc with variables[0m
+[0;34mCommand:[0m cat << EOF
+Value: $TESTVAR
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_51.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+Value: value
+[1;33mActual stdout:[0m
+> Value: $TESTVAR
+> EOF
+Value: value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_51.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9532== HEAP SUMMARY:
+==9532==     in use at exit: 232,803 bytes in 235 blocks
+==9532==   total heap usage: 565 allocs, 330 frees, 261,264 bytes allocated
+==9532== 
+==9532== Searching for pointers to 235 not-freed blocks
+==9532== Checked 258,552 bytes
+==9532== 
+==9532== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9532==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9532==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9532==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9532== LEAK SUMMARY:
+==9532==    definitely lost: 4 bytes in 1 blocks
+==9532==    indirectly lost: 0 bytes in 0 blocks
+==9532==      possibly lost: 0 bytes in 0 blocks
+==9532==    still reachable: 0 bytes in 0 blocks
+==9532==         suppressed: 232,799 bytes in 234 blocks
+==9532== 
+==9532== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9532-- 
+--9532-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9532-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9532==    still reachable: 0 bytes in 0 blocks
+==9532==         suppressed: 232,799 bytes in 234 blocks
+==9532== 
+==9532== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9532-- 
+--9532-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9532-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9532== 
+==9532== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #52: heredoc with quotes[0m
+[0;34mCommand:[0m cat << EOF
+'single' "double"
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_52.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+'single' "double"
+[1;33mActual stdout:[0m
+> 'single' "double"
+> EOF
+'single' "double"
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_52.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9552== HEAP SUMMARY:
+==9552==     in use at exit: 232,803 bytes in 235 blocks
+==9552==   total heap usage: 573 allocs, 338 frees, 261,389 bytes allocated
+==9552== 
+==9552== Searching for pointers to 235 not-freed blocks
+==9552== Checked 258,552 bytes
+==9552== 
+==9552== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9552==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9552==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9552==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9552== LEAK SUMMARY:
+==9552==    definitely lost: 4 bytes in 1 blocks
+==9552==    indirectly lost: 0 bytes in 0 blocks
+==9552==      possibly lost: 0 bytes in 0 blocks
+==9552==    still reachable: 0 bytes in 0 blocks
+==9552==         suppressed: 232,799 bytes in 234 blocks
+==9552== 
+==9552== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9552-- 
+--9552-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9552-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9552==    still reachable: 0 bytes in 0 blocks
+==9552==         suppressed: 232,799 bytes in 234 blocks
+==9552== 
+==9552== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9552-- 
+--9552-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9552-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9552== 
+==9552== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #53: heredoc pipe[0m
+[0;34mCommand:[0m cat << EOF | grep hello
+hello world
+test
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_53.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+> hello world
+> test
+> EOF
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_53.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9574== HEAP SUMMARY:
+==9574==     in use at exit: 232,883 bytes in 239 blocks
+==9574==   total heap usage: 593 allocs, 354 frees, 261,817 bytes allocated
+==9574== 
+==9574== Searching for pointers to 239 not-freed blocks
+==9574== Checked 258,856 bytes
+==9574== 
+==9574== 4 bytes in 1 blocks are definitely lost in loss record 3 of 79
+==9574==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9574==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9574==    by 0x10DAEF: token_new (tokenizer.c:25)
+--
+==9575== HEAP SUMMARY:
+==9575==     in use at exit: 232,883 bytes in 239 blocks
+==9575==   total heap usage: 593 allocs, 354 frees, 261,817 bytes allocated
+==9575== 
+==9575== Searching for pointers to 239 not-freed blocks
+==9575== Checked 258,864 bytes
+==9575== 
+==9575== 4 bytes in 1 blocks are definitely lost in loss record 3 of 79
+==9575==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9575==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9575==    by 0x10DAEF: token_new (tokenizer.c:25)
+--
+==9573== HEAP SUMMARY:
+==9573==     in use at exit: 232,803 bytes in 235 blocks
+==9573==   total heap usage: 597 allocs, 362 frees, 261,847 bytes allocated
+==9573== 
+==9573== Searching for pointers to 235 not-freed blocks
+==9573== Checked 258,560 bytes
+==9573== 
+==9573== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9573==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9573==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9573==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9574== LEAK SUMMARY:
+==9574==    definitely lost: 4 bytes in 1 blocks
+==9574==    indirectly lost: 0 bytes in 0 blocks
+==9574==      possibly lost: 0 bytes in 0 blocks
+==9574==    still reachable: 0 bytes in 0 blocks
+==9574==         suppressed: 232,879 bytes in 238 blocks
+==9574== 
+==9574== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9574-- 
+--9574-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9574-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+--
+==9575== LEAK SUMMARY:
+==9575==    definitely lost: 4 bytes in 1 blocks
+==9575==    indirectly lost: 0 bytes in 0 blocks
+==9575==      possibly lost: 0 bytes in 0 blocks
+==9575==    still reachable: 0 bytes in 0 blocks
+==9575==         suppressed: 232,879 bytes in 238 blocks
+==9575== 
+==9575== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9575-- 
+--9575-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9575-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+--
+==9573== LEAK SUMMARY:
+==9573==    definitely lost: 4 bytes in 1 blocks
+==9573==    indirectly lost: 0 bytes in 0 blocks
+==9573==      possibly lost: 0 bytes in 0 blocks
+==9573==    still reachable: 0 bytes in 0 blocks
+==9573==         suppressed: 232,799 bytes in 234 blocks
+==9573== 
+==9573== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9573-- 
+--9573-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9573-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9574==    still reachable: 0 bytes in 0 blocks
+==9574==         suppressed: 232,879 bytes in 238 blocks
+==9574== 
+==9574== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9574-- 
+--9574-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9574-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+==9574== 
+==9574== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+==9575== 
+==9575== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==9575== Open file descriptor 3: /home/jotong/42core/minishell_26dec/valgrind_logs/valgrind_test_53.log
+==9575==    <inherited from parent>
+==9575== 
+==9575== 
+==9575== HEAP SUMMARY:
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #54: heredoc redirect output[0m
+[0;34mCommand:[0m cat << EOF > out.txt
+heredoc content
+EOF
+cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_54.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+heredoc content
+[1;33mActual stdout:[0m
+> heredoc content
+> EOF
+heredoc content
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_54.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9596== HEAP SUMMARY:
+==9596==     in use at exit: 232,803 bytes in 235 blocks
+==9596==   total heap usage: 606 allocs, 371 frees, 261,934 bytes allocated
+==9596== 
+==9596== Searching for pointers to 235 not-freed blocks
+==9596== Checked 258,560 bytes
+==9596== 
+==9596== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9596==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9596==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9596==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9596== LEAK SUMMARY:
+==9596==    definitely lost: 4 bytes in 1 blocks
+==9596==    indirectly lost: 0 bytes in 0 blocks
+==9596==      possibly lost: 0 bytes in 0 blocks
+==9596==    still reachable: 0 bytes in 0 blocks
+==9596==         suppressed: 232,799 bytes in 234 blocks
+==9596== 
+==9596== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9596-- 
+--9596-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9596-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9596==    still reachable: 0 bytes in 0 blocks
+==9596==         suppressed: 232,799 bytes in 234 blocks
+==9596== 
+==9596== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9596-- 
+--9596-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9596-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9596== 
+==9596== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #55: multiple heredocs[0m
+[0;34mCommand:[0m cat << EOF1 << EOF2
+first
+EOF1
+second
+EOF2
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_55.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+second
+[1;33mActual stdout:[0m
+> first
+> EOF1
+> second
+> EOF2
+second
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_55.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9617== HEAP SUMMARY:
+==9617==     in use at exit: 232,809 bytes in 236 blocks
+==9617==   total heap usage: 595 allocs, 359 frees, 261,591 bytes allocated
+==9617== 
+==9617== Searching for pointers to 236 not-freed blocks
+==9617== Checked 258,552 bytes
+==9617== 
+==9617== 10 bytes in 2 blocks are definitely lost in loss record 6 of 75
+==9617==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9617==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9617==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9617== LEAK SUMMARY:
+==9617==    definitely lost: 10 bytes in 2 blocks
+==9617==    indirectly lost: 0 bytes in 0 blocks
+==9617==      possibly lost: 0 bytes in 0 blocks
+==9617==    still reachable: 0 bytes in 0 blocks
+==9617==         suppressed: 232,799 bytes in 234 blocks
+==9617== 
+==9617== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9617-- 
+--9617-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9617-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9617==    still reachable: 0 bytes in 0 blocks
+==9617==         suppressed: 232,799 bytes in 234 blocks
+==9617== 
+==9617== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9617-- 
+--9617-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9617-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9617== 
+==9617== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #56: heredoc with command[0m
+[0;34mCommand:[0m grep world << EOF
+hello
+world
+test
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_56.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+world
+[1;33mActual stdout:[0m
+> hello
+> world
+> test
+> EOF
+world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_56.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9637== HEAP SUMMARY:
+==9637==     in use at exit: 232,803 bytes in 235 blocks
+==9637==   total heap usage: 593 allocs, 358 frees, 261,620 bytes allocated
+==9637== 
+==9637== Searching for pointers to 235 not-freed blocks
+==9637== Checked 258,552 bytes
+==9637== 
+==9637== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9637==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9637==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9637==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9637== LEAK SUMMARY:
+==9637==    definitely lost: 4 bytes in 1 blocks
+==9637==    indirectly lost: 0 bytes in 0 blocks
+==9637==      possibly lost: 0 bytes in 0 blocks
+==9637==    still reachable: 0 bytes in 0 blocks
+==9637==         suppressed: 232,799 bytes in 234 blocks
+==9637== 
+==9637== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9637-- 
+--9637-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9637-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9637==    still reachable: 0 bytes in 0 blocks
+==9637==         suppressed: 232,799 bytes in 234 blocks
+==9637== 
+==9637== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9637-- 
+--9637-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9637-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==9637== 
+==9637== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         PIPE TESTS                     [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #57: simple pipe[0m
+[0;34mCommand:[0m echo hello | cat
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_57.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #58: pipe with grep[0m
+[0;34mCommand:[0m echo hello world | grep world
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_58.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #59: pipe chain[0m
+[0;34mCommand:[0m echo hello | cat | cat | cat
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_59.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #60: pipe with wc[0m
+[0;34mCommand:[0m echo hello world test | wc -w
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_60.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+3
+[1;33mActual stdout:[0m
+3
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #61: pipe with sort[0m
+[0;34mCommand:[0m echo -e 'c
+b
+a' | sort
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_61.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+c
+[1;33mActual stdout:[0m
+-e c\nb\na
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #62: pipe with redirects[0m
+[0;34mCommand:[0m echo test | cat > out.txt && cat out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_62.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test
+[1;33mActual stdout:[0m
+test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #63: complex pipe[0m
+[0;34mCommand:[0m cat file.txt | grep World | cat
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_63.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #64: pipe with heredoc[0m
+[0;34mCommand:[0m cat << EOF | grep hello
+hello
+world
+EOF
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_64.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+> hello
+> world
+> EOF
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_64.log
+[1;33m==== HEAP SUMMARY ====[0m
+==9813== HEAP SUMMARY:
+==9813==     in use at exit: 232,883 bytes in 239 blocks
+==9813==   total heap usage: 588 allocs, 349 frees, 261,710 bytes allocated
+==9813== 
+==9813== Searching for pointers to 239 not-freed blocks
+==9813== Checked 258,856 bytes
+==9813== 
+==9813== 4 bytes in 1 blocks are definitely lost in loss record 3 of 79
+==9813==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9813==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9813==    by 0x10DAEF: token_new (tokenizer.c:25)
+--
+==9814== HEAP SUMMARY:
+==9814==     in use at exit: 232,883 bytes in 239 blocks
+==9814==   total heap usage: 588 allocs, 349 frees, 261,710 bytes allocated
+==9814== 
+==9814== Searching for pointers to 239 not-freed blocks
+==9814== Checked 258,864 bytes
+==9814== 
+==9814== 4 bytes in 1 blocks are definitely lost in loss record 3 of 79
+==9814==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9814==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9814==    by 0x10DAEF: token_new (tokenizer.c:25)
+--
+==9812== HEAP SUMMARY:
+==9812==     in use at exit: 232,803 bytes in 235 blocks
+==9812==   total heap usage: 592 allocs, 357 frees, 261,740 bytes allocated
+==9812== 
+==9812== Searching for pointers to 235 not-freed blocks
+==9812== Checked 258,560 bytes
+==9812== 
+==9812== 4 bytes in 1 blocks are definitely lost in loss record 1 of 75
+==9812==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==9812==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==9812==    by 0x10DAEF: token_new (tokenizer.c:25)
+[1;33m==== LEAK SUMMARY ====[0m
+==9813== LEAK SUMMARY:
+==9813==    definitely lost: 4 bytes in 1 blocks
+==9813==    indirectly lost: 0 bytes in 0 blocks
+==9813==      possibly lost: 0 bytes in 0 blocks
+==9813==    still reachable: 0 bytes in 0 blocks
+==9813==         suppressed: 232,879 bytes in 238 blocks
+==9813== 
+==9813== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9813-- 
+--9813-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9813-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+--
+==9814== LEAK SUMMARY:
+==9814==    definitely lost: 4 bytes in 1 blocks
+==9814==    indirectly lost: 0 bytes in 0 blocks
+==9814==      possibly lost: 0 bytes in 0 blocks
+==9814==    still reachable: 0 bytes in 0 blocks
+==9814==         suppressed: 232,879 bytes in 238 blocks
+==9814== 
+==9814== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9814-- 
+--9814-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9814-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+--
+==9812== LEAK SUMMARY:
+==9812==    definitely lost: 4 bytes in 1 blocks
+==9812==    indirectly lost: 0 bytes in 0 blocks
+==9812==      possibly lost: 0 bytes in 0 blocks
+==9812==    still reachable: 0 bytes in 0 blocks
+==9812==         suppressed: 232,799 bytes in 234 blocks
+==9812== 
+==9812== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--9812-- 
+--9812-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--9812-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==9813==    still reachable: 0 bytes in 0 blocks
+==9813==         suppressed: 232,879 bytes in 238 blocks
+==9813== 
+==9813== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--9813-- 
+--9813-- used_suppression:     74 readline readline.supp:2 suppressed: 228,803 bytes in 234 blocks
+--9813-- used_suppression:      4 history readline.supp:9 suppressed: 4,076 bytes in 4 blocks
+==9813== 
+==9813== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+==9814== 
+==9814== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==9814== Open file descriptor 3: /home/jotong/42core/minishell_26dec/valgrind_logs/valgrind_test_64.log
+==9814==    <inherited from parent>
+==9814== 
+==9814== 
+==9814== HEAP SUMMARY:
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         LOGICAL OPERATOR TESTS         [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #65: AND success[0m
+[0;34mCommand:[0m echo first && echo second
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_65.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+first
+second
+[1;33mActual stdout:[0m
+first
+second
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #66: AND failure[0m
+[0;34mCommand:[0m ls nonexistent 2>/dev/null && echo should_not_print
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_66.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #67: OR success first[0m
+[0;34mCommand:[0m echo success || echo should_not_print
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_67.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+success
+[1;33mActual stdout:[0m
+success
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #68: OR failure first[0m
+[0;34mCommand:[0m ls nonexistent 2>/dev/null || echo recovered
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_68.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+recovered
+[1;33mActual stdout:[0m
+recovered
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #69: combined AND OR[0m
+[0;34mCommand:[0m echo ok && ls nonexistent 2>/dev/null || echo fallback
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_69.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+ok
+fallback
+[1;33mActual stdout:[0m
+ok
+fallback
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #70: multiple AND[0m
+[0;34mCommand:[0m echo a && echo b && echo c
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_70.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+c
+[1;33mActual stdout:[0m
+a
+b
+c
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #71: multiple OR[0m
+[0;34mCommand:[0m ls nope 2>/dev/null || ls nope2 2>/dev/null || echo final
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_71.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+final
+[1;33mActual stdout:[0m
+final
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #72: complex logic chain[0m
+[0;34mCommand:[0m echo start && echo mid || echo alt && echo end
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_72.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+start
+mid
+end
+[1;33mActual stdout:[0m
+start
+mid
+end
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         PARENTHESES (BONUS)            [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #73: simple parentheses[0m
+[0;34mCommand:[0m (echo hello)
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_73.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #74: nested parentheses[0m
+[0;34mCommand:[0m ((echo nested))
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_74.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+nested
+[1;33mExpected stderr:[0m
+bash: line 1: ((: echo nested: syntax error in expression (error token is "nested")
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #75: parentheses with AND[0m
+[0;34mCommand:[0m (echo a && echo b)
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_75.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+[1;33mActual stdout:[0m
+a
+b
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #76: parentheses with OR[0m
+[0;34mCommand:[0m (ls nope 2>/dev/null || echo ok)
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_76.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+ok
+[1;33mActual stdout:[0m
+ok
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #77: parentheses priority[0m
+[0;34mCommand:[0m echo a && (echo b || echo c) && echo d
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_77.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+d
+[1;33mActual stdout:[0m
+a
+b
+d
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #78: multiple paren groups[0m
+[0;34mCommand:[0m (echo first) && (echo second)
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_78.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+first
+second
+[1;33mActual stdout:[0m
+first
+second
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #79: complex paren logic[0m
+[0;34mCommand:[0m (echo a && echo b) || (echo c && echo d)
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_79.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+[1;33mActual stdout:[0m
+a
+b
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         CD BUILT-IN TESTS              [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #80: cd to /tmp[0m
+[0;34mCommand:[0m cd /tmp && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_80.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/tmp
+[1;33mActual stdout:[0m
+/tmp
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_80.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10078== HEAP SUMMARY:
+==10078==     in use at exit: 232,866 bytes in 236 blocks
+==10078==   total heap usage: 558 allocs, 322 frees, 261,271 bytes allocated
+==10078== 
+==10078== Searching for pointers to 236 not-freed blocks
+==10078== Checked 258,544 bytes
+==10078== 
+==10078== 67 bytes in 2 blocks are definitely lost in loss record 19 of 75
+==10078==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10078==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==10078==    by 0x1092B7: dup_envp (main.c:31)
+[1;33m==== LEAK SUMMARY ====[0m
+==10078== LEAK SUMMARY:
+==10078==    definitely lost: 67 bytes in 2 blocks
+==10078==    indirectly lost: 0 bytes in 0 blocks
+==10078==      possibly lost: 0 bytes in 0 blocks
+==10078==    still reachable: 0 bytes in 0 blocks
+==10078==         suppressed: 232,799 bytes in 234 blocks
+==10078== 
+==10078== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10078-- 
+--10078-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10078-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10078==    still reachable: 0 bytes in 0 blocks
+==10078==         suppressed: 232,799 bytes in 234 blocks
+==10078== 
+==10078== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10078-- 
+--10078-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10078-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10078== 
+==10078== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #81: cd to home[0m
+[0;34mCommand:[0m cd ~ && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_81.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/home/jotong
+[1;33mActual stdout:[0m
+/home/jotong
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_81.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10096== HEAP SUMMARY:
+==10096==     in use at exit: 232,866 bytes in 236 blocks
+==10096==   total heap usage: 558 allocs, 322 frees, 261,296 bytes allocated
+==10096== 
+==10096== Searching for pointers to 236 not-freed blocks
+==10096== Checked 258,544 bytes
+==10096== 
+==10096== 67 bytes in 2 blocks are definitely lost in loss record 19 of 75
+==10096==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10096==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==10096==    by 0x1092B7: dup_envp (main.c:31)
+[1;33m==== LEAK SUMMARY ====[0m
+==10096== LEAK SUMMARY:
+==10096==    definitely lost: 67 bytes in 2 blocks
+==10096==    indirectly lost: 0 bytes in 0 blocks
+==10096==      possibly lost: 0 bytes in 0 blocks
+==10096==    still reachable: 0 bytes in 0 blocks
+==10096==         suppressed: 232,799 bytes in 234 blocks
+==10096== 
+==10096== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10096-- 
+--10096-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10096-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10096==    still reachable: 0 bytes in 0 blocks
+==10096==         suppressed: 232,799 bytes in 234 blocks
+==10096== 
+==10096== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10096-- 
+--10096-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10096-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10096== 
+==10096== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #82: cd to previous dir[0m
+[0;34mCommand:[0m cd /tmp && cd - && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_82.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/home/jotong/42core/minishell_26dec
+/home/jotong/42core/minishell_26dec
+[1;33mActual stdout:[0m
+/home/jotong/42core/minishell_26dec
+/home/jotong/42core/minishell_26dec
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_82.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10114== HEAP SUMMARY:
+==10114==     in use at exit: 232,918 bytes in 238 blocks
+==10114==   total heap usage: 585 allocs, 347 frees, 261,713 bytes allocated
+==10114== 
+==10114== Searching for pointers to 238 not-freed blocks
+==10114== Checked 258,552 bytes
+==10114== 
+==10114== 9 bytes in 1 blocks are definitely lost in loss record 6 of 77
+==10114==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10114==    by 0x1097DB: setenv_value (shell_utils.c:72)
+==10114==    by 0x110F47: update_pwd_vars (cd.c:48)
+[1;33m==== LEAK SUMMARY ====[0m
+==10114== LEAK SUMMARY:
+==10114==    definitely lost: 119 bytes in 4 blocks
+==10114==    indirectly lost: 0 bytes in 0 blocks
+==10114==      possibly lost: 0 bytes in 0 blocks
+==10114==    still reachable: 0 bytes in 0 blocks
+==10114==         suppressed: 232,799 bytes in 234 blocks
+==10114== 
+==10114== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+--10114-- 
+--10114-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10114-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10114==    still reachable: 0 bytes in 0 blocks
+==10114==         suppressed: 232,799 bytes in 234 blocks
+==10114== 
+==10114== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+--10114-- 
+--10114-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10114-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10114== 
+==10114== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #83: cd invalid path[0m
+[0;34mCommand:[0m cd /nonexistent/path
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_83.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 1
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+bash: line 1: cd: /nonexistent/path: No such file or directory
+[1;33mActual stderr:[0m
+cd: No such file or directory: /nonexistent/path[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #84: cd with ..[0m
+[0;34mCommand:[0m cd /tmp && cd .. && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_84.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/
+[1;33mActual stdout:[0m
+/
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_84.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10147== HEAP SUMMARY:
+==10147==     in use at exit: 232,918 bytes in 238 blocks
+==10147==   total heap usage: 585 allocs, 347 frees, 261,688 bytes allocated
+==10147== 
+==10147== Searching for pointers to 238 not-freed blocks
+==10147== Checked 258,560 bytes
+==10147== 
+==10147== 9 bytes in 1 blocks are definitely lost in loss record 6 of 77
+==10147==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10147==    by 0x1097DB: setenv_value (shell_utils.c:72)
+==10147==    by 0x110F47: update_pwd_vars (cd.c:48)
+[1;33m==== LEAK SUMMARY ====[0m
+==10147== LEAK SUMMARY:
+==10147==    definitely lost: 119 bytes in 4 blocks
+==10147==    indirectly lost: 0 bytes in 0 blocks
+==10147==      possibly lost: 0 bytes in 0 blocks
+==10147==    still reachable: 0 bytes in 0 blocks
+==10147==         suppressed: 232,799 bytes in 234 blocks
+==10147== 
+==10147== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+--10147-- 
+--10147-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10147-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10147==    still reachable: 0 bytes in 0 blocks
+==10147==         suppressed: 232,799 bytes in 234 blocks
+==10147== 
+==10147== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+--10147-- 
+--10147-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10147-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10147== 
+==10147== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #85: cd relative path[0m
+[0;34mCommand:[0m cd . && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_85.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/home/jotong/42core/minishell_26dec
+[1;33mActual stdout:[0m
+/home/jotong/42core/minishell_26dec
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_85.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10165== HEAP SUMMARY:
+==10165==     in use at exit: 232,866 bytes in 236 blocks
+==10165==   total heap usage: 558 allocs, 322 frees, 261,275 bytes allocated
+==10165== 
+==10165== Searching for pointers to 236 not-freed blocks
+==10165== Checked 258,544 bytes
+==10165== 
+==10165== 67 bytes in 2 blocks are definitely lost in loss record 19 of 75
+==10165==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10165==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==10165==    by 0x1092B7: dup_envp (main.c:31)
+[1;33m==== LEAK SUMMARY ====[0m
+==10165== LEAK SUMMARY:
+==10165==    definitely lost: 67 bytes in 2 blocks
+==10165==    indirectly lost: 0 bytes in 0 blocks
+==10165==      possibly lost: 0 bytes in 0 blocks
+==10165==    still reachable: 0 bytes in 0 blocks
+==10165==         suppressed: 232,799 bytes in 234 blocks
+==10165== 
+==10165== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10165-- 
+--10165-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10165-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10165==    still reachable: 0 bytes in 0 blocks
+==10165==         suppressed: 232,799 bytes in 234 blocks
+==10165== 
+==10165== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10165-- 
+--10165-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10165-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10165== 
+==10165== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #86: cd no args[0m
+[0;34mCommand:[0m cd && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_86.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/home/jotong
+[1;33mActual stdout:[0m
+/home/jotong
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_86.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10183== HEAP SUMMARY:
+==10183==     in use at exit: 232,866 bytes in 236 blocks
+==10183==   total heap usage: 549 allocs, 313 frees, 261,170 bytes allocated
+==10183== 
+==10183== Searching for pointers to 236 not-freed blocks
+==10183== Checked 258,544 bytes
+==10183== 
+==10183== 67 bytes in 2 blocks are definitely lost in loss record 19 of 75
+==10183==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10183==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==10183==    by 0x1092B7: dup_envp (main.c:31)
+[1;33m==== LEAK SUMMARY ====[0m
+==10183== LEAK SUMMARY:
+==10183==    definitely lost: 67 bytes in 2 blocks
+==10183==    indirectly lost: 0 bytes in 0 blocks
+==10183==      possibly lost: 0 bytes in 0 blocks
+==10183==    still reachable: 0 bytes in 0 blocks
+==10183==         suppressed: 232,799 bytes in 234 blocks
+==10183== 
+==10183== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10183-- 
+--10183-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10183-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10183==    still reachable: 0 bytes in 0 blocks
+==10183==         suppressed: 232,799 bytes in 234 blocks
+==10183== 
+==10183== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10183-- 
+--10183-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10183-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10183== 
+==10183== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         PWD BUILT-IN TESTS             [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #87: pwd basic[0m
+[0;34mCommand:[0m pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_87.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+/home/jotong/42core/minishell_26dec
+[1;33mActual stdout:[0m
+/home/jotong/42core/minishell_26dec
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #88: pwd after cd[0m
+[0;34mCommand:[0m cd /tmp && pwd
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_88.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+/tmp
+[1;33mActual stdout:[0m
+/tmp
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_88.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10216== HEAP SUMMARY:
+==10216==     in use at exit: 232,866 bytes in 236 blocks
+==10216==   total heap usage: 558 allocs, 322 frees, 261,271 bytes allocated
+==10216== 
+==10216== Searching for pointers to 236 not-freed blocks
+==10216== Checked 258,544 bytes
+==10216== 
+==10216== 67 bytes in 2 blocks are definitely lost in loss record 19 of 75
+==10216==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10216==    by 0x113B57: ft_strdup (in /home/jotong/42core/minishell_26dec/minishell)
+==10216==    by 0x1092B7: dup_envp (main.c:31)
+[1;33m==== LEAK SUMMARY ====[0m
+==10216== LEAK SUMMARY:
+==10216==    definitely lost: 67 bytes in 2 blocks
+==10216==    indirectly lost: 0 bytes in 0 blocks
+==10216==      possibly lost: 0 bytes in 0 blocks
+==10216==    still reachable: 0 bytes in 0 blocks
+==10216==         suppressed: 232,799 bytes in 234 blocks
+==10216== 
+==10216== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10216-- 
+--10216-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10216-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10216==    still reachable: 0 bytes in 0 blocks
+==10216==         suppressed: 232,799 bytes in 234 blocks
+==10216== 
+==10216== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10216-- 
+--10216-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10216-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10216== 
+==10216== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         EXPORT BUILT-IN TESTS          [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #89: export new variable[0m
+[0;34mCommand:[0m export NEWVAR=test && echo $NEWVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_89.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+test
+[1;33mActual stdout:[0m
+test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_89.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10234== HEAP SUMMARY:
+==10234==     in use at exit: 233,263 bytes in 235 blocks
+==10234==   total heap usage: 579 allocs, 344 frees, 262,029 bytes allocated
+==10234== 
+==10234== Searching for pointers to 235 not-freed blocks
+==10234== Checked 258,568 bytes
+==10234== 
+==10234== 464 bytes in 1 blocks are definitely lost in loss record 26 of 75
+==10234==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10234==    by 0x109273: dup_envp (main.c:26)
+==10234==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10234== LEAK SUMMARY:
+==10234==    definitely lost: 464 bytes in 1 blocks
+==10234==    indirectly lost: 0 bytes in 0 blocks
+==10234==      possibly lost: 0 bytes in 0 blocks
+==10234==    still reachable: 0 bytes in 0 blocks
+==10234==         suppressed: 232,799 bytes in 234 blocks
+==10234== 
+==10234== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10234-- 
+--10234-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10234-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10234==    still reachable: 0 bytes in 0 blocks
+==10234==         suppressed: 232,799 bytes in 234 blocks
+==10234== 
+==10234== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10234-- 
+--10234-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10234-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10234== 
+==10234== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #90: export empty variable[0m
+[0;34mCommand:[0m export EMPTYVAR= && echo $EMPTYVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_90.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_90.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10252== HEAP SUMMARY:
+==10252==     in use at exit: 233,263 bytes in 235 blocks
+==10252==   total heap usage: 579 allocs, 344 frees, 261,977 bytes allocated
+==10252== 
+==10252== Searching for pointers to 235 not-freed blocks
+==10252== Checked 258,568 bytes
+==10252== 
+==10252== 464 bytes in 1 blocks are definitely lost in loss record 26 of 75
+==10252==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10252==    by 0x109273: dup_envp (main.c:26)
+==10252==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10252== LEAK SUMMARY:
+==10252==    definitely lost: 464 bytes in 1 blocks
+==10252==    indirectly lost: 0 bytes in 0 blocks
+==10252==      possibly lost: 0 bytes in 0 blocks
+==10252==    still reachable: 0 bytes in 0 blocks
+==10252==         suppressed: 232,799 bytes in 234 blocks
+==10252== 
+==10252== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10252-- 
+--10252-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10252-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10252==    still reachable: 0 bytes in 0 blocks
+==10252==         suppressed: 232,799 bytes in 234 blocks
+==10252== 
+==10252== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10252-- 
+--10252-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10252-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10252== 
+==10252== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #91: export without value[0m
+[0;34mCommand:[0m export NOVALUE
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_91.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #92: export list all[0m
+[0;34mCommand:[0m export
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_92.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+declare -x CLUTTER_DISABLE_MIPMAPPED_TEXT="1"
+declare -x COLORTERM="truecolor"
+declare -x DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+declare -x DEBUGINFOD_URLS="https://debuginfod.ubuntu.com "
+declare -x DESKTOP_SESSION="ubuntu"
+declare -x DISPLAY=":0"
+declare -x EMPTY_VAR=""
+declare -x GDMSESSION="ubuntu"
+declare -x GNOME_DESKTOP_SESSION_ID="this-is-deprecated"
+declare -x GNOME_SETUP_DISPLAY=":1"
+declare -x GNOME_SHELL_SESSION_MODE="ubuntu"
+declare -x GNOME_TERMINAL_SCREEN="/org/gnome/Terminal/screen/aa4798db_6431_40ee_ac3e_c9c951f9d019"
+declare -x GNOME_TERMINAL_SERVICE=":1.109"
+declare -x GSM_SKIP_SSH_AGENT_WORKAROUND="true"
+declare -x GTK_MODULES="gail:atk-bridge"
+declare -x HOME="/home/jotong"
+declare -x IM_CONFIG_PHASE="1"
+declare -x LANG="en_US.UTF-8"
+declare -x LESSCLOSE="/usr/bin/lesspipe %s %s"
+declare -x LESSOPEN="| /usr/bin/lesspipe %s"
+declare -x LOGNAME="jotong"
+declare -x LS_COLORS="rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:"
+declare -x MEMORY_PRESSURE_WATCH="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure"
+declare -x MEMORY_PRESSURE_WRITE="c29tZSAyMDAwMDAgMjAwMDAwMAA="
+declare -x MULTI_WORD="hello world"
+declare -x OLDPWD="/home/jotong/42core"
+declare -x PATH="/home/jotong/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jotong/.local/bin:/home/jotong/.local/bin"
+declare -x PATH_TEST="/usr/bin:/bin"
+declare -x PWD="/home/jotong/42core/minishell_26dec"
+declare -x QT_ACCESSIBILITY="1"
+declare -x QT_IM_MODULE="ibus"
+declare -x SESSION_MANAGER="local/linux:@/tmp/.ICE-unix/1923,unix/linux:/tmp/.ICE-unix/1923"
+declare -x SHELL="/bin/bash"
+declare -x SHLVL="3"
+declare -x SSH_AUTH_SOCK="/run/user/1000/keyring/ssh"
+declare -x SYSTEMD_EXEC_PID="1955"
+declare -x TERM="xterm-256color"
+declare -x TESTVAR="value"
+declare -x USER="jotong"
+declare -x USERNAME="jotong"
+declare -x VTE_VERSION="7600"
+declare -x WAYLAND_DISPLAY="wayland-0"
+declare -x XAUTHORITY="/run/user/1000/.mutter-Xwaylandauth.KAQNH3"
+declare -x XDG_CONFIG_DIRS="/etc/xdg/xdg-ubuntu:/etc/xdg"
+declare -x XDG_CURRENT_DESKTOP="ubuntu:GNOME"
+declare -x XDG_DATA_DIRS="/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop"
+declare -x XDG_MENU_PREFIX="gnome-"
+declare -x XDG_RUNTIME_DIR="/run/user/1000"
+declare -x XDG_SESSION_CLASS="user"
+declare -x XDG_SESSION_DESKTOP="ubuntu"
+declare -x XDG_SESSION_TYPE="wayland"
+declare -x XMODIFIERS="@im=ibus"
+declare -x _="/usr/bin/bash"
+[1;33mActual stdout:[0m
+LESSOPEN=| /usr/bin/lesspipe %s
+USER=jotong
+XDG_SESSION_TYPE=wayland
+CLUTTER_DISABLE_MIPMAPPED_TEXT=1
+SHLVL=2
+LD_LIBRARY_PATH=/usr/lib/debug
+HOME=/home/jotong
+OLDPWD=/home/jotong/42core
+DESKTOP_SESSION=ubuntu
+PATH_TEST=/usr/bin:/bin
+GNOME_SHELL_SESSION_MODE=ubuntu
+GTK_MODULES=gail:atk-bridge
+MULTI_WORD=hello world
+SYSTEMD_EXEC_PID=1955
+GSM_SKIP_SSH_AGENT_WORKAROUND=true
+DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus
+COLORTERM=truecolor
+DEBUGINFOD_URLS=https://debuginfod.ubuntu.com 
+IM_CONFIG_PHASE=1
+WAYLAND_DISPLAY=wayland-0
+LOGNAME=jotong
+_=/usr/bin/valgrind
+MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure
+XDG_SESSION_CLASS=user
+USERNAME=jotong
+TERM=xterm-256color
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+PATH=/home/jotong/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/jotong/.local/bin:/home/jotong/.local/bin
+SESSION_MANAGER=local/linux:@/tmp/.ICE-unix/1923,unix/linux:/tmp/.ICE-unix/1923
+XDG_MENU_PREFIX=gnome-
+GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/aa4798db_6431_40ee_ac3e_c9c951f9d019
+GNOME_SETUP_DISPLAY=:1
+XDG_RUNTIME_DIR=/run/user/1000
+GLIBCPP_FORCE_NEW=1
+DISPLAY=:0
+LANG=en_US.UTF-8
+XDG_CURRENT_DESKTOP=ubuntu:GNOME
+TESTVAR=value
+XMODIFIERS=@im=ibus
+XDG_SESSION_DESKTOP=ubuntu
+XAUTHORITY=/run/user/1000/.mutter-Xwaylandauth.KAQNH3
+LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+GNOME_TERMINAL_SERVICE=:1.109
+SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+SHELL=/bin/bash
+QT_ACCESSIBILITY=1
+GDMSESSION=ubuntu
+LESSCLOSE=/usr/bin/lesspipe %s %s
+QT_IM_MODULE=ibus
+PWD=/home/jotong/42core/minishell_26dec
+XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA=
+VTE_VERSION=7600
+EMPTY_VAR=
+GLIBCXX_FORCE_NEW=1
+LD_PRELOAD=/usr/libexec/valgrind/vgpreload_core-arm64-linux.so:/usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #93: export multiple[0m
+[0;34mCommand:[0m export VAR1=a VAR2=b && echo $VAR1 $VAR2
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_93.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+a b
+[1;33mActual stdout:[0m
+a b
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_93.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10300== HEAP SUMMARY:
+==10300==     in use at exit: 233,735 bytes in 236 blocks
+==10300==   total heap usage: 610 allocs, 374 frees, 262,679 bytes allocated
+==10300== 
+==10300== Searching for pointers to 236 not-freed blocks
+==10300== Checked 258,576 bytes
+==10300== 
+==10300== 464 bytes in 1 blocks are definitely lost in loss record 26 of 76
+==10300==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10300==    by 0x109273: dup_envp (main.c:26)
+==10300==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10300== LEAK SUMMARY:
+==10300==    definitely lost: 936 bytes in 2 blocks
+==10300==    indirectly lost: 0 bytes in 0 blocks
+==10300==      possibly lost: 0 bytes in 0 blocks
+==10300==    still reachable: 0 bytes in 0 blocks
+==10300==         suppressed: 232,799 bytes in 234 blocks
+==10300== 
+==10300== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--10300-- 
+--10300-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10300-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10300==    still reachable: 0 bytes in 0 blocks
+==10300==         suppressed: 232,799 bytes in 234 blocks
+==10300== 
+==10300== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--10300-- 
+--10300-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10300-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10300== 
+==10300== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #94: export with quotes[0m
+[0;34mCommand:[0m export QUOTED="hello world" && echo $QUOTED
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_94.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_94.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10318== HEAP SUMMARY:
+==10318==     in use at exit: 233,263 bytes in 235 blocks
+==10318==   total heap usage: 583 allocs, 348 frees, 262,255 bytes allocated
+==10318== 
+==10318== Searching for pointers to 235 not-freed blocks
+==10318== Checked 258,576 bytes
+==10318== 
+==10318== 464 bytes in 1 blocks are definitely lost in loss record 26 of 75
+==10318==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10318==    by 0x109273: dup_envp (main.c:26)
+==10318==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10318== LEAK SUMMARY:
+==10318==    definitely lost: 464 bytes in 1 blocks
+==10318==    indirectly lost: 0 bytes in 0 blocks
+==10318==      possibly lost: 0 bytes in 0 blocks
+==10318==    still reachable: 0 bytes in 0 blocks
+==10318==         suppressed: 232,799 bytes in 234 blocks
+==10318== 
+==10318== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10318-- 
+--10318-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10318-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10318==    still reachable: 0 bytes in 0 blocks
+==10318==         suppressed: 232,799 bytes in 234 blocks
+==10318== 
+==10318== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10318-- 
+--10318-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10318-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10318== 
+==10318== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         UNSET BUILT-IN TESTS           [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #95: unset existing var[0m
+[0;34mCommand:[0m export TMPVAR=value && unset TMPVAR && echo $TMPVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_95.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_95.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10336== HEAP SUMMARY:
+==10336==     in use at exit: 233,263 bytes in 235 blocks
+==10336==   total heap usage: 605 allocs, 370 frees, 262,927 bytes allocated
+==10336== 
+==10336== Searching for pointers to 235 not-freed blocks
+==10336== Checked 258,584 bytes
+==10336== 
+==10336== 464 bytes in 1 blocks are definitely lost in loss record 26 of 75
+==10336==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10336==    by 0x109273: dup_envp (main.c:26)
+==10336==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10336== LEAK SUMMARY:
+==10336==    definitely lost: 464 bytes in 1 blocks
+==10336==    indirectly lost: 0 bytes in 0 blocks
+==10336==      possibly lost: 0 bytes in 0 blocks
+==10336==    still reachable: 0 bytes in 0 blocks
+==10336==         suppressed: 232,799 bytes in 234 blocks
+==10336== 
+==10336== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10336-- 
+--10336-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10336-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10336==    still reachable: 0 bytes in 0 blocks
+==10336==         suppressed: 232,799 bytes in 234 blocks
+==10336== 
+==10336== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10336-- 
+--10336-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10336-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10336== 
+==10336== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #96: unset nonexistent[0m
+[0;34mCommand:[0m unset NONEXISTENT
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_96.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #97: unset multiple[0m
+[0;34mCommand:[0m export A=1 B=2 && unset A B && echo $A $B
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_97.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+
+[1;33mActual stdout:[0m
+
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_97.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10369== HEAP SUMMARY:
+==10369==     in use at exit: 233,735 bytes in 236 blocks
+==10369==   total heap usage: 644 allocs, 408 frees, 263,979 bytes allocated
+==10369== 
+==10369== Searching for pointers to 236 not-freed blocks
+==10369== Checked 258,576 bytes
+==10369== 
+==10369== 464 bytes in 1 blocks are definitely lost in loss record 26 of 76
+==10369==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10369==    by 0x109273: dup_envp (main.c:26)
+==10369==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10369== LEAK SUMMARY:
+==10369==    definitely lost: 936 bytes in 2 blocks
+==10369==    indirectly lost: 0 bytes in 0 blocks
+==10369==      possibly lost: 0 bytes in 0 blocks
+==10369==    still reachable: 0 bytes in 0 blocks
+==10369==         suppressed: 232,799 bytes in 234 blocks
+==10369== 
+==10369== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--10369-- 
+--10369-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10369-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10369==    still reachable: 0 bytes in 0 blocks
+==10369==         suppressed: 232,799 bytes in 234 blocks
+==10369== 
+==10369== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+--10369-- 
+--10369-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10369-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10369== 
+==10369== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         ENV BUILT-IN TESTS             [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #98: env basic[0m
+[0;34mCommand:[0m env | grep TESTVAR
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_98.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+TESTVAR=value
+[1;33mActual stdout:[0m
+TESTVAR=value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #99: env after export[0m
+[0;34mCommand:[0m export ENVTEST=value && env | grep ENVTEST
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_99.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+ENVTEST=value
+[1;33mActual stdout:[0m
+ENVTEST=value
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_99.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10410== HEAP SUMMARY:
+==10410==     in use at exit: 233,385 bytes in 239 blocks
+==10410==   total heap usage: 575 allocs, 336 frees, 262,251 bytes allocated
+==10410== 
+==10410== Searching for pointers to 239 not-freed blocks
+==10410== Checked 258,968 bytes
+==10410== 
+==10410== 464 bytes in 1 blocks are definitely lost in loss record 30 of 79
+==10410==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10410==    by 0x109273: dup_envp (main.c:26)
+==10410==    by 0x10935F: init_shell (main.c:47)
+--
+==10411== HEAP SUMMARY:
+==10411==     in use at exit: 233,385 bytes in 239 blocks
+==10411==   total heap usage: 571 allocs, 332 frees, 262,235 bytes allocated
+==10411== 
+==10411== Searching for pointers to 239 not-freed blocks
+==10411== Checked 258,976 bytes
+==10411== 
+==10411== 464 bytes in 1 blocks are definitely lost in loss record 30 of 79
+==10411==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10411==    by 0x109273: dup_envp (main.c:26)
+==10411==    by 0x10935F: init_shell (main.c:47)
+--
+==10409== HEAP SUMMARY:
+==10409==     in use at exit: 233,263 bytes in 235 blocks
+==10409==   total heap usage: 575 allocs, 340 frees, 262,265 bytes allocated
+==10409== 
+==10409== Searching for pointers to 235 not-freed blocks
+==10409== Checked 258,576 bytes
+==10409== 
+==10409== 464 bytes in 1 blocks are definitely lost in loss record 26 of 75
+==10409==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10409==    by 0x109273: dup_envp (main.c:26)
+==10409==    by 0x10935F: init_shell (main.c:47)
+[1;33m==== LEAK SUMMARY ====[0m
+==10410== LEAK SUMMARY:
+==10410==    definitely lost: 464 bytes in 1 blocks
+==10410==    indirectly lost: 0 bytes in 0 blocks
+==10410==      possibly lost: 0 bytes in 0 blocks
+==10410==    still reachable: 0 bytes in 0 blocks
+==10410==         suppressed: 232,921 bytes in 238 blocks
+==10410== 
+==10410== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--10410-- 
+--10410-- used_suppression:     74 readline readline.supp:2 suppressed: 228,826 bytes in 234 blocks
+--10410-- used_suppression:      4 history readline.supp:9 suppressed: 4,095 bytes in 4 blocks
+--
+==10411== LEAK SUMMARY:
+==10411==    definitely lost: 464 bytes in 1 blocks
+==10411==    indirectly lost: 0 bytes in 0 blocks
+==10411==      possibly lost: 0 bytes in 0 blocks
+==10411==    still reachable: 0 bytes in 0 blocks
+==10411==         suppressed: 232,921 bytes in 238 blocks
+==10411== 
+==10411== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--10411-- 
+--10411-- used_suppression:     74 readline readline.supp:2 suppressed: 228,826 bytes in 234 blocks
+--10411-- used_suppression:      4 history readline.supp:9 suppressed: 4,095 bytes in 4 blocks
+--
+==10409== LEAK SUMMARY:
+==10409==    definitely lost: 464 bytes in 1 blocks
+==10409==    indirectly lost: 0 bytes in 0 blocks
+==10409==      possibly lost: 0 bytes in 0 blocks
+==10409==    still reachable: 0 bytes in 0 blocks
+==10409==         suppressed: 232,799 bytes in 234 blocks
+==10409== 
+==10409== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10409-- 
+--10409-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10409-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10410==    still reachable: 0 bytes in 0 blocks
+==10410==         suppressed: 232,921 bytes in 238 blocks
+==10410== 
+==10410== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+--10410-- 
+--10410-- used_suppression:     74 readline readline.supp:2 suppressed: 228,826 bytes in 234 blocks
+--10410-- used_suppression:      4 history readline.supp:9 suppressed: 4,095 bytes in 4 blocks
+==10410== 
+==10410== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 78 from 78)
+==10411== 
+==10411== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==10411== Open file descriptor 3: /home/jotong/42core/minishell_26dec/valgrind_logs/valgrind_test_99.log
+==10411==    <inherited from parent>
+==10411== 
+==10411== 
+==10411== HEAP SUMMARY:
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         ECHO BUILT-IN TESTS            [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #100: echo with -n[0m
+[0;34mCommand:[0m echo -n test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_100.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test[1;33mActual stdout:[0m
+testMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #101: echo -n multiple args[0m
+[0;34mCommand:[0m echo -n hello world
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_101.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world[1;33mActual stdout:[0m
+hello worldMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #102: echo invalid flag[0m
+[0;34mCommand:[0m echo -x test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_102.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+-x test
+[1;33mActual stdout:[0m
+-x test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #103: echo -nnn[0m
+[0;34mCommand:[0m echo -nnn test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_103.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test[1;33mActual stdout:[0m
+testMS$ exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         EXIT BUILT-IN TESTS            [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #104: exit with code[0m
+[0;34mCommand:[0m exit 42
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 42
+[1;33mActual exit:[0m 0
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #105: exit no args[0m
+[0;34mCommand:[0m exit
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #106: exit in pipeline[0m
+[0;34mCommand:[0m echo test | exit 5
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+exit
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 5
+[1;33mActual exit:[0m 0
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         PATH & EXECUTABLE TESTS        [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #107: absolute path[0m
+[0;34mCommand:[0m /bin/echo hello
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_107.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #108: relative path[0m
+[0;34mCommand:[0m ./file.txt 2>/dev/null || echo not executable
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_108.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+not executable
+[1;33mActual stdout:[0m
+not executable
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #109: command not found[0m
+[0;34mCommand:[0m nonexistentcommand 2>&1 | head -1
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_109.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+bash: line 1: nonexistentcommand: command not found
+[1;33mActual stdout:[0m
+Syntax error near unexpected token '&'
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #110: ls basic[0m
+[0;34mCommand:[0m ls file.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_110.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+ls: cannot access 'file.txt': No such file or directory
+[1;33mActual stderr:[0m
+ls: cannot access 'file.txt': No such file or directory
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #111: cat existing file[0m
+[0;34mCommand:[0m cat file.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_111.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 1
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mExpected exit:[0m 1
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #112: grep basic[0m
+[0;34mCommand:[0m grep Hello file.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_112.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 2
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+grep: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+grep: file.txt: No such file or directory
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         EDGE CASE TESTS                [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #113: empty command[0m
+[0;34mCommand:[0m 
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_113.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #114: only spaces[0m
+[0;34mCommand:[0m    
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_114.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 42
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;31m⚠ Valgrind detected memory issues[0m
+[0;31mLog:[0m ./valgrind_logs/valgrind_test_114.log
+[1;33m==== HEAP SUMMARY ====[0m
+==10652== HEAP SUMMARY:
+==10652==     in use at exit: 232,807 bytes in 235 blocks
+==10652==   total heap usage: 522 allocs, 287 frees, 260,702 bytes allocated
+==10652== 
+==10652== Searching for pointers to 235 not-freed blocks
+==10652== Checked 258,536 bytes
+==10652== 
+==10652== 8 bytes in 1 blocks are definitely lost in loss record 5 of 75
+==10652==    at 0x4885250: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-arm64-linux.so)
+==10652==    by 0x11336B: ft_split (in /home/jotong/42core/minishell_26dec/minishell)
+==10652==    by 0x10C807: check_has_equals (lexer_checks.c:63)
+[1;33m==== LEAK SUMMARY ====[0m
+==10652== LEAK SUMMARY:
+==10652==    definitely lost: 8 bytes in 1 blocks
+==10652==    indirectly lost: 0 bytes in 0 blocks
+==10652==      possibly lost: 0 bytes in 0 blocks
+==10652==    still reachable: 0 bytes in 0 blocks
+==10652==         suppressed: 232,799 bytes in 234 blocks
+==10652== 
+==10652== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10652-- 
+--10652-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10652-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+[1;33m==== FIRST STILL REACHABLE ====[0m
+==10652==    still reachable: 0 bytes in 0 blocks
+==10652==         suppressed: 232,799 bytes in 234 blocks
+==10652== 
+==10652== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+--10652-- 
+--10652-- used_suppression:     73 readline readline.supp:2 suppressed: 228,783 bytes in 233 blocks
+--10652-- used_suppression:      1 history readline.supp:9 suppressed: 4,016 bytes in 1 blocks
+==10652== 
+==10652== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 74 from 74)
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #115: only tabs[0m
+[0;34mCommand:[0m 		
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_115.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+Makefile                            more_test_cases.pdf
+Minishell AST Visual Examples.pdf   obj/
+Minishell Test Cases.pdf            out.txt
+Parser Precedence Visual Guide.pdf  out1.txt
+a.txt                               out2.txt
+b.txt                               out3.txt
+clean_logs.sh                       outfile
+err.txt                             output-dec27.ansi
+f1.txt                              output_26dec.ansi
+f2.txt                              output_26dec1.ansi
+f3.txt                              readline.supp
+include/                            remake_minishell_valgrind_logs.sh
+lib/                                src/
+logs/                               temp1.txt
+minishell                           temp2.txt
+minishell-tester-26dec.sh           test1.txt
+minishell-tester-old.sh             test2.txt
+minishell-tester.sh                 test3.txt
+minishell_valgrind.supp             testdir/
+minishell~Stashed changes           valgrind_logs/
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #116: semicolon not implemented[0m
+[0;34mCommand:[0m ; echo test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_116.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+Semicolons not supported in this MS.
+[1;33mExpected stderr:[0m
+bash: -c: line 1: syntax error near unexpected token `;'
+bash: -c: line 1: `; echo test'
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #117: backslash not implemented[0m
+[0;34mCommand:[0m echo test\ ing
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_117.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test ing
+[1;33mActual stdout:[0m
+test\ ing
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #118: multiple pipes empty[0m
+[0;34mCommand:[0m | | |
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_118.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: -c: line 1: syntax error near unexpected token `|'
+bash: -c: line 1: `| | |'
+[1;33mActual stderr:[0m
+minishell: syntax error near unexpected token `newline'
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #119: pipe at start[0m
+[0;34mCommand:[0m | echo test
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_119.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: -c: line 1: syntax error near unexpected token `|'
+bash: -c: line 1: `| echo test'
+[1;33mActual stderr:[0m
+minishell: syntax error near unexpected token `newline'
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #120: pipe at end[0m
+[0;34mCommand:[0m echo test |
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_120.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: -c: line 2: syntax error: unexpected end of file
+[1;33mActual stderr:[0m
+minishell: syntax error near unexpected token `newline'
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #121: redirect without file[0m
+[0;34mCommand:[0m echo test >
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_121.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+Syntax error near unexpected token 'newline'
+[1;33mExpected stderr:[0m
+bash: -c: line 1: syntax error near unexpected token `newline'
+bash: -c: line 1: `echo test >'
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #122: double redirect[0m
+[0;34mCommand:[0m echo test >> > out.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_122.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+[1;33mActual stdout:[0m
+[1;33mExpected stderr:[0m
+bash: -c: line 1: syntax error near unexpected token `>'
+bash: -c: line 1: `echo test >> > out.txt'
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 2
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #123: many spaces between[0m
+[0;34mCommand:[0m echo     hello     world
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_123.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello world
+[1;33mActual stdout:[0m
+hello world
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #124: dollar at end[0m
+[0;34mCommand:[0m echo test$
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_124.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test$
+[1;33mActual stdout:[0m
+test$
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #125: question mark alone[0m
+[0;34mCommand:[0m echo \?
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_125.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+?
+[1;33mActual stdout:[0m
+\?
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #126: multiple dollar signs[0m
+[0;34mCommand:[0m echo $$$
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_126.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+10833$
+[1;33mActual stdout:[0m
+$$$
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;31m✗ Failed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         STRESS TESTS                   [0m
+[0;36m════════════════════════════════════════[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #127: long pipe chain[0m
+[0;34mCommand:[0m echo hello | cat | cat | cat | cat | cat
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_127.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+hello
+[1;33mActual stdout:[0m
+hello
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #128: many redirects[0m
+[0;34mCommand:[0m echo test > a.txt > b.txt > c.txt > d.txt && cat d.txt
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_128.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+test
+[1;33mActual stdout:[0m
+test
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #129: complex combined[0m
+[0;34mCommand:[0m echo start && (cat file.txt | grep World) || echo fallback
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_129.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+start
+fallback
+[1;33mActual stdout:[0m
+start
+fallback
+[1;33mExpected stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mActual stderr:[0m
+cat: file.txt: No such file or directory
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #130: nested logic[0m
+[0;34mCommand:[0m echo a && echo b || echo c && echo d
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_130.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+a
+b
+d
+[1;33mActual stdout:[0m
+a
+b
+d
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+[1;33mTest #131: long command line[0m
+[0;34mCommand:[0m echo word1 word2 word3 word4 word5 word6 word7 word8 word9 word10
+[0;35m[Valgrind enabled][0m
+[0;35mSuppression file:[0m readline.supp
+[0;35mValgrind log:[0m ./valgrind_logs/valgrind_test_131.log
+[0;36m--- DEBUG INFO ---[0m
+Minishell exit code: 0
+Valgrind exit code: 0
+[1;33mExpected stdout:[0m
+word1 word2 word3 word4 word5 word6 word7 word8 word9 word10
+[1;33mActual stdout:[0m
+word1 word2 word3 word4 word5 word6 word7 word8 word9 word10
+[1;33mExpected stderr:[0m
+[1;33mActual stderr:[0m
+[1;33mExpected exit:[0m 0
+[1;33mActual exit:[0m 0
+[0;32m✓ Valgrind clean[0m
+[0;32m✓ Passed[0m
+
+[0;36m════════════════════════════════════════[0m
+[0;36m         SIGNAL TESTS (MANUAL)          [0m
+[0;36m════════════════════════════════════════[0m
+[1;33mNote: Signal tests (Ctrl-C, Ctrl-D, Ctrl-\) must be tested manually[0m
+[1;33mExpected behavior:[0m
+  - Ctrl-C: Display new prompt on new line
+  - Ctrl-D: Exit the shell
+  - Ctrl-\: Do nothing
+
+[0;36m╔════════════════════════════════════════╗[0m
+[0;36m║              SUMMARY                 ║[0m
+[0;36m╚════════════════════════════════════════╝[0m
+Total: 131
+[0;32mPassed: 76[0m
+[0;31mFailed: 55[0m
+[0;35mValgrind failures: 25[0m
+
+[0;36mTesting complete.[0m
