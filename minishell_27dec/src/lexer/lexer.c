@@ -86,7 +86,6 @@ t_token	*lex_input(const char *s, t_shell *shell)
 	if (check_syntax((char *)s) == 0)
 	{
 		shell->last_exit_status = 2;
-		printf("last exit status set to 2 due to syntax error\n");
 		return (NULL);
 	}
 	while (s[i])

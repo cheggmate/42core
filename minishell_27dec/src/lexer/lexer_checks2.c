@@ -56,23 +56,23 @@ int	check_commas_closed(char *s)
 	return (1);
 }
 
-int	check_invalid_pipes(char *s)
-{
-	int	i;
-	int	s_back;
+// int	check_invalid_pipes(char *s)
+// {
+// 	int	i;
+// 	int	s_back;
 
-	i = 0;
-	s_back = ft_strlen(s);
-	while (s[i] && s[i] == ' ')
-		i++;
-	while (s[s_back] && s[s_back] == ' ')
-		s_back--;
-	if (s[i] == '|' || s[i] == '<' || s[i] == '>')
-		return (0);
-	if (s[s_back] == '|' || s[s_back] == '<' || s[s_back] == '>')
-		return (0);
-	return (1);
-}
+// 	i = 0;
+// 	s_back = ft_strlen(s);
+// 	while (s[i] && s[i] == ' ')
+// 		i++;
+// 	while (s[s_back] && s[s_back] == ' ')
+// 		s_back--;
+// 	if (s[i] == '|')
+// 		return (0);
+// 	if (s[s_back] == '|')
+// 		return (0);
+// 	return (1);
+// }
 
 int	check_valid_ampersand(char *s)
 {
