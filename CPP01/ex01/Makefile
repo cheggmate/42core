@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/30 23:36:15 by jotong            #+#    #+#              #
-#    Updated: 2025/10/30 23:36:38 by jotong           ###   ########.fr        #
+#    Updated: 2026/01/02 18:08:19 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = zombie
+TARGET = zombieHorde
 
 # Source files
 SRC = Zombie.cpp zombieHorde.cpp main.cpp
