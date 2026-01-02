@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 18:19:08 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/05 18:26:46 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 19:44:35 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	param_check(int ac)
 
 int	filename_check(char **av)
 {
-	if (std::strlen(av[1]) == 0)
+	std::string fname = av[1];
+	if (fname.empty() || fname.length() == 0)
 	{
 		std::cout << "No filename provided." << std::endl;
 		return 1;
