@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:53:43 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 21:43:25 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:45:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,24 @@ void Harl::complain(std::string level)
 	switch (result) {
 		case 0 : // Debug
 			this->debug();
+			// fallthrough
 			// (this->*functions[0])();
 			// std::cout << "\n" << std::endl;
 		case 1 : // Info
 			this->info();
+			// fallthrough
 			// (this->*functions[1])();
 			// std::cout << "\n" << std::endl;
 		case 2 : // Warning
 			this->warning();
+			// fallthrough
 			// (this->*functions[2])();
 			// std::cout << "\n" << std::endl;
 		case 3 : // Error
 			this->error();
 			// (this->*functions[3])();
 			// std::cout << "\n" << std::endl;
+		break ;
 	}
 	
 	return ;
