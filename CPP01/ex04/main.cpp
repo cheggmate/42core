@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 22:41:57 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/06 00:43:41 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 20:37:51 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	sed_is_for_losers(int ac, char **av)
 		std::cout << "Could not open file." << std::endl;
 		return 1;
 	}
-	if (std::strlen(av[2]) == 0)
+	std::string line = av[2];
+	if (line.empty() || line.length() == 0)
 	{
 		std::cout << "Invalid string to replace." << std::endl;
 		return 1;
