@@ -6,11 +6,18 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:04:13 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/13 23:17:45 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 15:45:50 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+
+std::string to_lowercase(std::string str) {
+    for (size_t i = 0; i < str.length(); i++) {
+        str[i] = (char)std::tolower(str[i]);
+    }
+    return str;
+}
 
 int	PhoneBook::findOldestContact()
 {
@@ -220,35 +227,48 @@ int	main() {
 
 	std::cout << "Welcome!" << std::endl;
 	
-	do {
-		std::cout << "Available commands: ADD | SEARCH | EXIT to begin" << std::endl;
-		std::cin.clear();
-		std::getline(std::cin, command);
-		if (command == "EXIT" || command == "exit")
-		{
-			std::cout << "Goodbye!" << std::endl;
-			break ;
-		}
-		else if (command == "ADD" || command == "add")
-		{
-			pb.addContact();
-			continue ;
-		}
-		else if (command == "SEARCH" || command == "search")
-		{
-			if (searchCommand(&pb) == -1)
-			{
-				std::cout << "An error occurred. Aborting.." << std::endl;
+	// do {
+	// 	std::cout << "Available commands: ADD | SEARCH | EXIT to begin" << std::endl;
+	// 	std::cin.clear();
+	// 	std::getline(std::cin, command);
+	// 	if (command == "EXIT" || command == "exit")
+	// 	{
+	// 		std::cout << "Goodbye!" << std::endl;
+	// 		break ;
+	// 	}
+	// 	else if (command == "ADD" || command == "add")
+	// 	{
+	// 		pb.addContact();
+	// 		continue ;
+	// 	}
+	// 	else if (command == "SEARCH" || command == "search")
+	// 	{
+	// 		if (searchCommand(&pb) == -1)
+	// 		{
+	// 			std::cout << "An error occurred. Aborting.." << std::endl;
 				
-			}
-			continue ;
-		}
-		else
-		{
-			// std::cout << "Unknown command." << std::endl;
-			continue ;
-		}
-	} while (command != "EXIT" || command != "exit");
-	
+	// 		}
+	// 		continue ;
+	// 	}
+	// 	else
+	// 	{
+	// 		// std::cout << "Unknown command." << std::endl;
+	// 		continue ;
+	// 	}
+	// } while (command != "EXIT" || command != "exit");
+	while (true)
+	{
+		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
+		if (!std::getline(std::cin, command))
+			break;
+		std::string command_lowercase = to_lowercase(command);
+		if (command_lowercase == "exit")
+			break;
+		else if (command_lowercase == "add")
+			pb.addContact();
+		else if (command_lowercase == "search")
+			searchCommand(&pb);
+	}
+
 	return 0;
 }
