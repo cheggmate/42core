@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Harl.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:53:43 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/09 22:34:28 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:43:25 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ void Harl::complain(std::string level)
 		
 	switch (result) {
 		case 0 : // Debug
-			(this->*functions[0])();
-			std::cout << "\n" << std::endl;
+			this->debug();
+			// (this->*functions[0])();
+			// std::cout << "\n" << std::endl;
 		case 1 : // Info
-			(this->*functions[1])();
-			std::cout << "\n" << std::endl;
+			this->info();
+			// (this->*functions[1])();
+			// std::cout << "\n" << std::endl;
 		case 2 : // Warning
-			(this->*functions[2])();
-			std::cout << "\n" << std::endl;
+			this->warning();
+			// (this->*functions[2])();
+			// std::cout << "\n" << std::endl;
 		case 3 : // Error
-			(this->*functions[3])();
-			std::cout << "\n" << std::endl;
+			this->error();
+			// (this->*functions[3])();
+			// std::cout << "\n" << std::endl;
 	}
 	
 	return ;
