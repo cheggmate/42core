@@ -7,6 +7,9 @@ NC='\033[0;30m'
 TESTS_RUN=0
 TESTS_PASSED=0
 
+echo "compiling..."
+make re > /dev/null
+
 test_case() {
 	local EXPECTED_CODE="$1"
 	local CMD="$2"
@@ -75,3 +78,5 @@ echo "----------------------------------------"
 if [ "$TESTS_PASSED" -ne "$TESTS_RUN" ]; then
     exit 1
 fi
+
+make fclean > /dev/null

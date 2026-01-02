@@ -1,16 +1,11 @@
 #!/bin/bash
-# Test for ex00 and ex01
+# Save as ex00/test.sh
 
-run_valgrind() {
-    echo "--- Testing $1 with Valgrind ---"
-    valgrind --leak-check=full --show-leak-kinds=all ./$1
-    echo "--------------------------------"
-}
+echo "--- Compiling ex00 ---"
+make re > /dev/null
 
-# ex00: Check if stack zombies and heap zombies both announce and die
-cd ex00 && make re > /dev/null
-run_valgrind "zombie"
+echo -e "\n--- Running Valgrind (Check Stack vs Heap Destructors) ---"
+# Tests newZombie (heap) and randomChump (stack) [cite: 358, 360]
+valgrind --leak-check=full --show-leak-kinds=all ./zombie
 
-# ex01: Check if N zombies are allocated in ONE 'new[]' call and 'delete[]'
-cd ../ex01 && make re > /dev/null
-run_valgrind "zombieHorde"
+make fclean > /dev/null

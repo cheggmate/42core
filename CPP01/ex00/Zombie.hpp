@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 16:27:10 by jotong            #+#    #+#             */
-/*   Updated: 2025/10/31 21:32:09 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 18:03:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ class Zombie
 		{
 			name = n;
 		}
+		~Zombie()
+		{
+			std::cout << this->name << " is destroyed." << std::endl;
+			return ;
+		};
 };
 
 Zombie* newZombie (std::string name);

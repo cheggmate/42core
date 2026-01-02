@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+         #
+#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/31 19:41:14 by jotong            #+#    #+#              #
-#    Updated: 2025/10/31 20:48:28 by jotong           ###   ########.fr        #
+#    Updated: 2026/01/02 17:33:37 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = this_is_brain
+TARGET = sed_is_for_losers
 
 # Source files
 SRC = main.cpp

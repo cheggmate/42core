@@ -5,7 +5,7 @@ Zombie* zombieHorde(int N, std::string name)
 	int	i;
 
 	if (N <= 0)
-		return nullptr;
+		return NULL;
 	i = 0;
 	Zombie* zbs = new Zombie[N];
 	while (i < N)

@@ -13,7 +13,7 @@ class HumanB
 	public:
 		HumanB(const std::string& name) :
 			name(name),
-			weapon(nullptr)
+			weapon(NULL)
 		{};
 		void setWeapon(Weapon& weapon)
 		{

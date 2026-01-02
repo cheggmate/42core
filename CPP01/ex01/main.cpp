@@ -7,7 +7,7 @@ int main(void)
 	Zombie*		zb;
 
 	zb = zombieHorde(N, name);
-	if (zb != nullptr)
+	if (zb != NULL)
 	{
 		delete[] zb;
 	}

@@ -6,7 +6,7 @@
 #    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 16:25:00 by jotong            #+#    #+#              #
-#    Updated: 2026/01/02 16:28:16 by jotong           ###   ########.fr        #
+#    Updated: 2026/01/02 18:04:06 by jotong           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = zombie
+TARGET = zombieHorde
 
 # Source files
 SRC = Zombie.cpp randomChump.cpp newZombie.cpp
