@@ -63,7 +63,7 @@ test_case 0 "./harl '1'" "Unknown input: The provided level does not match the s
 # --- Summary ---
 
 echo -e "\n----------------------------------------"
-echo "TEST SUMMARY"
+echo "${NC}TEST SUMMARY"
 echo "----------------------------------------"
 echo "Total Tests Run: $TESTS_RUN"
 if [ "$TESTS_PASSED" -eq "$TESTS_RUN" ]; then
