@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 23:02:28 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 21:12:21 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:17:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	find_and_replace(std::string file_in, std::string to_find, std::string to_r
 	}
 	if (!ofs.is_open())
 	{
-		std::cout << "Could not create putput file." << std::endl;
+		std::cout << "Could not create output file." << std::endl;
 		ifs.close();
 		return ;
 	}

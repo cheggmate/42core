@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 22:41:57 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 20:37:51 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:18:02 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	sed_is_for_losers(int ac, char **av)
 	std::ifstream inputFile(av[1]);
 	if (!inputFile.is_open())
 	{
-		std::cout << "Could not open file." << std::endl;
+		std::cout << "Could not open file."
+		<< "Check if the file exists or the right permissions are set." << std::endl;
 		return 1;
 	}
 	std::string line = av[2];
