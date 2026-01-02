@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:53:32 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/09 21:55:25 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 17:58:28 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int ac, char **av)
 	
 	if (ac != 2)
 	{
-		std::cout << "Too many arguments." << std::endl;
+		std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
 		return 1;
 	}
 	complaint = av[1];
