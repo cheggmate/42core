@@ -67,6 +67,15 @@ if [[ $OUTPUT == *"Error"* ]] || [[ $OUTPUT == *"permission"* ]]; then
 else
     echo -e "Status: ${RED}❌ FAIL (Should have shown an error)${NC}"
 fi
+
+# --error-exitcode=42 makes valgrind return 42 if any leak is found
+valgrind --leak-check=full --error-exitcode=42 ./your_program_name
+if [ $? -eq 42 ]; then
+    echo -e "Status: \033[0;31m❌ MEMORY LEAK FOUND\033[0m"
+else
+    echo -e "Status: \033[0;32m✅ NO LEAKS\033[0m"
+fi
+
 rm -f secret.txt
 
 make fclean > /dev/null

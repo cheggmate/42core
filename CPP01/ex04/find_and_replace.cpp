@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 23:02:28 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 20:48:20 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:12:21 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	find_and_replace(std::string file_in, std::string to_find, std::string to_r
 
 	if (!ifs.is_open())
 	{
-		std::cout << "Could not open input file." << std::endl;
+		std::cout << "Could not open input file " << file_in
+		<< ". Please check if the file exists or the right permissions are set." << std::endl;
 		return ;
 	}
 	if (!ofs.is_open())
