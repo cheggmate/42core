@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 21:53:43 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 21:45:47 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 21:47:10 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ void Harl::complain(std::string level)
 		"ERROR"
 	};
 	size_t		l_count = sizeof(levels) / sizeof(levels[0]);
-	HarlMembers functions[] = 
-	{
-		&Harl::debug,
-		&Harl::info,
-		&Harl::warning,
-		&Harl::error
-	};
+	// HarlMembers functions[] = 
+	// {
+	// 	&Harl::debug,
+	// 	&Harl::info,
+	// 	&Harl::warning,
+	// 	&Harl::error
+	// };
 	
 	for (int j = 0; j < len_level; j++)
 	{
