@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_and_replace.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/02 23:02:28 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/05 18:17:29 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/02 20:47:44 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	find_and_replace(std::string file_in, std::string to_find, std::string to_r
 {
 	std::string file_out = file_in + ".replace";
 	std::ifstream ifs(file_in);
-	std::ofstream ofs(file_out);
+	std::ofstream ofs(file_out.c_str());
 	std::string line;
 
 	if (!ifs.is_open())
