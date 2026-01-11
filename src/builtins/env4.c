@@ -6,14 +6,14 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/11 09:09:46 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/11 12:30:11 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/11 14:38:47 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
 
-void sort_envp_vars(char **env_var)
+void	sort_envp_vars(char **env_var)
 {
 	int		i;
 	int		j;

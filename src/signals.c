@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 22:52:55 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/07 16:08:53 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/11 15:04:33 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	sigint_handler(int sig, siginfo_t *info, void *context)
 	write(1, "\n", 1);
 	if (sig == SIGINT && info->si_pid != 0)
 	{
-		// write(1, "\n", 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

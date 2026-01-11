@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_new.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksng <ksng@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 15:20:42 by ksng              #+#    #+#             */
-/*   Updated: 2025/12/23 18:50:46 by ksng             ###   ########.fr       */
+/*   Updated: 2026/01/11 14:17:04 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,8 @@ static t_ast *parse_redirection(t_parser *p, t_shell *shell)
         free_ast(cmd);
         // Print error message
         ft_putstr_fd("minishell: syntax error near unexpected token `newline'\n", 2);
-        return (NULL);
+        shell->last_exit_status = 2;
+		return (NULL);
     }
 
     // Parse redirections AFTER command

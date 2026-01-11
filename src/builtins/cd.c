@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 15:43:40 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/11 14:35:00 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ int	builtin_cd(char **av, t_shell *shell)
 	prev_pwd = getenv_value(shell->envp, "PWD");
 	if (chdir(path) != 0)
 	{
-		print_err("cd", path);
+		if (av[2])
+			ft_putstr_fd("cd: too many arguments\n", 2);
+		else
+			print_err("cd", path);
 		shell->last_exit_status = chdir(path);
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 22:22:11 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/11 09:20:11 by jotong           ###   ########.fr       */
+/*   Updated: 2026/01/11 14:29:20 by jotong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	ft_exit(char **av, t_shell *shell)
 
 	num_args = count_args(av);
 	ft_putstr_fd("exit\n", 1);
+	exit_code = shell->last_exit_status;
 	if (num_args >= 2)
 	{
 		if (handle_exit_dashes(av, num_args, shell, &exit_code))
@@ -86,7 +87,5 @@ int	ft_exit(char **av, t_shell *shell)
 		else
 			exit_code = (unsigned char)ft_atoi(av[1]);
 	}
-	else
-		exit_code = shell->last_exit_status;
 	return (handle_exit_and_cleanup(exit_code, shell), 0);
 }
