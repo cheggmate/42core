@@ -7,25 +7,22 @@
 
 class HumanB
 {
-	private:
-		std::string	name;
-		Weapon *weapon;
-	public:
-		HumanB(const std::string& name) :
-			name(name),
-			weapon(NULL)
-		{};
-		void setWeapon(Weapon& weapon)
-		{
-			this->weapon = &weapon;
-			return ;
-		}
-		void attack()
-		{
-			std::cout << name << " attacks with their " << weapon->getType() << std::endl;
-			return ;
-		};
-};
+private:
+    std::string name;
+    Weapon      *weapon;
 
+public:
+    HumanB();
+    HumanB(const std::string& name);
+    HumanB(const HumanB& other);
+    ~HumanB();
+
+    // Operators
+    HumanB& operator=(const HumanB& other);
+
+    // Member Functions
+    void setWeapon(Weapon& weapon);
+    void attack();
+};
 
 #endif

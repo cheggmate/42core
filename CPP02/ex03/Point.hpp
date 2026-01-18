@@ -13,7 +13,9 @@ class Point
 		Fixed	const	_x;
 		Fixed	const	_y;
 	public:
-		Point();
+		Point():
+			_x(0);
+			_y(0)
 		Point(const float x, const float y);
 		Point(const Point& other);
 		Point& operator=(const Point& other);

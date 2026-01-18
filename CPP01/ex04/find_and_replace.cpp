@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   find_and_replace.cpp                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/02 23:02:28 by jotong            #+#    #+#             */
-/*   Updated: 2026/01/02 21:34:19 by jotong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "sed_is_for_losers.hpp"
 
 void	find_and_replace(std::string file_in, std::string to_find, std::string to_replace)

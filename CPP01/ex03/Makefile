@@ -1,20 +1,8 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jotong <jotong@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/10/31 20:51:39 by jotong            #+#    #+#              #
-#    Updated: 2026/01/02 19:31:14 by jotong           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Compiler
 CXX = c++
 
 # Compiler flags
-CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
+CXXFLAGS= -std=c++98 -Wall -Wextra -Werror -g
 
 # Program name
 TARGET = unnecessaryViolence
