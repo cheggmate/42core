@@ -13,9 +13,7 @@ class Point
 		Fixed	const	_x;
 		Fixed	const	_y;
 	public:
-		Point():
-			_x(0);
-			_y(0)
+		Point();
 		Point(const float x, const float y);
 		Point(const Point& other);
 		Point& operator=(const Point& other);
@@ -23,5 +21,7 @@ class Point
 		Fixed	getX() const;
 		Fixed	getY() const;
 };
+
+bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif

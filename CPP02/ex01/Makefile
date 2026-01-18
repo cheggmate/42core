@@ -17,7 +17,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror
 
 # Program name
-TARGET = a.out
+TARGET = fixed
 
 # Source files
 SRC = main.cpp Fixed.cpp
