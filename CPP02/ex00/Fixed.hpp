@@ -24,13 +24,9 @@ class Fixed
 		static const int	_f_bits = 8;
 		
 	public:
-		Fixed () :
-			_raw_bits(0)
-		{
-			std::cout << "Default constructor called" << std::endl;
-		} ;
-		Fixed (const Fixed& other); // Creates a new object by copying the internal state (the raw bits) from an existing Fixed object.
-		Fixed& operator=(const Fixed& other); // (const Fixed& other);	Assigns the internal state of an existing Fixed object to another existing Fixed object (e.g., a = b;).
+		Fixed ();
+		Fixed (const Fixed& other);
+		Fixed& operator=(const Fixed& other);
 		~Fixed();
 		int 	getRawBits (void) const;
 		void	setRawBits (int const raw);

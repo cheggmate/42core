@@ -1,23 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Fixed.cpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jotong <jotong@student.42singapore.sg>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 23:57:50 by jotong            #+#    #+#             */
-/*   Updated: 2025/11/23 23:55:31 by jotong           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Fixed.hpp"
 
-Fixed::Fixed(const Fixed& other) // Creates a new object by copying the internal state (the raw bits) from an existing Fixed object.
+Fixed:: Fixed() : _raw_bits(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const Fixed& other)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->setRawBits(other.getRawBits());
 }
-Fixed& Fixed::operator=(const Fixed& other) //	Assigns the internal state of an existing Fixed object to another existing Fixed object (e.g., a = b;).
+
+Fixed& Fixed::operator=(const Fixed& other)
 {
 	if (this != &other)
 	{
