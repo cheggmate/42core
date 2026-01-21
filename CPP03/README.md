@@ -10,7 +10,8 @@ make
 
 ex00: `./claptrap`
 ex01: `./scavtrap`
-ex02: `./repetitive`
+ex02: `./fragtrap`
+ex03: `./diamondtrap`
 
 ## Resources
 
