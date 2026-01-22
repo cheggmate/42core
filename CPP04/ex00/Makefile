@@ -5,7 +5,7 @@ CXX = c++
 CXXFLAGS= -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow
 
 # Program name
-TARGET = animal
+TARGET = polymorphism
 
 # Source files
 SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongCat.cpp WrongAnimal.cpp

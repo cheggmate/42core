@@ -9,7 +9,7 @@ Object Oriented Programming in CPP.
 once in the folder for each exercise, do 
 make
 
-ex00: `./animal`
+ex00: `./polymorphism`
 ex01: `./`
 ex02: `./`
 ex03: `./`
