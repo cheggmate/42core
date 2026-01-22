@@ -6,7 +6,7 @@ Animal::Animal() :
     std::cout << "Animal default constructor called" << std::endl;
 }
 
-Animal::Animal(const Animal& other) {
+Animal::Animal(const Animal& other) : type(other.type) {
     std::cout << "Animal copy constructor called" << std::endl;
     *this = other;
 }
@@ -14,7 +14,6 @@ Animal::Animal(const Animal& other) {
 Animal& Animal::operator=(const Animal& other) {
     std::cout << "Animal assignment operator called" << std::endl;
     if (this != &other) {
-        // Copy members here
         this->type = other.type;
     }
     return *this;
