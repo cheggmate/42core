@@ -1,89 +1,203 @@
 #include <unistd.h>
-#include <sys/wait.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
+#include <sys/wait.h>
 
-/* Helper to write strings to STDERR */
-void err(char *str) {
+void ft_putstr_fd(char *str, int fd)
+{
     while (*str)
-        write(2, str++, 1);
+        write(fd, str++, 1);
 }
 
-/* Handles the 'cd' builtin */
-void cd(char **argv, int i) {
-    if (i != 2)
-        err("error: cd: bad arguments\n");
-    else if (chdir(argv[1]) == -1) {
-        err("error: cd: cannot change directory to ");
-        err(argv[1]);
-        err("\n");
-    }
+void fatal_error(void)
+{
+    ft_putstr_fd("error: fatal\n", 2);
+    exit(1);
 }
 
-/* Executes a command or a pipe sequence */
-void exec(char **argv, int i, char **envp) {
-    int fd[2];
-    int has_pipe = argv[i] && !strcmp(argv[i], "|");
-
-    if (has_pipe && pipe(fd) == -1) {
-        err("error: fatal\n");
-        exit(1);
-    }
-
-    int pid = fork();
-    if (pid == 0) {
-        argv[i] = NULL;
-        if (has_pipe) {
-            if (dup2(fd[1], 1) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1) {
-                err("error: fatal\n");
-                exit(1);
-            }
-        }
-        execve(argv[0], argv, envp);
-        err("error: cannot execute ");
-        err(argv[0]);
-        err("\n");
-        exit(1);
-    }
-
-    if (waitpid(pid, NULL, 0) == -1) {
-        err("error: fatal\n");
-        exit(1);
-    }
-    if (has_pipe) {
-        if (dup2(fd[0], 0) == -1 || close(fd[0]) == -1 || close(fd[1]) == -1) {
-            err("error: fatal\n");
-            exit(1);
-        }
-    }
+void exec_error(char *cmd)
+{
+    ft_putstr_fd("error: cannot execute ", 2);
+    ft_putstr_fd(cmd, 2);
+    ft_putstr_fd("\n", 2);
 }
 
-int main(int argc, char **argv, char **envp) {
-    int i = 0;
-    int tmp_fd = dup(0);
+void cd_error(char *path)
+{
+    ft_putstr_fd("error: cd: cannot change directory to ", 2);
+    ft_putstr_fd(path, 2);
+    ft_putstr_fd("\n", 2);
+}
 
-    (void)argc;
-    while (argv[i] && argv[i + 1]) {
-        argv = &argv[i + 1];
-        i = 0;
-        /* Find the next break point (| or ;) */
-        while (argv[i] && strcmp(argv[i], "|") && strcmp(argv[i], ";"))
-            i++;
+int is_separator(char *str, char *sep)
+{
+    return (str && strcmp(str, sep) == 0);
+}
 
-        if (strcmp(argv[0], "cd") == 0) {
-            cd(argv, i);
-        } else if (i != 0) {
-            exec(argv, i, envp);
+int count_args(char **argv, int start)
+{
+    int count = 0;
+    while (argv[start + count] && !is_separator(argv[start + count], "|") 
+           && !is_separator(argv[start + count], ";"))
+        count++;
+    return count;
+}
+
+void execute_cd(char **argv, int i)
+{
+    if (count_args(argv, i) != 2)
+    {
+        ft_putstr_fd("error: cd: bad arguments\n", 2);
+        return;
+    }
+    if (chdir(argv[i + 1]) != 0)
+        cd_error(argv[i + 1]);
+}
+
+void execute_command(char **argv, int i, char **env)
+{
+    int argc = count_args(argv, i);
+    char **cmd = malloc(sizeof(char *) * (argc + 1));
+    if (!cmd)
+        fatal_error();
+    
+    for (int j = 0; j < argc; j++)
+        cmd[j] = argv[i + j];
+    cmd[argc] = NULL;
+    
+    execve(cmd[0], cmd, env);
+    exec_error(cmd[0]);
+    free(cmd);
+    exit(1);
+}
+
+void exec_pipeline(char **argv, int start, int end, char **env)
+{
+    int pipe_count = 0;
+    int i = start;
+    
+    // Count pipes
+    while (i < end)
+    {
+        if (is_separator(argv[i], "|"))
+            pipe_count++;
+        i++;
+    }
+    
+    if (pipe_count == 0)
+    {
+        // Single command
+        if (strcmp(argv[start], "cd") == 0)
+        {
+            execute_cd(argv, start);
+            return;
         }
         
-        /* If we hit a semicolon or end of input, reset STDIN */
-        if (argv[i] && !strcmp(argv[i], ";")) {
-            if (dup2(tmp_fd, 0) == -1) {
-                err("error: fatal\n");
-                exit(1);
-            }
-        }
+        pid_t pid = fork();
+        if (pid < 0)
+            fatal_error();
+        
+        if (pid == 0)
+            execute_command(argv, start, env);
+        
+        waitpid(pid, NULL, 0);
+        return;
     }
-    close(tmp_fd);
+    
+    // Multiple commands with pipes
+    int **pipes = malloc(sizeof(int *) * pipe_count);
+    if (!pipes)
+        fatal_error();
+    
+    for (int j = 0; j < pipe_count; j++)
+    {
+        pipes[j] = malloc(sizeof(int) * 2);
+        if (!pipes[j] || pipe(pipes[j]) < 0)
+            fatal_error();
+    }
+    
+    int cmd_idx = 0;
+    i = start;
+    
+    while (i < end)
+    {
+        int cmd_start = i;
+        while (i < end && !is_separator(argv[i], "|"))
+            i++;
+        
+        pid_t pid = fork();
+        if (pid < 0)
+            fatal_error();
+        
+        if (pid == 0)
+        {
+            // Redirect input from previous pipe
+            if (cmd_idx > 0)
+            {
+                if (dup2(pipes[cmd_idx - 1][0], 0) < 0)
+                    fatal_error();
+            }
+            
+            // Redirect output to next pipe
+            if (cmd_idx < pipe_count)
+            {
+                if (dup2(pipes[cmd_idx][1], 1) < 0)
+                    fatal_error();
+            }
+            
+            // Close all pipe fds
+            for (int j = 0; j < pipe_count; j++)
+            {
+                close(pipes[j][0]);
+                close(pipes[j][1]);
+            }
+            
+            execute_command(argv, cmd_start, env);
+        }
+        
+        cmd_idx++;
+        if (i < end)
+            i++; // Skip the "|"
+    }
+    
+    // Close all pipe fds in parent
+    for (int j = 0; j < pipe_count; j++)
+    {
+        close(pipes[j][0]);
+        close(pipes[j][1]);
+    }
+    
+    // Wait for all children
+    for (int j = 0; j <= pipe_count; j++)
+        waitpid(-1, NULL, 0);
+    
+    // Free pipes
+    for (int j = 0; j < pipe_count; j++)
+        free(pipes[j]);
+    free(pipes);
+}
+
+int main(int argc, char **argv, char **env)
+{
+    if (argc < 2)
+        return 0;
+    
+    int i = 1;
+    
+    while (i < argc)
+    {
+        int start = i;
+        
+        // Find the end of this pipeline (terminated by ";" or end of args)
+        while (i < argc && !is_separator(argv[i], ";"))
+            i++;
+        
+        if (i > start)
+            exec_pipeline(argv, start, i, env);
+        
+        if (i < argc)
+            i++; // Skip the ";"
+    }
+    
     return 0;
 }
