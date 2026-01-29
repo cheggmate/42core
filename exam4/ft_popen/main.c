@@ -1,5 +1,19 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include "get_next_line/get_next_line.h"
+
+char *ft_putstr(char *str)
+{
+	if (!str)
+		return NULL;
+	while (*str)
+	{
+		write(1, str, 1);
+		str++;
+	}
+	return str;
+}
 
 int ft_popen(const char *file, char *const argv[], char type)
 {
@@ -39,4 +53,23 @@ int ft_popen(const char *file, char *const argv[], char type)
 	}
 	close(fd[0]);
 	return fd[1];
+}
+// int main()
+// {
+// 	int fd;
+// 	char *line;
+// 	fd = ft_popen("ls", (char *const []){"ls", NULL}, 'r');
+// 	while ((line = get_next_line(fd)))
+// 		ft_putstr(line);
+// 	return (0);
+// }
+
+int main()
+{
+	int fd = ft_popen("ls", (char *const []){"ls", NULL}, 'r');
+	dup2(fd, 0);
+	fd = ft_popen("grep", (char *const []){"grep", "c", NULL}, 'r');
+	char *line;
+	while ((line = get_next_line(fd)))
+		printf("%s", line);
 }

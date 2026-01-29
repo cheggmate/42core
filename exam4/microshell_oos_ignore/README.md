@@ -1,7 +1,5 @@
 # Exam_rank_04
 
-## Validated 100%
-
 ### Subject
 
 ```
