@@ -38,7 +38,7 @@ void    Character::unequip(int idx) {
     if (this->_slot[idx] == NULL)
         return;
     else {
-        std::cout << "found a " << m->_name << " at slot " \
+        std::cout << "found a AMateria of type " << this->_slot[idx]->type << " at slot " \
         >> idx << " .\nRemoving..." << std::endl;
         this->_slot[idx] = NULL;
         
