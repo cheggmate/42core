@@ -49,3 +49,15 @@ void Character::unequip(int idx) {
 Character::~Character() {
     std::cout << "Character destructor called" << std::endl;
 }
+
+std::string const & Character::getName() const {
+    return this->_name;
+}
+
+void Character::use(int idx, ICharacter& target) {
+    // Check if the index is valid and if a Materia exists in that slot [cite: 242]
+    if (idx >= 0 && idx < 4 && this->_slot[idx] != NULL) {
+        this->_slot[idx]->use(target); // Calls Ice::use or Cure::use 
+    }
+    // If the slot is empty or the index is invalid, nothing happens [cite: 242]
+}

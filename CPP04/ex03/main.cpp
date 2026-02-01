@@ -50,14 +50,19 @@ int main()
     delete fifth; // Must delete manually as it wasn't equipped [cite: 245]
 
     std::cout << "\n--- UNEQUIP & DEEP COPY TESTS ---" << std::endl;
-    // Test unequip without leaking 
-    AMateria* floor = NULL;
-    // Note: You must save the pointer before unequipping to delete it later
-    // In a real implementation, you'd likely use an array or linked list for "grounded" items
-    // This is a simple manual check for slot 0
-    floor = ((Character*)me)->getMateria(0); // If you added a getter for testing
-    me->unequip(0);
-    delete floor;
+    std::cout << "\n--- SAFE UNEQUIP TEST ---" << std::endl;
+    // Create and equip a Materia
+    AMateria* m1 = src->createMateria("ice");
+    me->equip(m1);
+
+    // To avoid a leak, we keep the pointer 'm1' before calling unequip
+    me->unequip(0); // This sets the slot to NULL but does NOT delete m1 
+
+    // Now we manually delete the "fallen" Materia to avoid memory leaks 
+    if (m1) {
+        std::cout << "Manually cleaning up the unequipped " << m1->getType() << std::endl;
+        delete m1;
+    }
 
     // Deep Copy Test [cite: 253, 254]
     Character* original = new Character("Original");

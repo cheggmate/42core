@@ -12,3 +12,12 @@ AMateria& AMateria::operator=(const AMateria& other) {
 }
 
 std::string const & AMateria::getType() const { return this->type; }
+
+AMateria::~AMateria() {
+    std::cout << "AMateria destructor called" << std::endl;
+}
+
+void AMateria::use(ICharacter& target) {
+    // The base class usually does nothing or prints a generic message
+    (void)target; 
+}
