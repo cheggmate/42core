@@ -17,13 +17,13 @@ Character& Character::operator=(const Character& other) {
     return *this;
 }
 
-void    equip(AMateria* m) {
+void    Character::equip(AMateria* m) {
     int i;
 
     i = 0;
     if (!m)
         return ;
-    while (i < 4 && i != NULL)
+    while (i < 4 && this->_slot[i] != NULL)
         i++;
     if (i == 4)
         return ;
@@ -32,15 +32,15 @@ void    equip(AMateria* m) {
     return ;  
 }
 
-void    unequip(int idx) {
+void    Character::unequip(int idx) {
     if (idx <0 || idx >= 4)
         return ;
     if (this->_slot[idx] == NULL)
         return;
     else {
         std::cout << "found a " << m->_name << " at slot " \
-        >> idx.tostring() << " .\nRemoving..." << std::endl;
-        this->_slot[idx] == NULL;
+        >> idx << " .\nRemoving..." << std::endl;
+        this->_slot[idx] = NULL;
         
     }
 
