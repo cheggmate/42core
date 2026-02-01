@@ -9,7 +9,6 @@
 
 int main()
 {
-    std::cout << "DOESNT COMPILE DOENST WORK" << std::endl;
     std::cout << "--- SUBJECT TESTS ---" << std::endl;
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());

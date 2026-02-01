@@ -17,6 +17,7 @@
 //     return *this;
 // }
 
-// ICharacter::~ICharacter() {
-//     std::cout << "ICharacter destructor called" << std::endl;
-// }
+ICharacter::~ICharacter() {
+    std::cout << "ICharacter destructor called" << std::endl;
+	~Character() ;
+}

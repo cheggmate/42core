@@ -8,7 +8,8 @@ CXXFLAGS= -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow
 TARGET = polymorphism
 
 # Source files
-SRC = main.cpp Ice.cpp Cure.cpp AMateria.cpp ICharacter.cpp IMateriaSource.cpp
+SRC = main.cpp Ice.cpp Cure.cpp AMateria.cpp ICharacter.cpp Character.cpp \
+ 		IMateriaSource.cpp MateriaSource.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp

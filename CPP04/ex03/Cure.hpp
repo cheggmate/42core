@@ -11,8 +11,8 @@ public:
     Cure(const Cure& other);    // Copy Constructor
     Cure& operator=(const Cure& other); // Assignment Operator
     ~Cure();                            // Destructor
-    Cure* clone() const = 0;
     void use(ICharacter& target);
+    AMateria* clone();
 
 private:
 };
