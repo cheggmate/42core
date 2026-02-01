@@ -1,8 +1,8 @@
 #include "IMateriaSource.hpp"
 
-// IMateriaSource::IMateriaSource() {
-//     std::cout << "IMateriaSource default constructor called" << std::endl;
-// }
+IMateriaSource::IMateriaSource() {
+    std::cout << "IMateriaSource default constructor called" << std::endl;
+}
 
 // IMateriaSource::IMateriaSource(const IMateriaSource& other) {
 //     std::cout << "IMateriaSource copy constructor called" << std::endl;

@@ -12,7 +12,7 @@ public:
     Cure& operator=(const Cure& other); // Assignment Operator
     ~Cure();                            // Destructor
     void use(ICharacter& target);
-    AMateria* clone();
+    AMateria* clone() const;
 
 private:
 };

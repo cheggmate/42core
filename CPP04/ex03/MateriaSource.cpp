@@ -2,6 +2,9 @@
 
 MateriaSource::MateriaSource() : IMateriaSource() {
     std::cout << "MateriaSource default constructor called" << std::endl;
+	for (int i = 0; i < 4; i++) {
+        this->_templates[i] = NULL; // Crucial to prevent undefined behavior [cite: 242]
+    }
 }
 
 MateriaSource::MateriaSource(const MateriaSource& other) {
@@ -11,14 +14,27 @@ MateriaSource::MateriaSource(const MateriaSource& other) {
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
     std::cout << "MateriaSource assignment operator called" << std::endl;
-    if (this != &other) {
-        // Copy members here
+    
+	if (this != &other) {
+        for (int i = 0; i < 4; i++) {
+            if (this->_templates[i])
+                delete this->_templates[i]; // Clean up existing memory
+            if (other._templates[i])
+                this->_templates[i] = other._templates[i]->clone(); // Deep copy [cite: 253, 266]
+            else
+                this->_templates[i] = NULL;
+        }
     }
     return *this;
 }
 
 MateriaSource::~MateriaSource() {
     std::cout << "MateriaSource destructor called" << std::endl;
+	 for (int i = 0; i < 4; i++) {
+        if (this->_templates[i]) {
+            delete this->_templates[i]; // Free the clones created by learnMateria [cite: 255]
+        }
+    }
 }
 
 void    MateriaSource::learnMateria(AMateria* m) {

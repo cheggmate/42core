@@ -5,7 +5,7 @@ Cure::Cure() : AMateria() {
     this->type = "cure";
 }
 
-Cure::Cure(const Cure& other) {
+Cure::Cure(const Cure& other) : AMateria(other) {
     std::cout << "Cure copy constructor called" << std::endl;
     *this = other;
 }
@@ -26,9 +26,6 @@ void    Cure::use(ICharacter& target) {
     std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
-AMateria* Cure::clone(AMateria *) {
-    AMateria*   a_clone;
-
-    a_clone = new AMateria("cure");
-    return (a_clone);
+AMateria* Cure::clone() const {
+    return new Cure(*this);
 }

@@ -5,7 +5,7 @@ Ice::Ice() {
     this->type = "ice";
 }
 
-Ice::Ice(const Ice& other) {
+Ice::Ice(const Ice& other) : AMateria(other) {
     std::cout << "Ice copy constructor called" << std::endl;
     *this = other;
 }
@@ -23,12 +23,7 @@ Ice::~Ice() {
 }
 
 AMateria* Ice::clone() const {
-    AMateria* Cure::clone(AMateria *) {
-    AMateria*   a_clone;
-
-    a_clone = new AMateria("ice");
-    return (a_clone);
-}
+    return new Ice(*this); // Returns a new Ice instance 
 }
 
 void    Ice::use(ICharacter& target) {

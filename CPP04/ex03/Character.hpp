@@ -8,6 +8,7 @@
 class Character : public ICharacter {
 public:
     Character();                             // Default Constructor
+    Character(std::string const & name);
     Character(const Character& other);    // Copy Constructor
     Character& operator=(const Character& other); // Assignment Operator
     ~Character();                            // Destructor

@@ -55,9 +55,9 @@ int main()
     // Note: You must save the pointer before unequipping to delete it later
     // In a real implementation, you'd likely use an array or linked list for "grounded" items
     // This is a simple manual check for slot 0
-    // floor = ((Character*)me)->getMateria(0); // If you added a getter for testing
-    // me->unequip(0);
-    // delete floor;
+    floor = ((Character*)me)->getMateria(0); // If you added a getter for testing
+    me->unequip(0);
+    delete floor;
 
     // Deep Copy Test [cite: 253, 254]
     Character* original = new Character("Original");

@@ -12,7 +12,8 @@ public:
     Ice& operator=(const Ice& other); // Assignment Operator
     ~Ice();                            // Destructor
     void use(ICharacter& target);
-    AMateria* clone();
+    // Both need to match the base class exactly
+    AMateria* clone() const;
 
 // private:
 };
