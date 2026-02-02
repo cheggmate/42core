@@ -2,7 +2,7 @@
 #include <stdlib.h>    // MOD: on utilise <stdlib.h> pour calloc/free au lieu de <malloc.h>
 #include <ctype.h>
 
-typedef struct node {
+typedef struct node { //given
     enum { 
         ADD, 
         MULTI,
@@ -22,7 +22,7 @@ node *new_node(node n)
     return ret;
 }
 
-void destroy_tree(node *n)
+void destroy_tree(node *n) //given
 {
     if (!n)
         return;
@@ -33,7 +33,7 @@ void destroy_tree(node *n)
     free(n);
 }
 
-void unexpected(char c)
+void unexpected(char c) //given
 {
     if (c)
         printf("Unexpected token '%c'\n", c);
@@ -44,14 +44,14 @@ void unexpected(char c)
 /* MODIFIED: accept/expect remises à la signature d’origine, sans global */
 int accept(char **s, char c)
 {
-    if (**s == c) {
+    if (**s == c) { //given but this line is changed
         (*s)++;
         return 1;
     }
     return 0;
 }
 
-int expect(char **s, char c)
+int expect(char **s, char c) //given
 {
     if (accept(s, c))
         return 1;
@@ -142,7 +142,7 @@ node *parse_expr(char *s)
     return ret;
 }
 
-int eval_tree(node *tree)
+int eval_tree(node *tree) //given
 {
     switch (tree->type) {
         case ADD:   return eval_tree(tree->l) + eval_tree(tree->r);
@@ -152,7 +152,7 @@ int eval_tree(node *tree)
     return 0;  // should no happen, but who know's ?
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv) //given
 {
     if (argc != 2)
         return 1;
