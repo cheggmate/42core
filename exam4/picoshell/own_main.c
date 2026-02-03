@@ -26,8 +26,8 @@ int picoshell(char **cmds[])
 				return 1;
 		}
 		pid = fork();
-			if (pid == -1)
-				return (1);
+		if (pid == -1)
+			return (1);
 		if (pid == 0)
 		{
 			if (in_fd != STDIN_FILENO)
@@ -46,7 +46,6 @@ int picoshell(char **cmds[])
 			printf("status = %d\n", status);
 			if (status == 1)
 				exit(1);
-			
 		}
 		else
 		{

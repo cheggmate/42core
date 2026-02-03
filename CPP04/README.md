@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by by jotong
+*This project has been created as part of the 42 curriculum by by jotong*
 
 ## Description
 This assignment consists of 4 exercises written in the CPP language, and the objective is to learn 
@@ -11,7 +11,7 @@ make
 
 ex00: `./polymorphism`
 ex01: `./polymorphism`
-ex02: `./`
+ex02: `./polymorphism`
 ex03: `./`
 
 ## Resources
