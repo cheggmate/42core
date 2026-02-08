@@ -4,7 +4,7 @@
 # file1=sandbox.c
 # file2=../../../../rendu/sandbox/sandbox.c
 file1=sandbox_ref.c
-file2=sandbox_test.c
+file2=sandbox_test1.c
 
 # Compile reference and user solutions
 gcc -Werror -Wall -Wextra -o out1 sandbox_main.c "$file1"

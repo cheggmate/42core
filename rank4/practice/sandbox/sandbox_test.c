@@ -43,7 +43,6 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	alarm(timeout);
 	if (waitpid(pid, &status, 0) == -1)
 	{
-		alarm(0);
 		g_childpid = -1;
 		return (-1);
 	}
@@ -58,6 +57,7 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	}
 	if (WIFEXITED(status))
 	{
+		// child terminated normally
 		int code = WEXITSTATUS(status);
 		if (code == 0)
 		{
@@ -74,6 +74,7 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	}
 	if (WIFSIGNALED(status))
 	{
+		// child process was terminated by a signal.
 		int sig = WTERMSIG(status);
 		if (verbose)
 			printf("Bad function: %s\n", strsignal(sig));
