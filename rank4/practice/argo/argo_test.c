@@ -5,7 +5,7 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-typedef struct	json {
+typedef struct	json { //given
 	enum {
 		MAP,
 		INTEGER,
@@ -21,12 +21,12 @@ typedef struct	json {
 	};
 }	json;
 
-typedef struct	pair {
+typedef struct	pair { // given
 	char	*key;
 	json	value;
 }	pair;
 
-void	free_json(json j)
+void	free_json(json j) // given
 {
 	switch (j.type)
 	{
@@ -46,7 +46,7 @@ void	free_json(json j)
 	}
 }
 
-void	serialize(json j)
+void	serialize(json j) // given
 {
 	switch (j.type)
 	{
@@ -78,7 +78,7 @@ void	serialize(json j)
 	}
 }
 
-int	peek(FILE *stream)
+int	peek(FILE *stream) //given
 {
 	int	c = getc(stream);
 	if (c != EOF)
@@ -86,7 +86,7 @@ int	peek(FILE *stream)
 	return c;
 }
 
-void	unexpected(FILE *stream)
+void	unexpected(FILE *stream) //given
 {
 	int c = peek(stream);
 	if (c != EOF)
@@ -105,7 +105,7 @@ int	accept(FILE *stream, char c)
 	return 0;
 }
 
-int	expect(FILE *stream, char c)
+int	expect(FILE *stream, char c) //given
 {
 	if (accept(stream, c))
 		return 1;

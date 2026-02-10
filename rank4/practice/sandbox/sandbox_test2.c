@@ -8,7 +8,7 @@
 static volatile sig_atomic_t g_timeout = 0;
 static volatile sig_atomic_t g_childpid = -1;
 
-static void alarm_handler(int sig)
+static void	alarm_handler(int sig)
 {
 	(void)sig;
 	g_timeout = 1;
@@ -18,15 +18,20 @@ static void alarm_handler(int sig)
 
 int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 {
+	int status;
 	struct sigaction sa;
-	int		status;
-	pid_t	pid;
+	pid_t pid;
 
 	if (!f)
 		return (-1);
 	pid = fork();
+	g_childpid = -1;
+	g_timeout = 0;
 	if (pid == -1)
-		return (-1);
+	{
+		g_timeout = 1;
+		return -1;
+	}
 	if (pid == 0)
 	{
 		f();
@@ -36,15 +41,19 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sa.sa_handler = alarm_handler;
-	sigaction(SIGALRM, &sa, NULL);
+	
 	alarm(timeout);
 	if (waitpid(pid, &status, 0) == -1)
 	{
-		g_childpid = -1;
+		g_timeout = 1;
 		return -1;
 	}
-	alarm(0);
-	g_childpid = -1;
+	if (g_timeout)
+	{
+		if (verbose)
+			printf("Bad function: timed out after %d seconds\n", timeout);
+		return -1;
+	}
 	if (WIFEXITED(status))
 	{
 		int code = WEXITSTATUS(status);
@@ -52,7 +61,7 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 		{
 			if (verbose)
 				printf("Nice function!\n");
-			return (1);
+			return 1;
 		}
 		else
 		{
@@ -66,15 +75,14 @@ int sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 		int sig = WTERMSIG(status);
 		if (verbose)
 			printf("Bad function: %s\n", strsignal(sig));
-		return 1;
+		return 0;
 	}
 	if (WIFSTOPPED(status))
 	{
 		kill(pid, SIGKILL);
 		waitpid(pid, &status, 0);
-
 		if (verbose)
-			printf("Bad function: timed out after %d seconds\n", timeout);
+			printf("Bad function: %s\n", strsignal(SIGSTOP));
 		return 0;
 	}
 	return -1;
