@@ -12,7 +12,7 @@ SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
-	#$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Default rule
 all : $(TARGET)
@@ -21,7 +21,7 @@ $(TARGET) : $(OBJ)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
 
 clean :
-	@rm -f $(TARGET)
+	@rm -f $(OBJ)
 
 fclean : clean
 	@rm -f $(TARGET)

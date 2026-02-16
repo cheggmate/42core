@@ -3,10 +3,10 @@
 
 # include <iostream>
 # include <string>
-# include "AAnimal.hpp"
+# include "Animal.hpp"
 # include "Brain.hpp"
 
-class Cat : public AAnimal{
+class Cat : public Animal{
 public:
     Cat();                             // Default Constructor
     Cat(const Cat& other);    // Copy Constructor

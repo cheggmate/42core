@@ -1,4 +1,4 @@
-#include "AAnimal.hpp"
+#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include <iostream>
@@ -6,8 +6,8 @@
 int main()
 {
     std::cout << "===== Basic polymorphism test =====" << std::endl;
-    const AAnimal* j = new Dog();
-    const AAnimal* i = new Cat();
+    const Animal* j = new Dog();
+    const Animal* i = new Cat();
 
     delete j; // should call Dog destructor, then Brain, then Animal
     delete i; // should call Cat destructor, then Brain, then Animal
@@ -15,7 +15,7 @@ int main()
     std::cout << "\n===== Array of Animals test =====" << std::endl;
 
     const int size = 10;
-    AAnimal* animals[size];
+    Animal* animals[size];
 
     for (int k = 0; k < size; k++)
     {

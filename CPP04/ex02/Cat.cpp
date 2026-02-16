@@ -1,12 +1,12 @@
 #include "Cat.hpp"
 
-Cat::Cat() : AAnimal() {
+Cat::Cat() : Animal() {
     std::cout << "Cat default constructor called" << std::endl;
     this->type = "Cat";
     this->b = new Brain();
 }
 
-Cat::Cat(const Cat& other) : AAnimal(other) {
+Cat::Cat(const Cat& other) : Animal(other) {
     std::cout << "Cat copy constructor called" << std::endl;
     b = new Brain(*other.b);
 }
@@ -18,7 +18,7 @@ Cat& Cat::operator=(const Cat& other) {
     std::cout << "Cat assignment operator called" << std::endl;
     if (this != &other) {
         // Copy members here
-        AAnimal::operator=(other);
+        Animal::operator=(other);
         while (i < 100)
         {
             this->b->ideas[i] = other.b->ideas[i];

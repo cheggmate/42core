@@ -8,11 +8,11 @@ CXXFLAGS= -std=c++98 -Wall -Wextra -Werror -Wshadow -Wno-shadow
 TARGET = polymorphism
 
 # Source files
-SRC = main.cpp AAnimal.cpp Cat.cpp Dog.cpp Brain.cpp
+SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 OBJ = $(SRC:.cpp=.o)
 
 %.o: %.cpp
-	#$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Default rule
 all : $(TARGET)
@@ -21,7 +21,7 @@ $(TARGET) : $(OBJ)
 	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
 
 clean :
-	@rm -f $(TARGET)
+	@rm -f $(OBJ)
 
 fclean : clean
 	@rm -f $(TARGET)
