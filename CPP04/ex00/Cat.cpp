@@ -14,7 +14,7 @@ Cat& Cat::operator=(const Cat& other) {
     std::cout << "Cat assignment operator called" << std::endl;
     if (this != &other) {
         // Copy members here
-        Animal::operator=(other);
+        Animal::operator=(other); // TODO: check if needs to change
     }
     return *this;
 }

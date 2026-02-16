@@ -22,6 +22,22 @@ Fixed::~Fixed()
     // std::cout << "Destructor called" << std::endl;
 }
 
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b) {
+	return (a.getRawBits() > b.getRawBits()) ? a : b;
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b) {
+	return (a.getRawBits() > b.getRawBits()) ? a : b;
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b) {
+	return (a.getRawBits() < b.getRawBits()) ? a : b;
+}
+
+Fixed& Fixed::min(Fixed& a, Fixed& b) {
+	return (a.getRawBits() < b.getRawBits()) ? a : b;
+}	
+
 // Fixed-point to int: Shift right by _f_bits to divide by 2^8
 int Fixed::toInt(void) const
 {

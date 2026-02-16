@@ -2,7 +2,6 @@
 #include "Point.hpp"
 #include <iostream>
 
-
 void checkPoint(Point a, Point b, Point c, Point p, std::string name) {
     if (bsp(a, b, c, p))
         std::cout << name << ": Inside" << std::endl;
