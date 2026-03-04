@@ -9,9 +9,9 @@ Object Oriented Programming in CPP.
 once in the folder for each exercise, do 
 make
 
-ex00: `./polymorphism`
-ex01: `./polymorphism`
-ex02: `./polymorphism`
+ex00: `./polymorphism` <br>
+ex01: `./polymorphism` <br>
+ex02: `./`
 ex03: `./`
 
 ## Resources

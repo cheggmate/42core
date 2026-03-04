@@ -8,10 +8,10 @@ This assignment consists of 4 exercises written in the CPP language, and the obj
 once in the folder for each exercise, do 
 make
 
-ex00: `./claptrap`
-ex01: `./scavtrap`
-ex02: `./fragtrap`
-ex03: `./diamondtrap`
+ex00: `./claptrap` <br>
+ex01: `./scavtrap` <br>
+ex02: `./fragtrap` <br>
+ex03: `./diamondtrap` <br>
 
 ## Resources
 

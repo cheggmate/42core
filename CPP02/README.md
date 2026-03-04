@@ -8,7 +8,7 @@ This assignment consists of 4 exercises written in the CPP language, and the obj
 once in the folder for each exercise, do 
 make
 
-for all exercises: `./fixed`
+for all exercises: `./fixed` <br>
 
 ## Resources
 
