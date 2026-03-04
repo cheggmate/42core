@@ -35,18 +35,10 @@ class Fixed
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		
-		static const Fixed& max(const Fixed& a, const Fixed& b) {
-			return (a.getRawBits() > b.getRawBits()) ? a : b;
-		}
-		static Fixed& max(Fixed& a, Fixed& b) {
-			return (a.getRawBits() > b.getRawBits()) ? a : b;
-		}
-		static const Fixed& min(const Fixed& a, const Fixed& b) {
-			return (a.getRawBits() < b.getRawBits()) ? a : b;
-		}
-		static Fixed& min(Fixed& a, Fixed& b) {
-			return (a.getRawBits() < b.getRawBits()) ? a : b;
-		}	
+		static const Fixed& max(const Fixed& a, const Fixed& b);
+		static Fixed& max(Fixed& a, Fixed& b);
+		static const Fixed& min(const Fixed& a, const Fixed& b);
+		static Fixed& min(Fixed& a, Fixed& b);
 		Fixed& operator++(); // Prefix ++a
 		Fixed operator++(int); // Postfix a++
 		Fixed& operator--(); // Prefix --a
