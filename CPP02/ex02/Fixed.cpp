@@ -1,5 +1,8 @@
 #include "Fixed.hpp"
 
+Fixed::Fixed() : _raw_bits(0)
+{}
+
 Fixed::Fixed(const Fixed& other)
 {
     this->setRawBits(other.getRawBits());

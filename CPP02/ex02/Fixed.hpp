@@ -12,7 +12,7 @@ class Fixed
 		int					_raw_bits;
 		static const int	_f_bits = 8;
 	public:
-		Fixed() : _raw_bits(0) {}
+		Fixed();
 		Fixed(const int input);
 		Fixed(const float input);
 		Fixed(const Fixed& other);
