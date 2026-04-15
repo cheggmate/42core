@@ -1,69 +1,12 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::GradeTooHighException& 
-Bureaucrat::GradeTooHighException::operator=(const GradeTooHighException& src) throw() {
-    if (this != &src) {
-        (void)src; // Exceptions in this module usually have no data to copy
-    }
-    return *this;
+std::string	Bureaucrat::getName() const {
+	return this->_name;
 }
 
-Bureaucrat::GradeTooHighException& 
-Bureaucrat::GradeTooHighException::throw() {
+int	Bureaucrat::getGrade() const {
+	return this->_grade;
 }
-
-Bureaucrat::GradeTooHighException& 
-Bureaucrat::GradeTooHighException::throw(const GradeTooHighException& src) {
-    *this = src;
-}
-
-const char* Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Grade is too high!";
-}
-
-Bureaucrat::GradeTooHighException& 
-Bureaucrat::~GradeTooHighException()::throw() {
-}
-
-Bureaucrat::GradeTooLowException& 
-Bureaucrat::GradeTooLowException::operator=(const GradeTooLowException& src) throw() {
-    if (this != &src) {
-        (void)src; // Exceptions in this module usually have no data to copy
-    }
-    return *this;
-}
-
-Bureaucrat::GradeTooLowException& 
-Bureaucrat::GradeTooLowException::throw() {
-}
-
-Bureaucrat::GradeTooLowException& 
-Bureaucrat::GradeTooLowException::throw(const GradeTooLowException& src) {
-    *this = src;
-}
-
-const char* Bureaucrat::GradeTooLowException::what() const throw() {
-    return "Grade is too low!";
-}
-
-Bureaucrat::GradeTooLowException& 
-Bureaucrat::~GradeTooLowException()::throw() {
-}
-
-std::string	Bureaucrat::getName() {
-	return this.name;
-}
-
-int	Bureaucrat::getGrade() {
-	return this.grade;
-}
-
-class Bureaucrat::GradeTooHighException : public std::exception {
-public:
-	virtual const char* what() const throw() {
-		return "Grade is too high! (Limit is 1)";
-	}
-};
 
 Bureaucrat::Bureaucrat(std::string const name, int grade) : _name(name) {
     if (grade < 1) {
@@ -101,6 +44,13 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
     }
     return *this;
 }
+std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs) {
+    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << ".";
+    
+    // 4. Return the stream
+    return o;
+}
+
 
 Bureaucrat::~Bureaucrat() {
     std::cout << "Bureaucrat destructor called" << std::endl;

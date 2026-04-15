@@ -5,40 +5,36 @@
 # include <stdexcept>
 
 class Bureaucrat {
-public:
-    class GradeTooHighException : public std::exception {
-        public:
-            GradeTooHighException() throw() {}
-            GradeTooHighException(const GradeTooHighException& src) throw() { *this = src; }
-            GradeTooHighException& operator=(const GradeTooHighException& src) throw() { (void)src; return *this; }
-            virtual ~GradeTooHighException() throw() {}
+    public:
+        class GradeTooHighException : public std::exception {
+            public:
+                virtual const char* what() const throw() {
+                    return "Grade is too high!";
+                }
+        };
 
-            virtual const char* what() const throw() {
-                return "Grade is too high!";
-            }
-    };
-    class GradeTooLowException : public std::exception {
-        public:
-            GradeTooHighException() throw();
-            GradeTooHighException(const GradeTooLowException& src) throw();
-            GradeTooHighException& operator=(const GradeTooLowException& src) throw()
-            virtual ~GradeTooLowException() throw();
+        class GradeTooLowException : public std::exception {
+            public:
+                virtual const char* what() const throw() {
+                    return "Grade is too low!";
+                }
+        };
 
-            virtual const char* what() const throw();
-    };
-    Bureaucrat(std::string name, int grade);                             // Default Constructor
-    Bureaucrat(const Bureaucrat& other);    // Copy Constructor
-    Bureaucrat& operator=(const Bureaucrat& other); // Assignment Operator
-    ~Bureaucrat();                            // Destructor
-    std::string getName();
-    int         getGrade();
-    void        incrementGrade();
-    void        decrementGrade();
+        Bureaucrat(std::string name, int grade);
+        Bureaucrat(const Bureaucrat& other);
+        Bureaucrat& operator=(const Bureaucrat& other);
+        ~Bureaucrat();
 
+        // Getters and Grade Shifting [cite: 136, 137]
+        std::string getName() const;
+        int         getGrade() const;
+        void        incrementGrade();
+        void        decrementGrade();
 
-private:
-    const std::string   _name;
-    int                 _grade;
+    private:
+        const std::string   _name;
+        int                 _grade;
 };
+ std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs);
 
 #endif
