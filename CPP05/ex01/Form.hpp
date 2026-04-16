@@ -19,7 +19,7 @@ public:
             virtual const char* what() const throw() { return "Form grade is too low!"; }
     };
     Form();                             // Default Constructor
-    Form(const Form& other);    // Copy Constructor
+    Form(const Form& other);            // Copy Constructor
     Form& operator=(const Form& other); // Assignment Operator
     ~Form();                            // Destructor
     Form(const std::string name, int signGrade, int execGrade);
@@ -28,8 +28,8 @@ public:
     int               getSignGrade() const;
     int               getExecGrade() const;
 
-        // Member functions
-        void beSigned(const Bureaucrat& b);
+    // Member functions
+    void beSigned(const Bureaucrat& b);
 
 private:
     const std::string _name;
