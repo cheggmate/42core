@@ -10,7 +10,6 @@ Form::Form()
 Form::Form(const std::string name, int signGrade, int execGrade) 
     : _name(name), _isSigned(false), _signGrade(signGrade), _execGrade(execGrade) 
 {
-    // Grade validation must happen inside the body after initialization
     if (signGrade < 1 || execGrade < 1)
         throw Form::GradeTooHighException();
     if (signGrade > 150 || execGrade > 150)
