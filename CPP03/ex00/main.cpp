@@ -2,22 +2,22 @@
 
 int main() {
     std::cout << "--- Initializing Tests ---" << std::endl;
-    // Test construction and name initialization [cite: 124, 125]
+    // Test construction and name initialization 
     ClapTrap clap("CLP-42");
     ClapTrap anonymous("CL-TP");
 
     std::cout << "\n--- Action Tests ---" << std::endl;
-    // Test attack (Costs 1 energy) [cite: 130, 134]
+    // Test attack (Costs 1 energy) 
     clap.attack("Target-Dummy");
 
-    // Test taking damage [cite: 131]
+    // Test taking damage
     clap.takeDamage(5);
 
-    // Test repairing (Costs 1 energy, regains HP) [cite: 132, 134]
+    // Test repairing (Costs 1 energy, regains HP) 
     clap.beRepaired(3);
 
     std::cout << "\n--- Energy Depletion Test ---" << std::endl;
-    // ClapTrap starts with 10 Energy [cite: 127]
+    // ClapTrap starts with 10 Energy 
     // We already used 2 (attack + repair). Using the remaining 8.
     for (int i = 0; i < 9; ++i) {
         std::cout << "[" << i + 1 << "] ";

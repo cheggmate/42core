@@ -47,7 +47,7 @@ run_harl_test() {
     fi
 }
 
-# 2. Run the tests [cite: 507, 513]
+# 2. Run the tests
 run_harl_test "DEBUG" "DEBUG"
 run_harl_test "INFO" "INFO"
 run_harl_test "WARNING" "WARNING"

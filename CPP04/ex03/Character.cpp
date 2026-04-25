@@ -5,7 +5,7 @@ Character::Character() {
 }
 
 Character::Character(std::string const & name) : _name(name) {
-    for (int i = 0; i < 4; i++) this->_slot[i] = NULL; // Must initialize! [cite: 241]
+    for (int i = 0; i < 4; i++) this->_slot[i] = NULL; // Must initialize! 
 }
 
 Character::Character(const Character& other) {
@@ -17,7 +17,7 @@ Character& Character::operator=(const Character& other) {
     if (this != &other) {
         this->_name = other._name;
         for (int i = 0; i < 4; i++) {
-            if (this->_slot[i]) delete this->_slot[i]; // Clean old [cite: 254]
+            if (this->_slot[i]) delete this->_slot[i]; // Clean old 
             if (other._slot[i]) this->_slot[i] = other._slot[i]->clone();
             else this->_slot[i] = NULL;
         }
@@ -43,7 +43,7 @@ void    Character::equip(AMateria* m) {
 void Character::unequip(int idx) {
     if (idx < 0 || idx >= 4 || !this->_slot[idx]) return;
     std::cout << "Removing " << this->_slot[idx]->getType() << " at " << idx << std::endl;
-    this->_slot[idx] = NULL; // Do NOT delete the materia [cite: 243]
+    this->_slot[idx] = NULL; // Do NOT delete the materia 
 }
 
 Character::~Character() {
@@ -55,9 +55,9 @@ std::string const & Character::getName() const {
 }
 
 void Character::use(int idx, ICharacter& target) {
-    // Check if the index is valid and if a Materia exists in that slot [cite: 242]
+    // Check if the index is valid and if a Materia exists in that slot 
     if (idx >= 0 && idx < 4 && this->_slot[idx] != NULL) {
         this->_slot[idx]->use(target); // Calls Ice::use or Cure::use 
     }
-    // If the slot is empty or the index is invalid, nothing happens [cite: 242]
+    // If the slot is empty or the index is invalid, nothing happens 
 }

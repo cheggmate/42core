@@ -12,14 +12,14 @@ make re > /dev/null
 
 echo -e "${YELLOW}--- Running CPP00 Megaphone Tests ---${NC}"
 
-# Test 1: No Arguments [cite: 132-133]
+# Test 1: No Arguments
 echo -e "\n${YELLOW}Test 1: No Arguments${NC}"
 ACTUAL=$($EXE)
 EXPECTED="* LOUD AND UNBEARABLE FEEDBACK NOISE *"
 if [ "$ACTUAL" == "$EXPECTED" ]; then echo -e "Status: ${GREEN}✅ PASS${NC}"; else echo -e "Status: ${RED}❌ FAIL${NC}"; fi
 echo "Actual:   [$ACTUAL]"
 
-# Test 2: Single long string [cite: 128-129]
+# Test 2: Single long string
 echo -e "\n${YELLOW}Test 2: Single String Input${NC}"
 INPUT="shhhhh... I think the students are asleep..."
 ACTUAL=$($EXE "$INPUT")
@@ -27,7 +27,7 @@ EXPECTED="SHHHHH... I THINK THE STUDENTS ARE ASLEEP..."
 if [ "$ACTUAL" == "$EXPECTED" ]; then echo -e "Status: ${GREEN}✅ PASS${NC}"; else echo -e "Status: ${RED}❌ FAIL${NC}"; fi
 echo "Actual:   [$ACTUAL]"
 
-# Test 3: Multiple arguments [cite: 130-131]
+# Test 3: Multiple arguments
 # This tests if you are accidentally adding spaces between arguments
 echo -e "\n${YELLOW}Test 3: Multiple Inputs (Concatenation Test)${NC}"
 # We pass these as 3 separate arguments to argv

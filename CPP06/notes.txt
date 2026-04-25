@@ -1,23 +1,23 @@
-[cite_start]For **Exercise 00: Conversion of scalar types**, the subject allows you to use any standard function that converts a string to an `int`, `float`, or `double`[cite: 129]. [cite_start]However, since you are restricted to the **C++98 standard**, you must use the C-style conversion functions inherited from `<cstdlib>`[cite: 12, 20, 35].
+For **Exercise 00: Conversion of scalar types**, the subject allows you to use any standard function that converts a string to an `int`, `float`, or `double`. However, since you are restricted to the **C++98 standard**, you must use the C-style conversion functions inherited from `<cstdlib>`.
 
 ### Authorized Conversion Functions
 The following functions are the most common tools for this exercise:
 
-* [cite_start]**`atoi`**: Converts a string to an `int`. [cite: 129]
-* [cite_start]**`atof`**: Converts a string to a `double`. [cite: 129]
-* [cite_start]**`strtol`**: Converts a string to a `long int`, which is useful for detecting overflows before casting to a standard `int`. [cite: 129, 155]
-* **`strtod`**: Converts a string to a `double`. [cite_start]This is often preferred over `atof` because it provides better error checking via the second parameter (the "end pointer"). [cite: 129, 155]
-* **`strtof`**: Converts a string to a `float`. [cite_start]Note that while this is a standard conversion function, you must ensure it is available in your specific C++98 environment. [cite: 129]
+* **`atoi`**: Converts a string to an `int`. 
+* **`atof`**: Converts a string to a `double`. 
+* **`strtol`**: Converts a string to a `long int`, which is useful for detecting overflows before casting to a standard `int`. 
+* **`strtod`**: Converts a string to a `double`. This is often preferred over `atof` because it provides better error checking via the second parameter (the "end pointer"). 
+* **`strtof`**: Converts a string to a `float`. Note that while this is a standard conversion function, you must ensure it is available in your specific C++98 environment. 
 
 ### Implementation Requirements
 While these functions handle the initial conversion, you must implement the following logic manually:
 
-* [cite_start]**Initial Type Detection**: You must first detect the actual type of the literal passed as a parameter (char, int, float, or double)[cite: 153].
-* [cite_start]**Explicit Casting**: After the initial conversion from a string, you must explicitly convert that value to the other three data types using C++ casts[cite: 153].
-* [cite_start]**Special Values**: You must manually handle "pseudo-literals" such as `-inff`, `+inff`, `nanf`, `inf`, `+inf`, and `nan`[cite: 143, 148].
-* [cite_start]**Error Handling**: If a conversion is impossible or results in an overflow, you must display an informative message[cite: 155].
+* **Initial Type Detection**: You must first detect the actual type of the literal passed as a parameter (char, int, float, or double).
+* **Explicit Casting**: After the initial conversion from a string, you must explicitly convert that value to the other three data types using C++ casts.
+* **Special Values**: You must manually handle "pseudo-literals" such as `-inff`, `+inff`, `nanf`, `inf`, `+inf`, and `nan`.
+* **Error Handling**: If a conversion is impossible or results in an overflow, you must display an informative message.
 
 ### Forbidden Functions
 Be careful not to use the following, as they will result in a grade of 0:
-* [cite_start]**`printf()`**: Use `std::cout` instead[cite: 28, 37].
-* [cite_start]**`alloc()` / `free()`**: Use `new` and `delete` if memory allocation is required[cite: 37, 47].
+* **`printf()`**: Use `std::cout` instead.
+* **`alloc()` / `free()`**: Use `new` and `delete` if memory allocation is required.

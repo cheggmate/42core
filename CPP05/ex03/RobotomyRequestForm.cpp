@@ -1,6 +1,6 @@
 #include "RobotomyRequestForm.hpp"
 
-// Initialize with required grades: sign 72, exec 45 [cite: 198]
+// Initialize with required grades: sign 72, exec 45 
 RobotomyRequestForm::RobotomyRequestForm(const std::string target)
     : AForm("Robotomy Request", 72, 45), _target(target) {}
 

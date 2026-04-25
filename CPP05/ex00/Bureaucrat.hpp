@@ -25,7 +25,7 @@ class Bureaucrat {
         Bureaucrat& operator=(const Bureaucrat& other);
         ~Bureaucrat();
 
-        // Getters and Grade Shifting [cite: 136, 137]
+        // Getters and Grade Shifting 
         std::string getName() const;
         int         getGrade() const;
         void        incrementGrade();

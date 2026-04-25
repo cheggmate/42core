@@ -32,7 +32,7 @@ int main()
     src->learnMateria(new Ice());
     src->learnMateria(new Cure());
     AMateria* extra = new Ice();
-    src->learnMateria(extra); // Should not be learned [cite: 267]
+    src->learnMateria(extra); // Should not be learned 
     delete extra; // Clean up manually as src didn't take ownership
 
     // Creating unknown materia
@@ -47,7 +47,7 @@ int main()
     // Attempting to equip 5th materia 
     AMateria* fifth = src->createMateria("ice");
     me->equip(fifth); 
-    delete fifth; // Must delete manually as it wasn't equipped [cite: 245]
+    delete fifth; // Must delete manually as it wasn't equipped 
 
     std::cout << "\n--- UNEQUIP & DEEP COPY TESTS ---" << std::endl;
     std::cout << "\n--- SAFE UNEQUIP TEST ---" << std::endl;
@@ -64,7 +64,7 @@ int main()
         delete m1;
     }
 
-    // Deep Copy Test [cite: 253, 254]
+    // Deep Copy Test 
     Character* original = new Character("Original");
     original->equip(src->createMateria("ice"));
     

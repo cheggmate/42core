@@ -51,7 +51,7 @@ run_test() {
     rm -f "$filename" "${filename}.replace"
 }
 
-# 2. Test Cases [cite: 457, 460]
+# 2. Test Cases
 run_test "Standard Replace" "hello world" "world" "42" "hello 42"
 run_test "Multiple Occurrences" "aaa" "a" "b" "bbb"
 run_test "Empty s2" "delete me" "me" "" "delete "

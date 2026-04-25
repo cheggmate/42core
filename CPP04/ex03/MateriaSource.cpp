@@ -3,7 +3,7 @@
 MateriaSource::MateriaSource() : IMateriaSource() {
     std::cout << "MateriaSource default constructor called" << std::endl;
 	for (int i = 0; i < 4; i++) {
-        this->_templates[i] = NULL; // Crucial to prevent undefined behavior [cite: 242]
+        this->_templates[i] = NULL; // Crucial to prevent undefined behavior 
     }
 }
 
@@ -20,7 +20,7 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other) {
             if (this->_templates[i])
                 delete this->_templates[i]; // Clean up existing memory
             if (other._templates[i])
-                this->_templates[i] = other._templates[i]->clone(); // Deep copy [cite: 253, 266]
+                this->_templates[i] = other._templates[i]->clone(); // Deep copy 
             else
                 this->_templates[i] = NULL;
         }
@@ -32,7 +32,7 @@ MateriaSource::~MateriaSource() {
     std::cout << "MateriaSource destructor called" << std::endl;
 	 for (int i = 0; i < 4; i++) {
         if (this->_templates[i]) {
-            delete this->_templates[i]; // Free the clones created by learnMateria [cite: 255]
+            delete this->_templates[i]; // Free the clones created by learnMateria 
         }
     }
 }
@@ -64,7 +64,7 @@ AMateria* MateriaSource::createMateria(std::string const & type)
     {
         // Check if the slot is occupied and if the type matches the request
         if (this->_templates[i] != NULL && this->_templates[i]->getType() == type) {
-            // Return a new clone of the stored template [cite: 269]
+            // Return a new clone of the stored template 
             return (this->_templates[i]->clone());
         }
     }
