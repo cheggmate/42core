@@ -1,0 +1,5 @@
+The Overloading Approach
+To be truly robust, you can provide two versions of iter. The compiler will pick the one that matches the function pointer you provide.3. The 
+
+"Double Template" Approach (Modern/Flexible)
+You can make the function pointer itself a template parameter. This is the most flexible way because it doesn't care about the exact signature of f, as long as f(array[i]) is a valid call.
