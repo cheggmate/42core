@@ -30,7 +30,6 @@ static bool checkChar(std::string str, char c) {
 }
 
 static void print_types(const std::string& literal, std::string type) {
-    // 1. Handle Pseudo-literals and non-sensical inputs immediately
     if (type == "pseudo" || literal == "nan" || literal == "nanf" || 
         literal == "inf" || literal == "+inf" || literal == "-inf" ||
         literal == "inff" || literal == "+inff" || literal == "-inff") {
@@ -48,14 +47,12 @@ static void print_types(const std::string& literal, std::string type) {
         return;
     }
 
-    // 2. For all valid numeric types, convert to double to simplify casting
     double d;
     if (type == "char")
         d = static_cast<double>(literal[0]);
     else
         d = atof(literal.c_str());
 
-    // 3. Output Char (Handling non-displayable vs impossible)
     std::cout << "char: ";
     if (d < 0 || d > 127 || std::isnan(d)) {
         std::cout << "impossible" << std::endl;
@@ -65,7 +62,6 @@ static void print_types(const std::string& literal, std::string type) {
         std::cout << "'" << static_cast<char>(d) << "'" << std::endl;
     }
 
-    // 4. Output Int (Handling overflow)
     std::cout << "int: ";
     if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max()) {
         std::cout << "impossible" << std::endl;
@@ -73,7 +69,6 @@ static void print_types(const std::string& literal, std::string type) {
         std::cout << static_cast<int>(d) << std::endl;
     }
 
-    // 5. Output Float and Double with .0 precision 
     std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(d) << "f" << std::endl;
     std::cout << "double: " << std::fixed << std::setprecision(1) << d << std::endl;
 }

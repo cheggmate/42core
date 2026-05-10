@@ -8,7 +8,7 @@ This assignment consists of 3 exercises written in the CPP language, and the obj
 once in the folder for each exercise, do 
 make
 
-exercise 0: `./scalar_types` <br>
+exercise 0: `./scalar_types {some input}` or `./scalar_types` to access tests <br>
 exercise 1: `./serialize` <br>
 exercise 2: `./identify_real_type` <br>
 
