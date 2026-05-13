@@ -8,8 +8,8 @@ This assignment consists of 3 exercises written in the CPP language, and the obj
 once in the folder for each exercise, do 
 make
 
-exercise 0: `./` <br>
-exercise 1: `./` <br>
+exercise 0: `./easyfind` <br>
+exercise 1: `./span` <br>
 exercise 2: `./` <br>
 
 ## Resources
