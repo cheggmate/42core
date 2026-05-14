@@ -35,8 +35,15 @@ public:
     public:
         virtual const char* what() const throw();
     };
-    template <typename T>
-    void addRange(T begin, T end);
+    template <typename Iterator>
+    void addRange(Iterator begin, Iterator end) {
+        size_t range_size = std::distance(begin, end);
+
+        if (_lst.size() + range_size > _N)
+            throw std::exception();
+
+        _lst.insert(_lst.end(), begin, end);
+    }
 
 private:
     Span();             // Default Constructor

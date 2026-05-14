@@ -4,7 +4,7 @@
 #include <deque>
 
 void	print_testcase(std::string tcase) {
-	std::cout << tcase << std::endl;
+	std::cout << "\n" << tcase << std::endl;
 }
 
 // Maps and stacks not included, out of scope.

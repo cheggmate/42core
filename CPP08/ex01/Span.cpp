@@ -37,7 +37,8 @@ Span::Span(const Span& other) {
 Span& Span::operator=(const Span& other) {
     std::cout << "Span assignment operator called" << std::endl;
     if (this != &other) {
-        // Copy members here
+        this->_N = other._N;
+        this->_lst = other._lst;
     }
     return *this;
 }
@@ -76,21 +77,3 @@ unsigned int    Span::shortestSpan() {
     }
     return min_diff;
 }
-
-template <typename Iterator>
-void Span::addRange(Iterator begin, Iterator end) {
-    size_t range_size = std::distance(begin, end);
-
-    if (_lst.size() + range_size > _N)
-        throw std::exception();
-
-    _lst.insert(_lst.end(), begin, end);
-}
-
-typedef std::vector<int>::iterator vec_it;
-typedef std::list<int>::iterator   lst_it;
-typedef int* ptr_it;
-
-template void Span::addRange<vec_it>(vec_it, vec_it);
-template void Span::addRange<lst_it>(lst_it, lst_it);
-template void Span::addRange<ptr_it>(ptr_it, ptr_it);

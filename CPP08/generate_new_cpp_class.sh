@@ -23,7 +23,7 @@ public:
     ${CLASS_NAME}& operator=(const ${CLASS_NAME}& other); // Assignment Operator
     ~${CLASS_NAME}();                            // Destructor
 
-private:
+private: 
 };
 
 #endif
