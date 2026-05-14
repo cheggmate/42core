@@ -9,7 +9,7 @@ once in the folder for each exercise, do
 make
 
 exercise 0: `./btc` <br>
-exercise 1: `./` <br>
+exercise 1: `./RPN` <br>
 exercise 2: `./` <br>
 
 ## Resources
