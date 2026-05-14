@@ -10,7 +10,7 @@ make
 
 exercise 0: `./easyfind` <br>
 exercise 1: `./span` <br>
-exercise 2: `./` <br>
+exercise 2: `./mutant_stack` <br>
 
 ## Resources
 
