@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
@@ -33,35 +33,27 @@ bool isValidDate(const std::string& date) {
 
 int main(int argc, char** argv) {
     if (argc != 2) {
-        std::cerr << "Error: could not open file." << std::endl;
+        std::cout << "Error: could not open file." << std::endl; // Match exact usage error requirement
         return 1;
     }
 
     BitcoinExchange exchange;
     try {
-        // Step 1: Populate database map from the original source file CSV
         exchange.load_input("data.csv");
     } catch (const std::exception& e) {
-        std::cerr << e.what() << std::endl;
+        std::cout << e.what() << std::endl;
         return 1;
     }
 
-    // Step 2: Open evaluating dataset argument file
     std::ifstream evalFile(argv[1]);
     if (!evalFile.is_open()) {
-        std::cerr << "Error: could not open file." << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
 
     std::string line;
-    // Skip the expected format definition header row ("date | value")
-    if (std::getline(evalFile, line)) {
-        if (line != "date | value" && line.find('|') == std::string::npos) {
-            evalFile.seekg(0); // Reset pointer if no generic head description exists
-        }
-    }
+    bool isHeader = true;
 
-    // Step 3: Run row iterations
     while (std::getline(evalFile, line)) {
         if (line.empty()) continue;
         
@@ -73,6 +65,13 @@ int main(int argc, char** argv) {
 
         std::string datePart = trim_whitespace(line.substr(0, pipe_pos));
         std::string valuePart = trim_whitespace(line.substr(pipe_pos + 1));
+
+        // Dynamically discard the header line if it contains the literal text "date"
+        if (isHeader && datePart == "date") {
+            isHeader = false;
+            continue;
+        }
+        isHeader = false;
 
         if (!isValidDate(datePart)) {
             std::cout << "Error: bad input => " << line << std::endl;
@@ -95,7 +94,6 @@ int main(int argc, char** argv) {
             continue;
         }
 
-        // Successfully verified values matching constraints; calculate using exchange map
         float rate = exchange.get_rate(datePart);
         std::cout << datePart << " => " << val << " = " << (val * rate) << std::endl;
     }
