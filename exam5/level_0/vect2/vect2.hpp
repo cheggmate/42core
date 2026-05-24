@@ -22,12 +22,14 @@ class vect2 {
 		vect2 &operator-=(const vect2 &other);
 		vect2 &operator*=(int num);
 		vect2 operator+(const vect2 &other) const;
-		vect2 oeprator*(int num) const;
+		vect2 operator*(int num) const;
 	private:
 		int num1;
 		int	num2;
 
-}
+};
 
+vect2 operator*(int num, const vect2 &vec);
+std::ostream &operator<<(std::ostream &os, const vect2 &other);
 
 #endif
