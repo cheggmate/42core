@@ -9,7 +9,7 @@ searchable_tree_bag::searchable_tree_bag(const searchable_tree_bag& source) : tr
 }
 
 searchable_tree_bag& searchable_tree_bag::operator=(const searchable_tree_bag& source) {
-	if (this!= source) {
+	if (this != &source) { // Also added missing & address-of operator check
 		tree_bag::operator=(source);
 	}
 	return (*this);
@@ -19,8 +19,9 @@ searchable_tree_bag::~searchable_tree_bag() {
 
 }
 
-bool searchable_array_bag::search(node* node, const int value) const {
-	if (node == NULL)
+// Fixed: changed class scope to searchable_tree_bag and specified tree_bag::node
+bool searchable_tree_bag::search(tree_bag::node* node, const int value) const {
+	if (node == NULL) // NULL is preferred over NULL in modern C++
 		return (false);
 	if (node->value == value)
 		return (true);

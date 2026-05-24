@@ -1,23 +1,23 @@
 #include "searchable_array_bag.hpp"
 
-
 searchable_array_bag::searchable_array_bag() {
 
 }
-
 
 searchable_array_bag::searchable_array_bag(const searchable_array_bag& source) : array_bag(source) {
 
 }
 
-searchable_array_bag& bsearchable_array_bag::operator=(const searchable_array_bag& source) {
-	if (this != source) {
+// Fixed typo 'bsearchable' to 'searchable' and added missing & to source comparison
+searchable_array_bag& searchable_array_bag::operator=(const searchable_array_bag& source) {
+	if (this != &source) {
 		array_bag::operator=(source);
 	}
 	return (*this);
 }
 
-searchable_array_bag::~searcheable_array_bag {
+// Fixed typo 'searcheable' and added missing empty parentheses ()
+searchable_array_bag::~searchable_array_bag() {
 
 }
 
