@@ -1,7 +1,8 @@
 #include "vect2.hpp"
 
 vect2::vect2() {
-
+	this->num1 = 0;
+	this->num2 = 0;
 }
 vect2::vect2(int num1, int num2) {
 	this->num1 = num1;
@@ -44,8 +45,8 @@ int vect2::operator[](int i) const{
 
 vect2 vect2::operator++(int){
 	vect2 tmp(*this);
-	tmp.num1 = this->num1 + 1;
-	tmp.num2 = this->num2 + 1;
+	this->num1 = this->num1 + 1;
+	this->num2 = this->num2 + 1;
 	return (tmp);
 }
 vect2 &vect2::operator++(){
@@ -55,8 +56,8 @@ vect2 &vect2::operator++(){
 }
 vect2 vect2::operator--(int){
 	vect2 tmp(*this);
-	tmp.num1 = tmp.num1 - 1;
-	tmp.num2 = tmp.num2 - 1;
+	this->num1 = this->num1 - 1;
+	this->num2 = this->num2 - 1;
 	return (tmp);
 }
 vect2 &vect2::operator--(){
