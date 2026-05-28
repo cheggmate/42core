@@ -1,3 +1,9 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+#include <sys/types.h>
+
 typedef struct s_map
 {
     char **lines;
@@ -17,19 +23,11 @@ typedef struct s_square
     int left_y;
 } t_square;
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <limits.h>
-#include <sys/types.h>
-
 void initi_map(t_map *map)
 {
     map->lines = 0;
-
     map->declared_lines = 0;
     map->line_length = 0;
-
     map->empty = 0;
     map->full = 0;
     map->obstacle = 0;
@@ -43,24 +41,41 @@ int is_printable(char c)
         return 0;
 }
 
+// FIXED: Handles space-separated headers safely (e.g., "9 . o x\n")
 int parse_header(char *line, t_map **map)
 {
     int len = strlen(line);
 
-    if (line[len - 1] != '\n' || len < 5)
+    if (len < 2 || line[len - 1] != '\n')
         return -1;
 
-    (*map)->empty = line[len - 4];
-    (*map)->obstacle = line[len - 3];
-    (*map)->full = line[len - 2];
+    // Strip trailing newline to ease processing
+    line[len - 1] = '\0';
+    len--;
 
+    // We expect at least: [number] [space] [empty] [space] [obstacle] [space] [full]
+    // Working backwards from the end of the line safely checking spaces
+    if (len < 7)
+        return -1;
+
+    (*map)->full = line[len - 1];
+    if (line[len - 2] != ' ') return -1;
+
+    (*map)->obstacle = line[len - 3];
+    if (line[len - 4] != ' ') return -1;
+
+    (*map)->empty = line[len - 5];
+    if (line[len - 6] != ' ') return -1;
+
+    // Validate if characters are printable and unique
     if (is_printable((*map)->empty) != 0 || is_printable((*map)->obstacle) != 0 || is_printable((*map)->full) != 0)
         return -1;
 
     if ((*map)->empty == (*map)->obstacle || (*map)->empty == (*map)->full || (*map)->full == (*map)->obstacle)
         return -1;
 
-    line[len - 4] = '\0'; // null terminate on the last char.
+    // Truncate the string right before the first space to read the number safely
+    line[len - 6] = '\0';
 
     long num = 0;
     int i = 0;
@@ -79,8 +94,7 @@ int parse_header(char *line, t_map **map)
         return -1;
 
     (*map)->declared_lines = num;
-
-    return 0; // success
+    return 0;
 }
 
 int parse_map_lines(t_map **map)
@@ -88,10 +102,15 @@ int parse_map_lines(t_map **map)
     int i = 0;
     int j = 0;
 
+    if ((*map)->declared_lines <= 0 || !(*map)->lines || !(*map)->lines[0])
+        return -1;
+
     while ((*map)->lines[0][j])
         j++;
 
     (*map)->line_length = j;
+    if (j == 0) // At least one box required
+        return -1;
 
     while (i < (*map)->declared_lines)
     {
@@ -113,7 +132,7 @@ int process_file(char *filename, t_map **map)
 {
     FILE *file;
 
-    if (filename == 0)
+    if (filename == NULL)
         file = stdin;
     else
     {
@@ -124,30 +143,54 @@ int process_file(char *filename, t_map **map)
 
     size_t len = 0;
     char *line = NULL;
-    getline(&line, &len, file);
+    
+    if (getline(&line, &len, file) == -1)
+    {
+        free(line);
+        if (filename != NULL) fclose(file);
+        return -1;
+    }
 
     if (parse_header(line, map) != 0)
     {
         free(line);
+        if (filename != NULL) fclose(file);
         return -1;
     }
 
-    (*map)->lines = calloc((*map)->declared_lines, sizeof *(*map)->lines); // also sizeof(*char)
+    (*map)->lines = calloc((*map)->declared_lines, sizeof *(*map)->lines);
     if (!(*map)->lines)
+    {
+        free(line);
+        if (filename != NULL) fclose(file);
         return -1;
+    }
 
     int i = 0;
     int n_read;
+    int error = 0;
     while ((n_read = getline(&line, &len, file)) != -1)
     {
+        if (i >= (*map)->declared_lines)
+        {
+            error = -1;
+            break;
+        }
         if (line[n_read - 1] == '\n')
             line[--n_read] = '\0';
         else
-            return -1;
+        {
+            error = -1;
+            break;
+        }
         (*map)->lines[i] = strdup(line);
         i++;
     }
-    if (i != (*map)->declared_lines)
+    free(line);
+    if (filename != NULL) 
+        fclose(file);
+
+    if (error == -1 || i != (*map)->declared_lines)
         return -1;
 
     if (parse_map_lines(map) != 0)
@@ -159,7 +202,6 @@ int process_file(char *filename, t_map **map)
 void print_map(t_map *map)
 {
     int i = 0;
-
     char **str = map->lines;
 
     while (i < map->declared_lines)
@@ -169,13 +211,27 @@ void print_map(t_map *map)
     }
 }
 
+// Clean up allocated memory per map iteration
+void free_map(t_map *map)
+{
+    if (!map) return;
+    if (map->lines)
+    {
+        for (int i = 0; i < map->declared_lines; i++)
+        {
+            if (map->lines[i])
+                free(map->lines[i]);
+        }
+        free(map->lines);
+    }
+    free(map);
+}
+
 int min3(int a, int b, int c)
 {
     int min = a;
-    if (b < min)
-        min = b;
-    if (c < min)
-        min = c;
+    if (b < min) min = b;
+    if (c < min) min = c;
     return min;
 }
 
@@ -187,7 +243,10 @@ t_square solve_bsq_dp(t_map *map)
     int height = map->declared_lines;
     int width = map->line_length;
 
-    int dp[height][width];
+    // Dynamic programming array
+    int **dp = malloc(height * sizeof(int *));
+    for (int i = 0; i < height; i++)
+        dp[i] = malloc(width * sizeof(int));
 
     int i = 0;
     while (i < height)
@@ -212,6 +271,11 @@ t_square solve_bsq_dp(t_map *map)
         }
         i++;
     }
+
+    for (int k = 0; k < height; k++)
+        free(dp[k]);
+    free(dp);
+
     return best;
 }
 
@@ -229,32 +293,47 @@ void apply_square(t_map *map, t_square sq)
             int xx = sq.top_x + x;
             int yy = sq.left_y + y;
             map->lines[xx][yy] = map->full;
-
             y++;
         }
         x++;
     }
 }
 
+// Core Execution Logic wrapper for single/multiple passes
+void run_bsq(char *filename)
+{
+    t_map *map = malloc(sizeof(t_map));
+    if (!map) return;
+    
+    initi_map(map);
+    if (process_file(filename, &map) == 0)
+    {
+        t_square best = solve_bsq_dp(map);
+        apply_square(map, best);
+        print_map(map);
+    }
+    else
+    {
+        fprintf(stderr, "map error\n");
+    }
+    free_map(map);
+}
 
+// FIXED: Now accurately switches between stdin, single, and multiple inputs
 int main(int argc, char **argv)
 {
-
-    if (argc == 2)
+    if (argc == 1)
     {
-        t_map *map = malloc(sizeof(t_map));
-        if (!map)
-            return -1;
-        initi_map(map);
-        if (process_file(argv[1], &map) == 0)
-        {
-            t_square best = solve_bsq_dp(map);
-            apply_square(map, best);
-            print_map(map);
-        }
-        else
-            fprintf(stderr, "map error\n");
+        // No arguments: Read straight from standard input
+        run_bsq(NULL);
     }
-
+    else
+    {
+        // Process one or multiple maps sequentially
+        for (int i = 1; i < argc; i++)
+        {
+            run_bsq(argv[i]);
+        }
+    }
     return 0;
 }
