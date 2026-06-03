@@ -20,7 +20,7 @@ class bigint {
 		std::string getStr() const;
 		std::string::size_type to_size_type() const;
 
-		bigint operator+(const bigin &b) const;
+		bigint operator+(const bigint &b) const;
 		bigint &operator+=(const bigint &b);
 		bigint operator++(int);
 		bigint &operator++();
@@ -31,6 +31,7 @@ class bigint {
 		bigint &operator>>=(const int);
 		bigint operator<<(const bigint &) const;
 		bigint &operator<<=(const bigint &);
+		bigint &operator>>=(const bigint &);
 
 		bool operator<(const bigint &b) const;
 		bool operator<=(const bigint &b) const;
@@ -38,7 +39,7 @@ class bigint {
 		bool operator>=(const bigint &b) const;
 		bool operator==(const bigint &b) const;
 		bool operator!=(const bigint &b) const;
-}
+};
 
 std::ostream &operator<<(std::ostream &os , const bigint &b);
 

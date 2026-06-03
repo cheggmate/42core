@@ -1,32 +1,32 @@
 #include "bigint.hpp"
 
-Bigint::bigint() {
+bigint::bigint() {
 	std::stringstream ss;
 	ss << 0;
 	_str = ss.str();
 }
-Bigint::bigint(int nb) {
+bigint::bigint(int nb) {
 	this->_str = std::to_string(nb);
 }
-Bigint::bigint(const bigint &other) {
+bigint::bigint(const bigint &other) {
 	*this = other;
 }
 
-bigint &Bigint::operator=(const bigint &other) {
+bigint &bigint::operator=(const bigint &other) {
 	if (this != &other)
 	{
 		this->_str = other._str;
 	}
 	return (*this);
 }
-Bigint::~bigint(){
+bigint::~bigint(){
 
 }
 
-std::string Bigint::getStr() const {
+std::string bigint::getStr() const {
 	return (this->_str);
 }
-std::string::size_type Bigint::to_size_type() const {
+std::string::size_type bigint::to_size_type() const {
 	std::string::size_type result = 0;
 	for (std::string::size_type i = 0; i < _str.size(); i++)
 		result = result * 10 + (_str[i] - '0');
@@ -34,94 +34,101 @@ std::string::size_type Bigint::to_size_type() const {
 	return result;
 }
 
-bigint Bigint::operator+(const bigin &b) const {
+bigint bigint::operator+(const bigint &b) const {
 	bigint tmp;
-	std::string _newStr;
+	std::string _newStr; // Capital S
 	int carry  = 0;
 	int i = _str.size() - 1;
 	int j = b._str.size() - 1;
 	while (i >= 0 || j >= 0 || carry > 0)
 	{
 		int x = (i >= 0) ? (_str[i] - '0') : 0;
-		int y = (j >= 0) ? (b._str[j] = '0') : 0;
+		int y = (j >= 0) ? (b._str[j] - '0') : 0; // Fixed '=' to '-'
 		int sum = carry + x + y;
 
 		carry = sum / 10;
 		int digit = sum % 10;
-		_newstr.insert(0, 1, digit + '0');
-		--i;
-		--j;
+		_newStr.insert(0, 1, digit + '0'); // Capital S
+		if (i >= 0) --i; // Prevent negative indexing wraps
+		if (j >= 0) --j;
 	}
-	tmp._str = _newstr;
+	tmp._str = _newStr;
 	return (tmp);
 }
-bigint &Bigint::operator+=(const bigint &b){
+bigint &bigint::operator+=(const bigint &b){
 	bigint tmp = *this + b;
 	this->_str = tmp._str;
 	return (*this);
 }
-bigint Bigint::operator++(int){
+bigint bigint::operator++(int){
 	bigint tmp(*this);
 	*this += bigint(1);
 	return (tmp);
 }
-bigint &Bigint::operator++(){
-	(*this)++;
+bigint &bigint::operator++(){
+	*this += bigint(1);
 	return (*this);
 }
 
-bigint Bigint::operator<<(const int) const {
+bigint bigint::operator<<(const int n) const { // Named parameter
 	bigint tmp(*this);
 	if (n > 0)
 		tmp._str.append(n, '0');
 	return (tmp);
 }
-bigint &Bigint::operator<<=(const int){
-	*this = (*this) << n;
-	return (*this);
-}
-bigint Bigint::operator>>(const int) const {
-	bigint tmp(*this);
-	int i = tmp._str.size() - n;
-	if (n <= 0)
-		return (tmp);
-	if (n >= (int)tmp._str.size())
-		tmp._str = "0";
-	else
-		tmp._str.erase();
-	return (tmp);
-}
-bigint &Bigint::operator>>=(const int){
-	*this = (*this) >> n;
-	return (*this);
-}
-bigint Bigint::operator<<(const bigint &) const {
-	return (*this << n.to_size_type());
-}
-bigint &Bigint::operator<<=(const bigint &n){
+bigint &bigint::operator<<=(const int n){ // Named parameter
 	*this = (*this) << n;
 	return (*this);
 }
 
-bool Bigint::operator<(const bigint &b) const {
+bigint bigint::operator>>(const int n) const { // Named parameter
+	bigint tmp(*this);
+	if (n <= 0)
+		return (tmp);
+	if (n >= (int)tmp._str.size())
+		tmp._str = "0";
+	else {
+		int i = tmp._str.size() - n;
+		tmp._str.erase(i); // Fixed empty erase()
+	}
+	return (tmp);
+}
+bigint &bigint::operator>>=(const int n){ // Named parameter
+	*this = (*this) >> n;
+	return (*this);
+}
+bigint bigint::operator<<(const bigint &n) const { // Named parameter
+	return (*this << n.to_size_type());
+}
+bigint &bigint::operator<<=(const bigint &n){
+	*this = (*this) << n;
+	return (*this);
+}
+
+bigint &bigint::operator>>=(const bigint &n) {
+	*this = (*this) >> n;
+	return (*this);
+}
+
+bool bigint::operator<(const bigint &b) const {
 	if (_str.size() != b._str.size())
 		return (_str.size() < b._str.size());
 	return (_str < b._str);
 }
-bool Bigint::operator<=(const bigint &b) const {
+bool bigint::operator<=(const bigint &b) const {
 	return (!(b < *this));
 }
-bool Bigint::operator>(const bigint &b) const {
-	return (!(b > *this));
+bool bigint::operator>(const bigint &b) const {
+	return (b < *this); // Fixed recursive bug
 }
-bool Bigint::operator>=(const bigint &b) const {
-	return (!(b >= *this));
+bool bigint::operator>=(const bigint &b) const {
+	return (!(*this < b)); // Fixed recursive bug
 }
-bool Bigint::operator==(const bigint &b) const {
-	return (_str == b.str);
+bool bigint::operator==(const bigint &b) const {
+	return (_str == b._str); // Fixed .str to ._str
 }
-bool Bigint::operator!=(const bigint &b) const {
-	return (_str != b.str);
+bool bigint::operator!=(const bigint &b) const {
+	return (_str != b._str); // Fixed .str to ._str
 }
 
 std::ostream &operator<<(std::ostream &os , const bigint &b) {
