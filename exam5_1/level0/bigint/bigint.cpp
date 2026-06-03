@@ -6,7 +6,9 @@ bigint::bigint() {
 	_str = ss.str();
 }
 bigint::bigint(int nb) {
-	this->_str = std::to_string(nb);
+	std::stringstream ss;
+	ss << nb;
+	this->_str = ss.str();
 }
 bigint::bigint(const bigint &other) {
 	*this = other;
@@ -103,6 +105,10 @@ bigint bigint::operator<<(const bigint &n) const { // Named parameter
 bigint &bigint::operator<<=(const bigint &n){
 	*this = (*this) << n;
 	return (*this);
+}
+
+bigint bigint::operator>>(const bigint &n) const {
+	return (*this >> n.to_size_type());
 }
 
 bigint &bigint::operator>>=(const bigint &n) {

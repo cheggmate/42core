@@ -31,6 +31,7 @@ class bigint {
 		bigint &operator>>=(const int);
 		bigint operator<<(const bigint &) const;
 		bigint &operator<<=(const bigint &);
+		bigint operator>>(const bigint &) const;
 		bigint &operator>>=(const bigint &);
 
 		bool operator<(const bigint &b) const;
