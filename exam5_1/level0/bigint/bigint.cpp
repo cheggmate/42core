@@ -36,6 +36,10 @@ std::string::size_type bigint::to_size_type() const {
 	return result;
 }
 
+bigint bigint::operator+(int nb) const {
+	return (*this + bigint(nb));
+}
+
 bigint bigint::operator+(const bigint &b) const {
 	bigint tmp;
 	std::string _newStr; // Capital S
@@ -112,7 +116,7 @@ bigint bigint::operator>>(const bigint &n) const {
 }
 
 bigint &bigint::operator>>=(const bigint &n) {
-	*this = (*this) >> n;
+	*this = (*this) >> n.to_size_type();
 	return (*this);
 }
 

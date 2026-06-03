@@ -20,6 +20,7 @@ class bigint {
 		std::string getStr() const;
 		std::string::size_type to_size_type() const;
 
+		bigint operator+(int nb) const;
 		bigint operator+(const bigint &b) const;
 		bigint &operator+=(const bigint &b);
 		bigint operator++(int);
