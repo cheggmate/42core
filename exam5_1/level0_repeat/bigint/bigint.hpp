@@ -24,11 +24,11 @@ class bigint {
 		bigint &operator++();
 
 		bigint operator<<(const int) const;
-		bgint &operator<<=(const int);
+		bigint &operator<<=(const int);
 		bigint operator>>(const int) const;
 		bigint &operator>>=(const int);
 		bigint operator<<(const bigint &) const;
-		bigint &operator<<=(const bigint &) const;
+		bigint &operator<<=(const bigint &);
 		bigint operator>>(const bigint &) const;
 		bigint &operator>>=(const bigint &);
 

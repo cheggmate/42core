@@ -2,12 +2,12 @@
 
 bigint::bigint() {
 	std::stringstream ss;
-	this->_str = ss < 0;
-	
+	ss << 0;
+	_str == ss.str();
 }
 
 
-bigint(int nb) {
+bigint::bigint(int nb) {
 	std::stringstream ss;
 	ss << nb;
 	this->_str = ss.str();
@@ -22,9 +22,9 @@ bigint::bigint(const bigint &other) {
 bigint &bigint::operator=(const bigint &other) {
 	if (this != &other)
 	{
-		this->_str = other.str;
+		this->_str = other._str;
 	}
-	return (this);
+	return (*this);
 }
 
 
@@ -128,7 +128,7 @@ bigint bigint::operator<<(const bigint &n) const {
 	return (*this << n.to_size_type());
 }
 
-bigint &bigint::operator<<=(const bigint &n) const {
+bigint &bigint::operator<<=(const bigint &n) {
 	*this = (*this) << n;
 	return (*this);
 }
