@@ -3,7 +3,7 @@
 bigint::bigint() {
 	std::stringstream ss;
 	ss << 0;
-	_str == ss.str();
+	_str = ss.str();
 }
 
 
@@ -61,7 +61,7 @@ bigint bigint::operator+(const bigint &b) const {
 	while (i >= 0 || j >= 0 || carry > 0)
 	{
 		int x = (i >= 0) ? (_str[i] - '0') : 0;
-		int y = (j >= 0) ? (b._str[i] - '0') : 0;
+		int y = (j >= 0) ? (b._str[j] - '0') : 0;
 		int sum = carry + x + y;
 
 		carry = sum / 10;
@@ -161,7 +161,7 @@ bool bigint::operator<=(const bigint &b) const {
 
 
 bool bigint::operator>=(const bigint &b) const {
-	return (!(b > *this));
+	return (!(*this < b));
 }
 
 
