@@ -70,7 +70,7 @@ static void	play_game(t_game *game)
 {
 	char	**new_map = malloc(game->height * sizeof(char *));
 	for (int y = 0; y < game->height; ++y)
-		new_map[y] = malloc(game->width * sizeof(char *));
+		new_map[y] = malloc(game->width * sizeof(char));
 
 	for (int y = 0; y < game->height; ++y)
 	{
@@ -107,7 +107,7 @@ static void	init_game(t_game *game, const char **argv)
 	game->map = malloc(game->height * sizeof(char *));
 	for (int y = 0; y < game->height; ++y)
 	{
-		game->map[y] = malloc(game->width * sizeof(char *));
+		game->map[y] = malloc(game->width * sizeof(char));
 		for (int x = 0; x < game->width; ++x)
 			game->map[y][x] = ' ';
 	}
