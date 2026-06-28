@@ -53,7 +53,7 @@ void BitcoinExchange::load_input(std::string filename) {
     if (!file.is_open())
         throw ErrorOpeningInputFile();
     std::string line;
-    std::getline(file, line); // Skip header
+    std::getline(file, line);
     while (std::getline(file, line)) {
         size_t comma_pos = line.find(',');
         if (comma_pos != std::string::npos) {
