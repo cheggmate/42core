@@ -9,7 +9,7 @@ setup:
 	@if [ ! -f secrets/db_password.txt ]; then echo "wp_db_pass_12345" > secrets/db_password.txt; fi
 	@if [ ! -f secrets/db_root_password.txt ]; then echo "db_root_pass_12345" > secrets/db_root_password.txt; fi
 	@if [ ! -f secrets/credentials.txt ]; then \
-		echo "WP_ADMIN_USER=jotong_admin" > secrets/credentials.txt; \
+		echo "WP_ADMIN_USER=jotong_owner" > secrets/credentials.txt; \
 		echo "WP_ADMIN_PASSWORD=admin_pass_12345" >> secrets/credentials.txt; \
 		echo "WP_ADMIN_EMAIL=jotong@student.42.fr" >> secrets/credentials.txt; \
 		echo "WP_USER=jotong_user" >> secrets/credentials.txt; \
