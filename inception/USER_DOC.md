@@ -64,15 +64,17 @@ To log in and manage the website:
 To maintain security, credentials are not hardcoded. They are stored in two locations at the root of the project:
 
 1.  **Database Credentials**:
-    *   `secrets/db_password.txt`: Holds the password for the database user `wp_db_user`.
-    *   `secrets/db_root_password.txt`: Holds the administrator (root) password for the MariaDB database.
+    *   `.env`: Holds the passwords to the database.
+    <!-- *   `secrets/db_password.txt`: Holds the password for the database user `wp_db_user`.
+    *   `secrets/db_root_password.txt`: Holds the administrator (root) password for the MariaDB database. -->
 2.  **WordPress User Credentials**:
-    *   `secrets/credentials.txt`: Contains variables defining the WordPress site administrator and regular user details.
+    *   `.env`: Contains variables defining the WordPress site administrator and regular user details.
+    <!-- *   `secrets/credentials.txt`: Contains variables defining the WordPress site administrator and regular user details.
         *   `WP_ADMIN_USER` / `WP_ADMIN_PASSWORD` (used to log into `/wp-admin`)
-        *   `WP_USER` / `WP_USER_PASSWORD` (secondary author user)
+        *   `WP_USER` / `WP_USER_PASSWORD` (secondary author user) -->
 
 ### Changing Credentials
-To change passwords before starting the stack, modify the text files in the `secrets/` directory. If the stack is already running, run `make fclean`, modify the secrets, and then run `make` to initialize the database with the new passwords.
+To change passwords before starting the stack, modify the text files in the `.env` file. If the stack is already running, run `make fclean`, modify the secrets, and then run `make` to initialize the database with the new passwords.
 
 ---
 

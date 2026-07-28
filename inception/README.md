@@ -70,8 +70,42 @@ Each service runs in a dedicated container, built using customized Dockerfiles f
     make re
     ```
 
+## Project Description
+
+This section breaks down the foundational concepts and technical design choices implemented throughout the **Inception** infrastructure.
+
 ---
 
+### 📦 Virtual Machines vs. Docker Containers
+
+| Feature | Virtual Machines (VMs) | Docker Containers |
+| :--- | :--- | :--- |
+| **Architecture** | Runs a complete Guest OS on top of a Hypervisor. | Shares the Host OS kernel; isolated via namespaces/cgroups. |
+| **Overhead** | High (GBs of storage, dedicated RAM/CPU allocation). | Extremely low (MBs of storage, dynamic resource usage). |
+| **Boot Time** | Minutes (requires full OS boot sequence). | Milliseconds (starts instantly as a native process). |
+
+> **Inception Implementation:** > Instead of wasting cluster resources running three heavy, separate operating systems, this project utilizes native Linux containers. This isolates our microservices (NGINX, WordPress, MariaDB) while keeping the host footprint lightweight and efficient.
+
+---
+
+### 🔑 Secrets vs. Environment Variables
+
+* **Environment Variables (`.env`)**
+    * **Characteristics:** Injected into the container environment as plain text. 
+    * **Risk:** Highly visible via commands like `docker inspect` or `env` inside the terminal logs, making them unsafe for cryptographic keys.
+    * **Use Case:** Ideal for non-sensitive structural configuration parameters (e.g., `SQL_DATABASE_NAME`, `DOMAIN_NAME`).
+
+* **Docker Secrets (`/run/secrets/`)**
+    * **Characteristics:** Mounted strictly at runtime as read-only, in-memory files. The application reads strings directly from a file path rather than the environment matrix.
+    * **Risk:** Safe from environment inspection leaks and image history exposure.
+    * **Use Case:** Mandated for all high-risk credentials (e.g., `db_root_password`, `db_password`).
+
+---
+
+### 🌐 Docker Network (Bridge) vs. Host Network
+
+* **Host Networking:** The container bypasses Docker's network isolation entirely, binding its ports directly to the host machine's interfaces. This exposes internal service ports to the outside world, creating a significant security vulnerability.
+* **Docker Custom Bridge Network:** Creates an isolated virtual network local to the Docker daemon. Containers communicate safely using their service names as hostnames via Docker’s internal automatic DNS resolver.
 ## Resources
 
 ### Reference Documentation

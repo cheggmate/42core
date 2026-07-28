@@ -20,11 +20,20 @@ else
 fi
 
 # Wait for MariaDB service to be fully up and ready
-echo "Checking MariaDB connection..."
-until mysql -h"mariadb" -u"${SQL_USER}" -p"${DB_PASS}" -e "show databases;" >/dev/null 2>&1; do
-    echo "Waiting for MariaDB to start..."
+DB_ROOT_PASS=$(cat /run/secrets/db_root_password)
+
+echo "Checking MariaDB network availability..."
+# Try opening a raw read/write socket descriptor to the mariadb host on port 3306
+until mysqladmin ping -h"mariadb" --silent; do
+    echo "Waiting for MariaDB port 3306 to open..."
     sleep 2
 done
+# Cleanly close the file descriptor socket channel
+exec 6>&-
+
+echo "MariaDB network port active! Waiting 3 seconds for database initialization to finish..."
+sleep 3
+echo "Proceeding with WordPress configuration steps."
 echo "MariaDB is ready."
 
 # Check if WordPress is already installed
@@ -50,7 +59,9 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --admin_password="${WP_ADMIN_PASSWORD}" \
         --admin_email="${WP_ADMIN_EMAIL}" \
         --path="/var/www/html"
+    
 
+   
     # Create a secondary user (author) as required by subject (two users, admin not named admin)
     wp user create --allow-root \
         "${WP_USER}" "${WP_USER_EMAIL}" \
@@ -59,6 +70,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --path="/var/www/html"
     
     echo "WordPress installation complete."
+
 fi
 
 # Ensure correct permissions on the files
