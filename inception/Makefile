@@ -3,6 +3,10 @@ NAME = inception
 all: setup build up
 
 setup:
+	@if ! grep -q "jotong.42.fr" /etc/hosts; then \
+		echo "Adding jotong.42.fr to /etc/hosts..."; \
+		echo "127.0.0.1 jotong.42.fr" | sudo tee -a /etc/hosts > /dev/null; \
+	fi
 	@mkdir -p /home/jotong/data/wordpress
 	@mkdir -p /home/jotong/data/mariadb
 	@mkdir -p secrets

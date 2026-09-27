@@ -28,8 +28,6 @@ until mysqladmin ping -h"mariadb" --silent; do
     echo "Waiting for MariaDB port 3306 to open..."
     sleep 2
 done
-# Cleanly close the file descriptor socket channel
-exec 6>&-
 
 echo "MariaDB network port active! Waiting 3 seconds for database initialization to finish..."
 sleep 3
