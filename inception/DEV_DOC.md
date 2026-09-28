@@ -8,7 +8,7 @@ This document explains the technical architecture, development workflows, contai
 
 ### Prerequisites
 Before developing, make sure the host operating system meets the following requirements:
-*   **Operating System**: Linux (Debian Bullseye/Bookworm or Ubuntu 20.04+ recommended).
+*   **Operating System**: Linux (Debian Bookworm recommended).
 *   **Packages**: `make`, `docker.io`, `docker-compose-v2` (or `docker-compose`).
 *   **Permissions**: The active developer user must be added to the `docker` group to run commands without `sudo` (except for direct `/home` root data directory edits):
     ```bash
@@ -25,6 +25,39 @@ When building the project from scratch, the root directory must be structured as
 If these configuration files are missing, running `make setup` (or simply `make`) will auto-populate them with default, gitignored template values.
 
 *Note: Any additions to configuration variables must be mirrored in `srcs/.env.example`.*
+
+Example for .env:
+```bash
+DOMAIN_NAME=login.42.fr
+SQL_DATABASE=wordpress
+SQL_USER=wp_db_user
+WP_TITLE=Inception_login
+LOGIN=login
+WP_ADMIN_USER=login_manager
+WP_ADMIN_EMAIL=login@student.42.fr
+WP_USER=login_user
+WP_USER_EMAIL=login+user@student.42.fr
+```
+
+Example for credentials.txt:
+```bash
+WP_ADMIN_USER=login_manager
+WP_ADMIN_PASSWORD=manager_pass_12345
+WP_ADMIN_EMAIL=login@student.42.fr
+WP_USER=login_user
+WP_USER_PASSWORD=user_pass_12345
+WP_USER_EMAIL=login+user@student.42.fr
+```
+
+Example for db_password.txt:
+```bash
+wp_db_pass_12345
+```
+
+Example for db_root_password.txt:
+```bash
+db_root_pass_12345
+```
 
 ---
 
@@ -44,7 +77,7 @@ make up
 
 ### Build Process details
 *   **Docker Compose Build**: Docker Compose reads `./srcs/docker-compose.yml` and triggers the respective build contexts inside `./srcs/requirements/`.
-*   **Dockerfiles**: Built from `debian:bullseye`. Avoid using the `latest` tag in any Dockerfile.
+*   **Dockerfiles**: Built from `debian:bookworm`. Avoid using the `latest` tag in any Dockerfile.
 *   **Layer Caching**: Filesystem changes inside `conf/` or `tools/` will bust the cache for the COPY layer during subsequent builds, ensuring configurations update properly.
 
 ---

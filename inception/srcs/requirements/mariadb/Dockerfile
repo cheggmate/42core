@@ -1,7 +1,9 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Install MariaDB server and client
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN export DEBIAN_FRONTEND=noninteractive \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends \
     mariadb-server \
     mariadb-client \
     && apt-get clean \

@@ -78,4 +78,5 @@ chown -R www-data:www-data /var/www/html
 mkdir -p /run/php
 
 echo "Starting PHP-FPM..."
-exec php-fpm7.4 -F
+PHP_FPM_BIN=$(which php-fpm || find /usr/sbin -name "php-fpm*" | head -n 1)
+exec $PHP_FPM_BIN -F

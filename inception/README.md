@@ -6,7 +6,7 @@
 
 The Inception project is a system administration exercise designed to introduce containerization and multi-container infrastructure orchestration using Docker. The goal of this project is to set up a fully-functional, secure, and isolated web server environment composed of three distinct services: NGINX (serving as the secure entry point via TLS), WordPress (driven by PHP-FPM), and MariaDB (storing all persistent WordPress database information).
 
-Each service runs in a dedicated container, built using customized Dockerfiles from the penultimate stable version of Debian (Debian 11 Bullseye). The services communicate securely over a custom bridge network, and persist data using Docker named volumes mapped to specific directories on the host machine.
+Each service runs in a dedicated container, built using customized Dockerfiles from the penultimate stable version of Debian (Debian 12 Bookworm). The services communicate securely over a custom bridge network, and persist data using Docker named volumes mapped to specific directories on the host machine.
 
 ### Design Choices & Infrastructure Comparisons
 

@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Install NGINX and OpenSSL
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -7,9 +7,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy configuration and tools
+# Copy configuration directly to conf.d and sites-enabled
+COPY conf/nginx.conf /etc/nginx/conf.d/default.conf
 COPY conf/nginx.conf /etc/nginx/sites-available/default
+RUN mkdir -p /etc/nginx/sites-enabled && \
+    ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 COPY tools/nginx_start.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/nginx_start.sh
 
 # Make entrypoint executable
 RUN chmod +x /usr/local/bin/nginx_start.sh

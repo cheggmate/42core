@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 # Install PHP and extensions, plus curl and mariadb-client
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -22,8 +22,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x /usr/local/bin/wp
 
-# Copy configurations
-COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
+# Copy configuration and automatically place in active PHP pool directory
+COPY conf/www.conf /tmp/www.conf
+RUN PHP_VER=$(ls /etc/php | head -n 1) && mkdir -p /etc/php/${PHP_VER}/fpm/pool.d/ && cp /tmp/www.conf /etc/php/${PHP_VER}/fpm/pool.d/www.conf
 COPY tools/wordpress_start.sh /usr/local/bin/
 
 # Make script executable

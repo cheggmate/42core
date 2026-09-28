@@ -1,35 +1,42 @@
-NAME = inception
+ENV_FILE := ./srcs/.env
+
+ifneq (,$(wildcard $(ENV_FILE)))
+    include $(ENV_FILE)
+    export
+endif
+
+NAME := inception
 
 all: setup build up
 
 setup:
-	@if ! grep -q "jotong.42.fr" /etc/hosts; then \
-		echo "Adding jotong.42.fr to /etc/hosts..."; \
-		echo "127.0.0.1 jotong.42.fr" | sudo tee -a /etc/hosts > /dev/null; \
+	@if [ ! -f srcs/.env ]; then \
+		echo "Error: Environment file is missing. Please create it based on the example provided in DEV_DOC.md."; \
+		exit 1; \
 	fi
-	@mkdir -p /home/jotong/data/wordpress
-	@mkdir -p /home/jotong/data/mariadb
-	@mkdir -p secrets
-# 	@if [ ! -f secrets/db_password.txt ]; then echo "wp_db_pass_12345" > secrets/db_password.txt; fi
-# 	@if [ ! -f secrets/db_root_password.txt ]; then echo "db_root_pass_12345" > secrets/db_root_password.txt; fi
-# 	@if [ ! -f secrets/credentials.txt ]; then \
-# 		echo "WP_ADMIN_USER=jotong_admin" > secrets/credentials.txt; \
-# 		echo "WP_ADMIN_PASSWORD=admin_pass_12345" >> secrets/credentials.txt; \
-# 		echo "WP_ADMIN_EMAIL=jotong@student.42.fr" >> secrets/credentials.txt; \
-# 		echo "WP_USER=jotong_user" >> secrets/credentials.txt; \
-# 		echo "WP_USER_PASSWORD=user_pass_12345" >> secrets/credentials.txt; \
-# 		echo "WP_USER_EMAIL=jotong_user@student.42.fr" >> secrets/credentials.txt; \
-# 	fi
-# 	@if [ ! -f srcs/.env ]; then \
-# 		echo "DOMAIN_NAME=jotong.42.fr" > srcs/.env; \
-# 		echo "SQL_DATABASE=wordpress" >> srcs/.env; \
-# 		echo "SQL_USER=wp_db_user" >> srcs/.env; \
-# 		echo "WP_TITLE=Inception_jotong" >> srcs/.env; \
-# 	fi
-
-	@if [ ! -f .env ]; then \
-		echo "No env file found"; \
+	@if [ ! -f secrets/db_password.txt ]; then \
+		echo "Error: db_password.txt file in the secrets folder doesnt exist. Please create it based on the example provided in DEV_DOC.md."; \
+		exit 1; \
 	fi
+	@if [ ! -f secrets/db_root_password.txt ]; then \
+		echo "Error: db_root_password.txt file in the secrets folder doesnt exist. Please create it based on the example provided in DEV_DOC.md."; \
+		exit 1; \
+	fi
+	@if [ ! -f secrets/credentials.txt ]; then \
+		echo "Error: credentials.txt file in the secrets folder doesnt exist. Please create it based on the example provided in DEV_DOC.md."; \
+		exit 1; \
+	fi
+	@if [ -z "$(LOGIN)" ]; then \
+		echo "Error: LOGIN variable is not defined in $(ENV_FILE)."; \
+		exit 1; \
+	fi
+	@mkdir -p /home/$(LOGIN)/data/wordpress
+	@mkdir -p /home/$(LOGIN)/data/mariadb
+	@if ! grep -q "$(DOMAIN_NAME)" /etc/hosts; then \
+		echo "Adding $(DOMAIN_NAME) to /etc/hosts..."; \
+		echo "127.0.0.1 $(DOMAIN_NAME)" | sudo tee -a /etc/hosts > /dev/null; \
+	fi
+	
 
 build:
 	docker compose -f srcs/docker-compose.yml build
@@ -44,9 +51,7 @@ clean:
 	docker compose -f srcs/docker-compose.yml down --volumes --rmi all
 
 fclean: clean
-	@sudo rm -rf /home/jotong/data
-	@rm -rf secrets
-	@rm -f srcs/.env
+	@sudo rm -rf /home/$(LOGIN)/data
 
 re: fclean all
 
