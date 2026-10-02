@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inception | Developer Showcase - jotong</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">🚀 <span>jotong</span>.42.fr</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#stack">Infrastructure</a></li>
+                    <li><a href="#services">Bonus Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <span class="badge">42 Curriculum — System Administration</span>
+                <h1>Inception Microservices Portfolio</h1>
+                <p class="subtitle">A fully containerized, secure, and resilient web infrastructure orchestrated with Docker Compose on Debian Bookworm.</p>
+                <div class="cta-buttons">
+                    <a href="https://jotong.42.fr" class="btn btn-primary" target="_blank">Visit WordPress (Port 443)</a>
+                    <a href="#stack" class="btn btn-secondary">Explore Architecture</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Project Overview</h2>
+                <div class="about-grid">
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Lightweight Containerization</h3>
+                        <p>Built using native Linux namespaces and cgroups instead of heavy Virtual Machines, offering near-instant boot times and minimal host overhead.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🔐</div>
+                        <h3>TLS & Secret Security</h3>
+                        <p>Strict entry point via NGINX supporting TLSv1.2/v1.3 only, paired with in-memory Docker Secrets for sensitive credentials.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💾</div>
+                        <h3>Persistent Named Volumes</h3>
+                        <p>Decoupled database and website storage mapped to dedicated host directories under <code>/home/jotong/data/</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="stack" class="section bg-alt">
+            <div class="container">
+                <h2 class="section-title">Core Infrastructure Stack</h2>
+                <div class="stack-list">
+                    <div class="stack-item">
+                        <span class="tech-name">NGINX</span>
+                        <span class="tech-desc">Reverse Proxy & TLS Termination Gateway (Port 443)</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="tech-name">WordPress</span>
+                        <span class="tech-desc">Content Management System driven by FastCGI PHP-FPM</span>
+                    </div>
+                    <div class="stack-item">
+                        <span class="tech-name">MariaDB</span>
+                        <span class="tech-desc">Relational SQL Database storing WordPress data</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Bonus Services Portfolio</h2>
+                <div class="bonus-grid">
+                    <div class="bonus-card">
+                        <span class="badge-bonus">Bonus 1</span>
+                        <h3>Redis Cache</h3>
+                        <p>In-memory key-value caching system accelerating WordPress query performance.</p>
+                    </div>
+                    <div class="bonus-card">
+                        <span class="badge-bonus">Bonus 2</span>
+                        <h3>FTP Server (VSFTPD)</h3>
+                        <p>FTP server providing file management access to the WordPress volume (Port 21).</p>
+                    </div>
+                    <div class="bonus-card">
+                        <span class="badge-bonus">Bonus 3</span>
+                        <h3>Adminer</h3>
+                        <p>Web-based MariaDB management dashboard (Port 8080).</p>
+                    </div>
+                    <div class="bonus-card">
+                        <span class="badge-bonus">Bonus 4</span>
+                        <h3>Static Showcase Site</h3>
+                        <p>Simple static HTML/CSS developer showcase site served via Python HTTP server (Port 8081).</p>
+                    </div>
+                    <div class="bonus-card">
+                        <span class="badge-bonus">Bonus 5</span>
+                        <h3>Portainer</h3>
+                        <p>Visual container management and monitoring GUI dashboard (Port 9000).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section bg-alt">
+            <div class="container text-center">
+                <h2 class="section-title">Developer Contact</h2>
+                <p>Created by <strong>jotong</strong> for the 42 Network Inception project.</p>
+                <div class="contact-info">
+                    <p>🌐 Domain: <code>jotong.42.fr</code></p>
+                    <p>📧 Email: <code>jotong@student.42.fr</code></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Inception Project — 42 School Curriculum. Built without PHP.</p>
+        </div>
+    </footer>
+</body>
+</html>

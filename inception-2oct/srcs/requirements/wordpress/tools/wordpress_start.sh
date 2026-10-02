@@ -1,0 +1,97 @@
+#!/bin/bash
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Load credentials from docker secrets
+if [ -f /run/secrets/credentials ]; then
+    echo "Loading WordPress credentials from secret..."
+    . /run/secrets/credentials
+else
+    echo "Error: Credentials secret not found!" >&2
+    exit 1
+fi
+
+# Load DB password from secret
+if [ -f /run/secrets/db_password ]; then
+    DB_PASS=$(cat /run/secrets/db_password)
+else
+    echo "Error: Database password secret not found!" >&2
+    exit 1
+fi
+
+# Wait for MariaDB service to be fully up and ready
+DB_ROOT_PASS=$(cat /run/secrets/db_root_password)
+
+echo "Checking MariaDB network availability..."
+# Try opening a raw read/write socket descriptor to the mariadb host on port 3306
+until mysqladmin ping -h"mariadb" --silent; do
+    echo "Waiting for MariaDB port 3306 to open..."
+    sleep 2
+done
+
+echo "MariaDB network port active! Waiting 3 seconds for database initialization to finish..."
+sleep 3
+echo "Proceeding with WordPress configuration steps."
+echo "MariaDB is ready."
+
+# Check if WordPress is already installed
+if [ ! -f /var/www/html/wp-config.php ]; then
+    echo "WordPress not found. Performing fresh installation..."
+    
+    # Download WordPress core
+    wp core download --allow-root --path=/var/www/html
+
+    # Create wp-config.php
+    wp config create --allow-root \
+        --dbname="${SQL_DATABASE}" \
+        --dbuser="${SQL_USER}" \
+        --dbpass="${DB_PASS}" \
+        --dbhost="mariadb:3306" \
+        --path="/var/www/html"
+
+    # Install WordPress site
+    wp core install --allow-root \
+        --url="${DOMAIN_NAME}" \
+        --title="${WP_TITLE}" \
+        --admin_user="${WP_ADMIN_USER}" \
+        --admin_password="${WP_ADMIN_PASSWORD}" \
+        --admin_email="${WP_ADMIN_EMAIL}" \
+        --path="/var/www/html"
+    
+    # Create a secondary user (author) as required by subject (two users, admin not named admin)
+    wp user create --allow-root \
+        "${WP_USER}" "${WP_USER_EMAIL}" \
+        --role=author \
+        --user_pass="${WP_USER_PASSWORD}" \
+        --path="/var/www/html"
+    
+    echo "WordPress installation complete."
+fi
+
+# Always configure and enable Redis Object Cache
+if [ -f /var/www/html/wp-config.php ]; then
+    echo "Configuring Redis cache in wp-config.php..."
+    wp config set WP_REDIS_HOST "redis" --allow-root --path="/var/www/html" || true
+    wp config set WP_REDIS_PORT 6379 --raw --allow-root --path="/var/www/html" || true
+    wp config set WP_CACHE true --raw --allow-root --path="/var/www/html" || true
+
+    if ! wp plugin is-installed redis-cache --allow-root --path="/var/www/html"; then
+        echo "Installing redis-cache plugin..."
+        wp plugin install redis-cache --activate --allow-root --path="/var/www/html" || true
+    else
+        wp plugin activate redis-cache --allow-root --path="/var/www/html" || true
+    fi
+
+    echo "Enabling Redis object cache..."
+    wp redis enable --allow-root --path="/var/www/html" || true
+fi
+
+# Ensure correct permissions on the files
+chown -R www-data:www-data /var/www/html
+
+# Create the php run directory
+mkdir -p /run/php
+
+echo "Starting PHP-FPM..."
+PHP_FPM_BIN=$(which php-fpm || find /usr/sbin -name "php-fpm*" | head -n 1)
+exec $PHP_FPM_BIN -F
