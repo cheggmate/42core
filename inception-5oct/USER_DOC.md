@@ -45,12 +45,6 @@ All container lifecycle tasks are controlled using the `Makefile` in the project
 
 ## 3. Accessing Services (Website, Admin Panel, FTP, Adminer, Portainer, & Static Site)
 
-Before accessing the site, you must add `jotong.42.fr` to your local host resolution file `/etc/hosts`:
-```bash
-# Run this on the machine you are browsing from (your host or VM)
-127.0.0.1 jotong.42.fr
-```
-
 ### Accessing the Frontend (Public Site)
 Open your web browser and navigate to:
 *   [https://jotong.42.fr](https://jotong.42.fr)
@@ -64,7 +58,7 @@ To log in and manage the website:
 
 ### Accessing Adminer (Database Management Interface)
 To manage the MariaDB database visually from your browser:
-1.  Navigate to `http://localhost:8080` (or `http://jotong.42.fr:8080`).
+1.  Navigate to `http://jotong.42.fr:8080`.
 2.  Fill in the login form with the following details:
     *   **System**: `MySQL`
     *   **Server**: `mariadb` *(use the internal container hostname)*
@@ -74,22 +68,22 @@ To manage the MariaDB database visually from your browser:
 
 ### Accessing Portainer (Visual Container Management Dashboard)
 To visually monitor container health, view live process logs, and inspect volumes/networks:
-1.  Navigate to `http://localhost:9000` (or `http://jotong.42.fr:9000`).
+1.  Navigate to `http://jotong.42.fr:9000`.
 2.  Upon first connection, create your administrator username and password (12+ characters).
 3.  Select the **Get Started** option to connect to the local Docker environment (`/var/run/docker.sock`).
 4.  You can now view live dashboards of all running containers.
 
 ### Accessing the Static Showcase Website
 To view the developer portfolio and infrastructure showcase (built without PHP):
-1. Open your web browser and navigate to `http://localhost:8081` (or `http://jotong.42.fr:8081`).
+1. Open your web browser and navigate to `http://jotong.42.fr:8081`.
 
 ### Accessing the FTP Server (File Management)
 To upload, download, or edit files inside your WordPress website volume via FTP:
 *   **Host**: `127.0.0.1` (or `jotong.42.fr`)
 *   **Port**: `21`
 *   **Passive Ports**: `21100-21110`
-*   **Username**: `jotong_ftp` (defined in `srcs/.env` / `secrets/credentials.txt`)
-*   **Password**: `ftp_pass_12345` (defined in `secrets/credentials.txt`)
+*   **Username**: `defined in `srcs/.env` / `secrets/credentials.txt`
+*   **Password**: `defined in `secrets/credentials.txt`
 
 #### Connecting via Command Line (FTP Client or Curl):
 ```bash
@@ -113,13 +107,13 @@ To maintain security, credentials are not hardcoded. They are stored in two loca
     *   `secrets/db_password.txt`: Holds the password for the database user `wp_db_user`.
     *   `secrets/db_root_password.txt`: Holds the administrator (root) password for the MariaDB database.
 2.  **WordPress & Service Credentials**:
-    *   `secrets/credentials.txt`: Contains variables defining the site administrator, regular user, and FTP credentials.
+    *   `secrets/credentials.txt`: Contains variables defining the site administrator, regular user, and FTP credentials. 
         *   `WP_ADMIN_USER` / `WP_ADMIN_PASSWORD` (used to log into `/wp-admin`)
         *   `WP_USER` / `WP_USER_PASSWORD` (secondary author user)
         *   `FTP_USER` / `FTP_PASSWORD` (used to log into the FTP server)
 
 ### Changing Credentials
-To change passwords before starting the stack, modify the text files in the `secrets/` directory. If the stack is already running, run `make fclean`, modify the secrets, and then run `make` to reinitialize the stack with the new passwords.
+To change passwords before starting the stack, modify the text files in the `secrets/` directory. If the stack is already running, run `make down` to stop the stack, modify the secrets, (if there is a need to remove existing data, do `make fclean`) and then run `make` to reinitialize the stack with the new passwords.
 
 ---
 

@@ -10,6 +10,7 @@ NAME := inception
 all: setup build up
 
 setup:
+	@find . -name "._*" -delete 2>/dev/null || true
 	@if [ ! -f srcs/.env ]; then \
 		echo "Error: Environment file is missing. Please create it based on the example provided in DEV_DOC.md."; \
 		exit 1; \
