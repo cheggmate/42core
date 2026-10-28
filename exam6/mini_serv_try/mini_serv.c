@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <netinet/ip.h>
 
-int count =0, max_fd = 0;
-int ids[65536];
+int     count = 0, max_fd = 0;
+int     ids[65536];
 char    *msgs[65536];
 
 fd_set  rfds, wfds, afds;
@@ -40,8 +40,8 @@ int extract_message(char **buf, char **msg)
 
 char *str_join(char *buf, char *add)
 {
-    char *newbuf;
-    int len;
+    char    *newbuf;
+    int     len;
 
     if (buf == 0)
         len = 0;
@@ -53,7 +53,6 @@ char *str_join(char *buf, char *add)
     newbuf[0] = 0;
     if (buf != 0)
         strcat(newbuf, buf);
-    strcat(newbuf, buf);
     free(buf);
     strcat(newbuf, add);
     return (newbuf);
@@ -63,7 +62,7 @@ void    fatal_error()
 {
     write(2, "Fatal error\n", 12);
     exit(1);
-} 
+}
 
 void    notify_other(int author, char *str)
 {
@@ -79,8 +78,9 @@ void    register_client(int fd)
     max_fd = fd > max_fd ? fd : max_fd;
     ids[fd] = count++;
     msgs[fd] = NULL;
-    FD_CLR(fd, &afds);
-    close(fd);
+    FD_SET(fd, &afds);
+    sprintf(buf_write, "server: client %d just arrived\n", ids[fd]);
+    notify_other(fd, buf_write);
 }
 
 void    remove_client(int fd)
@@ -95,8 +95,8 @@ void    remove_client(int fd)
 
 void    send_msg(int fd)
 {
-    char *msg;
-    int ret;
+    char    *msg;
+    int     ret;
 
     while ((ret = extract_message(&(msgs[fd]), &msg)))
     {
@@ -109,7 +109,7 @@ void    send_msg(int fd)
     }
 }
 
-int create_socket()
+int     create_socket()
 {
     max_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (max_fd < 0)
@@ -118,17 +118,18 @@ int create_socket()
     return max_fd;
 }
 
-int main(int ac, char **av)
+int     main(int ac, char **av)
 {
     if (ac != 2)
     {
-        write(2, "wrong number of arguments\n", 26);
+        write(2, "Wrong number of arguments\n", 26);
         exit(1);
     }
+
     FD_ZERO(&afds);
     int sockfd = create_socket();
 
-    struct  sockaddr_in servaddr;
+    struct sockaddr_in servaddr;
     bzero(&servaddr, sizeof(servaddr));
 
     servaddr.sin_family = AF_INET;
@@ -137,7 +138,7 @@ int main(int ac, char **av)
 
     if (bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr)))
         fatal_error();
-    if(listen(sockfd, SOMAXCONN))
+    if (listen(sockfd, SOMAXCONN))
         fatal_error();
 
     while (1)
@@ -151,9 +152,10 @@ int main(int ac, char **av)
         {
             if (!FD_ISSET(fd, &rfds))
                 continue;
+
             if (fd == sockfd)
             {
-                socklen_t   addr_len = sizeof(servaddr);
+                socklen_t addr_len = sizeof(servaddr);
                 int client_fd = accept(sockfd, (struct sockaddr *)&servaddr, &addr_len);
                 if (client_fd >= 0)
                 {
@@ -163,7 +165,7 @@ int main(int ac, char **av)
             }
             else
             {
-                int read_bytes = recv(fd, buf_read, 1000 ,0);
+                int read_bytes = recv(fd, buf_read, 1000, 0);
                 if (read_bytes <= 0)
                 {
                     remove_client(fd);
