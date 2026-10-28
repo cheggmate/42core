@@ -94,16 +94,20 @@ void	remove_client(int fd)
 	sprintf(buf_write, "server: client %d just left\n", ids[fd]);
 	notify_other(fd, buf_write);
 	free(msgs[fd]);
+	msgs[fd] = NULL;
 	FD_CLR(fd, &afds);
 	close(fd);
 }
 
 void	send_msg(int fd)
 {
-	char *msg;
+	char	*msg;
+	int		ret;
 
-	while (extract_message(&(msgs[fd]), &msg))
+	while ((ret = extract_message(&(msgs[fd]), &msg)))
 	{
+		if (ret < 0)
+			fatal_error();
 		sprintf(buf_write, "client %d: ", ids[fd]);
 		notify_other(fd, buf_write);
 		notify_other(fd, msg);
@@ -178,7 +182,10 @@ int		main(int ac, char **av)
 					break ;
 				}
 				buf_read[read_bytes] = '\0';
-				msgs[fd] = str_join(msgs[fd], buf_read);
+				char *tmp = str_join(msgs[fd], buf_read);
+				if (!tmp)
+					fatal_error();
+				msgs[fd] = tmp;
 				send_msg(fd);
 			}
 		}
